@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+    font-family: Cairo;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  @font-face {
+    font-family: Cairo;
+    font-weight: 400;
+    src: url(../assets/fonts/Cairo-Regular.ttf) format("ttf");
+  }
+  @font-face {
+    font-family: Cairo;
+    font-weight: 500;
+    src: url(../assets/fonts/Cairo-SemiBold.ttf) format("ttf");
+  }
+}
+
+body {
+  @apply p-12;
+}
