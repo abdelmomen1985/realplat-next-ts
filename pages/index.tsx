@@ -1,6 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import Link from "next/link";
 import Layout from "../components/Layout";
+import { GetStaticProps } from "next";
+import { useApollo, initializeApollo } from "../lib/apolloClient";
 
 export const allCompounds = gql`
   query MyQuery {
@@ -10,6 +12,12 @@ export const allCompounds = gql`
     }
   }
 `;
+
+export type Compound = {
+  name: { ar: string; en: string };
+  media: any;
+};
+
 const MyCard = ({ compound }: { compound: any }) => (
   <div className="w-1/3 flex">
     <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
@@ -41,14 +49,12 @@ const MyCard = ({ compound }: { compound: any }) => (
     </div>
   </div>
 );
-const IndexPage = () => {
-  const { data } = useQuery(allCompounds);
-  console.log(data);
+const IndexPage = ({ compounds }: { compounds: Compound[] }) => {
   return (
     <Layout title="Realstate Brand">
       <div className="flex flex-wrap ">
-        {data?.compounds &&
-          data.compounds.map((compound: any) => (
+        {compounds &&
+          compounds.map((compound: any) => (
             <MyCard key={compound.name.ar} compound={compound} />
           ))}
       </div>
@@ -59,6 +65,17 @@ const IndexPage = () => {
       </p>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  // Example for including static props in a Next.js function component page.
+  // Don't forget to include the respective types for any props passed into
+  // the component.
+  const client = initializeApollo();
+  const resp = await client.query({query:allCompounds})
+  //const { data } = useQuery(allCompounds);
+  const compounds: Compound[] = resp?.data.compounds;
+  return { props: { compounds } };
 };
 
 export default IndexPage;
