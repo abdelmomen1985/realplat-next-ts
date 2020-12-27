@@ -1,12 +1,15 @@
-import "../styles/index.css";
-import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "../lib/apolloClient";
+import '../styles/index.css';
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '../lib/apolloClient';
+import { LanguageProvider } from '../Context/LangContext';
 
 export default function MyApp({ Component, pageProps }: any) {
   const apolloClient = useApollo(pageProps.initialApolloState);
   return (
     <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+      <LanguageProvider localization={pageProps.localization}>
+        <Component {...pageProps} />
+      </LanguageProvider>
     </ApolloProvider>
   );
 }

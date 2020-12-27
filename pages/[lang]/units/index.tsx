@@ -1,9 +1,15 @@
-import { gql, useQuery } from "@apollo/client";
-import Link from "next/link";
-import Layout from "../../components/Layouts/Layout";
-import { GetStaticProps } from "next";
-import { useApollo, initializeApollo } from "../../lib/apolloClient";
-import Carousel from "react-elastic-carousel";
+import { gql, useQuery } from '@apollo/client';
+import Link from 'next/link';
+import Layout from '../../../components/Layouts/Layout';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import { useApollo, initializeApollo } from '../../../lib/apolloClient';
+import Carousel from 'react-elastic-carousel';
+import { Localization } from '../../../i18n/types';
+import {
+  getLocalizationProps,
+  LanguageProvider,
+} from '../../../Context/LangContext';
+import useTranslation from '../../../hooks/useTranslation';
 
 export const allUnits = gql`
   query MyQuery {
@@ -67,7 +73,7 @@ const MyCard = ({ unit }: { unit: any }) => (
             <img
               key={image}
               className="w-full"
-              style={{ maxHeight: "250px" }}
+              style={{ maxHeight: '250px' }}
               src={image}
               alt="unit image"
             />
@@ -99,23 +105,30 @@ const MyCard = ({ unit }: { unit: any }) => (
     </div>
   </div>
 );
-const UnitsPage = ({ units }: { units: Unit[] }) => {
+const UnitsPage: NextPage<{
+  units: Unit[];
+  localization: Localization;
+}> = ({ units, localization }) => {
+  const { t, locale } = useTranslation();
+
   return (
-    <Layout title="Realstate Brand">
-      <div className="flex flex-wrap ">
-        {units &&
-          units.map((unit: any) => <MyCard key={unit.id} unit={unit} />)}
-      </div>
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </p>
-    </Layout>
+    <LanguageProvider localization={localization}>
+      <Layout title="Realstate Brand">
+        <div className="flex flex-wrap ">
+          {units &&
+            units.map((unit: any) => <MyCard key={unit.id} unit={unit} />)}
+        </div>
+        <p>
+          <Link href="/about">
+            <a>{t('About')}</a>
+          </Link>
+        </p>
+      </Layout>
+    </LanguageProvider>
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
@@ -124,7 +137,19 @@ export const getStaticProps: GetStaticProps = async () => {
   //const { data } = useQuery(allCompounds);
   const units: Unit[] = resp?.data.units;
   console.log(resp.data.units);
-  return { props: { units } };
+  const localization = getLocalizationProps(ctx, 'units');
+  return {
+    props: {
+      localization,
+      units,
+    },
+  };
 };
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    fallback: false,
+  };
+};
 export default UnitsPage;
