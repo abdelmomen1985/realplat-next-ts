@@ -10,7 +10,8 @@ import {
   LanguageProvider,
 } from '../../../Context/LangContext';
 import useTranslation from '../../../hooks/useTranslation';
-
+import Header from '../../../components/Layouts/Header';
+import SearchFilters from './../../../components/SearchFilters/SearchFilters';
 export const allUnits = gql`
   query MyQuery {
     units(limit: 10) {
@@ -114,15 +115,12 @@ const UnitsPage: NextPage<{
   return (
     <LanguageProvider localization={localization}>
       <Layout title="Realstate Brand">
+        <Header />
+        <SearchFilters />
         <div className="flex flex-wrap ">
           {units &&
             units.map((unit: any) => <MyCard key={unit.id} unit={unit} />)}
         </div>
-        <p>
-          <Link href="/about">
-            <a>{t('About')}</a>
-          </Link>
-        </p>
       </Layout>
     </LanguageProvider>
   );
@@ -137,7 +135,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   //const { data } = useQuery(allCompounds);
   const units: Unit[] = resp?.data.units;
   console.log(resp.data.units);
-  const localization = getLocalizationProps(ctx, 'units');
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,

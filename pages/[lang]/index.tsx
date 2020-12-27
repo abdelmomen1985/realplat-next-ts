@@ -10,7 +10,7 @@ interface service {
 }
 const IndexPage: NextPage = () => {
   const [servicesState, setServicesState] = useState<service[]>([]);
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   useEffect(() => {
     let services = [
       {

@@ -1,11 +1,14 @@
-import { GetStaticProps } from 'next';
 import Link from 'next/link';
-
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { User } from '../../../interfaces';
 import { sampleUserData } from '../../../utils/sample-data';
 import Layout from '../../../components/Layouts/Layout';
 import List from '../../../components/List';
-
+import { Localization } from '../../../i18n/types';
+import {
+  getLocalizationProps,
+  LanguageProvider,
+} from '../../../Context/LangContext';
 type Props = {
   items: User[];
 };
@@ -26,12 +29,24 @@ const WithStaticProps = ({ items }: Props) => (
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
   const items: User[] = sampleUserData;
-  return { props: { items } };
+  const localization = getLocalizationProps(ctx, 'common');
+  return {
+    props: {
+      localization,
+      items,
+    },
+  };
 };
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    fallback: false,
+  };
+};
 export default WithStaticProps;

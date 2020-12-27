@@ -1,9 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
 import Layout from '../../../components/Layouts/Layout';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next';
 import { useApollo, initializeApollo } from '../../../lib/apolloClient';
-
+import { Localization } from '../../../i18n/types';
+import {
+  getLocalizationProps,
+  LanguageProvider,
+} from '../../../Context/LangContext';
 export const allCompounds = gql`
   query MyQuery {
     compounds {
@@ -65,7 +69,7 @@ const CompoundsPage = ({ compounds }: { compounds: Compound[] }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
@@ -73,7 +77,20 @@ export const getStaticProps: GetStaticProps = async () => {
   const resp = await client.query({ query: allCompounds });
   //const { data } = useQuery(allCompounds);
   const compounds: Compound[] = resp?.data.compounds;
-  return { props: { compounds } };
+  const localization = getLocalizationProps(ctx, 'common');
+  return {
+    props: {
+      localization,
+      compounds,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    fallback: false,
+  };
 };
 
 export default CompoundsPage;

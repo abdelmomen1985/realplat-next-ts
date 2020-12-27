@@ -1,6 +1,8 @@
 const common = {
     navHome: "الرئيسية",
     navAbout: "من نحن",
+    navCompounds: "كومبوند",
+    navUnits: "وحدات",
     navUsersList: "قائمة المستخدمين",
     navUsersAPI: "أي بي أي المستخدمين",
     localeSwitcher: "اللغة",
