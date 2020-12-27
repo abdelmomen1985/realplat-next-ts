@@ -21,7 +21,3 @@
     src: url(../assets/fonts/Cairo-SemiBold.ttf) format("ttf");
   }
 }
-
-body {
-  @apply p-12;
-}

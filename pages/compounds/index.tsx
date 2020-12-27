@@ -1,8 +1,8 @@
-import { gql, useQuery } from '@apollo/client';
-import Link from 'next/link';
-import Layout from '../../components/Layout';
-import { GetStaticProps } from 'next';
-import { useApollo, initializeApollo } from '../../lib/apolloClient';
+import { gql, useQuery } from "@apollo/client";
+import Link from "next/link";
+import Layout from "../../components/Layouts/Layout";
+import { GetStaticProps } from "next";
+import { useApollo, initializeApollo } from "../../lib/apolloClient";
 
 export const allCompounds = gql`
   query MyQuery {
@@ -25,7 +25,7 @@ const MyCard = ({ compound }: { compound: any }) => (
     <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
       <img
         className="w-full"
-        style={{ maxHeight: '250px' }}
+        style={{ maxHeight: "250px" }}
         src={compound.media.card_icon}
         alt="Sunset in the mountains"
       />

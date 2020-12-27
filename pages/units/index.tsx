@@ -1,9 +1,9 @@
-import { gql, useQuery } from '@apollo/client';
-import Link from 'next/link';
-import Layout from '../../components/Layout';
-import { GetStaticProps } from 'next';
-import { useApollo, initializeApollo } from '../../lib/apolloClient';
-import Carousel from 'react-elastic-carousel';
+import { gql, useQuery } from "@apollo/client";
+import Link from "next/link";
+import Layout from "../../components/Layouts/Layout";
+import { GetStaticProps } from "next";
+import { useApollo, initializeApollo } from "../../lib/apolloClient";
+import Carousel from "react-elastic-carousel";
 
 export const allUnits = gql`
   query MyQuery {
@@ -67,7 +67,7 @@ const MyCard = ({ unit }: { unit: any }) => (
             <img
               key={image}
               className="w-full"
-              style={{ maxHeight: '250px' }}
+              style={{ maxHeight: "250px" }}
               src={image}
               alt="unit image"
             />

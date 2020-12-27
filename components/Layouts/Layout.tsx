@@ -1,7 +1,7 @@
-import React, { ReactNode, Fragment } from 'react';
-import Head from 'next/head';
-import Header from './Header & Footer/Header';
-import Footer from './Header & Footer/Footer';
+import React, { ReactNode } from "react";
+import Head from "next/head";
+import Footer from "./Footer";
+import { NavLinks } from "../nav/NavLinks";
 
 type LayoutProps = {
   children?: ReactNode;
@@ -10,18 +10,21 @@ type LayoutProps = {
 
 const Layout = ({
   children,
-  title = 'This is the default title',
+  title = "This is the default title",
 }: LayoutProps) => (
-  <Fragment>
+  <>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Header />
+
     {children}
+    <div>
+      <NavLinks />
+    </div>
     <Footer />
-  </Fragment>
+  </>
 );
 
 export default Layout;
