@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { NavLinks } from '../nav/NavLinks';
+import LocaleSwitcher from './LocalSwitch';
 
 function Header() {
   return (
@@ -17,6 +18,7 @@ function Header() {
           </Link>
           <div className="pt-2">
             <NavLinks />
+            <LocaleSwitcher />
           </div>
         </nav>
       </div>

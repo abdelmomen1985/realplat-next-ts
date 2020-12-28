@@ -8,3 +8,34 @@ export type User = {
   id: number
   name: string
 }
+
+export type Unit = {
+  id: string;
+  bathrooms: number; //filter (modal)
+  bedrooms: number; //filter (modal)
+  bua: number; //filter (modal)
+  compound: {
+    //filter (modal)
+    name: any;
+    developer: {
+      //filter (modal)
+      name: any;
+      media: any;
+    };
+  };
+  delivery_month: string | number;
+  delivery_year: string | number; //filter
+  media: any;
+  slug_ar: string;
+  slug_en: string;
+  sk_city: any; //filter(location)
+  fin_total: number; //filter (payment)
+  fin_monthly_payment: number; //filter (payment)
+  fin_down_payment: number; //filter (payment)
+  fin_years: number; //filter (payment)
+  property_type: {
+    //filter (prop type)
+    name: any;
+    id: string;
+  };
+};
