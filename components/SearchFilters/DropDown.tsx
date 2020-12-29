@@ -57,6 +57,7 @@ export default function DropDown(props: Ddprops) {
             border: 1px solid #192a56;
             border-radius: 5px;
             font-weight: 500;
+            outline: none;
           }
           .filter-button:hover {
             color: #ffffff;

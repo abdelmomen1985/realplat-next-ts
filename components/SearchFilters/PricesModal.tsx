@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import "rc-slider/assets/index.css";
-import RangeSlider from "../Range/RangeSlider";
+import React, { useState } from 'react';
+import 'rc-slider/assets/index.css';
+import RangeSlider from '../Range/RangeSlider';
 
 const pricesList = [
   {
-    title: "Down Payment",
-    key: "fin_down_payment",
+    title: 'Down Payment',
+    key: 'fin_down_payment',
     value: [0, 1150000],
-    unit: "Egp",
+    unit: 'Egp',
   },
   {
-    title: "Monthly Payment",
-    key: "fin_monthly_payment",
+    title: 'Monthly Payment',
+    key: 'fin_monthly_payment',
     value: [0, 300000],
-    unit: "Egp",
+    unit: 'Egp',
   },
   {
-    title: "Total Price",
-    key: "fin_total",
+    title: 'Total Price',
+    key: 'fin_total',
     value: [0, 8000000],
-    unit: "Egp",
+    unit: 'Egp',
   },
   {
-    title: "Payment Years",
-    key: "fin_years",
+    title: 'Payment Years',
+    key: 'fin_years',
     value: [0, 10],
-    unit: "Years",
+    unit: 'Years',
   },
 ];
 
@@ -79,10 +79,10 @@ export default function PricesModal(props: any) {
           onClick={toggleModal}
         >
           <div className="dd-header-title">
-            <i className="fas fa-file-invoice-dollar"></i> Price Range{" "}
+            <i className="fas fa-file-invoice-dollar"></i> Price Range{' '}
             {isModalOpen ? (
               <span>
-                {" "}
+                {' '}
                 <i className="fas fa-angle-up"></i>
               </span>
             ) : (
@@ -96,12 +96,12 @@ export default function PricesModal(props: any) {
           <div
             className="dd-list absolute"
             style={{
-              top: "0",
-              background: "#fff",
-              borderRadius: "5px",
-              boxShadow: "0 2px 2px #eee",
+              top: '0',
+              background: '#fff',
+              borderRadius: '5px',
+              boxShadow: '0 2px 2px #eee',
               zIndex: 999,
-              width: "100%",
+              width: '100%',
             }}
           >
             {pricesList.map((item) => {
@@ -128,7 +128,12 @@ export default function PricesModal(props: any) {
                 />
               );
             })}
-            <button onClick={applyFiltersHandler}>Apply</button>
+            <button
+              onClick={applyFiltersHandler}
+              className="w-full rounded-md bg-blue-900 text-white font-bold text-md p-3 mt-2 mb-1 mx-auto"
+            >
+              Apply
+            </button>
           </div>
         )}
       </div>

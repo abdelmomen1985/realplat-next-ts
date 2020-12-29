@@ -5,6 +5,9 @@
   body {
     font-family: Cairo;
   }
+  button {
+    outline: none !important;
+  }
   h1 {
     @apply text-2xl;
     font-family: Cairo;
@@ -22,4 +25,13 @@
     font-weight: 500;
     src: url(../assets/fonts/Cairo-SemiBold.ttf) format("ttf");
   }
+}
+
+.rc-slider-track {
+  background-color: #2a4365 !important;
+}
+
+.rc-slider-handle {
+  border: 1px solid #2a4365 !important;
+  /* border-radius:  */
 }

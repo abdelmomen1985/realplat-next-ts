@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import DropDown from "./DropDown";
-import { Unit } from "../../interfaces/index";
-import PricesModal from "./PricesModal";
-import PropTypesDropDown from "./PropTypesDropDown";
-import { FilterListType } from "../../interfaces/filters";
+import React, { useEffect, useState } from 'react';
+import DropDown from './DropDown';
+import { Unit } from '../../interfaces/index';
+import PricesModal from './PricesModal';
+import MoreFiltersModal from './MoreFiltersModal';
+import PropTypesDropDown from './PropTypesDropDown';
+import { FilterListType } from '../../interfaces/filters';
 
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
@@ -44,8 +45,23 @@ export default function SearchFilters(props: SearchFiltersProps) {
 
   return (
     <>
+      <style jsx>
+        {`
+          .filter-button {
+            color: #192a56;
+            border: 1px solid #192a56;
+            border-radius: 5px;
+            font-weight: 500;
+            outline: none;
+          }
+          .filter-button:hover {
+            color: #ffffff;
+            background-color: #192a56;
+          }
+        `}
+      </style>
       <section className="">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
+        <div className="grid grid-cols-5 md:grid-cols-5 gap-1">
           {/* property Type */}
 
           <PropTypesDropDown
@@ -57,7 +73,6 @@ export default function SearchFilters(props: SearchFiltersProps) {
             isOpen={openPropTypeDD}
             toggOpen={(flag) => {
               setOpenPropTypeDD(flag);
-              console.log("toggOpen parent", flag);
             }}
           />
           {/* Location */}
@@ -76,6 +91,21 @@ export default function SearchFilters(props: SearchFiltersProps) {
             filtered={props.setFilterListState}
             filterListState={props.filterListState}
           />
+          <MoreFiltersModal
+            filtered={props.setFilterListState}
+            filterListState={props.filterListState}
+          />
+          <div className="relative">
+            <button
+              className="p-3 filter-button"
+              onClick={() => {
+                props.setFilterListState({} as any);
+                console.log(props.filterListState);
+              }}
+            >
+              Clear Filters
+            </button>
+          </div>
         </div>
       </section>
     </>

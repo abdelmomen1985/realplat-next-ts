@@ -1,6 +1,6 @@
-import { Range } from "rc-slider";
-import "rc-slider/assets/index.css";
-import React, { useState } from "react";
+import { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import React, { useState } from 'react';
 interface RangeProps {
   title: string;
   entry: string;
@@ -45,14 +45,16 @@ export default function RangeSlider({
   };
 
   return (
-    <div>
-      <label htmlFor={entry}>{title}</label>
+    <div className="p-2 m-3">
       <input
         type="checkbox"
         name={entry}
         checked={payState}
         onChange={() => changeHandler()}
       />
+      <label htmlFor={entry} className="ml-2">
+        {title}
+      </label>
       <Range
         min={min}
         max={max}
@@ -63,11 +65,14 @@ export default function RangeSlider({
       />
       <h3>
         {value ? (
-          <>
-            {value?.[0] + "-" + value?.[1]} <span>{unit}</span>
-          </>
+          <div className="flex flex-wrap justify-between">
+            <div>{value?.[0]}</div> -{' '}
+            <div>
+              {value?.[1]} <span>{unit}</span>
+            </div>{' '}
+          </div>
         ) : (
-          <div style={{ margin: "1.5em" }}></div>
+          <div style={{ margin: '1.5em' }}></div>
         )}
       </h3>
     </div>
