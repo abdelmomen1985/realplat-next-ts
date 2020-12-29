@@ -1,15 +1,11 @@
-import { gql, useQuery } from '@apollo/client';
-import Link from 'next/link';
-import Layout from '../../../components/Layouts/Layout';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { useApollo, initializeApollo } from '../../../lib/apolloClient';
-import { Localization } from '../../../i18n/types';
-import {
-  getLocalizationProps,
-  LanguageProvider,
-} from '../../../Context/LangContext';
+import { gql } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
+import Layout from "../../../components/Layouts/Layout";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import { initializeApollo } from "../../../lib/apolloClient";
 export const allCompounds = gql`
-  query MyQuery {
+  query CompoundsQuery {
     compounds {
       name
       media
@@ -29,7 +25,7 @@ const MyCard = ({ compound }: { compound: any }) => (
     <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
       <img
         className="w-full"
-        style={{ maxHeight: '250px' }}
+        style={{ maxHeight: "250px" }}
         src={compound.media.card_icon}
         alt="Sunset in the mountains"
       />
@@ -77,7 +73,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: allCompounds });
   //const { data } = useQuery(allCompounds);
   const compounds: Compound[] = resp?.data.compounds;
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -88,7 +84,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

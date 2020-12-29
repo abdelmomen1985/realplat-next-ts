@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
-import DropDown from './DropDown';
-import { Unit } from '../../interfaces/index';
-import PricesModal from './PricesModal';
+import React, { useEffect, useState } from "react";
+import DropDown from "./DropDown";
+import { Unit } from "../../interfaces/index";
+import PricesModal from "./PricesModal";
+import PropTypesDropDown from "./PropTypesDropDown";
+import { FilterListType } from "../../interfaces/filters";
+
 interface SearchFiltersProps {
-  setFilterListState: (val: any) => void;
+  setFilterListState: (val: FilterListType) => void;
   filterListState: any;
   units: Unit[];
 }
+
 export default function SearchFilters(props: SearchFiltersProps) {
+  const [openPropTypeDD, setOpenPropTypeDD] = useState(false);
   const unitList: any = props.units;
   const prices: any = [];
-  const propertyTypes: any = [];
+
   const locations: any = [];
   useEffect(() => {
     for (let unit in unitList) {
@@ -21,18 +26,6 @@ export default function SearchFilters(props: SearchFiltersProps) {
         monthlyPayment: unitList[unit].fin_monthly_payment,
         paymentYears: unitList[unit].fin_fin_years,
       });
-      let duplicateProperty = propertyTypes.filter((type) => {
-        return type.id === unitList[unit].property_type.id;
-      });
-      if (duplicateProperty.length === 0) {
-        propertyTypes.push({
-          id: unitList[unit].property_type.id,
-          name: {
-            ar: unitList[unit].property_type.name.ar,
-            en: unitList[unit].property_type.name.en,
-          },
-        });
-      }
       let duplicateLocations = locations.filter((location) => {
         return location.id === unitList[unit].sk_city._id;
       });
@@ -46,21 +39,26 @@ export default function SearchFilters(props: SearchFiltersProps) {
         });
       }
     }
-    console.log(locations, prices, propertyTypes);
+    console.log(locations, prices);
   }, []);
+
   return (
     <>
       <section className="">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
           {/* property Type */}
-          <DropDown
+
+          <PropTypesDropDown
             title="Property Type"
             icon="fas fa-home"
-            list={propertyTypes}
-            multiSelect={true}
             filtered={props.setFilterListState}
             filterListState={props.filterListState}
-            entryPoint="property_type"
+            entryPoint="property_types"
+            isOpen={openPropTypeDD}
+            toggOpen={(flag) => {
+              setOpenPropTypeDD(flag);
+              console.log("toggOpen parent", flag);
+            }}
           />
           {/* Location */}
           <DropDown

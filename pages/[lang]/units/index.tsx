@@ -1,112 +1,44 @@
-import React, { useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Link from 'next/link';
-import Layout from '../../../components/Layouts/Layout';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { useApollo, initializeApollo } from '../../../lib/apolloClient';
-import Carousel from 'react-elastic-carousel';
-import { Localization } from '../../../i18n/types';
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+
+import Layout from "../../../components/Layouts/Layout";
+import { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import { initializeApollo } from "../../../lib/apolloClient";
+
+import { Localization } from "../../../i18n/types";
 import {
   getLocalizationProps,
   LanguageProvider,
-} from '../../../Context/LangContext';
-import useTranslation from '../../../hooks/useTranslation';
-import Header from '../../../components/Layouts/Header';
-import { Unit } from '../../../interfaces/index';
-import SearchFilters from './../../../components/SearchFilters/SearchFilters';
-export const allUnits = gql`
-  query MyQuery {
-    units(limit: 50) {
-      id
-      bathrooms
-      bedrooms
-      bua
-      sk_city
-      fin_total
-      fin_monthly_payment
-      fin_down_payment
-      fin_years
-      compound {
-        name
-        developer {
-          name(path: "ar")
-          media(path: "card_icon")
-        }
-      }
-      delivery_month
-      delivery_year
-      media(path: "photos")
-      slug_ar
-      slug_en
-      property_type {
-        name
-        id
-      }
-    }
-  }
-`;
+} from "../../../Context/LangContext";
+import Header from "../../../components/Layouts/Header";
+import { Unit } from "../../../interfaces/index";
+import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
+import { UnitCard } from "../../../components/Units/UnitCard";
+import { FilterListType } from "../../../interfaces/filters";
+import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
 
-const MyCard = ({ unit }: { unit: any }) => {
-  const { t, locale } = useTranslation();
-  return (
-    <div className="w-1/3 flex">
-      <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
-        <Carousel
-          pagination={false}
-          showArrows={false}
-          enableAutoPlay={true}
-          autoPlaySpeed={1000}
-        >
-          {unit.media.map((image: any) => {
-            return (
-              <img
-                key={image}
-                className="w-full"
-                style={{ maxHeight: '250px' }}
-                src={image}
-                alt="unit image"
-              />
-            );
-          })}
-        </Carousel>
-
-        <div className="px-6 py-4">
-          <h4 className="text-purple-500 mb-2">
-            {locale === 'ar' ? unit.sk_city.name_ar : unit.sk_city.name}
-          </h4>
-          <p className="text-gray-700 text-base">
-            Compound: {unit.compound.name[locale]}
-          </p>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Bedrooms: {unit.bedrooms}
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Bathrooms: {unit.bathrooms}
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Bua: {unit.bua}
-          </span>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <span>Total Price: {unit.fin_total} Usd</span>
-        </div>
-        {/* <p>{unit.slug_ar}</p> */}
-      </div>
-    </div>
-  );
-};
 const UnitsPage: NextPage<{
   units: Unit[];
   localization: Localization;
 }> = ({ units, localization }) => {
-  const { t, locale } = useTranslation();
-  const [filterListState, setFilterListState] = useState<any>({});
+  const [filterListState, setFilterListState] = useState<FilterListType>({
+    property_types: [],
+  });
+
+  const [innerUnits, setInnerUnits] = useState(units);
+  const { data } = useQuery(UNITS_AGGREGATE, {
+    variables: { pt_ids: filterListState.property_types },
+  });
+
+  useEffect(() => {
+    if (data?.units_aggregate && data?.units_aggregate.nodes.length > 0) {
+      setInnerUnits(data.units_aggregate.nodes);
+    }
+  }, [data?.units_aggregate]);
 
   return (
     <LanguageProvider localization={localization}>
-      <Layout title="Real Estate Brand">
+      <Layout title="Brand Logo Here">
         <Header />
         <div className="mx-4 my-5">
           <SearchFilters
@@ -116,8 +48,10 @@ const UnitsPage: NextPage<{
           />
         </div>
         <div className="flex flex-wrap ">
-          {units &&
-            units.map((unit: any) => <MyCard key={unit.id} unit={unit} />)}
+          {innerUnits &&
+            innerUnits.map((unit: any) => (
+              <UnitCard key={unit.id} unit={unit} />
+            ))}
         </div>
       </Layout>
     </LanguageProvider>
@@ -129,11 +63,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Don't forget to include the respective types for any props passed into
   // the component.
   const client = initializeApollo();
-  const resp = await client.query({ query: allUnits });
+  const resp = await client.query({ query: ALL_UNITS });
   //const { data } = useQuery(allCompounds);
   const units: Unit[] = resp?.data.units;
-  console.log(resp.data.units);
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -144,7 +77,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };
