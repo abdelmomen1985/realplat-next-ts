@@ -28,26 +28,29 @@ export default function PropTypesDropDown({
   const [listTitle, setListTitle] = useState<string>(title);
   const [innerFilterList, setInnerFilterList] = useState<any[]>([]);
   const { locale } = useTranslation();
-  // const [propTypesState, setPropTypesState] = useState<any[]>(
-  //   data?.property_types
-  // );
-  // useEffect(() => {
-  //   if (data?.property_types) {
-  //     console.log(propTypesState);
-  //     const dummyData = [...propTypesState];
-  //     console.log(dummyData);
-  //     const newData = [];
-  //     for (let type in dummyData) {
-  //       newData.push({
-  //         ...dummyData[type],
-  //         selected: false,
-  //       });
-  //     }
-  //     console.log(newData);
-  //     setPropTypesState(newData);
-  //     console.log(propTypesState);
-  //   }
-  // }, []);
+  const [propTypesState, setPropTypesState] = useState<any[]>(
+    data?.property_types
+  );
+  /*
+  useEffect(() => {
+    if (data?.property_types && ) {
+      console.log(propTypesState);
+      const dummyData = [...propTypesState];
+      console.log(dummyData);
+      const newData = [];
+      for (let type in dummyData) {
+        // newData.push({
+        //   ...dummyData[type],
+        //   selected: false,
+        // });
+      }
+      console.log(newData);
+      setPropTypesState(newData);
+      console.log(propTypesState);
+    }
+  }, [data?.property_types]);
+  */
+
   const multiSelectItem = (item: any) => {
     let newFilterList = [...innerFilterList, item];
     let duplicateItems = newFilterList.filter((propType) => {
@@ -55,10 +58,11 @@ export default function PropTypesDropDown({
     });
     console.log(duplicateItems);
     if (duplicateItems.length > 1) {
-      console.log('this shit is duplicate ');
+      console.log('duplicate ');
       let nonDuplicateItems = newFilterList.filter((propType) => {
         return propType.id !== item.id;
       });
+
       setInnerFilterList(nonDuplicateItems);
       if (nonDuplicateItems.length === 2) {
         setListTitle(
@@ -80,7 +84,8 @@ export default function PropTypesDropDown({
       delete filteredList[entryPoint];
       filtered(filteredList);
     } else {
-      console.log('this shit is broken');
+      console.log('first time');
+      // map => {..., selected: true}
       const selectedIds = newFilterList.map((single) => single.id);
       let newFilterListIds = [...selectedIds, item.id];
       setInnerFilterList(newFilterList);

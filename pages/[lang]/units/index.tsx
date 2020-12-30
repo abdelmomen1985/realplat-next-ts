@@ -35,6 +35,7 @@ const UnitsPage: NextPage<{
       fin_total_max: filterListState?.fin_total?.[1],
       fin_years_min: filterListState?.fin_years?.[0],
       fin_years_max: filterListState?.fin_years?.[1],
+      sk_city_comparison: { _id: filterListState?.sk_city },
     },
   });
 
@@ -42,6 +43,7 @@ const UnitsPage: NextPage<{
     if (data?.units_aggregate && data?.units_aggregate.nodes) {
       setInnerUnits(data.units_aggregate.nodes);
     }
+    console.log('filtering');
   }, [data?.units_aggregate]);
 
   return (

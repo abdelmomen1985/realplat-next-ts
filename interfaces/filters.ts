@@ -4,6 +4,7 @@ export type FilterListType = {
   fin_total?: number[];
   fin_years?: number[];
   fin_monthly_payment?: number[];
+  sk_city?: string;
 };
 
 export type PropertyType = {

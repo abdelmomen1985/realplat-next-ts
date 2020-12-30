@@ -47,6 +47,7 @@ export const UNITS_AGGREGATE = gql`
     $fin_total_max: Int
     $fin_years_min: Int
     $fin_years_max: Int
+    $sk_city_comparison: jsonb
   ) {
     units_aggregate(
       limit: 50
@@ -67,6 +68,9 @@ export const UNITS_AGGREGATE = gql`
         fin_years: {
           _gte: $fin_years_min
           _lte: $fin_years_max
+        }
+        sk_city:{
+          _contains: $sk_city_comparison
         }
       }
     ) {
