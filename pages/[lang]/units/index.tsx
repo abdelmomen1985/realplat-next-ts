@@ -21,17 +21,25 @@ const UnitsPage: NextPage<{
   units: Unit[];
   localization: Localization;
 }> = ({ units, localization }) => {
-  const [filterListState, setFilterListState] = useState<FilterListType>({
-    property_types: [],
-  });
+  const [filterListState, setFilterListState] = useState<FilterListType>({});
 
   const [innerUnits, setInnerUnits] = useState(units);
   const { data } = useQuery(UNITS_AGGREGATE, {
-    variables: { pt_ids: filterListState.property_types },
+    variables: {
+      pt_ids: filterListState.property_types,
+      fin_down_payment_min: filterListState?.fin_down_payment?.[0],
+      fin_down_payment_max: filterListState?.fin_down_payment?.[1],
+      fin_monthly_payment_min: filterListState?.fin_monthly_payment?.[0],
+      fin_monthly_payment_max: filterListState?.fin_monthly_payment?.[1],
+      fin_total_min: filterListState?.fin_total?.[0],
+      fin_total_max: filterListState?.fin_total?.[1],
+      fin_years_min: filterListState?.fin_years?.[0],
+      fin_years_max: filterListState?.fin_years?.[1],
+    },
   });
 
   useEffect(() => {
-    if (data?.units_aggregate && data?.units_aggregate.nodes.length > 0) {
+    if (data?.units_aggregate && data?.units_aggregate.nodes) {
       setInnerUnits(data.units_aggregate.nodes);
     }
   }, [data?.units_aggregate]);
@@ -52,6 +60,7 @@ const UnitsPage: NextPage<{
             innerUnits.map((unit: any) => (
               <UnitCard key={unit.id} unit={unit} />
             ))}
+          {innerUnits.length === 0 && <div>No Units Found</div>}
         </div>
       </Layout>
     </LanguageProvider>

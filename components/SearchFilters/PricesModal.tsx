@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
-import 'rc-slider/assets/index.css';
-import RangeSlider from '../Range/RangeSlider';
+import React, { useState } from "react";
+import "rc-slider/assets/index.css";
+import RangeSlider from "../Range/RangeSlider";
 
 const pricesList = [
   {
-    title: 'Down Payment',
-    key: 'fin_down_payment',
-    value: [0, 1150000],
-    unit: 'Egp',
+    title: "Down Payment",
+    key: "fin_down_payment",
+    value: [0, 2000000],
+    unit: "Egp",
+    step: 100000,
   },
   {
-    title: 'Monthly Payment',
-    key: 'fin_monthly_payment',
+    title: "Monthly Payment",
+    key: "fin_monthly_payment",
     value: [0, 300000],
-    unit: 'Egp',
+    unit: "Egp",
+    step: 100000,
   },
   {
-    title: 'Total Price',
-    key: 'fin_total',
+    title: "Total Price",
+    key: "fin_total",
     value: [0, 8000000],
-    unit: 'Egp',
+    unit: "Egp",
+    step: 100000,
   },
   {
-    title: 'Payment Years',
-    key: 'fin_years',
+    title: "Payment Years",
+    key: "fin_years",
     value: [0, 10],
-    unit: 'Years',
+    unit: "Years",
+    step: 1,
   },
 ];
 
@@ -79,10 +83,10 @@ export default function PricesModal(props: any) {
           onClick={toggleModal}
         >
           <div className="dd-header-title">
-            <i className="fas fa-file-invoice-dollar"></i> Price Range{' '}
+            <i className="fas fa-file-invoice-dollar"></i> Price Range{" "}
             {isModalOpen ? (
               <span>
-                {' '}
+                {" "}
                 <i className="fas fa-angle-up"></i>
               </span>
             ) : (
@@ -96,12 +100,12 @@ export default function PricesModal(props: any) {
           <div
             className="dd-list absolute"
             style={{
-              top: '0',
-              background: '#fff',
-              borderRadius: '5px',
-              boxShadow: '0 2px 2px #eee',
+              top: "0",
+              background: "#fff",
+              borderRadius: "5px",
+              boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: '100%',
+              width: "100%",
             }}
           >
             {pricesList.map((item) => {
@@ -114,15 +118,18 @@ export default function PricesModal(props: any) {
                   unit={item.unit}
                   min={item.value[0]}
                   max={item.value[1]}
+                  step={item.step}
                   filtered={(value) => {
-                    console.log(value);
                     setPricesFilterState(value);
-                    let allFilters = { ...props.filterListState };
+                    /*
+                    let allFilters = { ...props.filterListSta
+                      te };
                     let newAllFilters = {
                       ...allFilters,
                       [item.key]: value[item.key],
                     };
-                    props.filtered(newAllFilters);
+                    //props.filtered(newAllFilters);
+          */
                   }}
                   pricesFilterList={pricesFilterState}
                 />

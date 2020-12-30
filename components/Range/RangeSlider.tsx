@@ -1,6 +1,6 @@
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import React, { useState } from 'react';
+import { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
+import React, { useState } from "react";
 interface RangeProps {
   title: string;
   entry: string;
@@ -10,6 +10,7 @@ interface RangeProps {
   min: number;
   max: number;
   unit: string;
+  step: number;
 }
 
 export default function RangeSlider({
@@ -21,6 +22,7 @@ export default function RangeSlider({
   min,
   max,
   unit,
+  step,
 }: RangeProps) {
   const [payState, setPaymentState] = useState(value !== undefined);
   //const [valuesState, setValuesState] = useState(value);
@@ -58,6 +60,7 @@ export default function RangeSlider({
       <Range
         min={min}
         max={max}
+        step={step}
         // tabIndex={[0, 0]}
         onChange={(value) => priceChangeHadler(value)}
         defaultValue={value ? value : [min, max]}
@@ -66,13 +69,13 @@ export default function RangeSlider({
       <h3>
         {value ? (
           <div className="flex flex-wrap justify-between">
-            <div>{value?.[0]}</div> -{' '}
+            <div>{value?.[0]}</div> -{" "}
             <div>
               {value?.[1]} <span>{unit}</span>
-            </div>{' '}
+            </div>{" "}
           </div>
         ) : (
-          <div style={{ margin: '1.5em' }}></div>
+          <div style={{ margin: "1.5em" }}></div>
         )}
       </h3>
     </div>
