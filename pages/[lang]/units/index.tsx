@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
 
-import Layout from "../../../components/Layouts/Layout";
-import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import { initializeApollo } from "../../../lib/apolloClient";
+import Layout from '../../../components/Layouts/Layout';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import { initializeApollo } from '../../../lib/apolloClient';
 
-import { Localization } from "../../../i18n/types";
+import { Localization } from '../../../i18n/types';
 import {
   getLocalizationProps,
   LanguageProvider,
-} from "../../../Context/LangContext";
-import Header from "../../../components/Layouts/Header";
-import { Unit } from "../../../interfaces/index";
-import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
-import { UnitCard } from "../../../components/Units/UnitCard";
-import { FilterListType } from "../../../interfaces/filters";
-import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
+} from '../../../Context/LangContext';
+import Header from '../../../components/Layouts/Header';
+import { Unit } from '../../../interfaces/index';
+import SearchFilters from './../../../components/SearchFilters/SearchFilters';
+import { UnitCard } from '../../../components/Units/UnitCard';
+import { FilterListType } from '../../../interfaces/filters';
+import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -66,7 +66,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: ALL_UNITS });
   //const { data } = useQuery(allCompounds);
   const units: Unit[] = resp?.data.units;
-  const localization = getLocalizationProps(ctx, "common");
+  console.log(resp?.data);
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -77,7 +78,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };
