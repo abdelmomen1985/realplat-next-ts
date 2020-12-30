@@ -1,14 +1,15 @@
-import { gql } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
-import Layout from '../../../components/Layouts/Layout';
-import { getLocalizationProps } from '../../../Context/LangContext';
-import { initializeApollo } from '../../../lib/apolloClient';
-import Header from './../../../components/Layouts/Header';
-import useTranslation from './../../../hooks/useTranslation';
+import { gql } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
+import Layout from "../../../components/Layouts/Layout";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import { initializeApollo } from "../../../lib/apolloClient";
+import Header from "./../../../components/Layouts/Header";
+import useTranslation from "./../../../hooks/useTranslation";
 export const allDevelopers = gql`
   query Developers {
     developers(limit: 50) {
+      id
       description
       media
       name
@@ -31,14 +32,17 @@ export type Developer = {
     id: string;
   };
 };
-const MyCard = ({ developer }: { developer: any }) => {
-  const { t, locale } = useTranslation();
+const DeveloperCard = ({ developer }: { developer: any }) => {
+  const developerHandler = (id) => {
+    console.log(id);
+  };
+  const { locale } = useTranslation();
   return (
     <div className="w-1/3 flex">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
-          style={{ maxHeight: '250px' }}
+          style={{ maxHeight: "250px" }}
           src={developer.media.card_icon}
           alt="Sunset in the mountains"
         />
@@ -60,10 +64,18 @@ const MyCard = ({ developer }: { developer: any }) => {
             );
           })}
         </div>
+        <button
+          onClick={() => {
+            developerHandler(developer.id);
+          }}
+        >
+          Show more
+        </button>
       </div>
     </div>
   );
 };
+
 const DevelopersPage = ({ developers }: { developers: Developer[] }) => {
   // const { t, locale } = useTranslation();
   return (
@@ -72,7 +84,7 @@ const DevelopersPage = ({ developers }: { developers: Developer[] }) => {
       <div className="flex flex-wrap ">
         {developers &&
           developers.map((developer: any) => (
-            <MyCard key={developer.id} developer={developer} />
+            <DeveloperCard key={developer.id} developer={developer} />
           ))}
       </div>
     </Layout>
@@ -87,7 +99,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: allDevelopers });
   //const { data } = useQuery(allCompounds);
   const developers: Developer[] = resp?.data.developers;
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -98,7 +110,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

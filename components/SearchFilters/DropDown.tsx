@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
-import { GET_LOCATIONS } from '../../query/locations';
-import useTranslation from './../../hooks/useTranslation';
+import { useQuery } from "@apollo/client";
+import React, { useState, useEffect } from "react";
+import { GET_LOCATIONS } from "../../query/locations";
+import useTranslation from "./../../hooks/useTranslation";
 
 interface Ddprops {
   title: string;
@@ -12,30 +12,54 @@ interface Ddprops {
   icon: any;
   entryPoint: any;
 }
+
 export default function DropDown(props: Ddprops) {
   const { data } = useQuery(GET_LOCATIONS);
   const [isOpenState, setIsOpenState] = useState(false);
   const [listTitle, setListTitle] = useState(props.title);
-  const list = props.list;
-  const { t, locale } = useTranslation();
+  const [locationsInnerState, setLocationsInnerState] = useState(data?.units);
+  // const list = props.list;
+  const { locale } = useTranslation();
+  useEffect(() => {
+    // Init state
+    if (data?.units) {
+      const dummyData = [...data?.units];
+      const falseChecked = dummyData.map((item: any) => {
+        return { ...item, selected: false };
+      });
+      setLocationsInnerState(falseChecked);
+    }
+  }, [data?.units]);
+
   const toggleList = () => {
     setIsOpenState(!isOpenState);
   };
+
   const selectItem = (item: any) => {
+    console.log(item.sk_city._id);
+    item.selected = !item.selected;
+    const newArray = locationsInnerState.map((single: any) => {
+      console.log(single);
+      if (single.sk_city._id === item.sk_city._id) return item;
+      return { ...single, selected: false };
+    });
+    setLocationsInnerState(newArray);
+
     let duplicateLocations = { ...props.filterListState };
     if (duplicateLocations.sk_city === item.sk_city._id) {
       delete duplicateLocations.sk_city;
       props.filtered(duplicateLocations);
       console.log(duplicateLocations);
+      setListTitle("Location");
     } else {
-      setListTitle(locale === 'ar' ? item.sk_city.name_ar : item.sk_city.name);
-      setIsOpenState(false);
+      setListTitle(locale === "ar" ? item.sk_city.name_ar : item.sk_city.name);
       let filteredList = { ...props.filterListState };
       // setFilterList(...filterList, id)
       filteredList.sk_city = item.sk_city._id;
       props.filtered(filteredList);
       console.log(filteredList);
     }
+    setIsOpenState(false);
   };
 
   return (
@@ -62,10 +86,10 @@ export default function DropDown(props: Ddprops) {
           onClick={toggleList}
         >
           <div className="dd-header-title">
-            <i className={props.icon}></i> {listTitle}{' '}
+            <i className={props.icon}></i> {listTitle}{" "}
             {isOpenState ? (
               <span>
-                {' '}
+                {" "}
                 <i className="fas fa-angle-up"></i>
               </span>
             ) : (
@@ -80,31 +104,32 @@ export default function DropDown(props: Ddprops) {
             role="list"
             className="dd-list absolute"
             style={{
-              top: '0',
-              background: '#fff',
-              borderRadius: '5px',
-              boxShadow: '0 2px 2px #eee',
-              zIndex: '999',
-              width: '100%',
+              top: "0",
+              background: "#fff",
+              borderRadius: "5px",
+              boxShadow: "0 2px 2px #eee",
+              zIndex: 999,
+              width: "100%",
             }}
           >
-            {data?.units.map((item: any) => (
+            {locationsInnerState.map((item: any) => (
               <button
                 type="button"
                 className="dd-list-item"
                 style={{
-                  display: 'block',
-                  margin: '5px auto',
-                  textAlign: 'center',
-                  fontSize: '16px',
-                  fontWeight: '500',
+                  display: "block",
+                  margin: "5px auto",
+                  textAlign: "center",
+                  fontSize: "16px",
+                  fontWeight: 500,
                 }}
                 key={item.sk_city._id}
                 onClick={() => {
                   selectItem(item);
                 }}
               >
-                {locale === 'ar' ? item.sk_city.name_ar : item.sk_city.name}{' '}
+                {locale === "ar" ? item.sk_city.name_ar : item.sk_city.name}{" "}
+                {item.selected ? <i className="fas fa-times"></i> : null}
               </button>
             ))}
           </div>

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
 
-import Layout from '../../../components/Layouts/Layout';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { initializeApollo } from '../../../lib/apolloClient';
+import Layout from "../../../components/Layouts/Layout";
+import { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import { initializeApollo } from "../../../lib/apolloClient";
 
-import { Localization } from '../../../i18n/types';
+import { Localization } from "../../../i18n/types";
 import {
   getLocalizationProps,
   LanguageProvider,
-} from '../../../Context/LangContext';
-import Header from '../../../components/Layouts/Header';
-import { Unit } from '../../../interfaces/index';
-import SearchFilters from './../../../components/SearchFilters/SearchFilters';
-import { UnitCard } from '../../../components/Units/UnitCard';
-import { FilterListType } from '../../../interfaces/filters';
-import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
+} from "../../../Context/LangContext";
+import Header from "../../../components/Layouts/Header";
+import { Unit } from "../../../interfaces/index";
+import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
+import { UnitCard } from "../../../components/Units/UnitCard";
+import { FilterListType } from "../../../interfaces/filters";
+import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -24,7 +24,7 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>({});
 
   const [innerUnits, setInnerUnits] = useState(units);
-  const { data } = useQuery(UNITS_AGGREGATE, {
+  const { data, loading } = useQuery(UNITS_AGGREGATE, {
     variables: {
       pt_ids: filterListState.property_types,
       fin_down_payment_min: filterListState?.fin_down_payment?.[0],
@@ -37,14 +37,25 @@ const UnitsPage: NextPage<{
       fin_years_max: filterListState?.fin_years?.[1],
       sk_city_comparison: { _id: filterListState?.sk_city },
     },
+    fetchPolicy: "no-cache",
   });
+
+  useEffect(() => {
+    console.log("filterListState changed to", filterListState);
+  }, [filterListState]);
 
   useEffect(() => {
     if (data?.units_aggregate && data?.units_aggregate.nodes) {
       setInnerUnits(data.units_aggregate.nodes);
     }
-    console.log('filtering');
+    console.log("filtering");
   }, [data?.units_aggregate]);
+  /*
+  useEffect(() => {
+    setInnerUnits([]);
+    console.log("ReFetching");
+  }, [filterListState]);
+  */
 
   return (
     <LanguageProvider localization={localization}>
@@ -58,11 +69,12 @@ const UnitsPage: NextPage<{
           />
         </div>
         <div className="flex flex-wrap ">
+          {loading && <div>Loading ...</div>}
           {innerUnits &&
             innerUnits.map((unit: any) => (
               <UnitCard key={unit.id} unit={unit} />
             ))}
-          {innerUnits.length === 0 && <div>No Units Found</div>}
+          {innerUnits.length === 0 && !loading && <div>No Units Found</div>}
         </div>
       </Layout>
     </LanguageProvider>
@@ -77,8 +89,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: ALL_UNITS });
   //const { data } = useQuery(allCompounds);
   const units: Unit[] = resp?.data.units;
-  console.log(resp?.data);
-  const localization = getLocalizationProps(ctx, 'common');
+
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -89,7 +101,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };
