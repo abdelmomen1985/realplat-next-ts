@@ -1,4 +1,6 @@
+import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
+import { GET_LOCATIONS } from '../../query/locations';
 import useTranslation from './../../hooks/useTranslation';
 
 interface Ddprops {
@@ -11,41 +13,29 @@ interface Ddprops {
   entryPoint: any;
 }
 export default function DropDown(props: Ddprops) {
+  const { data } = useQuery(GET_LOCATIONS);
   const [isOpenState, setIsOpenState] = useState(false);
   const [listTitle, setListTitle] = useState(props.title);
   const list = props.list;
-  const [filterList, setFilterList] = useState<any[]>([]);
   const { t, locale } = useTranslation();
   const toggleList = () => {
     setIsOpenState(!isOpenState);
   };
   const selectItem = (item: any) => {
-    setListTitle(locale === 'ar' ? item.name.ar : item.name.en);
-    console.log('single');
-    setIsOpenState(false);
-    let filteredList = { ...props.filterListState };
-    let key = props.entryPoint;
-    filteredList[key] = [...filterList];
-    props.filtered(filterList);
-    console.log(filteredList);
-  };
-  const toggleItem = (item: any) => {
-    console.log('multi');
-    setFilterList([...filterList, item]);
-    if (filterList.length === 2) {
-      setListTitle(`${filterList[0]} + ${filterList[1]}`);
-    } else if (filterList.length > 2) {
-      setListTitle(`${filterList[0]} + ${filterList.length - 1}`);
+    let duplicateLocations = { ...props.filterListState };
+    if (duplicateLocations.sk_city === item.sk_city._id) {
+      delete duplicateLocations.sk_city;
+      props.filtered(duplicateLocations);
+      console.log(duplicateLocations);
     } else {
-      // late step of the Dom
-      setListTitle(filterList[0]);
+      setListTitle(locale === 'ar' ? item.sk_city.name_ar : item.sk_city.name);
+      setIsOpenState(false);
+      let filteredList = { ...props.filterListState };
+      // setFilterList(...filterList, id)
+      filteredList.sk_city = item.sk_city._id;
+      props.filtered(filteredList);
+      console.log(filteredList);
     }
-    let filteredList = { ...props.filterListState };
-    let key = props.entryPoint;
-    filteredList[key] = [...filterList];
-    props.filtered(filteredList);
-    console.log(props.filterListState);
-    console.log(filteredList);
   };
 
   return (
@@ -98,7 +88,7 @@ export default function DropDown(props: Ddprops) {
               width: '100%',
             }}
           >
-            {list.map((item: any) => (
+            {data?.units.map((item: any) => (
               <button
                 type="button"
                 className="dd-list-item"
@@ -109,12 +99,12 @@ export default function DropDown(props: Ddprops) {
                   fontSize: '16px',
                   fontWeight: '500',
                 }}
-                key={item.id}
-                onClick={() =>
-                  props.multiSelect ? toggleItem(item) : selectItem(item)
-                }
+                key={item.sk_city._id}
+                onClick={() => {
+                  selectItem(item);
+                }}
               >
-                {locale === 'ar' ? item.name.ar : item.name.en}{' '}
+                {locale === 'ar' ? item.sk_city.name_ar : item.sk_city.name}{' '}
               </button>
             ))}
           </div>

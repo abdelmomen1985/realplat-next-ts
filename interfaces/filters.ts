@@ -12,4 +12,5 @@ export type PropertyType = {
     ar: string;
     en: string;
   };
+  selected?: boolean
 };

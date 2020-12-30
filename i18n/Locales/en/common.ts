@@ -3,6 +3,7 @@ const common = {
     navAbout: "About",
     navCompounds: "Compounds",
     navUnits: "Units",
+    navDevelopers: 'Developers',
     navUsersList: "Users List",
     navUsersAPI: "Users API",
     localeSwitcher: "Language",

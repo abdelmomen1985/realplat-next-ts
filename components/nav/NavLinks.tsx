@@ -40,6 +40,9 @@ export const NavLinks = () => {
       <ActiveLink activeClassName="active" href={`/${locale}/compounds`}>
         <a className="nav-link mx-2">{t('navCompounds')}</a>
       </ActiveLink>
+      <ActiveLink activeClassName="active" href={`/${locale}/developers`}>
+        <a className="nav-link mx-2">{t('navDevelopers')}</a>
+      </ActiveLink>
       <ActiveLink activeClassName="active" href={`/${locale}/units`}>
         <a className="nav-link mx-2">{t('navUnits')}</a>
       </ActiveLink>
