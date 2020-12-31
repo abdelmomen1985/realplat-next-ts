@@ -21,6 +21,7 @@
     "apollo-link-ws": "^1.0.20",
     "classnames": "^2.2.6",
     "deepmerge": "^4.2.2",
+    "google-maps-react": "^2.0.6",
     "graphql": "^15.4.0",
     "isomorphic-unfetch": "^3.1.0",
     "next": "latest",
@@ -29,6 +30,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-elastic-carousel": "^0.10.0",
+    "react-google-maps": "^9.4.5",
     "styled-components": "^5.2.1",
     "subscriptions-transport-ws": "^0.9.18"
   },

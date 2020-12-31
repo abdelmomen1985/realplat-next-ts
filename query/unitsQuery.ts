@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const UNIT_FIELDS = `
   id
@@ -31,6 +31,13 @@ export const UNIT_FIELDS = `
 export const ALL_UNITS = gql`
   query UnitsQuery {
     units(limit: 50) {
+      ${UNIT_FIELDS}
+    }
+  }
+`;
+export const FULL_UNITS = gql`
+  query UnitsQuery {
+    units {
       ${UNIT_FIELDS}
     }
   }
@@ -80,6 +87,44 @@ export const UNITS_AGGREGATE = gql`
       aggregate {
         count
       }
+    }
+  }
+`;
+export const UNITS_BY_PK = gql`
+  query units_by_pk($id: uuid!) {
+    units_by_pk(id: $id) {
+      bathrooms
+      bedrooms
+      bua
+      compound {
+        name
+        id
+        media
+        developer {
+          name
+          media
+          id
+        }
+      }
+      delivery_month
+      delivery_year
+      description
+      fin_down_payment
+      fin_monthly_payment
+      fin_total
+      fin_years
+      finishing_type
+      id
+      land
+      lat
+      lng
+      media
+      npv
+      property_type {
+        name
+        id
+      }
+      sk_city
     }
   }
 `;

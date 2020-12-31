@@ -52,7 +52,7 @@ const CompoundCard = ({ compound }: { compound: any }) => {
           href={`/${locale}/compounds/[compound]`}
           as={`/${locale}` + '/compounds/' + compound.id}
         >
-          <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 block text-center py-3 px-3 text-white">
+          <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 font-bold text-lg block text-center py-3 px-3 text-white">
             Explore
           </a>
         </Link>
@@ -81,9 +81,11 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
         <h3 className="font-bold text-center text-indigo-800 text-2xl">
           Projects
         </h3>
-        {developer.compounds.map((compound) => {
-          return <CompoundCard key={compound.id} compound={compound} />;
-        })}
+        <div className="flex flex-wrap ">
+          {developer.compounds.map((compound) => {
+            return <CompoundCard key={compound.id} compound={compound} />;
+          })}
+        </div>
       </div>
     </Layout>
   );
@@ -105,7 +107,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     },
   });
   const developer: Developer = resp?.data.developers_by_pk;
-  console.log(resp.data);
 
   const localization = getLocalizationProps(ctx, 'common');
   // const devID = router.query.developer;

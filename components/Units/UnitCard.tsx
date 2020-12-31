@@ -1,12 +1,24 @@
 import React from 'react';
 import useTranslation from '../../hooks/useTranslation';
 import Carousel from 'react-elastic-carousel';
+import { useRouter } from 'next/router';
 
 export const UnitCard = ({ unit }: { unit: any }) => {
   const { locale } = useTranslation();
+  const router = useRouter();
+  const singleUnitHandler = (unitId: string) => {
+    router.push(`/${locale}/units/[unit]/`, `/${locale}/units/${unitId}/`, {
+      shallow: true,
+    });
+  };
   return (
     <div className="w-1/3 flex">
-      <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1 relative">
+      <div
+        className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1 relative cursor-pointer"
+        onClick={() => {
+          singleUnitHandler(unit.id);
+        }}
+      >
         <Carousel
           pagination={false}
           showArrows={false}

@@ -42,10 +42,12 @@ const MyCard = ({ compound }: { compound: any }) => {
           </span>
         </div>
         <Link
-          href={`/${locale}/compounds/[developer]`}
+          href={`/${locale}/compounds/[compound]`}
           as={`/${locale}` + '/compounds/' + compound.id}
         >
-          Show More &rarr;
+          <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 block font-bold text-lg text-center py-3 px-3 text-white">
+            Explore
+          </a>
         </Link>
       </div>
     </div>
