@@ -75,7 +75,7 @@ export const getLocalizationProps = (ctx: any, namespace: string) => {
     ...strings,
   };
   return {
-    locale: ctx.params?.lang || 'en',
+    locale: ctx?.params?.lang || 'en',
     translations,
     namespace,
   };

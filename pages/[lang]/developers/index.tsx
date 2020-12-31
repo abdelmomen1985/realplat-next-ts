@@ -1,26 +1,12 @@
-import { gql } from "@apollo/client";
-import { GetStaticPaths, GetStaticProps } from "next";
-import Link from "next/link";
-import Layout from "../../../components/Layouts/Layout";
-import { getLocalizationProps } from "../../../Context/LangContext";
-import { initializeApollo } from "../../../lib/apolloClient";
-import Header from "./../../../components/Layouts/Header";
-import useTranslation from "./../../../hooks/useTranslation";
-export const allDevelopers = gql`
-  query Developers {
-    developers(limit: 50) {
-      id
-      description
-      media
-      name
-      slug_en
-      compounds {
-        name
-        id
-      }
-    }
-  }
-`;
+import { gql } from '@apollo/client';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
+import Layout from '../../../components/Layouts/Layout';
+import { getLocalizationProps } from '../../../Context/LangContext';
+import { initializeApollo } from '../../../lib/apolloClient';
+import Header from './../../../components/Layouts/Header';
+import useTranslation from './../../../hooks/useTranslation';
+import { allDevelopers } from '../../../query/developers';
 
 export type Developer = {
   name: { ar: string; en: string };
@@ -42,12 +28,12 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
-          style={{ maxHeight: "250px" }}
+          style={{ maxHeight: '250px' }}
           src={developer.media.card_icon}
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <h1 className="text-purple-500 mb-2"> {developer.name[locale]}</h1>
+          <h1 className="text-indigo-800 mb-2"> {developer.name[locale]}</h1>
           <p className="text-gray-700 text-base">
             {developer.description[locale]}
           </p>
@@ -64,13 +50,12 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
             );
           })}
         </div>
-        <button
-          onClick={() => {
-            developerHandler(developer.id);
-          }}
+        <Link
+          href={`/${locale}/developers/[developer]`}
+          as={`/${locale}` + '/developers/' + developer.id}
         >
-          Show more
-        </button>
+          Show More &rarr;
+        </Link>
       </div>
     </div>
   );
@@ -99,7 +84,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: allDevelopers });
   //const { data } = useQuery(allCompounds);
   const developers: Developer[] = resp?.data.developers;
-  const localization = getLocalizationProps(ctx, "common");
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -110,7 +95,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

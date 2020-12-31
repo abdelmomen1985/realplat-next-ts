@@ -5,15 +5,8 @@ import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
 import Header from './../../../components/Layouts/Header';
-export const allCompounds = gql`
-  query CompoundsQuery {
-    compounds {
-      name
-      media
-      description
-    }
-  }
-`;
+import { allCompounds } from '../../../query/compounds';
+import useTranslation from '../../../hooks/useTranslation';
 
 export type Compound = {
   name: { ar: string; en: string };
@@ -21,33 +14,43 @@ export type Compound = {
   media: any;
 };
 
-const MyCard = ({ compound }: { compound: any }) => (
-  <div className="w-1/3 flex">
-    <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
-      <img
-        className="w-full"
-        style={{ maxHeight: '250px' }}
-        src={compound.media.card_icon}
-        alt="Sunset in the mountains"
-      />
-      <div className="px-6 py-4">
-        <h1 className="text-purple-500 mb-2"> {compound.name.ar}</h1>
-        <p className="text-gray-700 text-base">{compound.description.en}</p>
-      </div>
-      <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #photography
-        </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #travel
-        </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #winter
-        </span>
+const MyCard = ({ compound }: { compound: any }) => {
+  const { locale } = useTranslation();
+
+  return (
+    <div className="w-1/3 flex">
+      <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
+        <img
+          className="w-full"
+          style={{ maxHeight: '250px' }}
+          src={compound.media.card_icon}
+          alt="Sunset in the mountains"
+        />
+        <div className="px-6 py-4">
+          <h1 className="text-indigo-800 mb-2"> {compound.name.ar}</h1>
+          <p className="text-gray-700 text-base">{compound.description.en}</p>
+        </div>
+        <div className="px-6 pt-4 pb-2">
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            #photography
+          </span>
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            #travel
+          </span>
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            #winter
+          </span>
+        </div>
+        <Link
+          href={`/${locale}/compounds/[developer]`}
+          as={`/${locale}` + '/compounds/' + compound.id}
+        >
+          Show More &rarr;
+        </Link>
       </div>
     </div>
-  </div>
-);
+  );
+};
 const CompoundsPage = ({ compounds }: { compounds: Compound[] }) => {
   return (
     <Layout title="Realstate Brand">
