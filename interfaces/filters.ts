@@ -5,6 +5,12 @@ export type FilterListType = {
   fin_years?: number[];
   fin_monthly_payment?: number[];
   sk_city?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  delivery_year?: number;
+  space?:number[];
+  finishing_type: string;
+
 };
 
 export type PropertyType = {

@@ -67,7 +67,8 @@ const innerList = [
     title: 'Delivery Date',
     values: [
       {
-        val: 'Ready_To_Move',
+        title: 'Ready_To_Move',
+        val: 2019,
         selected: false,
       },
       {

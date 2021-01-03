@@ -55,6 +55,13 @@ export const UNITS_AGGREGATE = gql`
     $fin_years_min: Int
     $fin_years_max: Int
     $sk_city_comparison: jsonb
+    $bathrooms: Int
+    $bedrooms: Int
+    $delivery_year_min: Int
+    $delivery_year_max: Int
+    $land_min: Int
+    $land_max:  Int 
+    $finishing_type: String
   ) {
     units_aggregate(
       limit: 50
@@ -78,6 +85,23 @@ export const UNITS_AGGREGATE = gql`
         }
         sk_city:{
           _contains: $sk_city_comparison
+        }
+        bathrooms: {
+          _eq: $bathrooms
+        }
+        bedrooms: {
+          _eq: $bedrooms
+        }
+        delivery_year: {
+          _gte: $delivery_year_min,
+           _lte: $delivery_year_max,
+          }
+        land: {
+          _gte: $land_min
+          _lte: $land_max
+        }
+        finishing_type: {
+          _eq: $finishing_type
         }
       }
     ) {
