@@ -92,11 +92,6 @@ export default function PropTypesDropDown({
     );
     console.log(onlySelectedArray);
     setPropTypesInnerState(newArray);
-    let newFilterList = [...innerFilterList];
-    let duplicateItems = newFilterList.filter((propType) => {
-      return propType.id === item.id;
-    });
-
     let filteredList = { ...filterListState };
     const selectedIds = onlySelectedArray.map(
       (single: PropertyType) => single.id
@@ -105,46 +100,20 @@ export default function PropTypesDropDown({
     filtered(filteredList);
 
     // label change
-    if (duplicateItems.length > 1) {
-      let nonDuplicateItems = newFilterList.filter((propType) => {
-        return propType.id !== item.id;
-      });
-      setInnerFilterList(nonDuplicateItems);
-      if (nonDuplicateItems.length === 2) {
-        setListTitle(
-          `${nonDuplicateItems[0].name[locale]} + ${nonDuplicateItems[1].name[locale]}`
-        );
-      } else if (nonDuplicateItems.length > 2) {
-        setListTitle(
-          `${nonDuplicateItems[0].name[locale]} + ${
-            nonDuplicateItems.length - 1
-          }`
-        );
-      } else if (nonDuplicateItems.length === 0) {
-        setListTitle('prop_type');
-      } else {
-        // late step of the Dom
-        setListTitle(nonDuplicateItems[0].name[locale]);
-      }
-      let filteredList = { ...filterListState };
-      delete filteredList[entryPoint];
-      filtered(filteredList);
+    if (onlySelectedArray.length === 1) {
+      setListTitle(`${onlySelectedArray[0].name[locale]}`);
+    } else if (onlySelectedArray.length === 2) {
+      setListTitle(
+        `${onlySelectedArray[0].name[locale]} + ${onlySelectedArray[1].name[locale]}`
+      );
+    } else if (onlySelectedArray.length > 2) {
+      setListTitle(
+        `${onlySelectedArray[0].name[locale]} + ${onlySelectedArray.length - 1}`
+      );
+    } else if (onlySelectedArray.length === 0) {
+      setListTitle('prop_type');
     } else {
-      setInnerFilterList(newFilterList);
-      if (newFilterList.length === 2) {
-        setListTitle(
-          `${newFilterList[0].name[locale]} + ${newFilterList[1].name[locale]}`
-        );
-      } else if (newFilterList.length > 2) {
-        setListTitle(
-          `${newFilterList[0].name[locale]} + ${newFilterList.length - 1}`
-        );
-      } else if (newFilterList.length === 0) {
-        setListTitle('prop_type');
-      } else {
-        // late step of the Dom
-        setListTitle(newFilterList[0].name[locale]);
-      }
+      setListTitle(`${onlySelectedArray[0].name[locale]}`);
     }
   };
 
