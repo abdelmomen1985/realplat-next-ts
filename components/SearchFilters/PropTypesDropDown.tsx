@@ -189,7 +189,7 @@ export default function PropTypesDropDown({
         {isOpen && (
           <div
             role="list"
-            className="dd-list"
+            className="dd-list absolute"
             style={{
               top: '0',
               background: '#fff',
