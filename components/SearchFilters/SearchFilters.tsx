@@ -5,7 +5,7 @@ import PricesModal from './PricesModal';
 import MoreFiltersModal from './MoreFiltersModal';
 import PropTypesDropDown from './PropTypesDropDown';
 import { FilterListType } from '../../interfaces/filters';
-
+import useTranslation from './../../hooks/useTranslation';
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
   filterListState: any;
@@ -13,6 +13,7 @@ interface SearchFiltersProps {
 }
 
 export default function SearchFilters(props: SearchFiltersProps) {
+  const { t, locale } = useTranslation();
   const [openPropTypeDD, setOpenPropTypeDD] = useState(false);
   const unitList: any = props.units;
   const prices: any = [];
@@ -40,7 +41,6 @@ export default function SearchFilters(props: SearchFiltersProps) {
         });
       }
     }
-    console.log(locations, prices);
   }, []);
 
   return (
@@ -65,7 +65,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
           {/* property Type */}
 
           <PropTypesDropDown
-            title="Property Type"
+            title="prop_type"
             icon="fas fa-home"
             filtered={props.setFilterListState}
             filterListState={props.filterListState}
@@ -103,7 +103,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
                 console.log(props.filterListState);
               }}
             >
-              Clear Filters
+              {t('clearFilters')}
             </button>
           </div>
         </div>

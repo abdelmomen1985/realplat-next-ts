@@ -1,34 +1,35 @@
-import React, { useState } from "react";
-import "rc-slider/assets/index.css";
-import RangeSlider from "../Range/RangeSlider";
+import React, { useState, useEffect, useRef } from 'react';
+import 'rc-slider/assets/index.css';
+import RangeSlider from '../Range/RangeSlider';
+import useTranslation from './../../hooks/useTranslation';
 
 const pricesList = [
   {
-    title: "Down Payment",
-    key: "fin_down_payment",
+    title: 'downPay',
+    key: 'fin_down_payment',
     value: [0, 2000000],
-    unit: "Egp",
+    unit: 'Egp',
     step: 100000,
   },
   {
-    title: "Monthly Payment",
-    key: "fin_monthly_payment",
+    title: 'monthlyPay',
+    key: 'fin_monthly_payment',
     value: [0, 300000],
-    unit: "Egp",
+    unit: 'Egp',
     step: 100000,
   },
   {
-    title: "Total Price",
-    key: "fin_total",
+    title: 'totalPrice',
+    key: 'fin_total',
     value: [0, 8000000],
-    unit: "Egp",
+    unit: 'Egp',
     step: 100000,
   },
   {
-    title: "Payment Years",
-    key: "fin_years",
+    title: 'paymentYears',
+    key: 'fin_years',
     value: [0, 10],
-    unit: "Years",
+    unit: 'Years',
     step: 1,
   },
 ];
@@ -42,13 +43,30 @@ type PricesFilterType = {
 
 export default function PricesModal(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t, locale } = useTranslation();
+  const node = useRef<HTMLDivElement>(null);
   const [pricesFilterState, setPricesFilterState] = useState<PricesFilterType>({
     fin_down_payment: pricesList[0].value,
     fin_monthly_payment: pricesList[1].value,
     fin_total: pricesList[2].value,
     fin_years: pricesList[3].value,
   });
-
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener('mousedown', handleClick);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, []);
+  const handleClick = (e) => {
+    if (node?.current?.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    setIsModalOpen(false);
+  };
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -76,17 +94,17 @@ export default function PricesModal(props: any) {
           }
         `}
       </style>
-      <div className="dd-wrapper relative">
+      <div className="dd-wrapper relative" ref={node}>
         <button
           type="button"
           className="dd-header p-3 filter-button"
           onClick={toggleModal}
         >
           <div className="dd-header-title">
-            <i className="fas fa-file-invoice-dollar"></i> Price Range{" "}
+            <i className="fas fa-file-invoice-dollar"></i> {t('priceRange')}{' '}
             {isModalOpen ? (
               <span>
-                {" "}
+                {' '}
                 <i className="fas fa-angle-up"></i>
               </span>
             ) : (
@@ -100,12 +118,12 @@ export default function PricesModal(props: any) {
           <div
             className="dd-list absolute"
             style={{
-              top: "0",
-              background: "#fff",
-              borderRadius: "5px",
-              boxShadow: "0 2px 2px #eee",
+              top: '0',
+              background: '#fff',
+              borderRadius: '5px',
+              boxShadow: '0 2px 2px #eee',
               zIndex: 999,
-              width: "100%",
+              width: '100%',
             }}
           >
             {pricesList.map((item) => {
@@ -113,23 +131,19 @@ export default function PricesModal(props: any) {
                 <RangeSlider
                   key={item.key}
                   entry={item.key}
-                  value={(pricesFilterState as any)[item.key]}
+                  value={
+                    (pricesFilterState as any)[item.key]
+                      ? (pricesFilterState as any)[item.key]
+                      : item.value
+                  }
                   title={item.title}
                   unit={item.unit}
                   min={item.value[0]}
                   max={item.value[1]}
                   step={item.step}
+                  filterListState={props.filterListState}
                   filtered={(value) => {
                     setPricesFilterState(value);
-                    /*
-                    let allFilters = { ...props.filterListSta
-                      te };
-                    let newAllFilters = {
-                      ...allFilters,
-                      [item.key]: value[item.key],
-                    };
-                    //props.filtered(newAllFilters);
-          */
                   }}
                   pricesFilterList={pricesFilterState}
                 />

@@ -37,7 +37,7 @@ export type Compound = {
   ];
 };
 const SingleCompound = ({ compound }: { compound: Compound }) => {
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   // console.log(window.location.href);
   return (
     <Layout>
@@ -53,8 +53,8 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-indigo-800 text-2xl">
-          Projects
+        <h3 className="font-bold text-center text-3xl text-indigo-800 text-2xl py-5">
+          {t('projects')}
         </h3>
         <div className="flex flex-wrap ">
           {compound.units.map((unit) => {
@@ -74,7 +74,8 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
         >
           <a className="my-2 mx-auto w-11/12 rounded-md text-indigo-800 bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
             {' '}
-            See ALL Projects &rarr;
+            {t('allProjectsDeveloper')}{' '}
+            {locale === 'ar' ? <span>&larr;</span> : <span>&rarr;</span>}
           </a>
         </Link>
       </div>

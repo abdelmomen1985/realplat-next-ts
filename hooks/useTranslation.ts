@@ -8,9 +8,10 @@ function useTranslation() {
   function t(key: string) {
     // console.log("t localization", localization);
     if (!localization.translations[key]) {
-      console.warn(
-        `Translation '${key}' for locale '${localization.locale}' not found.`
-      );
+      // console.log(
+      //   `Translation '${key}' for locale '${localization.locale}' not found.`
+      // );
+      return key;
     }
     return localization.translations[key] || "";
   }

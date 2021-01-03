@@ -26,11 +26,7 @@ export type Developer = {
   ];
 };
 const CompoundCard = ({ compound }: { compound: any }) => {
-  const developerHandler = (id) => {
-    console.log(id);
-  };
-  console.log(compound);
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   return (
     <div className="w-1/3 flex">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
@@ -53,7 +49,7 @@ const CompoundCard = ({ compound }: { compound: any }) => {
           as={`/${locale}` + '/compounds/' + compound.id}
         >
           <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 font-bold text-lg block text-center py-3 px-3 text-white">
-            Explore
+            {t('explore')}
           </a>
         </Link>
       </div>
@@ -62,7 +58,7 @@ const CompoundCard = ({ compound }: { compound: any }) => {
 };
 
 const SingleDeveloper = ({ developer }: { developer: Developer }) => {
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   // console.log(window.location.href);
   return (
     <Layout>
@@ -78,8 +74,8 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-indigo-800 text-2xl">
-          Projects
+        <h3 className="font-bold text-center text-indigo-800 text-3xl">
+          {t('projects')}
         </h3>
         <div className="flex flex-wrap ">
           {developer.compounds.map((compound) => {

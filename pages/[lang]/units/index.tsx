@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useState, useRef } from 'react';
+import { useQuery } from '@apollo/client';
 
-import Layout from "../../../components/Layouts/Layout";
-import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import { initializeApollo } from "../../../lib/apolloClient";
+import Layout from '../../../components/Layouts/Layout';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import { initializeApollo } from '../../../lib/apolloClient';
 
-import { Localization } from "../../../i18n/types";
+import { Localization } from '../../../i18n/types';
 import {
   getLocalizationProps,
   LanguageProvider,
-} from "../../../Context/LangContext";
-import Header from "../../../components/Layouts/Header";
-import { Unit } from "../../../interfaces/index";
-import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
-import { UnitCard } from "../../../components/Units/UnitCard";
-import { FilterListType } from "../../../interfaces/filters";
-import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
+} from '../../../Context/LangContext';
+import Header from '../../../components/Layouts/Header';
+import { Unit } from '../../../interfaces/index';
+import SearchFilters from './../../../components/SearchFilters/SearchFilters';
+import { UnitCard } from '../../../components/Units/UnitCard';
+import { FilterListType } from '../../../interfaces/filters';
+import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
 
 const UnitsPage: NextPage<{
   units: Unit[];
   localization: Localization;
 }> = ({ units, localization }) => {
   const [filterListState, setFilterListState] = useState<FilterListType>({});
-
   const [innerUnits, setInnerUnits] = useState(units);
   const { data, loading } = useQuery(UNITS_AGGREGATE, {
     variables: {
@@ -37,19 +36,20 @@ const UnitsPage: NextPage<{
       fin_years_max: filterListState?.fin_years?.[1],
       sk_city_comparison: { _id: filterListState?.sk_city },
     },
-    fetchPolicy: "no-cache",
+    fetchPolicy: 'no-cache',
   });
-
+  const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log("filterListState changed to", filterListState);
+    console.log('filterListState changed to', filterListState);
   }, [filterListState]);
 
   useEffect(() => {
     if (data?.units_aggregate && data?.units_aggregate.nodes) {
       setInnerUnits(data.units_aggregate.nodes);
     }
-    console.log("filtering");
+    console.log('filtering');
   }, [data?.units_aggregate]);
+
   /*
   useEffect(() => {
     setInnerUnits([]);
@@ -61,7 +61,7 @@ const UnitsPage: NextPage<{
     <LanguageProvider localization={localization}>
       <Layout title="Brand Logo Here">
         <Header />
-        <div className="mx-4 my-5">
+        <div className="mx-4 my-5" ref={node}>
           <SearchFilters
             setFilterListState={setFilterListState}
             filterListState={filterListState}
@@ -90,7 +90,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   //const { data } = useQuery(allCompounds);
   const units: Unit[] = resp?.data.units;
 
-  const localization = getLocalizationProps(ctx, "common");
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

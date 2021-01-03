@@ -19,10 +19,7 @@ export type Developer = {
   };
 };
 const DeveloperCard = ({ developer }: { developer: any }) => {
-  const developerHandler = (id) => {
-    console.log(id);
-  };
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   return (
     <div className="w-1/3 flex">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
@@ -55,7 +52,7 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
           as={`/${locale}` + '/developers/' + developer.id}
         >
           <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 block text-center font-bold text-lg py-3 px-3 text-white">
-            More About {developer.name[locale]}
+            {t('moreAbout')} {developer.name[locale]}
           </a>
         </Link>
       </div>

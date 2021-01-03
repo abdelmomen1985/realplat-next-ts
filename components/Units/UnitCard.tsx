@@ -4,7 +4,7 @@ import Carousel from 'react-elastic-carousel';
 import { useRouter } from 'next/router';
 
 export const UnitCard = ({ unit }: { unit: any }) => {
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   const router = useRouter();
   const singleUnitHandler = (unitId: string) => {
     router.push(`/${locale}/units/[unit]/`, `/${locale}/units/${unitId}/`, {
@@ -62,7 +62,7 @@ export const UnitCard = ({ unit }: { unit: any }) => {
           </div>
           <div>
             <p className="text-gray-700 text-base">
-              Compound: {unit.compound.name[locale]}
+              {t('compound')}: {unit.compound.name[locale]}
             </p>
           </div>
         </div>
@@ -71,24 +71,24 @@ export const UnitCard = ({ unit }: { unit: any }) => {
           <div className="px-6 pt-2 pb-2">
             <h3 style={{ color: '#000', fontWeight: 600 }}>
               {' '}
-              {unit.fin_total} $
+              {unit.fin_total} {t('dollar')}
             </h3>
             <h5
               className="text-gray-600"
               style={{ color: '#c4c4c4', fontWeight: 600 }}
             >
-              Total Price
+              {t('totalPrice')}
             </h5>
           </div>
           <div className="px-6 pt-2 pb-2">
             <h3 style={{ color: '#000', fontWeight: 600 }}>
-              {unit.fin_years} Years
+              {unit.fin_years} {t('years')}
             </h3>
             <h5
               className="text-gray-600"
               style={{ color: '#c4c4c4', fontWeight: 600 }}
             >
-              Total Years
+              {t('totalYears')}
             </h5>
           </div>
         </div>
@@ -97,24 +97,24 @@ export const UnitCard = ({ unit }: { unit: any }) => {
           <div className="px-6 pt-2 pb-2">
             <h3 style={{ color: '#000', fontWeight: 600 }}>
               {' '}
-              {unit.fin_down_payment} $
+              {unit.fin_down_payment} {t('dollar')}
             </h3>
             <h5
               className="text-gray-600"
               style={{ color: '#c4c4c4', fontWeight: 600 }}
             >
-              Down Payment
+              {t('downPay')}
             </h5>
           </div>
           <div className="px-6 pt-2 pb-2">
             <h3 style={{ color: '#000', fontWeight: 600 }}>
-              {unit.fin_monthly_payment} $
+              {unit.fin_monthly_payment} {t('dollar')}
             </h3>
             <h5
               className="text-gray-600"
               style={{ color: '#c4c4c4', fontWeight: 600 }}
             >
-              Monthly Payment
+              {t('monthlyPay')}
             </h5>
           </div>
         </div>
@@ -127,10 +127,9 @@ export const UnitCard = ({ unit }: { unit: any }) => {
             <i className="fas fa-toilet"></i> {unit.bathrooms}
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Bua: {unit.bua}
+            Bua{/* to be replaced with icon  */}: {unit.bua}
           </span>
         </div>
-        {/* <p>{unit.slug_ar}</p> */}
       </div>
     </div>
   );

@@ -27,8 +27,10 @@ const MyCard = ({ compound }: { compound: any }) => {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <h1 className="text-indigo-800 mb-2"> {compound.name.ar}</h1>
-          <p className="text-gray-700 text-base">{compound.description.en}</p>
+          <h1 className="text-indigo-800 mb-2"> {compound.name[locale]}</h1>
+          <p className="text-gray-700 text-base">
+            {compound.description[locale]}
+          </p>
         </div>
         <div className="px-6 pt-4 pb-2">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
