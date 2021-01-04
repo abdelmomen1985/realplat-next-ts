@@ -55,6 +55,8 @@ const common = {
     priceRange: 'Price Range',
     egp: 'Egp',
     paymentYears: 'Payment Years',
+    navSign: 'Sign In',
+    navSignOut: 'Sign Out'
     
   };
   

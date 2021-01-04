@@ -3,7 +3,7 @@ import Link from 'next/link';
 import useTranslation from '../../hooks/useTranslation';
 import ActiveLink from './../ActiveLink';
 
-export const NavLinks = () => {
+export const NavLinks = (props: any) => {
   const { t, locale } = useTranslation();
 
   return (
@@ -46,6 +46,25 @@ export const NavLinks = () => {
       <ActiveLink activeClassName="active" href={`/${locale}/units`}>
         <a className="nav-link mx-2">{t('navUnits')}</a>
       </ActiveLink>
+      {!props.authenticated ? (
+        <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
+          {t('navSign')}
+        </a>
+      ) : (
+        <>
+          <a
+            className="nav-link mx-2"
+            onClick={() => props.setAuthenticated(false)}
+          >
+            {t('navSignOut')}
+          </a>
+          <ActiveLink activeClassName="active" href={`/${locale}/units`}>
+            <a className="nav-link mx-2">
+              <i className="fa fa-heart-o" aria-hidden="true"></i>
+            </a>
+          </ActiveLink>
+        </>
+      )}
     </>
   );
 };

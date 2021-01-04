@@ -55,7 +55,8 @@ const common = {
     priceRange: 'السعر',
     egp: 'جنيه',
     paymentYears: 'سنوات السداد',
-
+    navSign: 'تسجيل دخول',
+    navSignOut: 'تسجيل خروج'
     
 
 
