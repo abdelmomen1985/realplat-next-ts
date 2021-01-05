@@ -1,18 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { useQuery, useMutation } from '@apollo/client';
-import {
-  getLocalizationProps,
-  LanguageProvider,
-} from '../../../../Context/LangContext';
-import { AppContext } from '../../../../Context/AppContextProvider';
+import React, { useContext, useState, useEffect } from "react";
+import { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import { useMutation, useLazyQuery } from "@apollo/client";
+import { getLocalizationProps } from "../../../../Context/LangContext";
+import { AppContext } from "../../../../Context/AppContextProvider";
 
-import { initializeApollo } from '../../../../lib/apolloClient';
-import { UnitCard } from '../../../../components/Units/UnitCard';
-import { Unit } from '../../../../interfaces/index';
-import Layout from './../../../../components/Layouts/Layout';
-import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../../query/user';
-import Header from './../../../../components/Layouts/Header';
+import { UnitCard } from "../../../../components/Units/UnitCard";
+import { Unit } from "../../../../interfaces/index";
+import Layout from "./../../../../components/Layouts/Layout";
+import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from "./../../../../query/user";
+import Header from "./../../../../components/Layouts/Header";
 export default function WhishList({
   wishListUnits,
 }: {
@@ -20,15 +16,24 @@ export default function WhishList({
 }) {
   const [wishListUnitsState, setWishListUnitsState] = useState(wishListUnits);
   const { user } = useContext(AppContext);
-  let id = user?.id;
-  const { data, loading } = useQuery(USER_WISHLIST, {
-    variables: { user_id: id },
+  const [getWishList, { data, refetch }] = useLazyQuery(USER_WISHLIST, {
+    fetchPolicy: "no-cache",
   });
   useEffect(() => {
     // const { user } = useContext(AppContext);
     console.log(user);
     const getUserWishList = async () => {
-      console.log(data?.user_wishlist_aggregate.nodes);
+      getWishList({ variables: { user_id: user!.id! } });
+    };
+    // getUserWishList();
+    if (user) {
+      getUserWishList();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (data?.user_wishlist_aggregate) {
+      console.log(data);
       const serverWishListUnits: Unit[] = data?.user_wishlist_aggregate.nodes;
       let resolvedUnits = [];
       for (let node in serverWishListUnits) {
@@ -40,12 +45,8 @@ export default function WhishList({
       }
       console.log(resolvedUnits);
       setWishListUnitsState(resolvedUnits);
-    };
-    // getUserWishList();
-    if (user) {
-      getUserWishList();
     }
-  }, []);
+  }, [data]);
 
   const compareHandler = (unit: Unit) => {
     console.log(unit);
@@ -53,7 +54,7 @@ export default function WhishList({
 
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
 
-  const removeFromWishListHandler = (unit: Unit) => {
+  const removeFromWishListHandler = async (unit: Unit) => {
     console.log(unit);
     unit.wishListed = !unit.wishListed;
     let wishListedUnit: Unit = { ...unit };
@@ -64,14 +65,15 @@ export default function WhishList({
     });
     setWishListUnitsState(dummyUnits);
     // handle add to the server
-    console.log('unit is WishListed');
+    console.log("unit is WishListed");
     if (user) {
-      removeWishList({
+      await removeWishList({
         variables: {
           user_id: user.id,
           unit_id: unit.id,
         },
       });
+      if (refetch) refetch();
     }
   };
 
@@ -91,7 +93,7 @@ export default function WhishList({
                     compareHandler={compareHandler}
                   />
                 );
-              })}{' '}
+              })}{" "}
             </div>
           </>
         ) : (
@@ -108,7 +110,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Don't forget to include the respective types for any props passed into
   // the component.
   const wishListUnits: any = [];
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -119,7 +121,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };
