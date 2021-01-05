@@ -55,11 +55,42 @@ const UnitsPage: NextPage<{
 
   useEffect(() => {
     if (data?.units_aggregate && data?.units_aggregate.nodes) {
-      setInnerUnits(data.units_aggregate.nodes);
+      let dummyUnits = data?.units_aggregate.nodes;
+      let newUnits: Unit[] = [];
+      for (let unit in dummyUnits) {
+        newUnits.push({
+          ...dummyUnits[unit],
+          wishListed: false,
+          comparing: false,
+        });
+      }
+      setInnerUnits(newUnits);
+      console.log('filtering');
     }
-    console.log('filtering');
   }, [data?.units_aggregate]);
 
+  const wishListHandler = (unit: Unit) => {
+    console.log(unit);
+    unit.wishListed = !unit.wishListed;
+    let wishListedUnit: Unit = { ...unit };
+    let dummyUnits = [...innerUnits];
+    dummyUnits = dummyUnits.map((unit) => {
+      if (unit.id === wishListedUnit.id) return wishListedUnit;
+      return unit;
+    });
+    setInnerUnits(dummyUnits);
+    console.log(innerUnits);
+    if (wishListedUnit.wishListed) {
+      // handle add to the server
+      console.log('unit is WishListed');
+    } else {
+      // handle removal from server
+      console.log('unit is removed from WishList');
+    }
+  };
+  const compareHandler = (unit: any) => {
+    console.log(unit);
+  };
   /*
   useEffect(() => {
     setInnerUnits([]);
@@ -82,7 +113,12 @@ const UnitsPage: NextPage<{
           {loading && <div>Loading ...</div>}
           {innerUnits &&
             innerUnits.map((unit: any) => (
-              <UnitCard key={unit.id} unit={unit} />
+              <UnitCard
+                key={unit.id}
+                unit={unit}
+                wishListHandler={wishListHandler}
+                compareHandler={compareHandler}
+              />
             ))}
           {innerUnits.length === 0 && !loading && <div>No Units Found</div>}
         </div>
@@ -98,8 +134,11 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const client = initializeApollo();
   const resp = await client.query({ query: ALL_UNITS });
   //const { data } = useQuery(allCompounds);
-  const units: Unit[] = resp?.data.units;
-
+  let dummyUnits = resp?.data.units;
+  let units: Unit[] = [];
+  for (let unit in dummyUnits) {
+    units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
+  }
   const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {

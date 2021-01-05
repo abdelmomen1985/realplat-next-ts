@@ -38,4 +38,6 @@ export type Unit = {
     name: any;
     id: string;
   };
+  wishListed: Boolean;
+  comparing: Boolean
 };
