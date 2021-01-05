@@ -1,13 +1,28 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import useTranslation from "../../hooks/useTranslation";
 export default function Login(props: any) {
-  const { register, handleSubmit, watch, errors } = useForm();
-  const onLogin = (data: any) => {
+  const router = useRouter();
+  const { locale } = useTranslation();
+  const { register, handleSubmit, errors } = useForm();
+  const onLogin = async (data: any) => {
     console.log(data);
     props.setLoginModal(false);
     props.setAuthenticated(true);
-    console.log(props.setAuthenticated(true));
+    const email = data.email;
+    const password = data.password;
+
+    const response = await fetch("/api/sessions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    console.log(response);
+
+    if (response.ok) {
+      return router.push(`/${locale}/developers`);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onLogin)}>
@@ -33,10 +48,10 @@ export default function Login(props: any) {
           name="email"
           placeholder="Email"
           ref={register({
-            required: 'Email is Required',
+            required: "Email is Required",
             pattern: {
               value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: 'Please Enter A valid Email Address',
+              message: "Please Enter A valid Email Address",
             },
           })}
         />
@@ -54,7 +69,7 @@ export default function Login(props: any) {
           type="password"
           name="password"
           placeholder="Password"
-          ref={register({ required: 'Password is Required' })}
+          ref={register({ required: "Password is Required" })}
         />
         {errors.password && (
           <p className="text-sm text-bold text-red-400 px-1 py-2">

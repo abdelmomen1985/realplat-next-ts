@@ -1,14 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-import { User } from '../interfaces';
-import useTranslation from './../hooks/useTranslation';
+import { User } from "../interfaces";
+import useTranslation from "./../hooks/useTranslation";
 type Props = {
   data: User;
 };
 
 const ListItem = ({ data }: Props) => {
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   return (
     <Link href={`/${locale}/users/[id]`} as={`/${locale}/users/${data.id}`}>
       <a>
