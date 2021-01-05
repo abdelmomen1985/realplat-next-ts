@@ -1,27 +1,22 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useState, useRef, useContext } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 
-import Layout from "../../../components/Layouts/Layout";
-import {
-  GetStaticProps,
-  GetStaticPaths,
-  NextPage,
-  GetServerSideProps,
-} from "next";
-import { initializeApollo } from "../../../lib/apolloClient";
-
-import { Localization } from "../../../i18n/types";
+import Layout from '../../../components/Layouts/Layout';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import { initializeApollo } from '../../../lib/apolloClient';
+import { ADD_TO_WISHLIST } from '../../../query/user';
+import { Localization } from '../../../i18n/types';
 import {
   getLocalizationProps,
   LanguageProvider,
-} from "../../../Context/LangContext";
-import Header from "../../../components/Layouts/Header";
-import { Unit } from "../../../interfaces/index";
-import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
-import { UnitCard } from "../../../components/Units/UnitCard";
-import { FilterListType } from "../../../interfaces/filters";
-import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
-import { AppContext } from "../../../Context/AppContextProvider";
+} from '../../../Context/LangContext';
+import Header from '../../../components/Layouts/Header';
+import { Unit } from '../../../interfaces/index';
+import SearchFilters from './../../../components/SearchFilters/SearchFilters';
+import { UnitCard } from '../../../components/Units/UnitCard';
+import { FilterListType } from '../../../interfaces/filters';
+import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
+import { AppContext } from '../../../Context/AppContextProvider';
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -55,11 +50,11 @@ const UnitsPage: NextPage<{
           ? 2050
           : filterListState?.delivery_year,
     },
-    fetchPolicy: "no-cache",
+    fetchPolicy: 'no-cache',
   });
   const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log("filterListState changed to", filterListState);
+    console.log('filterListState changed to', filterListState);
   }, [filterListState]);
 
   useEffect(() => {
@@ -75,9 +70,10 @@ const UnitsPage: NextPage<{
       }
       setInnerUnits(newUnits);
       console.log('filtering');
+      console.log(user);
     }
   }, [data?.units_aggregate]);
-
+  const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const wishListHandler = (unit: Unit) => {
     console.log(unit);
     unit.wishListed = !unit.wishListed;
@@ -92,6 +88,14 @@ const UnitsPage: NextPage<{
     if (wishListedUnit.wishListed) {
       // handle add to the server
       console.log('unit is WishListed');
+      if (user) {
+        addWishList({
+          variables: {
+            user_id: user.id,
+            unit_id: unit.id,
+          },
+        });
+      }
     } else {
       // handle removal from server
       console.log('unit is removed from WishList');
@@ -142,7 +146,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // the component.
   const client = initializeApollo();
   const resp = await client.query({ query: ALL_UNITS });
-  //const { data } = useQuery(allCompounds);
 
   let dummyUnits = resp?.data.units;
   let units: Unit[] = [];
@@ -160,7 +163,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

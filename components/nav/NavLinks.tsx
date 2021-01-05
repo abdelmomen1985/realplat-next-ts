@@ -46,25 +46,27 @@ export const NavLinks = (props: any) => {
       <ActiveLink activeClassName="active" href={`/${locale}/units`}>
         <a className="nav-link mx-2">{t('navUnits')}</a>
       </ActiveLink>
-      {!props.authenticated ? (
-        <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
-          {t('navSign')}
+
+      <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
+        {t('navSign')}
+      </a>
+
+      <>
+        <a
+          className="nav-link mx-2"
+          onClick={() => props.setAuthenticated(false)}
+        >
+          {t('navSignOut')}
         </a>
-      ) : (
-        <>
-          <a
-            className="nav-link mx-2"
-            onClick={() => props.setAuthenticated(false)}
-          >
-            {t('navSignOut')}
+        <ActiveLink
+          activeClassName="active"
+          href={`/${locale}/profile/wishlist`}
+        >
+          <a className="nav-link mx-2">
+            <i className="far fa-heart" aria-hidden="true"></i>
           </a>
-          <ActiveLink activeClassName="active" href={`/${locale}/units`}>
-            <a className="nav-link mx-2">
-              <i className="fa fa-heart-o" aria-hidden="true"></i>
-            </a>
-          </ActiveLink>
-        </>
-      )}
+        </ActiveLink>
+      </>
     </>
   );
 };
