@@ -9,8 +9,8 @@ export const UnitCard = ({
   compareHandler,
 }: {
   unit: any;
-  wishListHandler: (val: any) => void;
-  compareHandler: (val: any) => void;
+  wishListHandler?: (val: any) => void;
+  compareHandler?: (val: any) => void;
 }) => {
   const { t, locale } = useTranslation();
   const router = useRouter();

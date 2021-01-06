@@ -10,6 +10,7 @@ export const UNIT_FIELDS = `
   fin_monthly_payment
   fin_down_payment
   fin_years
+  land
   compound {
     name
     developer {

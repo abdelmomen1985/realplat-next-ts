@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import useTranslation from '../../hooks/useTranslation';
 import ActiveLink from './../ActiveLink';
+import { AppContext } from '../../Context/AppContextProvider';
 
 export const NavLinks = (props: any) => {
+  const { user } = useContext(AppContext);
+
   const { t, locale } = useTranslation();
 
   return (
@@ -47,26 +50,28 @@ export const NavLinks = (props: any) => {
         <a className="nav-link mx-2">{t('navUnits')}</a>
       </ActiveLink>
 
-      <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
-        {t('navSign')}
-      </a>
-
-      <>
-        <a
-          className="nav-link mx-2"
-          onClick={() => props.setAuthenticated(false)}
-        >
-          {t('navSignOut')}
+      {!user?.id ? (
+        <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
+          {t('navSign')}
         </a>
-        <ActiveLink
-          activeClassName="active"
-          href={`/${locale}/profile/wishlist`}
-        >
-          <a className="nav-link mx-2">
-            <i className="far fa-heart" aria-hidden="true"></i>
+      ) : (
+        <>
+          <a
+            className="nav-link mx-2"
+            onClick={() => props.setAuthenticated(false)}
+          >
+            {t('navSignOut')}
           </a>
-        </ActiveLink>
-      </>
+          <ActiveLink
+            activeClassName="active"
+            href={`/${locale}/profile/wishlist`}
+          >
+            <a className="nav-link mx-2">
+              <i className="far fa-heart" aria-hidden="true"></i>
+            </a>
+          </ActiveLink>
+        </>
+      )}
     </>
   );
 };

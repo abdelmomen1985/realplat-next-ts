@@ -25,7 +25,7 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user } = useContext(AppContext);
+  const { user, comparing, setComparing } = useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
   const { data, loading } = useQuery(UNITS_AGGREGATE, {
     variables: {
@@ -58,6 +58,12 @@ const UnitsPage: NextPage<{
   }, [filterListState]);
 
   useEffect(() => {
+    // wish list handling
+    // newProducts = products.map(item => {
+    //   let index = likedProducts.findIndex(likedProduct => likedProduct.id === item.id);
+    //  if (index >-1) return {...newProducts[index], wishListed: true, comparing: false}
+    // return {...item, wishListed: false, comparing: false,};
+    // })
     if (data?.units_aggregate && data?.units_aggregate.nodes) {
       let dummyUnits = data?.units_aggregate.nodes;
       let newUnits: Unit[] = [];
@@ -103,6 +109,17 @@ const UnitsPage: NextPage<{
   };
   const compareHandler = (unit: any) => {
     console.log(unit);
+    unit.comparing = !unit.comparing;
+    let comparedUnit: Unit = { ...unit };
+    let dummyUnits = [...innerUnits];
+    dummyUnits = dummyUnits.map((unit) => {
+      if (unit.id === comparedUnit.id) return comparedUnit;
+      return unit;
+    });
+
+    setComparing(comparedUnit);
+
+    setInnerUnits(dummyUnits);
   };
   /*
   useEffect(() => {
