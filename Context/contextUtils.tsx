@@ -1,10 +1,12 @@
 export type StateType = {
   // day
   user: { id: string } | undefined;
-  setUser: (user: { id: string }) => void;
+  setUser: (user: { id: string } | undefined) => void;
   comparing: any[];
   setComparing: (val: any) => void;
   clearComparing: () => void;
+  loginModal: Boolean;
+  setLoginModal: (val: any) => void;
 };
 
 export const setStorageItems = (name: string, items: any[]) => {

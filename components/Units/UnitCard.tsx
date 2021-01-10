@@ -1,7 +1,7 @@
-import React from "react";
-import useTranslation from "../../hooks/useTranslation";
-import Carousel from "react-elastic-carousel";
-import { useRouter } from "next/router";
+import React from 'react';
+import useTranslation from '../../hooks/useTranslation';
+import Carousel from 'react-elastic-carousel';
+import { useRouter } from 'next/router';
 
 export const UnitCard = ({
   unit,
@@ -10,8 +10,8 @@ export const UnitCard = ({
   wishlisted,
 }: {
   unit: any;
-  wishListHandler?: (val: any) => void;
-  compareHandler?: (val: any) => void;
+  wishListHandler?: (val: any, val2: any) => void;
+  compareHandler?: (val: any, val2: any) => void;
   wishlisted: boolean;
 }) => {
   const { t, locale } = useTranslation();
@@ -26,8 +26,8 @@ export const UnitCard = ({
     <div className="w-1/3 flex">
       <div
         className={
-          "m-2 max-w-sm rounded-md overflow-hidden shadow-lg flex-1 relative " +
-          (unit.comparing ? "bg-blue-600" : "bg-white")
+          'm-2 max-w-sm rounded-md overflow-hidden shadow-lg flex-1 relative ' +
+          (unit.comparing ? 'bg-blue-600' : 'bg-white')
         }
       >
         <div className="relative">
@@ -42,7 +42,7 @@ export const UnitCard = ({
                 <img
                   key={key}
                   className="w-full"
-                  style={{ maxHeight: "250px" }}
+                  style={{ maxHeight: '250px' }}
                   src={image}
                   alt="unit image"
                 />
@@ -51,31 +51,31 @@ export const UnitCard = ({
           </Carousel>
           <div
             className="absolute flex justify-between text-sm"
-            style={{ bottom: "50px", width: "100%" }}
+            style={{ bottom: '50px', width: '100%' }}
           >
             <div
               className="bg-transparent rounded-md p-3 text-black-500"
-              style={{ left: "15px", position: "absolute" }}
+              style={{ left: '15px', position: 'absolute' }}
             >
-              {unit.wishListed || wishlisted ? (
+              {wishlisted ? (
                 <span
                   className="cursor-pointer"
-                  onClick={() => wishListHandler(unit)}
+                  onClick={() => wishListHandler(unit, wishlisted)}
                 >
                   <i
                     className="fas fa-heart"
-                    style={{ color: "white", fontSize: "18px" }}
+                    style={{ color: 'white', fontSize: '18px' }}
                     aria-hidden="true"
                   ></i>
                 </span>
               ) : (
                 <span
                   className="cursor-pointer"
-                  onClick={() => wishListHandler(unit)}
+                  onClick={() => wishListHandler(unit, wishlisted)}
                 >
                   <i
                     className="far fa-heart"
-                    style={{ color: "white", fontSize: "18px" }}
+                    style={{ color: 'white', fontSize: '18px' }}
                     aria-hidden="true"
                   ></i>
                 </span>
@@ -83,19 +83,19 @@ export const UnitCard = ({
             </div>
             <div
               className="bg-blue-900 rounded-md p-3 text-white"
-              style={{ right: "15px", position: "absolute" }}
+              style={{ right: '15px', position: 'absolute' }}
             >
               {!unit.comparing ? (
                 <span
                   className="cursor-pointer"
-                  onClick={() => compareHandler(unit)}
+                  onClick={() => compareHandler(unit, wishlisted)}
                 >
                   <i className="fas fa-compress-alt"></i> compare
                 </span>
               ) : (
                 <span
                   className="cursor-pointer"
-                  onClick={() => compareHandler(unit)}
+                  onClick={() => compareHandler(unit, wishlisted)}
                 >
                   <i className="fas fa-compress"></i> Comparing
                 </span>
@@ -105,17 +105,17 @@ export const UnitCard = ({
         </div>
         <div
           className="absolute flex justify-between text-sm"
-          style={{ top: "10px", width: "100%" }}
+          style={{ top: '10px', width: '100%' }}
         >
           <div
             className="bg-white rounded-md p-3 text-black-500"
-            style={{ left: "15px", position: "absolute" }}
+            style={{ left: '15px', position: 'absolute' }}
           >
             <i className="fas fa-calendar"></i> {unit.delivery_year}
           </div>
           <div
             className="bg-blue-900 rounded-md p-3 text-white"
-            style={{ right: "15px", position: "absolute" }}
+            style={{ right: '15px', position: 'absolute' }}
           >
             <i className="fas fa-home"></i> {unit.property_type.name[locale]}
           </div>
@@ -129,64 +129,64 @@ export const UnitCard = ({
           <div className="px-6 py-4 flex justify-between">
             <div>
               <h4 className="text-indigo-800">
-                {locale === "ar" ? unit.sk_city.name_ar : unit.sk_city.name}
+                {locale === 'ar' ? unit.sk_city.name_ar : unit.sk_city.name}
               </h4>
             </div>
             <div>
               <p className="text-gray-700 text-base">
-                {t("compound")}: {unit.compound.name[locale]}
+                {t('compound')}: {unit.compound.name[locale]}
               </p>
             </div>
           </div>
 
           <div className="px-6 py-2 flex justify-between">
             <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: "#000", fontWeight: 600 }}>
-                {" "}
-                {unit.fin_total} {t("dollar")}
+              <h3 style={{ color: '#000', fontWeight: 600 }}>
+                {' '}
+                {unit.fin_total} {t('dollar')}
               </h3>
               <h5
                 className="text-gray-600"
-                style={{ color: "#c4c4c4", fontWeight: 600 }}
+                style={{ color: '#c4c4c4', fontWeight: 600 }}
               >
-                {t("totalPrice")}
+                {t('totalPrice')}
               </h5>
             </div>
             <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: "#000", fontWeight: 600 }}>
-                {unit.fin_years} {t("years")}
+              <h3 style={{ color: '#000', fontWeight: 600 }}>
+                {unit.fin_years} {t('years')}
               </h3>
               <h5
                 className="text-gray-600"
-                style={{ color: "#c4c4c4", fontWeight: 600 }}
+                style={{ color: '#c4c4c4', fontWeight: 600 }}
               >
-                {t("totalYears")}
+                {t('totalYears')}
               </h5>
             </div>
           </div>
           <hr />
           <div className="px-6 py-4 flex justify-between">
             <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: "#000", fontWeight: 600 }}>
-                {" "}
-                {unit.fin_down_payment} {t("dollar")}
+              <h3 style={{ color: '#000', fontWeight: 600 }}>
+                {' '}
+                {unit.fin_down_payment} {t('dollar')}
               </h3>
               <h5
                 className="text-gray-600"
-                style={{ color: "#c4c4c4", fontWeight: 600 }}
+                style={{ color: '#c4c4c4', fontWeight: 600 }}
               >
-                {t("downPay")}
+                {t('downPay')}
               </h5>
             </div>
             <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: "#000", fontWeight: 600 }}>
-                {unit.fin_monthly_payment} {t("dollar")}
+              <h3 style={{ color: '#000', fontWeight: 600 }}>
+                {unit.fin_monthly_payment} {t('dollar')}
               </h3>
               <h5
                 className="text-gray-600"
-                style={{ color: "#c4c4c4", fontWeight: 600 }}
+                style={{ color: '#c4c4c4', fontWeight: 600 }}
               >
-                {t("monthlyPay")}
+                {t('monthlyPay')}
               </h5>
             </div>
           </div>

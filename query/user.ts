@@ -32,3 +32,11 @@ mutation remove_from_wishlist($user_id: uuid, $unit_id: uuid) {
   }
 }
 `
+export const NEW_USER = gql`
+mutation sign_up($name: String, $username: String, $password: String) {
+  insert_users(objects:[
+    {name: $name,username: $username, passwired: $password}
+  ]){
+    affected_rows 
+  }
+}`

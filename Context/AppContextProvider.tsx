@@ -54,11 +54,15 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       payload: null,
     });
   };
+  const [loginModal, setLoginModal] = useState(false);
+
   const contextValues: StateType = {
     ...state,
     setUser,
     setComparing,
     clearComparing,
+    loginModal,
+    setLoginModal,
   };
   return (
     <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

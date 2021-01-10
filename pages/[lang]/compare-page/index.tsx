@@ -10,15 +10,22 @@ import {
   getLocalizationProps,
   LanguageProvider,
 } from '../../../Context/LangContext';
+import { useMutation } from '@apollo/client';
 import { Localization } from '../../../i18n/types';
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
+
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 const ComparePage: NextPage = (props: any) => {
-  const { comparing, clearComparing } = useContext(AppContext);
+  const { comparing, clearComparing, user, setLoginModal } = useContext(
+    AppContext
+  );
 
   const [comparingUnits, setComparingUnits] = useState<any[]>(comparing);
 
   const router = useRouter();
   const { t, locale } = useTranslation();
+  const [addWishList] = useMutation(ADD_TO_WISHLIST);
+  const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
   useEffect(() => {
     if (comparing.length < 2) {
       router.replace(`/${locale}/units`);
@@ -31,6 +38,36 @@ const ComparePage: NextPage = (props: any) => {
       console.log('leaving and clearing', comparing);
     };
   }, []);
+  const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
+    // handle add to the server
+    if (user) {
+      unit.wishListed = !wishlisted;
+      let wishListedUnit: Unit = { ...unit };
+      let dummyUnits = [...comparingUnits];
+      dummyUnits = dummyUnits.map((unit) => {
+        if (unit.id === wishListedUnit.id) return wishListedUnit;
+        return unit;
+      });
+      setComparingUnits(dummyUnits);
+      if (wishListedUnit.wishListed) {
+        await addWishList({
+          variables: {
+            user_id: user.id,
+            unit_id: unit.id,
+          },
+        });
+      } else {
+        await removeWishList({
+          variables: {
+            user_id: user.id,
+            unit_id: unit.id,
+          },
+        });
+      }
+    } else {
+      setLoginModal(true);
+    }
+  };
   return (
     <>
       <style jsx>
@@ -66,6 +103,7 @@ const ComparePage: NextPage = (props: any) => {
                 <h4>{t('bedrooms')}</h4>
                 <h4>{t('bathrooms')}</h4>
                 <h4>{t('location')}</h4>
+                <h4>{t('wishList')}</h4>
               </div>
               {comparingUnits.map((unit) => (
                 <div
@@ -105,6 +143,23 @@ const ComparePage: NextPage = (props: any) => {
                     {' '}
                     {locale === 'ar' ? unit.sk_city.name_ar : unit.sk_city.name}
                   </h3>
+                  <button
+                    onClick={() => wishListHandler(unit, unit.wishListed)}
+                    style={{
+                      backgroundColor: unit.wishListed ? '#e84118' : '#273c75',
+                      color: '#fff',
+                      borderRadius: '5px',
+                      border: 'none',
+                      margin: '5px auto',
+                      display: 'block',
+                      padding: '5px 15px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {unit.wishListed
+                      ? 'Remove from WishList'
+                      : 'Add to Wish List'}
+                  </button>
                 </div>
                 //   <UnitCard key={unit.id} unit={unit} />
               ))}

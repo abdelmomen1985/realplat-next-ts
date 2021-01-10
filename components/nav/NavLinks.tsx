@@ -5,7 +5,7 @@ import ActiveLink from './../ActiveLink';
 import { AppContext } from '../../Context/AppContextProvider';
 
 export const NavLinks = (props: any) => {
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
 
   const { t, locale } = useTranslation();
 
@@ -56,10 +56,7 @@ export const NavLinks = (props: any) => {
         </a>
       ) : (
         <>
-          <a
-            className="nav-link mx-2"
-            onClick={() => props.setAuthenticated(false)}
-          >
+          <a className="nav-link mx-2" onClick={() => setUser(undefined)}>
             {t('navSignOut')}
           </a>
           <ActiveLink

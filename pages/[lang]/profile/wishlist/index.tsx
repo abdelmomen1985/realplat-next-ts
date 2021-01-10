@@ -1,23 +1,23 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import { useMutation, useLazyQuery } from "@apollo/client";
-import { getLocalizationProps } from "../../../../Context/LangContext";
-import { AppContext } from "../../../../Context/AppContextProvider";
+import React, { useContext, useState, useEffect } from 'react';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import { useMutation, useLazyQuery } from '@apollo/client';
+import { getLocalizationProps } from '../../../../Context/LangContext';
+import { AppContext } from '../../../../Context/AppContextProvider';
 
-import { UnitCard } from "../../../../components/Units/UnitCard";
-import { Unit } from "../../../../interfaces/index";
-import Layout from "./../../../../components/Layouts/Layout";
-import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from "./../../../../query/user";
-import Header from "./../../../../components/Layouts/Header";
+import { UnitCard } from '../../../../components/Units/UnitCard';
+import { Unit } from '../../../../interfaces/index';
+import Layout from './../../../../components/Layouts/Layout';
+import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../../query/user';
+import Header from './../../../../components/Layouts/Header';
 export default function WhishList({
   wishListUnits,
 }: {
   wishListUnits: Unit[];
 }) {
   const [wishListUnitsState, setWishListUnitsState] = useState(wishListUnits);
-  const { user } = useContext(AppContext);
+  const { user, setComparing } = useContext(AppContext);
   const [getWishList, { data, refetch }] = useLazyQuery(USER_WISHLIST, {
-    fetchPolicy: "no-cache",
+    fetchPolicy: 'no-cache',
   });
   useEffect(() => {
     // const { user } = useContext(AppContext);
@@ -48,15 +48,24 @@ export default function WhishList({
     }
   }, [data]);
 
-  const compareHandler = (unit: Unit) => {
+  const compareHandler = (unit: Unit, wishlisted: Boolean) => {
     console.log(unit);
+    unit.comparing = !unit.comparing;
+    let comparedUnit: Unit = { ...unit, wishListed: wishlisted };
+    let dummyUnits = [...wishListUnitsState];
+    dummyUnits = dummyUnits.map((unit) => {
+      if (unit.id === comparedUnit.id) return comparedUnit;
+      return unit;
+    });
+    setComparing(comparedUnit);
+    setWishListUnitsState(dummyUnits);
   };
 
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
 
-  const removeFromWishListHandler = async (unit: Unit) => {
+  const removeFromWishListHandler = async (unit: Unit, wishlisted: Boolean) => {
     console.log(unit);
-    unit.wishListed = !unit.wishListed;
+    unit.wishListed = !wishlisted;
     let wishListedUnit: Unit = { ...unit };
     let dummyUnits = [...wishListUnitsState];
     dummyUnits = dummyUnits.map((unit) => {
@@ -65,7 +74,7 @@ export default function WhishList({
     });
     setWishListUnitsState(dummyUnits);
     // handle add to the server
-    console.log("unit is WishListed");
+    console.log('unit is WishListed');
     if (user) {
       await removeWishList({
         variables: {
@@ -91,9 +100,10 @@ export default function WhishList({
                     unit={unit}
                     wishListHandler={removeFromWishListHandler}
                     compareHandler={compareHandler}
+                    wishlisted
                   />
                 );
-              })}{" "}
+              })}{' '}
             </div>
           </>
         ) : (
@@ -110,7 +120,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Don't forget to include the respective types for any props passed into
   // the component.
   const wishListUnits: any = [];
-  const localization = getLocalizationProps(ctx, "common");
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -121,7 +131,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

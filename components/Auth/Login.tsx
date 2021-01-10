@@ -69,7 +69,13 @@ export default function Login(props: any) {
           type="password"
           name="password"
           placeholder="Password"
-          ref={register({ required: 'Password is Required' })}
+          ref={register({
+            required: 'Password is Required',
+            minLength: {
+              value: 8,
+              message: "password can't be shorter than 8 Characters",
+            },
+          })}
         />
         {errors.password && (
           <p className="text-sm text-bold text-red-400 px-1 py-2">
