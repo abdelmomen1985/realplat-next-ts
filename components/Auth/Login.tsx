@@ -1,8 +1,10 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import useTranslation from '../../hooks/useTranslation';
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import useTranslation from "../../hooks/useTranslation";
+import { AppContext } from "../../Context/AppContextProvider";
 export default function Login(props: any) {
+  const { setUser } = useContext(AppContext);
   const router = useRouter();
   const { locale } = useTranslation();
   const { register, handleSubmit, errors } = useForm();
@@ -13,14 +15,18 @@ export default function Login(props: any) {
     const email = data.email;
     const password = data.password;
 
-    const response = await fetch('/api/sessions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/sessions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    console.log(response);
 
     if (response.ok) {
+      const userResp = await fetch("/api/getUserSession", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (userResp.status === 200) setUser(await userResp.json());
       return router.push(`/${locale}/profile/wishlist`);
     }
   };
@@ -48,10 +54,10 @@ export default function Login(props: any) {
           name="email"
           placeholder="Email"
           ref={register({
-            required: 'Email is Required',
+            required: "Email is Required",
             pattern: {
               value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: 'Please Enter A valid Email Address',
+              message: "Please Enter A valid Email Address",
             },
           })}
         />
@@ -70,7 +76,7 @@ export default function Login(props: any) {
           name="password"
           placeholder="Password"
           ref={register({
-            required: 'Password is Required',
+            required: "Password is Required",
             minLength: {
               value: 8,
               message: "password can't be shorter than 8 Characters",

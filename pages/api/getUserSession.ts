@@ -5,7 +5,7 @@ export default withIronSession(
   async (req, res) => {
     if (req.method === "POST") {
       const user = req.session.get("user");
-      if (user.id) {
+      if (user && user.id) {
         return res.status(200).send(JSON.stringify(user));
       }
       return res.status(403).send("");

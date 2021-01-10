@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import Link from 'next/link';
-import useTranslation from '../../hooks/useTranslation';
-import ActiveLink from './../ActiveLink';
-import { AppContext } from '../../Context/AppContextProvider';
+import React, { useContext } from "react";
+import Link from "next/link";
+import useTranslation from "../../hooks/useTranslation";
+import ActiveLink from "./../ActiveLink";
+import { AppContext } from "../../Context/AppContextProvider";
 
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);
@@ -29,10 +29,10 @@ export const NavLinks = (props: any) => {
         }
       `}</style>
       <ActiveLink activeClassName="active" href={`/${locale}/`}>
-        <a className="nav-link mx-2">{t('navHome')}</a>
+        <a className="nav-link mx-2">{t("navHome")}</a>
       </ActiveLink>
       <ActiveLink activeClassName="active" href={`/${locale}/about`}>
-        <a className="nav-link mx-2">{t('navAbout')}</a>
+        <a className="nav-link mx-2">{t("navAbout")}</a>
       </ActiveLink>
       <ActiveLink activeClassName="active" href={`/${locale}/users`}>
         <a className="nav-link mx-2">Users List</a>
@@ -41,23 +41,32 @@ export const NavLinks = (props: any) => {
         <a className="nav-link mx-2">Users API</a>
       </ActiveLink>
       <ActiveLink activeClassName="active" href={`/${locale}/compounds`}>
-        <a className="nav-link mx-2">{t('navCompounds')}</a>
+        <a className="nav-link mx-2">{t("navCompounds")}</a>
       </ActiveLink>
       <ActiveLink activeClassName="active" href={`/${locale}/developers`}>
-        <a className="nav-link mx-2">{t('navDevelopers')}</a>
+        <a className="nav-link mx-2">{t("navDevelopers")}</a>
       </ActiveLink>
       <ActiveLink activeClassName="active" href={`/${locale}/units`}>
-        <a className="nav-link mx-2">{t('navUnits')}</a>
+        <a className="nav-link mx-2">{t("navUnits")}</a>
       </ActiveLink>
 
       {!user?.id ? (
         <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
-          {t('navSign')}
+          {t("navSign")}
         </a>
       ) : (
         <>
-          <a className="nav-link mx-2" onClick={() => setUser(undefined)}>
-            {t('navSignOut')}
+          <a
+            className="nav-link mx-2"
+            onClick={async () => {
+              const response = await fetch("/api/sessions", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+              });
+              if (response.status === 204) setUser(undefined);
+            }}
+          >
+            {t("navSignOut")}
           </a>
           <ActiveLink
             activeClassName="active"
