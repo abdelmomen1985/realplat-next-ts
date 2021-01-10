@@ -3,7 +3,8 @@ import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { getLocalizationProps } from '../../../../Context/LangContext';
 import { AppContext } from '../../../../Context/AppContextProvider';
-
+import { useRouter } from 'next/router';
+import useTranslation from '../../../../hooks/useTranslation';
 import { UnitCard } from '../../../../components/Units/UnitCard';
 import { Unit } from '../../../../interfaces/index';
 import Layout from './../../../../components/Layouts/Layout';
@@ -19,6 +20,9 @@ export default function WhishList({
   const [getWishList, { data, refetch }] = useLazyQuery(USER_WISHLIST, {
     fetchPolicy: 'no-cache',
   });
+  const router = useRouter();
+  const { t, locale } = useTranslation();
+
   useEffect(() => {
     // const { user } = useContext(AppContext);
     console.log(user);
@@ -28,6 +32,8 @@ export default function WhishList({
     // getUserWishList();
     if (user) {
       getUserWishList();
+    } else {
+      router.replace(`/${locale}/units`);
     }
   }, [user]);
 
