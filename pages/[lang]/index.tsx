@@ -67,7 +67,7 @@ const IndexPage: NextPage = () => {
         className="flex flex-wrap bg-local pt-20 items-center justify-center"
         style={{
           background:
-            'url(https://www.sakneen.com/assets/images/landingPage/landingHeader.png) no-repeat 50% fixed',
+            'url(/images/landingHeader.png) no-repeat 50% fixed',
           backgroundSize: 'cover',
           minHeight: '100vh',
         }}
