@@ -1,8 +1,10 @@
+
 import React, { useContext } from "react";
 import Link from "next/link";
 import useTranslation from "../../hooks/useTranslation";
 import ActiveLink from "./../ActiveLink";
 import { AppContext } from "../../Context/AppContextProvider";
+
 
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);

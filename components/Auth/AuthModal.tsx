@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Login from './Login';
-import SignUp from './SignUp';
+import React, { useState, useEffect, useRef } from "react";
+import Login from "./Login";
+import SignUp from "./SignUp";
 export default function AuthModal(props: any) {
   const [newUserState, setNewUserState] = useState(true);
   //   handle the backdrop with useRed
   const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // add when mounted
-    document.addEventListener('mousedown', handleClick);
+    document.addEventListener("mousedown", handleClick);
     // return function to be called when unmounted
     return () => {
-      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener("mousedown", handleClick);
     };
   }, []);
-  const handleClick = (e) => {
+  const handleClick = (e: any) => {
     if (node?.current?.contains(e.target)) {
       // inside click
       return;
@@ -71,13 +71,13 @@ export default function AuthModal(props: any) {
         <div className="modal" ref={node}>
           <div className="modal-buttons flex justify-items-stretch w-full">
             <button
-              className={'log-btn ' + (newUserState ? null : 'active')}
+              className={"log-btn " + (newUserState ? null : "active")}
               onClick={() => setNewUserState(false)}
             >
               Sign In
             </button>
             <button
-              className={'log-btn ' + (newUserState ? 'active' : null)}
+              className={"log-btn " + (newUserState ? "active" : null)}
               onClick={() => setNewUserState(true)}
             >
               Register

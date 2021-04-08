@@ -1,16 +1,16 @@
-import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { getLocalizationProps } from '../../../Context/LangContext';
-import { initializeApollo } from '../../../lib/apolloClient';
-import useTranslation from '../../../hooks/useTranslation';
-import Carousel from 'react-elastic-carousel';
-import { FULL_UNITS, UNITS_BY_PK } from '../../../query/unitsQuery';
+import React from "react";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import { initializeApollo } from "../../../lib/apolloClient";
+import useTranslation from "../../../hooks/useTranslation";
+import Carousel from "react-elastic-carousel";
+import { FULL_UNITS, UNITS_BY_PK } from "../../../query/unitsQuery";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
-} from 'react-google-maps';
+} from "react-google-maps";
 
 import {
   FinancialSummary,
@@ -22,7 +22,7 @@ import {
   UnitDescription,
   FloorPlan,
   CompoundNdDeveloper,
-} from './../../../components/exports';
+} from "./../../../components/exports";
 const defaultOptions = { scrollwheel: false };
 
 const RegularMap = withScriptjs(
@@ -57,7 +57,7 @@ const SingleUnit = ({ unit }: { unit: any }) => {
                   <img
                     key={key}
                     className="w-full"
-                    style={{ maxHeight: '250px' }}
+                    style={{ maxHeight: "250px" }}
                     src={image}
                     alt="unit image"
                   />
@@ -77,23 +77,23 @@ const SingleUnit = ({ unit }: { unit: any }) => {
               {/* map api that recieves lat and lang */}
               <h3
                 style={{
-                  width: '100%',
-                  textAlign: locale === 'en' ? 'left' : 'right',
-                  background: 'rgba(149,165,166, 0.5)',
-                  color: 'rgb(44,62,80)',
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  padding: '5px 10px',
-                  margin: '15px 3px',
+                  width: "100%",
+                  textAlign: locale === "en" ? "left" : "right",
+                  background: "rgba(149,165,166, 0.5)",
+                  color: "rgb(44,62,80)",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  padding: "5px 10px",
+                  margin: "15px 3px",
                 }}
               >
-                {t('location')}
+                {t("location")}
               </h3>
               <RegularMap
                 googleMapURL="https://maps.googleapis.com/maps/api/js"
-                loadingElement={<div style={{ height: '100%' }} />}
-                containerElement={<div style={{ height: '280px' }} />}
-                mapElement={<div style={{ height: '100%' }} />}
+                loadingElement={<div style={{ height: "100%" }} />}
+                containerElement={<div style={{ height: "280px" }} />}
+                mapElement={<div style={{ height: "100%" }} />}
                 defaultCenter={{ lat: unit.lat, lng: unit.lng }}
               />
             </div>
@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     },
   });
   const unit: any = resp?.data.units_by_pk;
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -132,9 +132,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const resp = await client.query({ query: FULL_UNITS });
   const units: any = resp?.data.units;
   const paths: any[] = [];
-  units.forEach((unit) => {
-    paths.push({ params: { lang: 'ar', id: unit.id } });
-    paths.push({ params: { lang: 'en', id: unit.id } });
+  units.forEach((unit: any) => {
+    paths.push({ params: { lang: "ar", id: unit.id } });
+    paths.push({ params: { lang: "en", id: unit.id } });
   });
   return {
     paths,
