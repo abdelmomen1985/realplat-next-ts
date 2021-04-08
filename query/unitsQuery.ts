@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const UNIT_FIELDS = `
   id
@@ -10,6 +10,7 @@ export const UNIT_FIELDS = `
   fin_monthly_payment
   fin_down_payment
   fin_years
+  land
   compound {
     name
     developer {
@@ -62,6 +63,7 @@ export const UNITS_AGGREGATE = gql`
     $land_min: Int
     $land_max:  Int 
     $finishing_type: String
+    $user_id: uuid
   ) {
     units_aggregate(
       limit: 50
@@ -110,6 +112,14 @@ export const UNITS_AGGREGATE = gql`
       }
       aggregate {
         count
+      }
+    }
+    user_wishlist_aggregate(where: {user_id: 
+        {_eq: $user_id}}) {
+      nodes {
+       unit{
+        id
+       }
       }
     }
   }

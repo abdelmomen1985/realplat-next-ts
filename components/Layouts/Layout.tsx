@@ -24,10 +24,10 @@ const Layout = ({
       </Head>
 
       {children}
-      <div>
+      {/* <div>
         <NavLinks />
       </div>
-      <Footer />
+      <Footer /> */}
     </div>
   );
 };

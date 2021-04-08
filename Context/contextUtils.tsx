@@ -1,7 +1,12 @@
 export type StateType = {
   // day
   user: { id: string } | undefined;
-  setUser: (user: { id: string }) => void;
+  setUser: (user: { id: string } | undefined) => void;
+  comparing: any[];
+  setComparing: (val: any) => void;
+  clearComparing: () => void;
+  loginModal: Boolean;
+  setLoginModal: (val: any) => void;
 };
 
 export const setStorageItems = (name: string, items: any[]) => {
@@ -18,7 +23,9 @@ export const getStorageSingleItem = (name: string): object | undefined => {
 };
 
 export const ACTION_TYPES = {
-  SET_USER: "SET_USER",
+  SET_USER: 'SET_USER',
+  SET_COMPARING: ' SET_COMPARING',
+  CLEAR_COMPARING: 'CLEAR_COMPARING',
 };
 
 export type Action = {

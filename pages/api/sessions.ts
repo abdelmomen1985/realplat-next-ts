@@ -30,6 +30,10 @@ export default withIronSession(
       }
 
       return res.status(403).send("");
+    } else if (req.method === "DELETE") {
+      req.session.set("user", null);
+      await req.session.save();
+      return res.status(204).send("");
     }
 
     return res.status(404).send("");

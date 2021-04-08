@@ -7,10 +7,12 @@ export const UnitCard = ({
   unit,
   wishListHandler,
   compareHandler,
+  wishlisted,
 }: {
   unit: any;
-  wishListHandler: (val: any) => void;
-  compareHandler: (val: any) => void;
+  wishListHandler?: (val: any, val2: any) => void;
+  compareHandler?: (val: any, val2: any) => void;
+  wishlisted: boolean;
 }) => {
   const { t, locale } = useTranslation();
   const router = useRouter();
@@ -55,10 +57,10 @@ export const UnitCard = ({
               className="bg-transparent rounded-md p-3 text-black-500"
               style={{ left: '15px', position: 'absolute' }}
             >
-              {unit.wishListed ? (
+              {wishlisted ? (
                 <span
                   className="cursor-pointer"
-                  onClick={() => wishListHandler(unit)}
+                  onClick={() => wishListHandler(unit, wishlisted)}
                 >
                   <i
                     className="fas fa-heart"
@@ -69,7 +71,7 @@ export const UnitCard = ({
               ) : (
                 <span
                   className="cursor-pointer"
-                  onClick={() => wishListHandler(unit)}
+                  onClick={() => wishListHandler(unit, wishlisted)}
                 >
                   <i
                     className="far fa-heart"
@@ -86,14 +88,14 @@ export const UnitCard = ({
               {!unit.comparing ? (
                 <span
                   className="cursor-pointer"
-                  onClick={() => compareHandler(unit)}
+                  onClick={() => compareHandler(unit, wishlisted)}
                 >
                   <i className="fas fa-compress-alt"></i> compare
                 </span>
               ) : (
                 <span
                   className="cursor-pointer"
-                  onClick={() => compareHandler(unit)}
+                  onClick={() => compareHandler(unit, wishlisted)}
                 >
                   <i className="fas fa-compress"></i> Comparing
                 </span>
