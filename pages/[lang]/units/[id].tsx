@@ -1,10 +1,11 @@
 import React from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+
 import { getLocalizationProps } from "../../../Context/LangContext";
 import { initializeApollo } from "../../../lib/apolloClient";
 import useTranslation from "../../../hooks/useTranslation";
 import Carousel from "react-elastic-carousel";
-import { FULL_UNITS, UNITS_BY_PK } from "../../../query/unitsQuery";
+import { UNITS_BY_PK } from "../../../query/unitsQuery";
+import { GetServerSideProps } from "next";
 import {
   withScriptjs,
   withGoogleMap,
@@ -109,6 +110,8 @@ const SingleUnit = ({ unit }: { unit: any }) => {
     </Layout>
   );
 };
+
+/*
 export const getStaticProps: GetStaticProps = async (ctx) => {
   let unitId = ctx.params?.id;
   const client = initializeApollo();
@@ -127,6 +130,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     },
   };
 };
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const client = initializeApollo();
   const resp = await client.query({ query: FULL_UNITS });
@@ -139,6 +143,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths,
     fallback: false,
+  };
+};
+*/
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let unitId = context.params?.id;
+  const client = initializeApollo();
+  const resp = await client.query({
+    query: UNITS_BY_PK,
+    variables: {
+      id: unitId,
+    },
+  });
+  const unit: any = resp?.data.units_by_pk;
+  const localization = getLocalizationProps(context, "common");
+  return {
+    props: {
+      localization,
+      unit,
+    },
   };
 };
 export default SingleUnit;

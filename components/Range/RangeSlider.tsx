@@ -1,7 +1,7 @@
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import React, { useState, useEffect } from 'react';
-import useTranslation from './../../hooks/useTranslation';
+import { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
+import React, { useState, useEffect } from "react";
+import useTranslation from "./../../hooks/useTranslation";
 interface RangeProps {
   title: string;
   entry: string;
@@ -28,15 +28,15 @@ export default function RangeSlider({
   filterListState,
 }: RangeProps) {
   const [payState, setPaymentState] = useState(value !== undefined);
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   //const [valuesState, setValuesState] = useState(value);
   useEffect(() => {
-    console.log('use Effect is running');
+    console.log("use Effect is running");
     if (
       Object.keys(filterListState).length === 0 &&
       filterListState.constructor === Object
     ) {
-      console.log('use Effect condition is running');
+      console.log("use Effect condition is running");
       setPaymentState(true);
       let filteredList = { ...pricesFilterList };
       delete filteredList[entry];
@@ -86,13 +86,13 @@ export default function RangeSlider({
       <h3>
         {value ? (
           <div className="flex flex-wrap justify-between">
-            <div>{value?.[0]}</div> -{' '}
+            <div>{value?.[0]}</div> -{" "}
             <div>
               {value?.[1]} <span>{t(`${unit.toLowerCase()}`)}</span>
-            </div>{' '}
+            </div>{" "}
           </div>
         ) : (
-          <div style={{ margin: '1.5em' }}></div>
+          <div style={{ margin: "1.5em" }}></div>
         )}
       </h3>
     </div>

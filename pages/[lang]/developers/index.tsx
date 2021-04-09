@@ -35,7 +35,7 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
           </p>
         </div>
         <div className="px-6 pt-4 pb-2">
-          {developer.compounds.map((compound) => {
+          {developer.compounds.map((compound: any) => {
             return (
               <span
                 key={compound.id}

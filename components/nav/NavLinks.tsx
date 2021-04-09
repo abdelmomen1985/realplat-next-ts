@@ -1,18 +1,16 @@
-
-import React, { useContext } from "react";
-import Link from "next/link";
-import useTranslation from "../../hooks/useTranslation";
-import ActiveLink from "./../ActiveLink";
-import { AppContext } from "../../Context/AppContextProvider";
-
-
+import React from "react";
+//import useTranslation from "../../hooks/useTranslation";
+//import ActiveLink from "./../ActiveLink";
+/*
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);
 
   const { t, locale } = useTranslation();
-
+*/
+export const NavLinks = () => {
   return (
     <>
+      {/** 
       <style jsx>{`
         .nav-link {
           text-decoration: none;
@@ -80,6 +78,7 @@ export const NavLinks = (props: any) => {
           </ActiveLink>
         </>
       )}
+      */}
     </>
   );
 };

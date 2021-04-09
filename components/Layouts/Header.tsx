@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import Link from 'next/link';
-import { NavLinks } from '../nav/NavLinks';
-import LocaleSwitcher from './LocalSwitch';
-import AuthModal from './../Auth/AuthModal';
-import { AppContext } from './../../Context/AppContextProvider';
+import Link from "next/link";
+import React, { useState } from "react";
+//import { NavLinks } from "../nav/NavLinks";
+import AuthModal from "./../Auth/AuthModal";
+import LocaleSwitcher from "./LocalSwitch";
 function Header() {
   // const [loginModal, setLoginModal] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
@@ -22,10 +21,12 @@ function Header() {
               </h3>
             </Link>
             <div className="pt-2">
+              {/** 
               <NavLinks
                 setLoginModal={setLoginModal}
                 setAuthenticated={setAuthenticated}
               />
+              */}
               <LocaleSwitcher />
             </div>
           </nav>

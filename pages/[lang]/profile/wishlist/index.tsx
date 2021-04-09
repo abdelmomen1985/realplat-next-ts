@@ -1,27 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { useMutation, useLazyQuery } from '@apollo/client';
-import { getLocalizationProps } from '../../../../Context/LangContext';
-import { AppContext } from '../../../../Context/AppContextProvider';
-import { useRouter } from 'next/router';
-import useTranslation from '../../../../hooks/useTranslation';
-import { UnitCard } from '../../../../components/Units/UnitCard';
-import { Unit } from '../../../../interfaces/index';
-import Layout from './../../../../components/Layouts/Layout';
-import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../../query/user';
-import Header from './../../../../components/Layouts/Header';
-export default function WhishList({
-  wishListUnits,
-}: {
-  wishListUnits: Unit[];
-}) {
-  const [wishListUnitsState, setWishListUnitsState] = useState(wishListUnits);
-  const { user, setComparing } = useContext(AppContext);
-  const [getWishList, { data, refetch }] = useLazyQuery(USER_WISHLIST, {
-    fetchPolicy: 'no-cache',
-  });
-  const router = useRouter();
-  const { t, locale } = useTranslation();
+import { GetStaticPaths, GetStaticProps } from "next";
+import React from "react";
+import { UnitCard } from "../../../../components/Units/UnitCard";
+import { getLocalizationProps } from "../../../../Context/LangContext";
+import { Unit } from "../../../../interfaces/index";
+import Layout from "./../../../../components/Layouts/Layout";
 
   useEffect(() => {
     // const { user } = useContext(AppContext);
@@ -98,19 +80,18 @@ export default function WhishList({
         <Header />
         {wishListUnitsState.length > 0 ? (
           <>
-            <div className="flex flex-wrap ">
-              {wishListUnitsState.map((unit: any) => {
-                return (
-                  <UnitCard
-                    key={unit.id}
-                    unit={unit}
-                    wishListHandler={removeFromWishListHandler}
-                    compareHandler={compareHandler}
-                    wishlisted
-                  />
-                );
-              })}{' '}
-            </div>
+            (
+            {props.units.map((unit: Unit) => {
+              return (
+                <UnitCard
+                  key={unit.id}
+                  unit={unit}
+                  wishListHandler={wishListHandler}
+                  compareHandler={compareHandler}
+                />
+              );
+            })}
+            ){" "}
           </>
         ) : (
           <p className="text-center py-5 font-bold text-2xl">
@@ -125,8 +106,17 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
-  const wishListUnits: any = [];
-  const localization = getLocalizationProps(ctx, 'common');
+
+  //const client = initializeApollo();
+
+  // const resp = await client.query({ query: ALL_UNITS });
+  // //const { data } = useQuery(allCompounds);
+  // let dummyUnits = resp?.data.units;
+  // let units: Unit[] = [];
+  // for (let unit in dummyUnits) {
+  //   units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
+  // }
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -137,7 +127,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

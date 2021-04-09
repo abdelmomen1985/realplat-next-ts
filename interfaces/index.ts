@@ -5,9 +5,10 @@
 // import User from 'path/to/interfaces';
 
 export type User = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+  lang: string;
+};
 
 export type Unit = {
   id: string;
@@ -39,5 +40,5 @@ export type Unit = {
     id: string;
   };
   wishListed: Boolean;
-  comparing: Boolean
+  comparing: Boolean;
 };

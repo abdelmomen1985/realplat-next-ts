@@ -1,22 +1,19 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
-import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
-
-import Layout from '../../../components/Layouts/Layout';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { initializeApollo } from '../../../lib/apolloClient';
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
-import { Localization } from '../../../i18n/types';
+import { useQuery } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import React, { useEffect, useRef, useState } from "react";
+import Header from "../../../components/Layouts/Header";
+import Layout from "../../../components/Layouts/Layout";
+import { UnitCard } from "../../../components/Units/UnitCard";
 import {
   getLocalizationProps,
   LanguageProvider,
-} from '../../../Context/LangContext';
-import Header from '../../../components/Layouts/Header';
-import { Unit } from '../../../interfaces/index';
-import SearchFilters from './../../../components/SearchFilters/SearchFilters';
-import { UnitCard } from '../../../components/Units/UnitCard';
-import { FilterListType } from '../../../interfaces/filters';
-import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
-import { AppContext } from '../../../Context/AppContextProvider';
+} from "../../../Context/LangContext";
+import { Localization } from "../../../i18n/types";
+import { FilterListType } from "../../../interfaces/filters";
+import { Unit } from "../../../interfaces/index";
+import { initializeApollo } from "../../../lib/apolloClient";
+import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
+import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -25,14 +22,11 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user, comparing, setComparing, setLoginModal } = useContext(
-    AppContext
-  );
   const [innerUnits, setInnerUnits] = useState(units);
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
     UNITS_AGGREGATE,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     }
   );
   const getUnitsAggregate = async () => {
@@ -61,7 +55,7 @@ const UnitsPage: NextPage<{
         user_id:
           user?.id && user.id.length > 0
             ? user?.id
-            : '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
+            : "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       },
     });
   };
@@ -70,7 +64,7 @@ const UnitsPage: NextPage<{
   }, []);
   const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log('filterListState changed to', filterListState);
+    console.log("filterListState changed to", filterListState);
   }, [filterListState]);
 
   useEffect(() => {
@@ -85,7 +79,7 @@ const UnitsPage: NextPage<{
         });
       }
       setInnerUnits(newUnits);
-      console.log(user);
+      console.log("filtering");
     }
   }, [data?.units_aggregate]);
 
@@ -135,6 +129,17 @@ const UnitsPage: NextPage<{
     });
     setComparing(comparedUnit);
     setInnerUnits(dummyUnits);
+    console.log(innerUnits);
+    if (wishListedUnit.wishListed) {
+      // handle add to the server
+      console.log("unit is WishListed");
+    } else {
+      // handle removal from server
+      console.log("unit is removed from WishList");
+    }
+  };
+  const compareHandler = (unit: any) => {
+    console.log(unit);
   };
   /*
   useEffect(() => {
@@ -190,7 +195,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   for (let unit in dummyUnits) {
     units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
   }
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -201,7 +206,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };
