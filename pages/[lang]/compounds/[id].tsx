@@ -1,4 +1,3 @@
-// import { url } from 'inspector';
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import Layout from "../../../components/Layouts/Layout";
@@ -64,6 +63,7 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
           {compound.units.map((unit) => {
             return (
               <UnitCard
+                wishlisted={false}
                 key={unit.id}
                 unit={unit}
                 wishListHandler={wishListHandler}

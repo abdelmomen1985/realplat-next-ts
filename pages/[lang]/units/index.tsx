@@ -1,9 +1,10 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "../../../components/Layouts/Header";
 import Layout from "../../../components/Layouts/Layout";
 import { UnitCard } from "../../../components/Units/UnitCard";
+import { AppContext } from "../../../Context/AppContextProvider";
 import {
   getLocalizationProps,
   LanguageProvider,
@@ -13,6 +14,7 @@ import { FilterListType } from "../../../interfaces/filters";
 import { Unit } from "../../../interfaces/index";
 import { initializeApollo } from "../../../lib/apolloClient";
 import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../../../query/user";
 import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
 
 const UnitsPage: NextPage<{
@@ -22,6 +24,7 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
+  const { user, setComparing, setLoginModal } = useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
     UNITS_AGGREGATE,
@@ -79,7 +82,7 @@ const UnitsPage: NextPage<{
         });
       }
       setInnerUnits(newUnits);
-      console.log("filtering");
+      console.log(user);
     }
   }, [data?.units_aggregate]);
 
@@ -129,17 +132,6 @@ const UnitsPage: NextPage<{
     });
     setComparing(comparedUnit);
     setInnerUnits(dummyUnits);
-    console.log(innerUnits);
-    if (wishListedUnit.wishListed) {
-      // handle add to the server
-      console.log("unit is WishListed");
-    } else {
-      // handle removal from server
-      console.log("unit is removed from WishList");
-    }
-  };
-  const compareHandler = (unit: any) => {
-    console.log(unit);
   };
   /*
   useEffect(() => {
