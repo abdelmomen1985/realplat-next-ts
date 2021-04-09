@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import AuthModal from "./../Auth/AuthModal";
 import LocaleSwitcher from "./LocalSwitch";
 function Header() {
-  const [loginModal, setLoginModal] = useState(false);
-  const [setAuthenticated] = useState(false);
-
+  // const [loginModal, setLoginModal] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const { loginModal, setLoginModal } = useContext(AppContext);
   return (
     <>
       <header className="relative my-3 border-t-0 border-b-2 border-l-0 border-r-0 border-solid border-gray-400 shadow p-2 pb-4">

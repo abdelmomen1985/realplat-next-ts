@@ -3,6 +3,8 @@ import React from "react";
 //import ActiveLink from "./../ActiveLink";
 /*
 export const NavLinks = (props: any) => {
+  const { user, setUser } = useContext(AppContext);
+
   const { t, locale } = useTranslation();
 */
 export const NavLinks = () => {
@@ -47,7 +49,8 @@ export const NavLinks = () => {
       <ActiveLink activeClassName="active" href={`/${locale}/units`}>
         <a className="nav-link mx-2">{t("navUnits")}</a>
       </ActiveLink>
-      {!props.authenticated ? (
+
+      {!user?.id ? (
         <a className="nav-link mx-2" onClick={() => props.setLoginModal(true)}>
           {t("navSign")}
         </a>
@@ -55,13 +58,22 @@ export const NavLinks = () => {
         <>
           <a
             className="nav-link mx-2"
-            onClick={() => props.setAuthenticated(false)}
+            onClick={async () => {
+              const response = await fetch("/api/sessions", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+              });
+              if (response.status === 204) setUser(undefined);
+            }}
           >
             {t("navSignOut")}
           </a>
-          <ActiveLink activeClassName="active" href={`/${locale}/units`}>
+          <ActiveLink
+            activeClassName="active"
+            href={`/${locale}/profile/wishlist`}
+          >
             <a className="nav-link mx-2">
-              <i className="fa fa-heart-o" aria-hidden="true"></i>
+              <i className="far fa-heart" aria-hidden="true"></i>
             </a>
           </ActiveLink>
         </>
