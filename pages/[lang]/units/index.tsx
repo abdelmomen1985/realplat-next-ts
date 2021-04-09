@@ -1,27 +1,19 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
 import { useQuery } from "@apollo/client";
-
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import React, { useEffect, useRef, useState } from "react";
+import Header from "../../../components/Layouts/Header";
 import Layout from "../../../components/Layouts/Layout";
-import {
-  GetStaticProps,
-  GetStaticPaths,
-  NextPage,
-  GetServerSideProps,
-} from "next";
-import { initializeApollo } from "../../../lib/apolloClient";
-
-import { Localization } from "../../../i18n/types";
+import { UnitCard } from "../../../components/Units/UnitCard";
 import {
   getLocalizationProps,
   LanguageProvider,
 } from "../../../Context/LangContext";
-import Header from "../../../components/Layouts/Header";
-import { Unit } from "../../../interfaces/index";
-import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
-import { UnitCard } from "../../../components/Units/UnitCard";
+import { Localization } from "../../../i18n/types";
 import { FilterListType } from "../../../interfaces/filters";
+import { Unit } from "../../../interfaces/index";
+import { initializeApollo } from "../../../lib/apolloClient";
 import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
-import { AppContext } from "../../../Context/AppContextProvider";
+import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -30,7 +22,6 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user } = useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
   const { data, loading } = useQuery(UNITS_AGGREGATE, {
     variables: {
@@ -74,7 +65,7 @@ const UnitsPage: NextPage<{
         });
       }
       setInnerUnits(newUnits);
-      console.log('filtering');
+      console.log("filtering");
     }
   }, [data?.units_aggregate]);
 
@@ -91,10 +82,10 @@ const UnitsPage: NextPage<{
     console.log(innerUnits);
     if (wishListedUnit.wishListed) {
       // handle add to the server
-      console.log('unit is WishListed');
+      console.log("unit is WishListed");
     } else {
       // handle removal from server
-      console.log('unit is removed from WishList');
+      console.log("unit is removed from WishList");
     }
   };
   const compareHandler = (unit: any) => {
@@ -149,7 +140,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   for (let unit in dummyUnits) {
     units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
   }
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,

@@ -1,12 +1,14 @@
 import React from "react";
-import useTranslation from "../../hooks/useTranslation";
-import ActiveLink from "./../ActiveLink";
-
+//import useTranslation from "../../hooks/useTranslation";
+//import ActiveLink from "./../ActiveLink";
+/*
 export const NavLinks = (props: any) => {
   const { t, locale } = useTranslation();
-
+*/
+export const NavLinks = () => {
   return (
     <>
+      {/** 
       <style jsx>{`
         .nav-link {
           text-decoration: none;
@@ -64,6 +66,7 @@ export const NavLinks = (props: any) => {
           </ActiveLink>
         </>
       )}
+      */}
     </>
   );
 };

@@ -1,12 +1,11 @@
-import { gql } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
-import Layout from '../../../components/Layouts/Layout';
-import { getLocalizationProps } from '../../../Context/LangContext';
-import { initializeApollo } from '../../../lib/apolloClient';
-import Header from './../../../components/Layouts/Header';
-import { allCompounds } from '../../../query/compounds';
-import useTranslation from '../../../hooks/useTranslation';
+import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
+import Layout from "../../../components/Layouts/Layout";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import useTranslation from "../../../hooks/useTranslation";
+import { initializeApollo } from "../../../lib/apolloClient";
+import { allCompounds } from "../../../query/compounds";
+import Header from "./../../../components/Layouts/Header";
 
 export type Compound = {
   name: { ar: string; en: string };
@@ -22,7 +21,7 @@ const MyCard = ({ compound }: { compound: any }) => {
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
-          style={{ maxHeight: '250px' }}
+          style={{ maxHeight: "250px" }}
           src={compound.media.card_icon}
           alt="Sunset in the mountains"
         />
@@ -45,7 +44,7 @@ const MyCard = ({ compound }: { compound: any }) => {
         </div>
         <Link
           href={`/${locale}/compounds/[compound]`}
-          as={`/${locale}` + '/compounds/' + compound.id}
+          as={`/${locale}` + "/compounds/" + compound.id}
         >
           <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 block font-bold text-lg text-center py-3 px-3 text-white">
             Explore
@@ -82,7 +81,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: allCompounds });
   //const { data } = useQuery(allCompounds);
   const compounds: Compound[] = resp?.data.compounds;
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -93,7 +92,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

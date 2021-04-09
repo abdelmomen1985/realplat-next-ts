@@ -1,5 +1,5 @@
-import React from 'react';
-import useTranslation from '../../../hooks/useTranslation';
+import React from "react";
+import useTranslation from "../../../hooks/useTranslation";
 
 export default function UnitInformation({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
@@ -19,23 +19,23 @@ export default function UnitInformation({ unit }: { unit: any }) {
       </style>
       <h3
         style={{
-          width: '100%',
-          textAlign: locale === 'en' ? 'left' : 'right',
-          background: 'rgba(149,165,166, 0.5)',
-          color: 'rgb(44,62,80)',
-          fontSize: '20px',
-          fontWeight: '600',
-          padding: '15px 10px',
-          margin: '15px 3px',
+          width: "100%",
+          textAlign: locale === "en" ? "left" : "right",
+          background: "rgba(149,165,166, 0.5)",
+          color: "rgb(44,62,80)",
+          fontSize: "20px",
+          fontWeight: "bold",
+          padding: "15px 10px",
+          margin: "15px 3px",
         }}
       >
-        {t('unitInfo')}
+        {t("unitInfo")}
       </h3>
       <div className="flex flex-wrap justify-between py-3 px-2">
         <div>
           <h5 className="capitalize">
             <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t('unitType')}
+              <i className="fas fa-home"></i> {t("unitType")}
             </span>
             : {unit.property_type.name[locale]}
           </h5>
@@ -45,18 +45,18 @@ export default function UnitInformation({ unit }: { unit: any }) {
         <div>
           <h5 className="capitalize">
             <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t('landArea')}
+              <i className="fas fa-home"></i> {t("landArea")}
             </span>
-            : {unit.land} {t('meter')}
+            : {unit.land} {t("meter")}
             <span className="mSquare">2</span>
           </h5>
         </div>
         <div>
           <h5 className="capitalize">
             <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t('bua')}
+              <i className="fas fa-home"></i> {t("bua")}
             </span>
-            : {unit.bua} {t('meter')}
+            : {unit.bua} {t("meter")}
             <span className="mSquare">2</span>
           </h5>
         </div>
@@ -65,7 +65,7 @@ export default function UnitInformation({ unit }: { unit: any }) {
         <div>
           <h5 className="capitalize">
             <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t('bedrooms')}
+              <i className="fas fa-home"></i> {t("bedrooms")}
             </span>
             : {unit.bedrooms}
           </h5>
@@ -73,7 +73,7 @@ export default function UnitInformation({ unit }: { unit: any }) {
         <div>
           <h5 className="capitalize">
             <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t('bathrooms')}
+              <i className="fas fa-home"></i> {t("bathrooms")}
             </span>
             : {unit.bathrooms}
           </h5>

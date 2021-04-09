@@ -1,15 +1,13 @@
-import { gql } from '@apollo/client';
 // import { url } from 'inspector';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Layout from '../../../components/Layouts/Layout';
-import { getLocalizationProps } from '../../../Context/LangContext';
-import { initializeApollo } from '../../../lib/apolloClient';
-import { allCompounds, COMPOUNDS_BY_PK } from '../../../query/compounds';
-import Header from './../../../components/Layouts/Header';
-import useTranslation from './../../../hooks/useTranslation';
-import { UnitCard } from './../../../components/Units/UnitCard';
+import { GetServerSideProps } from "next";
+import Link from "next/link";
+import Layout from "../../../components/Layouts/Layout";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import { initializeApollo } from "../../../lib/apolloClient";
+import { COMPOUNDS_BY_PK } from "../../../query/compounds";
+import Header from "./../../../components/Layouts/Header";
+import { UnitCard } from "./../../../components/Units/UnitCard";
+import useTranslation from "./../../../hooks/useTranslation";
 export type Compound = {
   name: { ar: string; en: string };
   description: { ar: string; en: string };
@@ -39,6 +37,12 @@ export type Compound = {
 const SingleCompound = ({ compound }: { compound: Compound }) => {
   const { t, locale } = useTranslation();
   // console.log(window.location.href);
+  const compareHandler = (unit: any) => {
+    console.log(unit);
+  };
+  const wishListHandler = (unit: any) => {
+    console.log(unit);
+  };
   return (
     <Layout>
       <Header />
@@ -53,12 +57,19 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-3xl text-indigo-800 text-2xl py-5">
-          {t('projects')}
+        <h3 className="font-bold text-center text-indigo-800 text-2xl py-5">
+          {t("projects")}
         </h3>
         <div className="flex flex-wrap ">
           {compound.units.map((unit) => {
-            return <UnitCard key={unit.id} unit={unit} />;
+            return (
+              <UnitCard
+                key={unit.id}
+                unit={unit}
+                wishListHandler={wishListHandler}
+                compareHandler={compareHandler}
+              />
+            );
           })}
         </div>
       </div>
@@ -66,16 +77,16 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
       <div className="my-5 bg-blue-100 text-white p-5">
         <img
           src={compound.developer.media.card_icon}
-          style={{ width: '100px', display: 'block', margin: '10px auto' }}
+          style={{ width: "100px", display: "block", margin: "10px auto" }}
         />
         <Link
           href={`/${locale}/developers/[developer]`}
-          as={`/${locale}` + '/developers/' + compound.developer.id}
+          as={`/${locale}` + "/developers/" + compound.developer.id}
         >
           <a className="my-2 mx-auto w-11/12 rounded-md text-indigo-800 bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
-            {' '}
-            {t('allProjectsDeveloper')}{' '}
-            {locale === 'ar' ? <span>&larr;</span> : <span>&rarr;</span>}
+            {" "}
+            {t("allProjectsDeveloper")}{" "}
+            {locale === "ar" ? <span>&larr;</span> : <span>&rarr;</span>}
           </a>
         </Link>
       </div>
@@ -83,6 +94,7 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
   );
 };
 
+/*
 export const getStaticProps: GetStaticProps = async (ctx) => {
   let compoundId = ctx.params?.id;
   const client = initializeApollo();
@@ -93,7 +105,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     },
   });
   const compound: Compound = resp?.data.compounds_by_pk;
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -109,8 +121,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths: any[] = [];
   console.log(resp.data.compounds);
   compounds.forEach((compound) => {
-    paths.push({ params: { lang: 'ar', id: compound.id } });
-    paths.push({ params: { lang: 'en', id: compound.id } });
+    paths.push({ params: { lang: "ar", id: compound.id } });
+    paths.push({ params: { lang: "en", id: compound.id } });
   });
   return {
     paths,
@@ -118,4 +130,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+*/
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let compoundId = context.params?.id;
+  const client = initializeApollo();
+  const resp = await client.query({
+    query: COMPOUNDS_BY_PK,
+    variables: {
+      id: compoundId,
+    },
+  });
+  const compound: Compound = resp?.data.compounds_by_pk;
+  const localization = getLocalizationProps(context, "common");
+  return {
+    props: {
+      localization,
+      compound,
+    },
+  };
+};
 export default SingleCompound;

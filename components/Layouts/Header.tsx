@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { NavLinks } from "../nav/NavLinks";
+//import { NavLinks } from "../nav/NavLinks";
 import AuthModal from "./../Auth/AuthModal";
 import LocaleSwitcher from "./LocalSwitch";
 function Header() {
@@ -21,10 +21,12 @@ function Header() {
               </h3>
             </Link>
             <div className="pt-2">
+              {/** 
               <NavLinks
                 setLoginModal={setLoginModal}
                 setAuthenticated={setAuthenticated}
               />
+              */}
               <LocaleSwitcher />
             </div>
           </nav>
