@@ -140,8 +140,7 @@ export default function MoreFiltersModal({
     let currentListState = [...innerListState];
     let newInnerList = currentListState.map((item) => {
       if (item.key === key) {
-        console.log("item is item");
-        let newValues = item.values.map((value: any) => {
+        let newValues = (item.values as any).map((value: any) => {
           if (value.val === selectedValue.val) return selectedValue;
           console.log("that value" + selectedValue.val);
           return { ...value, selected: false };
@@ -322,26 +321,28 @@ export default function MoreFiltersModal({
                       </div>
                       <div className="flex-auto">
                         {/* <div className="gird grid-cols-5 md:grid-cols-5 gap-1"> */}
-                        {item.values.map((value: any, index: number) => {
-                          return (
-                            <button
-                              key={index}
-                              className={
-                                "bg-white font-bold rounded-sm mx-2 px-3 py-1 shadow-md filterVal-button " +
-                                (value.selected ? "active" : null)
-                              }
-                              onClick={() => filterHandler(value, item.key)}
-                            >
-                              {value.title
-                                ? t(`${value.title}`)
+                        {(item.values as any).map(
+                          (value: any, index: number) => {
+                            return (
+                              <button
+                                key={index}
+                                className={
+                                  "bg-white font-bold rounded-sm mx-2 px-3 py-1 shadow-md filterVal-button " +
+                                  (value.selected ? "active" : null)
+                                }
+                                onClick={() => filterHandler(value, item.key)}
+                              >
+                                {value.title
                                   ? t(`${value.title}`)
-                                  : value.title
-                                : t(`${value.val}`)
-                                ? t(`${value.val}`)
-                                : value.val}
-                            </button>
-                          );
-                        })}
+                                    ? t(`${value.title}`)
+                                    : value.title
+                                  : t(`${value.val}`)
+                                  ? t(`${value.val}`)
+                                  : value.val}
+                              </button>
+                            );
+                          }
+                        )}
                       </div>
                       {/* </div> */}
                     </div>

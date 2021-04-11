@@ -74,7 +74,7 @@ const UnitsPage: NextPage<{
         });
       }
       setInnerUnits(newUnits);
-      console.log('filtering');
+      console.log("filtering");
     }
   }, [data?.units_aggregate]);
 
@@ -91,10 +91,10 @@ const UnitsPage: NextPage<{
     console.log(innerUnits);
     if (wishListedUnit.wishListed) {
       // handle add to the server
-      console.log('unit is WishListed');
+      console.log("unit is WishListed");
     } else {
       // handle removal from server
-      console.log('unit is removed from WishList');
+      console.log("unit is removed from WishList");
     }
   };
   const compareHandler = (unit: any) => {
@@ -106,7 +106,9 @@ const UnitsPage: NextPage<{
     console.log("ReFetching");
   }, [filterListState]);
   */
-
+  const wishlist_ids = data?.user_wishlist_aggregate.nodes.map(
+    (node: any) => node.unit.id
+  );
   return (
     <LanguageProvider localization={localization}>
       <Layout title="Brand Logo Here">
@@ -125,6 +127,9 @@ const UnitsPage: NextPage<{
               <UnitCard
                 key={unit.id}
                 unit={unit}
+                wishlisted={
+                  wishlist_ids?.filter((id: any) => id === unit.id).length > 0
+                }
                 wishListHandler={wishListHandler}
                 compareHandler={compareHandler}
               />
@@ -149,7 +154,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   for (let unit in dummyUnits) {
     units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
   }
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
