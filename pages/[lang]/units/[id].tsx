@@ -31,6 +31,7 @@ const RegularMap = withScriptjs(
       defaultZoom={12}
       defaultCenter={props.defaultCenter}
       defaultOptions={defaultOptions}
+      key={"AIzaSyCUtuLWOinlOyAJhm3tHbrkVgUo5ADvpxQ"}
     >
       <Marker position={props.defaultCenter} />
     </GoogleMap>
@@ -90,7 +91,7 @@ const SingleUnit = ({ unit }: { unit: any }) => {
                 {t("location")}
               </h3>
               <RegularMap
-                googleMapURL="https://maps.googleapis.com/maps/api/js"
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUtuLWOinlOyAJhm3tHbrkVgUo5ADvpxQ"
                 loadingElement={<div style={{ height: "100%" }} />}
                 containerElement={<div style={{ height: "280px" }} />}
                 mapElement={<div style={{ height: "100%" }} />}
