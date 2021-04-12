@@ -9,7 +9,7 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: "https://realestate.hasura.app/v1/graphql", // Server URL (must be absolute)
+      uri: "https://realestatep.hasura.app/v1/graphql", // Server URL (must be absolute)
       headers: {
         "x-hasura-admin-secret": "rKpA@W3S2PlZsK",
       }, // Additional fetch() options like `credentials` or `headers`

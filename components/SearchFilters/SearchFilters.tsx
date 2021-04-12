@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import DropDown from './DropDown';
-import { Unit } from '../../interfaces/index';
-import PricesModal from './PricesModal';
-import MoreFiltersModal from './MoreFiltersModal';
-import PropTypesDropDown from './PropTypesDropDown';
-import { FilterListType } from '../../interfaces/filters';
-import useTranslation from './../../hooks/useTranslation';
+import React, { useEffect, useState } from "react";
+import DropDown from "./DropDown";
+import { Unit } from "../../interfaces/index";
+import PricesModal from "./PricesModal";
+import MoreFiltersModal from "./MoreFiltersModal";
+import PropTypesDropDown from "./PropTypesDropDown";
+import { FilterListType } from "../../interfaces/filters";
+import useTranslation from "./../../hooks/useTranslation";
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
   filterListState: any;
@@ -13,7 +13,7 @@ interface SearchFiltersProps {
 }
 
 export default function SearchFilters(props: SearchFiltersProps) {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const [openPropTypeDD, setOpenPropTypeDD] = useState(false);
   const unitList: any = props.units;
   const prices: any = [];
@@ -28,7 +28,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
         monthlyPayment: unitList[unit].fin_monthly_payment,
         paymentYears: unitList[unit].fin_fin_years,
       });
-      let duplicateLocations = locations.filter((location) => {
+      let duplicateLocations = locations.filter((location: any) => {
         return location.id === unitList[unit].sk_city._id;
       });
       if (duplicateLocations.length === 0) {
@@ -103,7 +103,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
                 console.log(props.filterListState);
               }}
             >
-              {t('clearFilters')}
+              {t("clearFilters")}
             </button>
           </div>
         </div>

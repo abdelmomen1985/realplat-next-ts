@@ -1,14 +1,10 @@
-import Link from 'next/link';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { User } from '../../../interfaces';
-import { sampleUserData } from '../../../utils/sample-data';
-import Layout from '../../../components/Layouts/Layout';
-import List from '../../../components/List';
-import { Localization } from '../../../i18n/types';
-import {
-  getLocalizationProps,
-  LanguageProvider,
-} from '../../../Context/LangContext';
+import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
+import Layout from "../../../components/Layouts/Layout";
+import List from "../../../components/List";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import { User } from "../../../interfaces";
+import { sampleUserData } from "../../../utils/sample-data";
 type Props = {
   items: User[];
 };
@@ -34,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Don't forget to include the respective types for any props passed into
   // the component.
   const items: User[] = sampleUserData;
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -45,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

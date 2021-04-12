@@ -1,35 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
-import 'rc-slider/assets/index.css';
-import RangeSlider from '../Range/RangeSlider';
-import useTranslation from './../../hooks/useTranslation';
+import React, { useState, useEffect, useRef } from "react";
+import "rc-slider/assets/index.css";
+import RangeSlider from "../Range/RangeSlider";
+import useTranslation from "./../../hooks/useTranslation";
 
 const pricesList = [
   {
-    title: 'downPay',
-    key: 'fin_down_payment',
+    title: "downPay",
+    key: "fin_down_payment",
     value: [0, 2000000],
-    unit: 'Egp',
+    unit: "Egp",
     step: 100000,
   },
   {
-    title: 'monthlyPay',
-    key: 'fin_monthly_payment',
+    title: "monthlyPay",
+    key: "fin_monthly_payment",
     value: [0, 300000],
-    unit: 'Egp',
+    unit: "Egp",
     step: 100000,
   },
   {
-    title: 'totalPrice',
-    key: 'fin_total',
+    title: "totalPrice",
+    key: "fin_total",
     value: [0, 8000000],
-    unit: 'Egp',
+    unit: "Egp",
     step: 100000,
   },
   {
-    title: 'paymentYears',
-    key: 'fin_years',
+    title: "paymentYears",
+    key: "fin_years",
     value: [0, 10],
-    unit: 'Years',
+    unit: "Years",
     step: 1,
   },
 ];
@@ -43,7 +43,7 @@ type PricesFilterType = {
 
 export default function PricesModal(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const node = useRef<HTMLDivElement>(null);
   const [pricesFilterState, setPricesFilterState] = useState<PricesFilterType>({
     fin_down_payment: pricesList[0].value,
@@ -53,13 +53,13 @@ export default function PricesModal(props: any) {
   });
   useEffect(() => {
     // add when mounted
-    document.addEventListener('mousedown', handleClick);
+    document.addEventListener("mousedown", handleClick);
     // return function to be called when unmounted
     return () => {
-      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener("mousedown", handleClick);
     };
   }, []);
-  const handleClick = (e) => {
+  const handleClick = (e: any) => {
     if (node?.current?.contains(e.target)) {
       // inside click
       return;
@@ -101,10 +101,10 @@ export default function PricesModal(props: any) {
           onClick={toggleModal}
         >
           <div className="dd-header-title">
-            <i className="fas fa-file-invoice-dollar"></i> {t('priceRange')}{' '}
+            <i className="fas fa-file-invoice-dollar"></i> {t("priceRange")}{" "}
             {isModalOpen ? (
               <span>
-                {' '}
+                {" "}
                 <i className="fas fa-angle-up"></i>
               </span>
             ) : (
@@ -118,12 +118,12 @@ export default function PricesModal(props: any) {
           <div
             className="dd-list absolute"
             style={{
-              top: '0',
-              background: '#fff',
-              borderRadius: '5px',
-              boxShadow: '0 2px 2px #eee',
+              top: "0",
+              background: "#fff",
+              borderRadius: "5px",
+              boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: '100%',
+              width: "100%",
             }}
           >
             {pricesList.map((item) => {

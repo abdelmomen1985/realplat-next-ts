@@ -1,14 +1,14 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { locales } from '../../i18n/config';
-import useTranslation from '../../hooks/useTranslation';
+import React from "react";
+import { useRouter } from "next/router";
+import { locales } from "../../i18n/config";
+import useTranslation from "../../hooks/useTranslation";
 
 const LocaleSwitcher: React.FC = () => {
   const router = useRouter();
   const handleLocaleChange = React.useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       const targetLang = e.target.value;
-      const regex = new RegExp(`^/(${locales.join('|')})`);
+      const regex = new RegExp(`^/(${locales.join("|")})`);
       router.push(
         router.pathname,
         router.asPath.replace(regex, `/${targetLang}`)
@@ -16,10 +16,10 @@ const LocaleSwitcher: React.FC = () => {
     },
     [router]
   );
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   return (
     <div
-      style={{ display: 'inline-block', outline: 'none !important' }}
+      style={{ display: "inline-block", outline: "none !important" }}
       className="mx-2"
     >
       <label className="language-switcher">

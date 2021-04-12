@@ -1,21 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { AppContext } from '../../../Context/AppContextProvider';
-import useTranslation from '../../../hooks/useTranslation';
-import { Unit } from '../../../interfaces/index';
-import Header from '../../../components/Layouts/Header';
-import Layout from '../../../components/Layouts/Layout';
-import { useRouter } from 'next/router';
-import { UnitCard } from '../../../components/Units/UnitCard';
-import {
-  getLocalizationProps,
-  LanguageProvider,
-} from '../../../Context/LangContext';
-import { useMutation } from '@apollo/client';
-import { Localization } from '../../../i18n/types';
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
+import { useMutation } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import Header from "../../../components/Layouts/Header";
+import Layout from "../../../components/Layouts/Layout";
+import { AppContext } from "../../../Context/AppContextProvider";
+import { getLocalizationProps } from "../../../Context/LangContext";
+import useTranslation from "../../../hooks/useTranslation";
+import { Unit } from "../../../interfaces/index";
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../../../query/user";
 
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-const ComparePage: NextPage = (props: any) => {
+const ComparePage: NextPage = () => {
   const { comparing, clearComparing, user, setLoginModal } = useContext(
     AppContext
   );
@@ -35,7 +30,7 @@ const ComparePage: NextPage = (props: any) => {
     return () => {
       setComparingUnits([]);
       clearComparing();
-      console.log('leaving and clearing', comparing);
+      console.log("leaving and clearing", comparing);
     };
   }, []);
   const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
@@ -91,19 +86,19 @@ const ComparePage: NextPage = (props: any) => {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 px-2 mx-auto">
               <div className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl bg-blue-900 text-white">
-                <h4>{t('prop_type')}</h4>
-                <h4>{t('totalPrice')}</h4>
-                <h4>{t('pricePerM')}</h4>
-                <h4>{t('landArea')}</h4>
-                <h4>{t('bua')}</h4>
-                <h4>{t('deliveryDate')}</h4>
-                <h4>{t('downPay')}</h4>
-                <h4>{t('monthlyPay')}</h4>
-                <h4>{t('totalYears')}</h4>
-                <h4>{t('bedrooms')}</h4>
-                <h4>{t('bathrooms')}</h4>
-                <h4>{t('location')}</h4>
-                <h4>{t('wishList')}</h4>
+                <h4>{t("prop_type")}</h4>
+                <h4>{t("totalPrice")}</h4>
+                <h4>{t("pricePerM")}</h4>
+                <h4>{t("landArea")}</h4>
+                <h4>{t("bua")}</h4>
+                <h4>{t("deliveryDate")}</h4>
+                <h4>{t("downPay")}</h4>
+                <h4>{t("monthlyPay")}</h4>
+                <h4>{t("totalYears")}</h4>
+                <h4>{t("bedrooms")}</h4>
+                <h4>{t("bathrooms")}</h4>
+                <h4>{t("location")}</h4>
+                <h4>{t("wishList")}</h4>
               </div>
               {comparingUnits.map((unit) => (
                 <div
@@ -112,53 +107,53 @@ const ComparePage: NextPage = (props: any) => {
                 >
                   <h3>{unit.property_type.name[locale]}</h3>
                   <h3>
-                    {unit.fin_total} {t('egp')}
+                    {unit.fin_total} {t("egp")}
                   </h3>
                   <h3>
-                    {(unit.fin_total / unit.land).toFixed()}{' '}
-                    {t('egp') + '/' + t('meter')}
+                    {(unit.fin_total / unit.land).toFixed()}{" "}
+                    {t("egp") + "/" + t("meter")}
                     <span className="mSquare">2</span>
                   </h3>
                   <h3>
-                    {unit.land} {t('meter')}
+                    {unit.land} {t("meter")}
                     <span className="mSquare">2</span>
                   </h3>
                   <h3>
-                    {unit.bua} {t('meter')}
+                    {unit.bua} {t("meter")}
                     <span className="mSquare">2</span>
                   </h3>
                   <h3>{unit.delivery_year}</h3>
                   <h3>
-                    {unit.fin_down_payment} {t('egp')}
+                    {unit.fin_down_payment} {t("egp")}
                   </h3>
                   <h3>
-                    {unit.fin_monthly_payment} {t('egp')}
+                    {unit.fin_monthly_payment} {t("egp")}
                   </h3>
                   <h3>
-                    {unit.fin_years} {t('years')}
+                    {unit.fin_years} {t("years")}
                   </h3>
                   <h3>{unit.bedrooms}</h3>
                   <h3>{unit.bathrooms}</h3>
                   <h3>
-                    {' '}
-                    {locale === 'ar' ? unit.sk_city.name_ar : unit.sk_city.name}
+                    {" "}
+                    {locale === "ar" ? unit.sk_city.name_ar : unit.sk_city.name}
                   </h3>
                   <button
                     onClick={() => wishListHandler(unit, unit.wishListed)}
                     style={{
-                      backgroundColor: unit.wishListed ? '#e84118' : '#273c75',
-                      color: '#fff',
-                      borderRadius: '5px',
-                      border: 'none',
-                      margin: '5px auto',
-                      display: 'block',
-                      padding: '5px 15px',
-                      textAlign: 'center',
+                      backgroundColor: unit.wishListed ? "#e84118" : "#273c75",
+                      color: "#fff",
+                      borderRadius: "5px",
+                      border: "none",
+                      margin: "5px auto",
+                      display: "block",
+                      padding: "5px 15px",
+                      textAlign: "center",
                     }}
                   >
                     {unit.wishListed
-                      ? 'Remove from WishList'
-                      : 'Add to Wish List'}
+                      ? "Remove from WishList"
+                      : "Add to Wish List"}
                   </button>
                 </div>
                 //   <UnitCard key={unit.id} unit={unit} />
@@ -172,7 +167,7 @@ const ComparePage: NextPage = (props: any) => {
 };
 export default ComparePage;
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -181,7 +176,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

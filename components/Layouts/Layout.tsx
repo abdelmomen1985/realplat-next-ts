@@ -1,8 +1,6 @@
-import React, { ReactNode } from 'react';
-import Head from 'next/head';
-import Footer from './Footer';
-import { NavLinks } from '../nav/NavLinks';
-import useTranslation from './../../hooks/useTranslation';
+import Head from "next/head";
+import React, { ReactNode } from "react";
+import useTranslation from "./../../hooks/useTranslation";
 
 type LayoutProps = {
   children?: ReactNode;
@@ -11,12 +9,12 @@ type LayoutProps = {
 
 const Layout = ({
   children,
-  title = 'This is the default title',
+  title = "This is the default title",
 }: LayoutProps) => {
   const { locale } = useTranslation();
   return (
     // <div>
-    <div style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}>
+    <div style={{ direction: locale === "ar" ? "rtl" : "ltr" }}>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />

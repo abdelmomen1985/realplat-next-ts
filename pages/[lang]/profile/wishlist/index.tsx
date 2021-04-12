@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { useMutation, useLazyQuery } from '@apollo/client';
-import { getLocalizationProps } from '../../../../Context/LangContext';
-import { AppContext } from '../../../../Context/AppContextProvider';
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps } from "next";
+import React, { useContext, useEffect, useState } from "react";
+import { UnitCard } from "../../../../components/Units/UnitCard";
+import { AppContext } from "../../../../Context/AppContextProvider";
+import { getLocalizationProps } from "../../../../Context/LangContext";
+import { Unit } from "../../../../interfaces/index";
+import Header from "./../../../../components/Layouts/Header";
+import Layout from "./../../../../components/Layouts/Layout";
+import { REMOVE_FROM_WISHLIST, USER_WISHLIST } from "./../../../../query/user";
 
-import { UnitCard } from '../../../../components/Units/UnitCard';
-import { Unit } from '../../../../interfaces/index';
-import Layout from './../../../../components/Layouts/Layout';
-import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../../query/user';
-import Header from './../../../../components/Layouts/Header';
 export default function WhishList({
   wishListUnits,
 }: {
@@ -17,7 +17,7 @@ export default function WhishList({
   const [wishListUnitsState, setWishListUnitsState] = useState(wishListUnits);
   const { user, setComparing } = useContext(AppContext);
   const [getWishList, { data, refetch }] = useLazyQuery(USER_WISHLIST, {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: "no-cache",
   });
   useEffect(() => {
     // const { user } = useContext(AppContext);
@@ -38,7 +38,7 @@ export default function WhishList({
       let resolvedUnits = [];
       for (let node in serverWishListUnits) {
         resolvedUnits.push({
-          ...serverWishListUnits[node].unit,
+          ...serverWishListUnits[node],
           wishListed: true,
           comparing: false,
         });
@@ -74,7 +74,7 @@ export default function WhishList({
     });
     setWishListUnitsState(dummyUnits);
     // handle add to the server
-    console.log('unit is WishListed');
+    console.log("unit is WishListed");
     if (user) {
       await removeWishList({
         variables: {
@@ -103,7 +103,7 @@ export default function WhishList({
                     wishlisted
                   />
                 );
-              })}{' '}
+              })}{" "}
             </div>
           </>
         ) : (
@@ -120,7 +120,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // Don't forget to include the respective types for any props passed into
   // the component.
   const wishListUnits: any = [];
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -131,7 +131,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

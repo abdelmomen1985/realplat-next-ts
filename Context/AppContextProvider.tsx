@@ -4,11 +4,11 @@ import {
   useReducer,
   useEffect,
   useState,
-} from 'react';
-import { AppReducer } from './AppReducer';
-import { ACTION_TYPES, StateType } from './contextUtils';
-import { useRouter } from 'next/router';
-import useTranslation from './../hooks/useTranslation';
+} from "react";
+import { AppReducer } from "./AppReducer";
+import { ACTION_TYPES, StateType } from "./contextUtils";
+import { useRouter } from "next/router";
+import useTranslation from "./../hooks/useTranslation";
 
 const initialState = {
   user: undefined,
@@ -20,12 +20,12 @@ export const AppContext = createContext<StateType>(initialState);
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const router = useRouter();
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   useEffect(() => {
     const getUserSession = async () => {
-      const response = await fetch('/api/getUserSession', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/getUserSession", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
       });
       if (response.status === 200) setUser(await response.json());
     };
