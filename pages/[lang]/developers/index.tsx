@@ -1,11 +1,11 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import Link from "next/link";
-import Layout from "../../../components/Layouts/Layout";
-import { getLocalizationProps } from "../../../Context/LangContext";
-import { initializeApollo } from "../../../lib/apolloClient";
-import Header from "./../../../components/Layouts/Header";
-import useTranslation from "./../../../hooks/useTranslation";
-import { allDevelopers } from "../../../query/developers";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
+import Layout from '../../../components/Layouts/Layout';
+import { getLocalizationProps } from '../../../Context/LangContext';
+import { initializeApollo } from '../../../lib/apolloClient';
+import Header from './../../../components/Layouts/Header';
+import useTranslation from './../../../hooks/useTranslation';
+import { allDevelopers } from '../../../query/developers';
 
 export type Developer = {
   name: { ar: string; en: string };
@@ -20,11 +20,11 @@ export type Developer = {
 const DeveloperCard = ({ developer }: { developer: any }) => {
   const { t, locale } = useTranslation();
   return (
-    <div className="w-1/3 flex">
+    <div className="w-full flex">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
-          style={{ maxHeight: "250px" }}
+          style={{ maxHeight: '250px' }}
           src={developer.media.card_icon}
           alt="Sunset in the mountains"
         />
@@ -48,10 +48,10 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
         </div>
         <Link
           href={`/${locale}/developers/[developer]`}
-          as={`/${locale}` + "/developers/" + developer.id}
+          as={`/${locale}` + '/developers/' + developer.id}
         >
           <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 block text-center font-bold text-lg py-3 px-3 text-white">
-            {t("moreAbout")} {developer.name[locale]}
+            {t('moreAbout')} {developer.name[locale]}
           </a>
         </Link>
       </div>
@@ -64,7 +64,7 @@ const DevelopersPage = ({ developers }: { developers: Developer[] }) => {
   return (
     <Layout title="Real Estate Brand">
       <Header />
-      <div className="flex flex-wrap ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
         {developers &&
           developers.map((developer: any) => (
             <DeveloperCard key={developer.id} developer={developer} />
@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: allDevelopers });
   //const { data } = useQuery(allCompounds);
   const developers: Developer[] = resp?.data.developers;
-  const localization = getLocalizationProps(ctx, "common");
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

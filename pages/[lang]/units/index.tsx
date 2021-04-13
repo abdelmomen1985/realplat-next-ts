@@ -1,21 +1,21 @@
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Header from "../../../components/Layouts/Header";
-import Layout from "../../../components/Layouts/Layout";
-import { UnitCard } from "../../../components/Units/UnitCard";
-import { AppContext } from "../../../Context/AppContextProvider";
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import Header from '../../../components/Layouts/Header';
+import Layout from '../../../components/Layouts/Layout';
+import { UnitCard } from '../../../components/Units/UnitCard';
+import { AppContext } from '../../../Context/AppContextProvider';
 import {
   getLocalizationProps,
   LanguageProvider,
-} from "../../../Context/LangContext";
-import { Localization } from "../../../i18n/types";
-import { FilterListType } from "../../../interfaces/filters";
-import { Unit } from "../../../interfaces/index";
-import { initializeApollo } from "../../../lib/apolloClient";
-import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../../../query/user";
-import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
+} from '../../../Context/LangContext';
+import { Localization } from '../../../i18n/types';
+import { FilterListType } from '../../../interfaces/filters';
+import { Unit } from '../../../interfaces/index';
+import { initializeApollo } from '../../../lib/apolloClient';
+import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
+import SearchFilters from './../../../components/SearchFilters/SearchFilters';
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -29,7 +29,7 @@ const UnitsPage: NextPage<{
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
     UNITS_AGGREGATE,
     {
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     }
   );
   const getUnitsAggregate = async () => {
@@ -58,7 +58,7 @@ const UnitsPage: NextPage<{
         user_id:
           user?.id && user.id.length > 0
             ? user?.id
-            : "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+            : '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
       },
     });
   };
@@ -67,7 +67,7 @@ const UnitsPage: NextPage<{
   }, []);
   const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log("filterListState changed to", filterListState);
+    console.log('filterListState changed to', filterListState);
   }, [filterListState]);
 
   useEffect(() => {
@@ -154,7 +154,7 @@ const UnitsPage: NextPage<{
             units={units}
           />
         </div>
-        <div className="flex flex-wrap ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
           {loading && <div>Loading ...</div>}
           {innerUnits &&
             innerUnits.map((unit: any) => (
@@ -187,7 +187,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   for (let unit in dummyUnits) {
     units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
   }
-  const localization = getLocalizationProps(ctx, "common");
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -198,7 +198,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

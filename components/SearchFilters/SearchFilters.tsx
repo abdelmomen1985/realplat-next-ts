@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import DropDown from "./DropDown";
-import { Unit } from "../../interfaces/index";
-import PricesModal from "./PricesModal";
-import MoreFiltersModal from "./MoreFiltersModal";
-import PropTypesDropDown from "./PropTypesDropDown";
-import { FilterListType } from "../../interfaces/filters";
-import useTranslation from "./../../hooks/useTranslation";
+import React, { useEffect, useState } from 'react';
+import DropDown from './DropDown';
+import { Unit } from '../../interfaces/index';
+import PricesModal from './PricesModal';
+import MoreFiltersModal from './MoreFiltersModal';
+import PropTypesDropDown from './PropTypesDropDown';
+import { FilterListType } from '../../interfaces/filters';
+import useTranslation from './../../hooks/useTranslation';
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
   filterListState: any;
@@ -61,7 +61,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
         `}
       </style>
       <section className="">
-        <div className="grid grid-cols-5 md:grid-cols-5 gap-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 mx-auto md:grid-cols-5 gap-1">
           {/* property Type */}
 
           <PropTypesDropDown
@@ -103,7 +103,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
                 console.log(props.filterListState);
               }}
             >
-              {t("clearFilters")}
+              {t('clearFilters')}
             </button>
           </div>
         </div>

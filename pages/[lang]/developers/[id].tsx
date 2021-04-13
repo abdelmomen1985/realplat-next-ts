@@ -1,12 +1,12 @@
 // import { url } from 'inspector';
-import { GetServerSideProps } from "next";
-import Link from "next/link";
-import Layout from "../../../components/Layouts/Layout";
-import { getLocalizationProps } from "../../../Context/LangContext";
-import { initializeApollo } from "../../../lib/apolloClient";
-import { GET_DEVELOPER_BY_PK } from "../../../query/developers";
-import Header from "./../../../components/Layouts/Header";
-import useTranslation from "./../../../hooks/useTranslation";
+import { GetServerSideProps } from 'next';
+import Link from 'next/link';
+import Layout from '../../../components/Layouts/Layout';
+import { getLocalizationProps } from '../../../Context/LangContext';
+import { initializeApollo } from '../../../lib/apolloClient';
+import { GET_DEVELOPER_BY_PK } from '../../../query/developers';
+import Header from './../../../components/Layouts/Header';
+import useTranslation from './../../../hooks/useTranslation';
 
 export type Developer = {
   name: { ar: string; en: string };
@@ -26,11 +26,11 @@ export type Developer = {
 const CompoundCard = ({ compound }: { compound: any }) => {
   const { t, locale } = useTranslation();
   return (
-    <div className="w-1/3 flex">
+    <div className="w-full flex">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
-          style={{ maxHeight: "350px" }}
+          style={{ maxHeight: '350px' }}
           src={compound.media.page_icon}
           alt="Sunset in the mountains"
         />
@@ -44,10 +44,10 @@ const CompoundCard = ({ compound }: { compound: any }) => {
         </div>
         <Link
           href={`/${locale}/compounds/[compound]`}
-          as={`/${locale}` + "/compounds/" + compound.id}
+          as={`/${locale}` + '/compounds/' + compound.id}
         >
           <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 font-bold text-lg block text-center py-3 px-3 text-white">
-            {t("explore")}
+            {t('explore')}
           </a>
         </Link>
       </div>
@@ -73,9 +73,9 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
       </div>
       <div className="my-4">
         <h3 className="font-bold text-center text-indigo-800 text-3xl">
-          {t("projects")}
+          {t('projects')}
         </h3>
-        <div className="flex flex-wrap ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
           {developer.compounds.map((compound) => {
             return <CompoundCard key={compound.id} compound={compound} />;
           })}
@@ -142,7 +142,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   const developer: Developer = resp?.data.developers_by_pk;
 
-  const localization = getLocalizationProps(context, "common");
+  const localization = getLocalizationProps(context, 'common');
   // const devID = router.query.developer;
   // console.log(devID);
   return {

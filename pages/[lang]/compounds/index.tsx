@@ -1,11 +1,11 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import Link from "next/link";
-import Layout from "../../../components/Layouts/Layout";
-import { getLocalizationProps } from "../../../Context/LangContext";
-import useTranslation from "../../../hooks/useTranslation";
-import { initializeApollo } from "../../../lib/apolloClient";
-import { allCompounds } from "../../../query/compounds";
-import Header from "./../../../components/Layouts/Header";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
+import Layout from '../../../components/Layouts/Layout';
+import { getLocalizationProps } from '../../../Context/LangContext';
+import useTranslation from '../../../hooks/useTranslation';
+import { initializeApollo } from '../../../lib/apolloClient';
+import { allCompounds } from '../../../query/compounds';
+import Header from './../../../components/Layouts/Header';
 
 export type Compound = {
   name: { ar: string; en: string };
@@ -17,11 +17,11 @@ const MyCard = ({ compound }: { compound: any }) => {
   const { locale } = useTranslation();
 
   return (
-    <div className="w-1/3 flex">
+    <div className="w-full flex">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
-          style={{ maxHeight: "250px" }}
+          style={{ maxHeight: '250px' }}
           src={compound.media.card_icon}
           alt="Sunset in the mountains"
         />
@@ -44,7 +44,7 @@ const MyCard = ({ compound }: { compound: any }) => {
         </div>
         <Link
           href={`/${locale}/compounds/[compound]`}
-          as={`/${locale}` + "/compounds/" + compound.id}
+          as={`/${locale}` + '/compounds/' + compound.id}
         >
           <a className="w-4/5 my-3 mx-auto rounded-sm bg-indigo-800 block font-bold text-lg text-center py-3 px-3 text-white">
             Explore
@@ -58,7 +58,7 @@ const CompoundsPage = ({ compounds }: { compounds: Compound[] }) => {
   return (
     <Layout title="Realstate Brand">
       <Header />
-      <div className="flex flex-wrap ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
         {compounds &&
           compounds.map((compound: any) => (
             <MyCard key={compound.name.ar} compound={compound} />
@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const resp = await client.query({ query: allCompounds });
   //const { data } = useQuery(allCompounds);
   const compounds: Compound[] = resp?.data.compounds;
-  const localization = getLocalizationProps(ctx, "common");
+  const localization = getLocalizationProps(ctx, 'common');
   return {
     props: {
       localization,
@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

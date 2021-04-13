@@ -1,12 +1,12 @@
-import { GetServerSideProps } from "next";
-import Link from "next/link";
-import Layout from "../../../components/Layouts/Layout";
-import { getLocalizationProps } from "../../../Context/LangContext";
-import { initializeApollo } from "../../../lib/apolloClient";
-import { COMPOUNDS_BY_PK } from "../../../query/compounds";
-import Header from "./../../../components/Layouts/Header";
-import { UnitCard } from "./../../../components/Units/UnitCard";
-import useTranslation from "./../../../hooks/useTranslation";
+import { GetServerSideProps } from 'next';
+import Link from 'next/link';
+import Layout from '../../../components/Layouts/Layout';
+import { getLocalizationProps } from '../../../Context/LangContext';
+import { initializeApollo } from '../../../lib/apolloClient';
+import { COMPOUNDS_BY_PK } from '../../../query/compounds';
+import Header from './../../../components/Layouts/Header';
+import { UnitCard } from './../../../components/Units/UnitCard';
+import useTranslation from './../../../hooks/useTranslation';
 export type Compound = {
   name: { ar: string; en: string };
   description: { ar: string; en: string };
@@ -57,9 +57,9 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
       </div>
       <div className="my-4">
         <h3 className="font-bold text-center text-indigo-800 text-2xl py-5">
-          {t("projects")}
+          {t('projects')}
         </h3>
-        <div className="flex flex-wrap ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
           {compound.units.map((unit) => {
             return (
               <UnitCard
@@ -77,16 +77,16 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
       <div className="my-5 bg-blue-100 text-white p-5">
         <img
           src={compound.developer.media.card_icon}
-          style={{ width: "100px", display: "block", margin: "10px auto" }}
+          style={{ width: '100px', display: 'block', margin: '10px auto' }}
         />
         <Link
           href={`/${locale}/developers/[developer]`}
-          as={`/${locale}` + "/developers/" + compound.developer.id}
+          as={`/${locale}` + '/developers/' + compound.developer.id}
         >
           <a className="my-2 mx-auto w-11/12 rounded-md text-indigo-800 bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
-            {" "}
-            {t("allProjectsDeveloper")}{" "}
-            {locale === "ar" ? <span>&larr;</span> : <span>&rarr;</span>}
+            {' '}
+            {t('allProjectsDeveloper')}{' '}
+            {locale === 'ar' ? <span>&larr;</span> : <span>&rarr;</span>}
           </a>
         </Link>
       </div>
@@ -141,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
   const compound: Compound = resp?.data.compounds_by_pk;
-  const localization = getLocalizationProps(context, "common");
+  const localization = getLocalizationProps(context, 'common');
   return {
     props: {
       localization,
