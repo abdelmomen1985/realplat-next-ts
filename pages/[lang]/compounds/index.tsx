@@ -17,7 +17,7 @@ const MyCard = ({ compound }: { compound: any }) => {
   const { locale } = useTranslation();
 
   return (
-    <div className="w-full flex">
+    <div className="w-full flex justify-center my-3">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"

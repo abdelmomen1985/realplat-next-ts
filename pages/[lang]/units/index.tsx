@@ -16,6 +16,7 @@ import { initializeApollo } from '../../../lib/apolloClient';
 import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
 import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
 import SearchFilters from './../../../components/SearchFilters/SearchFilters';
+import LoadingCircle from './../../../components/common/LoadingCircle';
 
 const UnitsPage: NextPage<{
   units: Unit[];
@@ -68,6 +69,10 @@ const UnitsPage: NextPage<{
   const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
     console.log('filterListState changed to', filterListState);
+    if (!loading && refetch) {
+      console.log('refetching');
+      getUnitsAggregate();
+    }
   }, [filterListState]);
 
   useEffect(() => {
@@ -118,6 +123,7 @@ const UnitsPage: NextPage<{
       }
       if (refetch) refetch();
     } else {
+      console.log('u should see a modal man');
       setLoginModal(true);
     }
   };
@@ -154,9 +160,10 @@ const UnitsPage: NextPage<{
             units={units}
           />
         </div>
+        {loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
-          {loading && <div>Loading ...</div>}
-          {innerUnits &&
+          {!loading &&
+            innerUnits &&
             innerUnits.map((unit: any) => (
               <UnitCard
                 key={unit.id}

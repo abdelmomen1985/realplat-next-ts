@@ -20,7 +20,7 @@ export type Developer = {
 const DeveloperCard = ({ developer }: { developer: any }) => {
   const { t, locale } = useTranslation();
   return (
-    <div className="w-full flex">
+    <div className="w-full flex justify-center my-3">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"
@@ -30,9 +30,9 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
         />
         <div className="px-6 py-4">
           <h1 className="text-indigo-800 mb-2"> {developer.name[locale]}</h1>
-          <p className="text-gray-700 text-base">
+          {/* <p className="text-gray-700 text-base">
             {developer.description[locale]}
-          </p>
+          </p> */}
         </div>
         <div className="px-6 pt-4 pb-2">
           {developer.compounds.map((compound: any) => {

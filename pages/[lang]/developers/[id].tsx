@@ -26,7 +26,7 @@ export type Developer = {
 const CompoundCard = ({ compound }: { compound: any }) => {
   const { t, locale } = useTranslation();
   return (
-    <div className="w-full flex">
+    <div className="w-full flex my-3 justify-center">
       <div className="m-2 max-w-sm rounded overflow-hidden shadow-lg flex-1">
         <img
           className="w-full"

@@ -6,7 +6,7 @@ export default function CompoundNdDeveloper({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap justify-center">
       <div className="my-5 bg-blue-100 text-white p-5 mx-5 shadow-md rounded-md">
         <img
           src={unit.compound.media.card_icon}

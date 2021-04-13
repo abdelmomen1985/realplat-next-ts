@@ -35,3 +35,21 @@
   border: 1px solid #2a4365 !important;
   /* border-radius:  */
 }
+
+.mobile-menu {
+  display: block;
+  position: absolute;
+  background: rgba(250, 250, 250, 0.7);
+  width: 90%;
+  top: 80%;
+  left: auto;
+  padding: 20px;
+  text-align: center;
+  z-index: 999;
+  /* transition: all .5s ease-in-out; */
+}
+
+.mobile-menu a {
+  font-weight: 700 !important;
+  display: block !important;
+}

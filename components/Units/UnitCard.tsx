@@ -23,7 +23,7 @@ export const UnitCard = ({
   };
 
   return (
-    <div className="w-full my-3">
+    <div className="w-full my-3 flex justify-center">
       <div
         className={
           'm-2 max-w-sm rounded-md overflow-hidden shadow-lg flex-1 relative ' +
@@ -31,7 +31,13 @@ export const UnitCard = ({
         }
       >
         <div className="relative">
-          <Carousel
+          <img
+            className="w-full"
+            style={{ maxHeight: '250px' }}
+            src={unit.media && unit.media[0] ? unit.media[0] : ''}
+            alt="unit image"
+          />
+          {/* <Carousel
             pagination={false}
             showArrows={false}
             enableAutoPlay={true}
@@ -39,16 +45,10 @@ export const UnitCard = ({
           >
             {unit.media.map((image: any, key: any) => {
               return (
-                <img
-                  key={key}
-                  className="w-full"
-                  style={{ maxHeight: '250px' }}
-                  src={image}
-                  alt="unit image"
-                />
+               
               );
             })}
-          </Carousel>
+          </Carousel> */}
           <div
             className="absolute flex justify-between text-sm"
             style={{ bottom: '50px', width: '100%' }}
