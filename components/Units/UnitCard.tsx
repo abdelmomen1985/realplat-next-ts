@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useTranslation from '../../hooks/useTranslation';
-import Carousel from 'react-elastic-carousel';
+// import Carousel from 'react-elastic-carousel';
 import { useRouter } from 'next/router';
 
 export const UnitCard = ({
@@ -16,10 +16,19 @@ export const UnitCard = ({
 }) => {
   const { t, locale } = useTranslation();
   const router = useRouter();
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    if (unit && unit?.media.length) {
+      setImageUrl(unit?.media[0]);
+    }
+  }, [unit]);
   const singleUnitHandler = (unitId: string) => {
     router.push(`/${locale}/units/[unit]/`, `/${locale}/units/${unitId}/`, {
       shallow: true,
     });
+  };
+  const imageErrorHandler = () => {
+    setImageUrl('https://i.imgur.com/bDujVXa.jpg');
   };
 
   return (
@@ -34,7 +43,8 @@ export const UnitCard = ({
           <img
             className="w-full"
             style={{ maxHeight: '250px' }}
-            src={unit.media && unit.media[0] ? unit.media[0] : ''}
+            src={imageUrl}
+            onError={imageErrorHandler}
             alt="unit image"
           />
           {/* <Carousel

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layouts/Layout';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Link from 'next/link';
+
 import { getLocalizationProps } from '../../Context/LangContext';
 import useTranslation from '../../hooks/useTranslation';
 interface service {
@@ -66,13 +68,14 @@ const IndexPage: NextPage = () => {
       <section
         className="flex flex-wrap bg-local pt-20 items-center justify-center"
         style={{
-          background:
-            'url(/images/landingHeader.png) no-repeat 50% fixed',
+          background: 'url(/images/landingHeader.png) no-repeat 50% fixed',
           backgroundSize: 'cover',
           minHeight: '100vh',
         }}
       >
-        <h1 className="text-white">{t('header')}</h1>
+        <Link href={`/${locale}/units`} shallow>
+          <h1 className="text-white cursor-pointer">{t('header')}</h1>
+        </Link>
       </section>
       {/* search factors  */}
       <section className="container mx-auto px-2 my-10">

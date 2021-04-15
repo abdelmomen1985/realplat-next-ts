@@ -87,7 +87,7 @@ const UnitsPage: NextPage<{
         });
       }
       setInnerUnits(newUnits);
-      console.log(user);
+      console.log(newUnits);
     }
   }, [data?.units_aggregate]);
 
