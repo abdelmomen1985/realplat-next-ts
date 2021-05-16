@@ -3,27 +3,47 @@
 @tailwind utilities;
 @layer base {
   body {
-    font-family: Cairo;
+    font-family: 'Montserrat', sans-serif;
+    --main-color: #007882;
+    --main-red: #FF5D3E;
+    --main-text: #3B4144;
   }
-  button {
+  button, input, a:active {
     outline: none !important;
   }
   h1 {
     @apply text-2xl;
-    font-family: Cairo;
+    font-family: 'Comfortaa', cursive;
+  }
+  small {
+    font-family: 'Comfortaa', cursive;
   }
   h2 {
     @apply text-xl;
   }
-  @font-face {
-    font-family: Cairo;
-    font-weight: 400;
-    src: url(../assets/fonts/Cairo-Regular.ttf) format("ttf");
+  .leave-here {
+    font-family: 'Roboto', sans-serif;
   }
-  @font-face {
-    font-family: Cairo;
-    font-weight: 500;
-    src: url(../assets/fonts/Cairo-SemiBold.ttf) format("ttf");
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--main-color)
+  }
+  .text-primary {
+    color: var(--main-color)
+  }
+  .bg-custom-red {
+    background-color: var(--main-red)
+  }
+  .text-custom-red {
+    color: var(--main-red)
+  }
+  .bg-main {
+    background-color: var(--main-text)
+  }
+  .text-main {
+    color: var(--main-text)
   }
 }
 

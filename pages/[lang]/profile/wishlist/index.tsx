@@ -9,7 +9,6 @@ import { UnitCard } from '../../../../components/Units/UnitCard';
 import { Unit } from '../../../../interfaces/index';
 import Layout from './../../../../components/Layouts/Layout';
 import { USER_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../../query/user';
-import Header from './../../../../components/Layouts/Header';
 import LoadingCircle from './../../../../components/common/LoadingCircle';
 export default function WhishList() {
   const [wishListUnitsState, setWishListUnitsState] = useState<Unit[]>([]);
@@ -93,7 +92,6 @@ export default function WhishList() {
   return (
     <>
       <Layout>
-        <Header />
         {loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
         {wishListUnitsState.length > 0 && (
           <>

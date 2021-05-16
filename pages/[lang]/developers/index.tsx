@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
-import Header from './../../../components/Layouts/Header';
 import useTranslation from './../../../hooks/useTranslation';
 import { allDevelopers } from '../../../query/developers';
 
@@ -63,7 +62,6 @@ const DevelopersPage = ({ developers }: { developers: Developer[] }) => {
   // const { t, locale } = useTranslation();
   return (
     <Layout title="Real Estate Brand">
-      <Header />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
         {developers &&
           developers.map((developer: any) => (

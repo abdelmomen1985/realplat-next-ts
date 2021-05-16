@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import Header from "../../../components/Layouts/Header";
 import Layout from "../../../components/Layouts/Layout";
 import { AppContext } from "../../../Context/AppContextProvider";
 import { getLocalizationProps } from "../../../Context/LangContext";
@@ -78,7 +77,6 @@ const ComparePage: NextPage = () => {
       </style>
 
       <Layout>
-        <Header />
         {comparingUnits.length > 0 && (
           <>
             <h3 className="py-3 text-center font-bold text-2xl text-blue-900">

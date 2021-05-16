@@ -4,7 +4,6 @@ import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
 import { COMPOUNDS_BY_PK } from '../../../query/compounds';
-import Header from './../../../components/Layouts/Header';
 import { UnitCard } from './../../../components/Units/UnitCard';
 import useTranslation from './../../../hooks/useTranslation';
 export type Compound = {
@@ -44,8 +43,6 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
   };
   return (
     <Layout>
-      <Header />
-      {/* Header */}
       <div className="grid grid-cols-3 gap-10 bg-blue-800 text-white justify-center p-2">
         <div>
           <img src={compound.media.page_icon} className="w-full" />

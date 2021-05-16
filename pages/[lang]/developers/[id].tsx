@@ -5,7 +5,6 @@ import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
 import { GET_DEVELOPER_BY_PK } from '../../../query/developers';
-import Header from './../../../components/Layouts/Header';
 import useTranslation from './../../../hooks/useTranslation';
 
 export type Developer = {
@@ -60,8 +59,6 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
   // console.log(window.location.href);
   return (
     <Layout>
-      <Header />
-      {/* Header */}
       <div className="grid grid-cols-3 gap-10 bg-blue-800 text-white justify-center p-2">
         <div>
           <img src={developer.media.page_icon} className="w-full" />

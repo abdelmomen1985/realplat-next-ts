@@ -1,6 +1,8 @@
 import Head from "next/head";
 import React, { ReactNode } from "react";
 import useTranslation from "./../../hooks/useTranslation";
+import Header from '../nav/Header';
+import Footer from '../nav/Footer';
 
 type LayoutProps = {
   children?: ReactNode;
@@ -20,8 +22,10 @@ const Layout = ({
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-
+      <Header />
       {children}
+
+      <Footer />
       {/* <div>
         <NavLinks />
       </div>

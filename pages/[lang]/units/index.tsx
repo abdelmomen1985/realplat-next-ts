@@ -1,7 +1,6 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import Header from '../../../components/Layouts/Header';
 import Layout from '../../../components/Layouts/Layout';
 import { UnitCard } from '../../../components/Units/UnitCard';
 import { AppContext } from '../../../Context/AppContextProvider';
@@ -152,7 +151,6 @@ const UnitsPage: NextPage<{
   return (
     <LanguageProvider localization={localization}>
       <Layout title="Brand Logo Here">
-        <Header />
         <div className="mx-4 my-5" ref={node}>
           <SearchFilters
             setFilterListState={setFilterListState}

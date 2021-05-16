@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { NavLinks } from '../nav/NavLinks';
-import AuthModal from './../Auth/AuthModal';
+import { NavLinks } from './NavLinks';
+import AuthModal from '../Auth/AuthModal';
 import LocaleSwitcher from './LocalSwitch';
-import { AppContext } from './../../Context/AppContextProvider';
+import { AppContext } from '../../Context/AppContextProvider';
 function Header() {
   // const [loginModal, setLoginModal] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -39,22 +39,21 @@ function Header() {
   };
   return (
     <>
-      <header className="relative my-3 border-t-0 border-b-2 border-l-0 border-r-0 border-solid border-gray-400 shadow p-2 pb-4">
+      <header className="relative my-3 p-2 pb-4">
         <div style={{ bottom: '0', width: '100%' }}>
           <nav className="container mx-auto px-4 flex flex-row justify-between space-y-3 md:space-y-0">
-            <Link href="/">
-              <h3
-                className="text-bold text-2xl text-indigo-800"
-                style={{ cursor: 'pointer' }}
-              >
-                Real Estate Brand
-              </h3>
-            </Link>
-
+            <h1
+              className="text-bold text-2xl p-0.5 cursor-pointer"
+              style={{ padding: '0.125rem' }}
+            >
+              <Link href="/">
+                <a>Mellw</a>
+              </Link>
+            </h1>
             <div
               ref={mobileMenu}
               className={
-                'pt-2 hidden md:flex flex-wrap md:flex-row flex-col ' +
+                'pt-2 hidden md:flex flex-wrap md:flex-row flex-col md:justify-between  w-full ' +
                 (isMobileMenuOpen ? 'mobile-menu ' : '')
               }
             >
@@ -63,7 +62,6 @@ function Header() {
                 setAuthenticated={setAuthenticated}
               />
 
-              <LocaleSwitcher />
             </div>
 
             <div className="cursor-pointer block md:hidden bg-transparent border-none focus:outline-none outline-none">
