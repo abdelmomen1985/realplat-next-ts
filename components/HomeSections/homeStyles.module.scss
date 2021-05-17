@@ -35,6 +35,10 @@
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 
+    @media screen and (max-width: 500px) {
+      width: 20%;
+    }
+
     i {
       color: #fff;
       font-size: 30px;
@@ -75,5 +79,67 @@
     left: 0;
     right: 0;
     margin: 0 auto;
+  }
+}
+
+.houseImg {
+  position: absolute;
+  bottom: -3rem;
+  width: 16rem;
+  right: -2.5rem;
+
+  @media screen and (max-width: 500px) {
+    right: 0;
+  }
+}
+
+.circularFire {
+  background-color: #FF5D3E;
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  border-radius: 50%;
+  border: transparent;
+}
+
+.slideImageContainer {
+  position: relative;
+  height: 100%;
+  border-radius: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  h3 {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  button {
+    position: absolute;
+    bottom: 10px;
+    left: 8px;
+    font-size: .9rem;
+    background-color: rgba(243, 241, 247, 0.6);
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+  }
+}
+
+.halfSlideImageContainer {
+  height: 45%;
+
+  &:nth-of-type(even) {
+    margin-top: 30px;
+    margin-bottom: 0;
   }
 }

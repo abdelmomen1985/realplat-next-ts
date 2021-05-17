@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import useTranslation from '../../hooks/useTranslation';
-import ActiveLink from './../ActiveLink';
+import ActiveLink from './ActiveLink';
 import { AppContext } from './../../Context/AppContextProvider';
 import LocaleSwitcher from './LocalSwitch';
 import styles from './navigation.module.scss'

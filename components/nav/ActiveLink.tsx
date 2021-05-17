@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useTranslation from '../hooks/useTranslation';
+import useTranslation from '../../hooks/useTranslation';
 
 type Props = {
   href: string;

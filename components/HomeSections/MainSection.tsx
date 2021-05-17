@@ -1,24 +1,14 @@
 import React from 'react'
 import Link from 'next/link';
 import useTranslation from './../../hooks/useTranslation';
-import { useForm } from 'react-hook-form';
 import clsx from 'clsx'
 import styles from './homeStyles.module.scss';
-interface SearchData {
-  searchQuery: string;
-}
+import SearchForm from './SearchForm';
+
 const suggestedCitites = ['new cairo', 'sahel', 'new capital', '6th october', 'sokhna city']
 const MainSection = () => {
   // const { t, locale } = useTranslation();
-  const { register, errors, handleSubmit, reset } = useForm({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
-    shouldFocusError: true
-  })
-  const searchHandler = (data: SearchData) => {
-    console.log(data)
-    reset();
-  }
+
   return (
     <>
       <section
@@ -36,18 +26,9 @@ const MainSection = () => {
           <br />
           <span>you'll love to live</span>
         </h2>
-        <form onSubmit={handleSubmit(searchHandler)} className={styles.searchForm}>
-          <input type="text" name="query"
-            placeholder="Search our listed units"
-            ref={register({
-              required: 'Please Enter a city first'
-            })} />
-          <button>
-            <i className="fas fa-search" />
-          </button>
-        </form>
+        <SearchForm placeHolder="Search our listed units" title="main" />
 
-        <div className="flex flex-wrap justify-between items-center my-3">
+        <div className="flex flex-wrap justify-center md:justify-between text-center items-center my-3">
           <h3 className="text-white text-xl md:text-3xl font-medium mx-1"
 
           >

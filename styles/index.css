@@ -7,6 +7,8 @@
     --main-color: #007882;
     --main-red: #FF5D3E;
     --main-text: #3B4144;
+    --main-secondary: #F3F1F7;
+    overflow-x: hidden;
   }
   button, input, a:active {
     outline: none !important;
@@ -33,6 +35,12 @@
   .text-primary {
     color: var(--main-color)
   }
+  .bg-secondary {
+    background-color: var(--main-secondary)
+  }
+  .text-secondary {
+    color: var(--main-secondary)
+  }
   .bg-custom-red {
     background-color: var(--main-red)
   }
@@ -44,6 +52,15 @@
   }
   .text-main {
     color: var(--main-text)
+  }
+  .font-comfortaa {
+    font-family: 'Comfortaa', cursive;
+  }
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+  .font-roboto {
+    font-family: 'Roboto', sans-serif;
   }
 }
 
