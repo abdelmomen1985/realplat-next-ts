@@ -32,12 +32,10 @@ export default function DropDown(props: Ddprops) {
     }
   }, [data?.units]);
   useEffect(() => {
-    console.log("use Effect is running");
     if (
       Object.keys(props.filterListState).length === 0 &&
       props.filterListState.constructor === Object
     ) {
-      console.log("use Effect condition is running");
       setListTitle("location");
       if (data?.units) {
         const dummyData = [...data?.units];
@@ -56,6 +54,17 @@ export default function DropDown(props: Ddprops) {
       document.removeEventListener("mousedown", handleClick);
     };
   }, []);
+  useEffect(() => {
+
+    if (data && locationsInnerState.length > 0) {
+      locationsInnerState.map((single: any) => {
+        if (single.sk_city._id === props.filterListState.sk_city) {
+          console.log(single.sk_city.name)
+          setListTitle(locale === "ar" ? single.sk_city.name_ar : single.sk_city.name)
+        }
+      })
+    }
+  }, [locationsInnerState])
   const handleClick = (e: any) => {
     if (node?.current?.contains(e.target)) {
       // inside click
@@ -69,10 +78,8 @@ export default function DropDown(props: Ddprops) {
   };
 
   const selectItem = (item: any) => {
-    console.log(item.sk_city._id);
     item.selected = !item.selected;
     const newArray = locationsInnerState.map((single: any) => {
-      console.log(single);
       if (single.sk_city._id === item.sk_city._id) return item;
       return { ...single, selected: false };
     });
@@ -99,35 +106,40 @@ export default function DropDown(props: Ddprops) {
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-            outline: none;
-          }
+      
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
+          }
+          .circularIcon{
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            background-color: #EDAE49;
+            border-radius: 50%;
+            border: transparent;
+            display: block
           }
         `}
       </style>
-      <div className="dd-wrapper relative" ref={node}>
+      <div className="dd-wrapper mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header p-3 filter-button"
+          className="dd-header border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={toggleList}
         >
-          <div className="dd-header-title">
-            <i className={props.icon}></i> {t(`${listTitle.toLowerCase()}`)}{" "}
+          <div className="dd-header-title flex justify-between items-center">
+            {listTitle !== 'location' && <span className="circularIcon"></span>} {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpenState ? (
               <span>
                 {" "}
-                <i className="fas fa-angle-up"></i>
+                <i className="fas fa-angle-up ml-1"></i>
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <i className="fas fa-angle-down ml-1"></i>
               </span>
             )}
           </div>

@@ -8,6 +8,7 @@
     --main-red: #FF5D3E;
     --main-text: #3B4144;
     --main-secondary: #F3F1F7;
+    --main-text-secondary: #443C53;
     overflow-x: hidden;
   }
   button, input, a:active {
@@ -35,11 +36,29 @@
   .text-primary {
     color: var(--main-color)
   }
+  .bg-outline-primary {
+    border: 1px solid var(--main-color);
+    background-color: #fff;
+  }
   .bg-secondary {
     background-color: var(--main-secondary)
   }
   .text-secondary {
     color: var(--main-secondary)
+  }
+  .bg-outline-secondary {
+    border: 1px solid var(--main-secondary);
+    background-color: #fff;
+  }
+  .bg-text-secondary {
+    background-color: var(--main-text-secondary)
+  }
+  .text-text-secondary {
+    color: var(--main-text-secondary)
+  }
+  .bg-outline-text-secondary {
+    border: 1px solid var(--main-text-secondary);
+    background-color: #fff;
   }
   .bg-custom-red {
     background-color: var(--main-red)
@@ -47,11 +66,19 @@
   .text-custom-red {
     color: var(--main-red)
   }
+  .bg-outline-red {
+    border: 1px solid var(--main-red);
+    background-color: #fff;
+  }
   .bg-main {
     background-color: var(--main-text)
   }
   .text-main {
     color: var(--main-text)
+  }
+  .bg-outline-main {
+    border: 1px solid var(--main-text);
+    background-color: #fff;
   }
   .font-comfortaa {
     font-family: 'Comfortaa', cursive;
@@ -65,11 +92,11 @@
 }
 
 .rc-slider-track {
-  background-color: #2a4365 !important;
+  background-color: #007882!important;
 }
 
 .rc-slider-handle {
-  border: 1px solid #2a4365 !important;
+  border: 1px solid #007882!important;
   /* border-radius:  */
 }
 

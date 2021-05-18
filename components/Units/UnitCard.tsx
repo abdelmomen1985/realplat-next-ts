@@ -35,14 +35,15 @@ export const UnitCard = ({
     <div className="w-full my-3 flex justify-center">
       <div
         className={
-          'm-2 max-w-sm rounded-md overflow-hidden shadow-lg flex-1 relative ' +
-          (unit.comparing ? 'bg-blue-600' : 'bg-white')
+          'm-2 max-w-sm rounded-xl overflow-hidden shadow-xl flex-1 relative ' +
+          (unit.comparing ? 'bg-primary text-white' : 'bg-white')
         }
       >
         <div className="relative">
           <img
             className="w-full"
-            style={{ maxHeight: '250px' }}
+
+            style={{ maxHeight: '250px', borderTopLeftRadius: '0.5rem', borderTopRightRadius: '0.5rem' }}
             src={imageUrl}
             onError={imageErrorHandler}
             alt="unit image"
@@ -64,35 +65,7 @@ export const UnitCard = ({
             style={{ bottom: '50px', width: '100%' }}
           >
             <div
-              className="bg-transparent rounded-md p-3 text-black-500"
-              style={{ left: '15px', position: 'absolute' }}
-            >
-              {wishlisted ? (
-                <span
-                  className="cursor-pointer"
-                  onClick={() => wishListHandler(unit, wishlisted)}
-                >
-                  <i
-                    className="fas fa-heart"
-                    style={{ color: 'white', fontSize: '18px' }}
-                    aria-hidden="true"
-                  ></i>
-                </span>
-              ) : (
-                <span
-                  className="cursor-pointer"
-                  onClick={() => wishListHandler(unit, wishlisted)}
-                >
-                  <i
-                    className="far fa-heart"
-                    style={{ color: 'white', fontSize: '18px' }}
-                    aria-hidden="true"
-                  ></i>
-                </span>
-              )}
-            </div>
-            <div
-              className="bg-blue-900 rounded-md p-3 text-white"
+              className="bg-primary rounded-md p-3 text-white"
               style={{ right: '15px', position: 'absolute' }}
             >
               {!unit.comparing ? (
@@ -100,14 +73,14 @@ export const UnitCard = ({
                   className="cursor-pointer"
                   onClick={() => compareHandler(unit, wishlisted)}
                 >
-                  <i className="fas fa-compress-alt"></i> compare
+                  <i className="fas fa-compress-alt"></i>
                 </span>
               ) : (
                 <span
                   className="cursor-pointer"
                   onClick={() => compareHandler(unit, wishlisted)}
                 >
-                  <i className="fas fa-compress"></i> Comparing
+                  <i className="fas fa-compress"></i>
                 </span>
               )}
             </div>
@@ -118,16 +91,31 @@ export const UnitCard = ({
           style={{ top: '10px', width: '100%' }}
         >
           <div
-            className="bg-white rounded-md p-3 text-black-500"
-            style={{ left: '15px', position: 'absolute' }}
-          >
-            <i className="fas fa-calendar"></i> {unit.delivery_year}
-          </div>
-          <div
-            className="bg-blue-900 rounded-md p-3 text-white"
+            className="bg-transparent rounded-md p-3 text-black-500"
             style={{ right: '15px', position: 'absolute' }}
           >
-            <i className="fas fa-home"></i> {unit.property_type.name[locale]}
+            {wishlisted ? (
+              <span
+                className="cursor-pointer"
+                onClick={() => wishListHandler(unit, wishlisted)}
+              >
+                <i
+                  className="fas fa-heart text-custom-red hover:text-white hover:text-opacity-50 text-opacity-50 text-2xl"
+                  style={{ color: 'red', fontSize: '25px' }}
+                  aria-hidden="true"
+                ></i>
+              </span>
+            ) : (
+              <span
+                className="cursor-pointer"
+                onClick={() => wishListHandler(unit, wishlisted)}
+              >
+                <i
+                  className="fas fa-heart text-white hover:text-red-600 text-opacity-50 text-2xl"
+                  aria-hidden="true"
+                ></i>
+              </span>
+            )}
           </div>
         </div>
         <div
@@ -138,79 +126,43 @@ export const UnitCard = ({
         >
           <div className="px-6 py-4 flex justify-between">
             <div>
-              <h4 className="text-indigo-800">
-                {locale === 'ar' ? unit.sk_city.name_ar : unit.sk_city.name}
-              </h4>
-            </div>
-            <div>
-              <p className="text-gray-700 text-base">
-                {t('compound')}: {unit.compound.name[locale]}
+              <p className="text-lg font-medium font-roboto capitalize text-text-secondary"  >
+                {unit.property_type.name[locale]}{' '}
+                {t('in')}{' '}
+                {unit.compound.name[locale]}{' '}
+                {t('compound')}{t('comma')}{' '}
+                {unit.bedrooms}{' '} {t('bedrooms')}{' '}
+                <br /> {locale === 'en' ? unit.sk_city.name : unit.sk_city.name_ar}
+              </p>
+              <p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary" >
+                {t('downPay')}: {unit.fin_down_payment} {t('egp')}
               </p>
             </div>
           </div>
-
-          <div className="px-6 py-2 flex justify-between">
-            <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: '#000', fontWeight: 600 }}>
-                {' '}
-                {unit.fin_total} {t('dollar')}
-              </h3>
-              <h5
-                className="text-gray-600"
-                style={{ color: '#c4c4c4', fontWeight: 600 }}
-              >
-                {t('totalPrice')}
-              </h5>
-            </div>
-            <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: '#000', fontWeight: 600 }}>
-                {unit.fin_years} {t('years')}
-              </h3>
-              <h5
-                className="text-gray-600"
-                style={{ color: '#c4c4c4', fontWeight: 600 }}
-              >
-                {t('totalYears')}
-              </h5>
-            </div>
+          <div className="px-6 py-4 flex justify-between items-center" style={{ backgroundColor: '#E5E5E5' }}>
+            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
+              <img src="/images/land.png" /> <span className="ml-2">{unit.land}M</span>
+            </span>
+            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
+              <img src="/images/bed.png" /> <span className="ml-2">{unit.bedrooms}bd</span>
+            </span>
+            {/* <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
+              <img src="/images/garden.png" /> <span className="ml-2">{unit.bedrooms}</span>
+            </span> */}
+            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
+              <img src="/images/bath.png" /> <span className="ml-2">{unit.bathrooms}ba</span>
+            </span>
           </div>
-          <hr />
-          <div className="px-6 py-4 flex justify-between">
-            <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: '#000', fontWeight: 600 }}>
-                {' '}
-                {unit.fin_down_payment} {t('dollar')}
-              </h3>
-              <h5
-                className="text-gray-600"
-                style={{ color: '#c4c4c4', fontWeight: 600 }}
-              >
-                {t('downPay')}
-              </h5>
-            </div>
-            <div className="px-6 pt-2 pb-2">
-              <h3 style={{ color: '#000', fontWeight: 600 }}>
-                {unit.fin_monthly_payment} {t('dollar')}
-              </h3>
-              <h5
-                className="text-gray-600"
-                style={{ color: '#c4c4c4', fontWeight: 600 }}
-              >
-                {t('monthlyPay')}
-              </h5>
-            </div>
-          </div>
-          <hr />
-          <div className="px-6 pt-2 pb-2">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              <i className="fas fa-bed"></i> {unit.bedrooms}
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              <i className="fas fa-toilet"></i> {unit.bathrooms}
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              Bua{/* to be replaced with icon  */}: {unit.bua}
-            </span>
+          <div className=" py-6 flex flex-wrap lg:flex-no-wrap justify-center lg:justify-between items-center">
+            <button className="flex justify-between items-center py-2 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
+              <img className="mr-1" src="/images/phone.png" /> Call
+            </button>
+            <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+              <img className="mr-1" src="/images/whatsapp.png" /> WhatsApp
+            </button>
+            <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+              <img className="mr-1" src="/images/message.png" /> Message
+            </button>
           </div>
         </div>
       </div>

@@ -82,22 +82,19 @@ export default function PricesModal(props: any) {
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-          }
+          
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
           }
         `}
       </style>
-      <div className="dd-wrapper relative" ref={node}>
+      <div className="dd-wrapper mx-auto relative " ref={node}>
         <button
           type="button"
-          className="dd-header p-3 filter-button"
+          className="dd-header border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={toggleModal}
         >
           <div className="dd-header-title">
@@ -151,7 +148,7 @@ export default function PricesModal(props: any) {
             })}
             <button
               onClick={applyFiltersHandler}
-              className="w-full rounded-md bg-blue-900 text-white font-bold text-md p-3 mt-2 mb-1 mx-auto"
+              className="w-full rounded-md bg-primary text-white font-bold text-md p-3 mt-2 mb-1 mx-auto"
             >
               Apply
             </button>

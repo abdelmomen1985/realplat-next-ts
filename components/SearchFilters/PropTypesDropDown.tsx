@@ -121,36 +121,42 @@ export default function PropTypesDropDown({
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-          }
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
+          }
+          .circularIcon{
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            background-color: #EDAE49;
+            border-radius: 50%;
+            border: transparent;
+            display: block
           }
         `}
       </style>
-      <div className="dd-wrapper relative" ref={node}>
+      <div className="dd-wrapper mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header p-3 filter-button"
+          className="dd-header border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
           onClick={() => {
             toggOpen(!isOpen);
           }}
         >
-          <div className="dd-header-title">
-            <i className={icon}></i> {t(`${listTitle.toLowerCase()}`)}{" "}
+          <div className="dd-header-title flex justify-between items-center">
+            {listTitle !== 'prop_type' && <span className="circularIcon"></span>}
+            {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpen ? (
               <span>
                 {" "}
-                <i className="fas fa-angle-up"></i>
+                <i className="fas fa-angle-up ml-1"></i>
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <i className="fas fa-angle-down ml-1"></i>
               </span>
             )}
           </div>

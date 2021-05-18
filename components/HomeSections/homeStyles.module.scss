@@ -67,8 +67,8 @@
   position: relative;
   margin: 10px auto;
   font-family: 'Roboto', sans-serif;
-
-
+  transition: all ease-in 0.2s;
+  cursor: pointer;
   &::after {
     content: "";
     position: absolute;
@@ -79,6 +79,10 @@
     left: 0;
     right: 0;
     margin: 0 auto;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 

@@ -7,6 +7,9 @@ export type StateType = {
   clearComparing: () => void;
   loginModal: Boolean;
   setLoginModal: (val: any) => void;
+  filterState: any,
+  filterUnitsByCity: (val: string) => void;
+
 };
 
 export const setStorageItems = (name: string, items: any[]) => {
@@ -26,6 +29,7 @@ export const ACTION_TYPES = {
   SET_USER: 'SET_USER',
   SET_COMPARING: ' SET_COMPARING',
   CLEAR_COMPARING: 'CLEAR_COMPARING',
+  FILTER_BY_CITY: 'FILTER_BY_CITY'
 };
 
 export type Action = {

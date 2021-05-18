@@ -31,7 +31,9 @@ export const AppReducer = (state: StateType, action: Action) => {
     case ACTION_TYPES.CLEAR_COMPARING: {
       return { ...state, comparing: [] };
     }
-
+    case ACTION_TYPES.FILTER_BY_CITY: {
+      return { ...state, filterState: { ...state.filterState, sk_city: action.payload } }
+    }
     default:
       return state;
   }

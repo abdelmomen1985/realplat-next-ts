@@ -61,7 +61,7 @@ export default function AuthModal(props: any) {
           }
           .log-btn:active,
           .log-btn.active {
-            background-color: #192a56;
+            background-color: #007882;
             color: #fff;
           }
         `}
@@ -83,7 +83,7 @@ export default function AuthModal(props: any) {
             </button>
           </div>
           <div className="modal-header">
-            <h3 className="pt-3 pb-5 text-center font-bold text-2xl text-blue-900">
+            <h3 className="pt-3 pb-5 text-center font-bold text-2xl text-primary">
               Sign Up to Store your Favorites
             </h3>
           </div>

@@ -182,17 +182,11 @@ export default function MoreFiltersModal({
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #ffffff;
-            background-color: #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-            outline: none;
-          }
           .filter-button:hover {
-            color: #192a56;
-            border: 1px solid #192a56;
-            background-color: #fff;
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
+            color: #fff;
+            background-color: #007882;
           }
           .overlay {
             position: fixed;
@@ -221,7 +215,7 @@ export default function MoreFiltersModal({
           .filterVal-button:active,
           .filterVal-button:hover,
           .filterVal-button.active {
-            background-color: #192a56;
+            background-color: #007882;
             color: #fff;
           }
           .mSquare {
@@ -233,9 +227,9 @@ export default function MoreFiltersModal({
           }
         `}
       </style>
-      <div className="relative">
+      <div className="relative mx-auto">
         <button
-          className="p-3 filter-button"
+          className="dd-header border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           <div>
@@ -267,7 +261,7 @@ export default function MoreFiltersModal({
                 </button>
                 <button
                   onClick={applyFiltersHandler}
-                  className="mx-2 bg-blue-900 font-bold text-md text-white py-3 px-5 shadow-md"
+                  className="mx-2 bg-primary font-bold text-md text-white py-3 px-5 shadow-md"
                 >
                   {t('apply')}
                 </button>
@@ -336,8 +330,8 @@ export default function MoreFiltersModal({
                                     ? t(`${value.title}`)
                                     : value.title
                                   : t(`${value.val}`)
-                                  ? t(`${value.val}`)
-                                  : value.val}
+                                    ? t(`${value.val}`)
+                                    : value.val}
                               </button>
                             );
                           }

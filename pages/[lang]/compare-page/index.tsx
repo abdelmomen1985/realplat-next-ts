@@ -79,11 +79,11 @@ const ComparePage: NextPage = () => {
       <Layout>
         {comparingUnits.length > 0 && (
           <>
-            <h3 className="py-3 text-center font-bold text-2xl text-blue-900">
+            <h3 className="py-3 text-center font-bold text-2xl text-primary">
               Comparing those units
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 px-2 mx-auto">
-              <div className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl bg-blue-900 text-white">
+              <div className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl bg-primary text-white">
                 <h4>{t("prop_type")}</h4>
                 <h4>{t("totalPrice")}</h4>
                 <h4>{t("pricePerM")}</h4>
@@ -101,7 +101,7 @@ const ComparePage: NextPage = () => {
               {comparingUnits.map((unit) => (
                 <div
                   key={unit.id}
-                  className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl text-blue-900"
+                  className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl text-primary"
                 >
                   <h3>{unit.property_type.name[locale]}</h3>
                   <h3>

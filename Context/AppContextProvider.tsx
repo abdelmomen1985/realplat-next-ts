@@ -13,6 +13,7 @@ import useTranslation from "./../hooks/useTranslation";
 const initialState = {
   user: undefined,
   comparing: [] as any[],
+  filterState: {} as any
 } as StateType;
 
 export const AppContext = createContext<StateType>(initialState);
@@ -54,6 +55,12 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       payload: null,
     });
   };
+  const filterUnitsByCity = (cityId: string) => {
+    dispatch({
+      type: ACTION_TYPES.FILTER_BY_CITY,
+      payload: cityId,
+    });
+  }
   const [loginModal, setLoginModal] = useState(false);
 
   const contextValues: StateType = {
@@ -63,6 +70,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     clearComparing,
     loginModal,
     setLoginModal,
+    filterUnitsByCity
   };
   return (
     <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

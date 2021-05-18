@@ -1,14 +1,58 @@
-import React from 'react'
-import Link from 'next/link';
+import React, { useContext } from 'react'
+import { useRouter } from 'next/router'
 import useTranslation from './../../hooks/useTranslation';
 import clsx from 'clsx'
 import styles from './homeStyles.module.scss';
 import SearchForm from './SearchForm';
+import { AppContext } from './../../Context/AppContextProvider';
 
-const suggestedCitites = ['new cairo', 'sahel', 'new capital', '6th october', 'sokhna city']
+const suggestedCities = [
+  {
+    _id: "5f3a53188b15b7006d8ad6bb",
+    name: {
+      ar: "القاهرة الجديدة",
+      en: 'new cairo',
+    },
+  },
+  {
+    _id: "5f3a549d8b15b7006d8ad6be",
+    name: {
+      ar: "الساحل الشمالي",
+      en: 'sahel',
+    }
+  },
+  {
+    _id: '5f3a534b8b15b7006d8ad6bc',
+    name: {
+      ar: "العاصمة الإدارية",
+      en: 'new capital'
+    }
+  },
+  {
+    _id: "5f3a55388b15b7006d8ad6c0",
+    name: {
+      ar: "مدينة ٦ أكتوبر",
+      en: '6th october',
+    }
+  },
+  {
+    _id: "5f3a53ed8b15b7006d8ad6bd",
+    name: {
+      ar: "العين السخنة",
+      en: 'sokhna city'
+    }
+  },
+
+]
 const MainSection = () => {
-  // const { t, locale } = useTranslation();
-
+  const router = useRouter()
+  const { locale } = useTranslation();
+  const { filterUnitsByCity } = useContext(AppContext)
+  const filterByCityHandler = (cityId: string) => {
+    console.log(cityId)
+    filterUnitsByCity(cityId)
+    router.push(`/${locale}/units`)
+  }
   return (
     <>
       <section
@@ -30,7 +74,6 @@ const MainSection = () => {
 
         <div className="flex flex-wrap justify-center md:justify-between text-center items-center my-3">
           <h3 className="text-white text-xl md:text-3xl font-medium mx-1"
-
           >
             Search our listed units with ease
           </h3>
@@ -38,8 +81,8 @@ const MainSection = () => {
           >Learn More</button>
         </div>
         <div className="flex flex-wrap w-4/5 justify-between my-5 items-center">
-          {suggestedCitites.map((city, i) => (
-            <p className={styles.city} key={i}>{city}</p>
+          {suggestedCities.map((city) => (
+            <p className={styles.city} onClick={() => filterByCityHandler(city._id)} key={city._id}>{city.name[locale]}</p>
           ))}
         </div>
       </section>

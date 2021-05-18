@@ -24,8 +24,9 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user, setComparing, setLoginModal } = useContext(AppContext);
+  const { user, setComparing, setLoginModal, filterState } = useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
+
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
     UNITS_AGGREGATE,
     {
@@ -65,13 +66,19 @@ const UnitsPage: NextPage<{
   useEffect(() => {
     getUnitsAggregate();
   }, []);
+  useEffect(() => {
+    setFilterListState({ ...filterState })
+    // getUnitsAggregate();
+    // console.log(filterListState, filterState)
+  }, [filterState])
   const node = useRef<HTMLDivElement>(null);
   useEffect(() => {
     console.log('filterListState changed to', filterListState);
-    if (!loading && refetch) {
-      console.log('refetching');
-      getUnitsAggregate();
-    }
+    getUnitsAggregate();
+    // if (!loading && refetch) {
+    //   console.log('refetching');
+
+    // }
   }, [filterListState]);
 
   useEffect(() => {
@@ -159,7 +166,7 @@ const UnitsPage: NextPage<{
           />
         </div>
         {loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center justify-center items-center">
           {!loading &&
             innerUnits &&
             innerUnits.map((unit: any) => (

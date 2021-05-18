@@ -101,7 +101,7 @@ export default function Login(props: any) {
       </div>
       <button
         type="submit"
-        className="my-5 mx-auto block bg-blue-900 text-white text-center py-3 px-8 w-full rounded-md"
+        className="my-5 mx-auto block bg-primary text-white text-center py-3 px-8 w-full rounded-md"
       >
         Sign In
       </button>

@@ -53,7 +53,7 @@ const GuidesSection = () => {
                 <img className="w-16 h-12" src={`images/${guide.img}`} />
                 <div className="ml-3">
                   <h4 className="font-semibold text-3xl" style={{ color: '#012B55' }}>{guide.title}</h4>
-                  <a className="cursor-pointer text-xl font-medium" style={{ color: '#443C53' }}>{guide.link} <span className="text-black">&#8594;</span></a>
+                  <a className="cursor-pointer text-xl font-medium text-text-secondary">{guide.link} <span className="text-black">&#8594;</span></a>
                 </div>
               </div>
             ))}
