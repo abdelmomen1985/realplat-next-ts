@@ -139,6 +139,9 @@ export const UNITS_BY_PK = gql`
           media
           id
         }
+        units(limit: 3) {
+          ${UNIT_FIELDS}
+        }
       }
       delivery_month
       delivery_year
@@ -159,6 +162,18 @@ export const UNITS_BY_PK = gql`
         id
       }
       sk_city
+    }
+  }
+`;
+export const USER_WISHLIST_IDS = gql`
+query user_wishlist($user_id: uuid) {
+    user_wishlist_aggregate(where: {user_id: 
+        {_eq: $user_id}}) {
+      nodes {
+       unit{
+        id
+       }
+      }
     }
   }
 `;

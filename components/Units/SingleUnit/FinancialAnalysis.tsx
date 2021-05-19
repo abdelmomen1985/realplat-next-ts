@@ -5,61 +5,19 @@ export default function FinancialAnalysis({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
 
   return (
-    <div className="px-5 py-3">
-      <h3
-        style={{
-          width: "100%",
-          textAlign: locale === "en" ? "left" : "right",
-          background: "rgba(149,165,166, 0.5)",
-          color: "rgb(44,62,80)",
-          fontSize: "20px",
-          fontWeight: "bold",
-          padding: "5px 10px",
-          margin: "15px 3px",
-        }}
+    <div className="border-gray-300 rounded-md shadow-md">
+      <h3 className="mb-3 py-4 w-100 px-5 rounded-md text-text-secondary flex justify-start items-center"
+        style={{ backgroundColor: '#F5F6F7' }}
       >
-        {t("finAnalysis")}
+        <img src="/images/dollar.png" />
+        <span className="text-2xl font-medium mx-4 capitalize">Financial Details</span>
       </h3>
-      <div className="flex flex-wrap">
-        <div className="flex flex-wrap px-2 border-r-2">
-          <div className="border rounded-md p-3 text-center">
-            <p>{t("totalPrice")}</p>
-            <h5>{unit.fin_total}</h5> {t("dollar")}
-          </div>
-          <div className="text-indigo-800 font-black text-2xl flex items-center">
-            {locale === "en" ? (
-              <i className="fas fa-chevron-right"></i>
-            ) : (
-              <i className="fas fa-chevron-left"></i>
-            )}
-          </div>
-          <div className="border rounded-md p-3 text-center border-indigo-800">
-            <p>{t("pricePerM")} </p>
-            <h5 className="font-bold">
-              {(unit.fin_total / unit.land).toFixed()} {t("dollar")}
-            </h5>
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          <div className="border rounded-md p-3 text-center">
-            <p>{t("NPV")}</p>
-            <h5>{unit.npv}</h5> {t("dollar")}
-          </div>
-          <div className="text-indigo-800 font-black text-2xl flex items-center">
-            {locale === "en" ? (
-              <i className="fas fa-chevron-right"></i>
-            ) : (
-              <i className="fas fa-chevron-left"></i>
-            )}
-          </div>
-          <div className="border rounded-md p-3 text-center border-indigo-800">
-            <p>{t("NPVPerM")}</p>
-            <h5 className="font-bold">
-              {(unit.npv / unit.land).toFixed()} {t("dollar")}
-            </h5>
-          </div>
-        </div>
-      </div>
+      <ul className="list-disc my-5 py-4 px-5 mx-3">
+        <li className="my-2 text-text-secondary text-lg font-medium">Price per SQMT: {(unit.fin_total / unit.land).toFixed()} {t('egp')}</li>
+        <li className="my-2 text-text-secondary text-lg font-medium">Total Price: {(unit.fin_total).toFixed()} {t('egp')}</li>
+        <li className="my-2 text-text-secondary text-lg font-medium">NPV: {(unit.npv).toFixed()} {t('egp')}</li>
+
+      </ul>
     </div>
   );
 }

@@ -1,0 +1,67 @@
+@mixin currentTab($left) {
+  position: absolute;
+  left: $left;
+  margin-top: 1px;
+  box-shadow: 0px 1px 1px 2px rgb(229 229 229 / 40%);
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+}
+
+@mixin currentTabContainer ($width) {
+  width: 100%;
+  position: relative;
+  padding: 5px 0;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: $width;
+    top: -1.6px;
+    left: 0;
+    border: 5px solid #fff;
+  }
+}
+
+.tab {
+  // position: relative;
+
+  .tabBtn {
+    color: var(--main-text-secondary);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .activeBtn {
+    background-color: #fff;
+    box-shadow: 0px -1px 1px 2px rgba(229, 229, 229, 0.4);
+    border-radius: 10px;
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: none;
+    padding: 5px 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .firstTab {
+    @include currentTab(5.5px);
+    border-top-left-radius: 0;
+
+    .tabContainer {
+      @include currentTabContainer(121px)
+    }
+  }
+
+  .secondTab {
+    @include currentTab(17.5%);
+    border-top-left-radius: 0;
+
+    .tabContainer {
+      @include currentTabContainer(196px)
+    }
+  }
+
+}
