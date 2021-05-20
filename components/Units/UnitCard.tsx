@@ -107,6 +107,7 @@ export const UnitCard = ({
                 <FontAwesomeIcon
                   icon={faHeart}
                   style={{ color: "red", fontSize: "25px" }}
+                  aria-hidden="true"
                   className=" text-custom-red hover:text-white hover:text-opacity-50 text-opacity-50 text-2xl"
                 />
               </span>
