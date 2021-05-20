@@ -25,7 +25,7 @@ const Layout = ({
       <Header />
       {children}
 
-      <Footer />
+      <Footer title={title} />
       {/* <div>
         <NavLinks />
       </div>

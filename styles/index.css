@@ -5,6 +5,8 @@
   body {
     font-family: 'Montserrat', sans-serif;
     --main-color: #007882;
+    --main-blue-light: #052386;
+    --main-blue-dark: #012B55;
     --main-red: #FF5D3E;
     --main-text: #3B4144;
     --main-secondary: #F3F1F7;
@@ -68,6 +70,26 @@
   }
   .bg-outline-red {
     border: 1px solid var(--main-red);
+    background-color: #fff;
+  }
+  .bg-custom-blue-light {
+    background-color: var(--main-blue-light)
+  }
+  .text-custom-blue-light {
+    color: var(--main-blue-light)
+  }
+  .bg-outline-blue-light {
+    border: 1px solid var(--main-blue-light);
+    background-color: #fff;
+  }
+  .bg-custom-blue-dark {
+    background-color: var(--main-blue-dark)
+  }
+  .text-custom-blue-dark {
+    color: var(--main-blue-dark)
+  }
+  .bg-outline-blue-dark {
+    border: 1px solid var(--main-blue-dark);
     background-color: #fff;
   }
   .bg-main {

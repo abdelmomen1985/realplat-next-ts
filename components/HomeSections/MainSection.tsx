@@ -61,6 +61,7 @@ const MainSection = () => {
           background: 'url(/images/hp-hero-desktop.png) no-repeat 50% fixed',
           backgroundSize: 'cover',
           minHeight: '100vh',
+          backgroundPosition: 'center'
         }}
       >
         <h2 className="text-3xl md:text-6xl text-center text-white py-3  font-medium"

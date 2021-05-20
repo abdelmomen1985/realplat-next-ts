@@ -34,7 +34,7 @@ const achievements = [
 const GuidesSection = () => {
   return (
     <>
-      <section className="my-3 w-full relative py-5" style={{ backgroundColor: '#F3F1F7' }}>
+      <section className="my-3 w-full relative py-5 bg-secondary">
         <div
           className="w-full md:w-2/3 my-8 py-7  mx-auto grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-4 px-10">
           <div className="mr-3">
@@ -50,9 +50,9 @@ const GuidesSection = () => {
             {guides.map((guide, i) =>
             (
               <div key={i} className="flex justify-start items-center mb-5">
-                <img className="w-16 h-12" src={`images/${guide.img}`} />
+                <img className="w-16 h-12" src={`/images/${guide.img}`} />
                 <div className="ml-3">
-                  <h4 className="font-semibold text-3xl" style={{ color: '#012B55' }}>{guide.title}</h4>
+                  <h4 className="font-semibold text-3xl text-custom-blue-dark">{guide.title}</h4>
                   <a className="cursor-pointer text-xl font-medium text-text-secondary">{guide.link} <span className="text-black">&#8594;</span></a>
                 </div>
               </div>
@@ -69,8 +69,8 @@ const GuidesSection = () => {
             <div key={i} className="flex justify-center items-center mx-5 my-3">
               <span className={styles.circularFire}></span>
               <div>
-                <h4 className="text-3xl font-bold text-center" style={{ color: '#052386' }}>{achievement.number}</h4>
-                <h5 className="text-xl font-medium text-center" style={{ color: '#052386' }}>{achievement.title}</h5>
+                <h4 className="text-3xl font-bold text-center text-custom-blue-light">{achievement.number}</h4>
+                <h5 className="text-xl font-medium text-center text-custom-blue-light">{achievement.title}</h5>
               </div>
             </div>
           ))}

@@ -22,7 +22,7 @@ const footerLinks = [
     links: [...dummyLinks]
   },
 ]
-function Footer() {
+function Footer({ title }: { title?: string }) {
   const [searchLinks, setSearchLinks] = useState(dummyLinks)
   const [citiesLinks, setCitiesLinks] = useState(dummyLinks)
   const [compoundsLinks, setCompoundsLinks] = useState(dummyLinks)
@@ -30,7 +30,7 @@ function Footer() {
 
   return (
     <footer className="mt-5">
-      <section className="flex flex-wrap justify-between items-center py-6 my-3 pr-16 pl-12 bg-secondary">
+      {title !== 'Expo Page' && <section className="flex flex-wrap justify-between items-center py-6 my-3 pr-16 pl-12 bg-secondary">
         <h5 className="text-black text-opacity-75 font-semibold text-xl">
           Lorem ipsum dolor sit amet, consectetur adipiscing <br /> elit, sed do eiusmod tempor incididunt ut labore
         </h5>
@@ -40,7 +40,7 @@ function Footer() {
           <button className="bg-white text-md ml-4 mt-5 mb-2 font-medium rounded-md px-3 py-2 shadow-md mx-auto"
             style={{ border: '1px solid #007882', color: '#7B53C1' }} >Contact Us</button>
         </div>
-      </section>
+      </section>}
       <section className="grid grid-cols-1 my-5 md:grid-cols-4 grid-rows-4 md:grid-rows-1 gap-4 pr-16 pl-12">
         {footerLinks.map((item, index) => (
           <div key={index} className="">

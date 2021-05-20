@@ -42,3 +42,12 @@ export type Unit = {
   wishListed: Boolean;
   comparing: Boolean;
 };
+
+export type Offer = {
+  id: number | string,
+  projectName: string,
+  projectImage: string,
+  projectDeveloperLogo: string,
+  startingPrice: string,
+  discountPer: string
+}
