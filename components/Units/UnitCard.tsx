@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import useTranslation from '../../hooks/useTranslation';
+import React, { useState, useEffect } from "react";
+import useTranslation from "../../hooks/useTranslation";
 // import Carousel from 'react-elastic-carousel';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export const UnitCard = ({
   unit,
@@ -28,22 +30,25 @@ export const UnitCard = ({
     });
   };
   const imageErrorHandler = () => {
-    setImageUrl('https://i.imgur.com/bDujVXa.jpg');
+    setImageUrl("https://i.imgur.com/bDujVXa.jpg");
   };
 
   return (
     <div className="w-full my-3 flex justify-center">
       <div
         className={
-          'm-2 max-w-sm rounded-xl overflow-hidden shadow-xl flex-1 relative ' +
-          (unit.comparing ? 'bg-primary text-white' : 'bg-white')
+          "m-2 max-w-sm rounded-xl overflow-hidden shadow-xl flex-1 relative " +
+          (unit.comparing ? "bg-primary text-white" : "bg-white")
         }
       >
         <div className="relative">
           <img
             className="w-full"
-
-            style={{ maxHeight: '250px', borderTopLeftRadius: '0.5rem', borderTopRightRadius: '0.5rem' }}
+            style={{
+              maxHeight: "250px",
+              borderTopLeftRadius: "0.5rem",
+              borderTopRightRadius: "0.5rem",
+            }}
             src={imageUrl}
             onError={imageErrorHandler}
             alt="unit image"
@@ -62,11 +67,11 @@ export const UnitCard = ({
           </Carousel> */}
           <div
             className="absolute flex justify-between text-sm"
-            style={{ bottom: '50px', width: '100%' }}
+            style={{ bottom: "50px", width: "100%" }}
           >
             <div
               className="bg-primary rounded-md p-3 text-white"
-              style={{ right: '15px', position: 'absolute' }}
+              style={{ right: "15px", position: "absolute" }}
             >
               {!unit.comparing ? (
                 <span
@@ -88,22 +93,22 @@ export const UnitCard = ({
         </div>
         <div
           className="absolute flex justify-between text-sm"
-          style={{ top: '10px', width: '100%' }}
+          style={{ top: "10px", width: "100%" }}
         >
           <div
             className="bg-transparent rounded-md p-3 text-black-500"
-            style={{ right: '15px', position: 'absolute' }}
+            style={{ right: "15px", position: "absolute" }}
           >
             {wishlisted ? (
               <span
                 className="cursor-pointer"
                 onClick={() => wishListHandler(unit, wishlisted)}
               >
-                <i
-                  className="fas fa-heart text-custom-red hover:text-white hover:text-opacity-50 text-opacity-50 text-2xl"
-                  style={{ color: 'red', fontSize: '25px' }}
-                  aria-hidden="true"
-                ></i>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  style={{ color: "red", fontSize: "25px" }}
+                  className=" text-custom-red hover:text-white hover:text-opacity-50 text-opacity-50 text-2xl"
+                />
               </span>
             ) : (
               <span
@@ -126,31 +131,35 @@ export const UnitCard = ({
         >
           <div className="px-6 py-4 flex justify-between">
             <div>
-              <p className="text-lg font-medium font-roboto capitalize text-text-secondary"  >
-                {unit.property_type.name[locale]}{' '}
-                {t('in')}{' '}
-                {unit.compound.name[locale]}{' '}
-                {t('compound')}{t('comma')}{' '}
-                {unit.bedrooms}{' '} {t('bedrooms')}{' '}
-                <br /> {locale === 'en' ? unit.sk_city.name : unit.sk_city.name_ar}
+              <p className="text-lg font-medium font-roboto capitalize text-text-secondary">
+                {unit.property_type.name[locale]} {t("in")}{" "}
+                {unit.compound.name[locale]} {t("compound")}
+                {t("comma")} {unit.bedrooms} {t("bedrooms")} <br />{" "}
+                {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
               </p>
-              <p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary" >
-                {t('downPay')}: {unit.fin_down_payment} {t('egp')}
+              <p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary">
+                {t("downPay")}: {unit.fin_down_payment} {t("egp")}
               </p>
             </div>
           </div>
-          <div className="px-6 py-4 flex justify-between items-center" style={{ backgroundColor: '#E5E5E5' }}>
-            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
-              <img src="/images/land.png" /> <span className="ml-2">{unit.land}M</span>
+          <div
+            className="px-6 py-4 flex justify-between items-center"
+            style={{ backgroundColor: "#E5E5E5" }}
+          >
+            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
+              <img src="/images/land.png" />{" "}
+              <span className="ml-2">{unit.land}M</span>
             </span>
-            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
-              <img src="/images/bed.png" /> <span className="ml-2">{unit.bedrooms}bd</span>
+            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
+              <img src="/images/bed.png" />{" "}
+              <span className="ml-2">{unit.bedrooms}bd</span>
             </span>
             {/* <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
               <img src="/images/garden.png" /> <span className="ml-2">{unit.bedrooms}</span>
             </span> */}
-            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
-              <img src="/images/bath.png" /> <span className="ml-2">{unit.bathrooms}ba</span>
+            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
+              <img src="/images/bath.png" />{" "}
+              <span className="ml-2">{unit.bathrooms}ba</span>
             </span>
           </div>
           <div className=" py-6 flex flex-wrap lg:flex-no-wrap justify-center lg:justify-between items-center">
