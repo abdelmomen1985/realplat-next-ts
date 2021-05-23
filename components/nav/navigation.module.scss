@@ -1,9 +1,7 @@
 .navLink {
   text-decoration: none;
-  font-size: 18px;
-  padding-bottom: 5px;
-  font-weight: 500;
-
+  @apply pb-1;
+  font-weight: 600;
   &.active {
     border-bottom: 3px solid var(--main-color);
     color: var(--main-color);

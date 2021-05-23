@@ -26,17 +26,16 @@ export const NavLinks = (props: any) => {
   return (
     <>
       <style jsx>{``}</style>
-      <div>
+      <div className="ml-4">
         <ActiveLink activeClassName={styles.active} href={`/${locale}/units`}>
-          <a className={clsx(styles.navLink, "mx-5")}>Search</a>
+          <a className={clsx(styles.navLink, "ml-12 mr-3")}>Search</a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/`}>
-          <a className={clsx(styles.navLink, "mx-5")}>New Projects</a>
+          <a className={clsx(styles.navLink, "mx-3")}>New Projects</a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/expo`}>
-          <a className={clsx(styles.navLink, "mx-5")}>Mellw's Expo</a>
+          <a className={clsx(styles.navLink, "mx-3")}>Mellw's Expo</a>
         </ActiveLink>
-        <LocaleSwitcher />
       </div>
       {!user?.id ? (
         <a
@@ -47,6 +46,7 @@ export const NavLinks = (props: any) => {
         </a>
       ) : (
         <div>
+          <LocaleSwitcher />
           <ActiveLink
             activeClassName={styles.active}
             href={`/${locale}/profile/wishlist`}

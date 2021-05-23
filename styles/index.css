@@ -1,124 +1,136 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     --main-color: #007882;
     --main-blue-light: #052386;
-    --main-blue-dark: #012B55;
-    --main-red: #FF5D3E;
-    --main-text: #3B4144;
-    --main-secondary: #F3F1F7;
-    --main-text-secondary: #443C53;
+    --main-blue-dark: #012b55;
+    --main-red: #ff5d3e;
+    --main-text: #3b4144;
+    --main-secondary: #f3f1f7;
+    --main-text-secondary: #443c53;
     overflow-x: hidden;
   }
-  button, input, a:active {
+  button,
+  input,
+  a:active {
     outline: none !important;
   }
   h1 {
     @apply text-2xl;
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
   }
   small {
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
   }
   h2 {
     @apply text-xl;
   }
   .leave-here {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 }
 
 @layer utilities {
   .bg-primary {
-    background-color: var(--main-color)
+    background-color: var(--main-color);
   }
   .text-primary {
-    color: var(--main-color)
+    color: var(--main-color);
   }
   .bg-outline-primary {
     border: 1px solid var(--main-color);
     background-color: #fff;
   }
   .bg-secondary {
-    background-color: var(--main-secondary)
+    background-color: var(--main-secondary);
   }
   .text-secondary {
-    color: var(--main-secondary)
+    color: var(--main-secondary);
   }
   .bg-outline-secondary {
     border: 1px solid var(--main-secondary);
     background-color: #fff;
   }
   .bg-text-secondary {
-    background-color: var(--main-text-secondary)
+    background-color: var(--main-text-secondary);
   }
   .text-text-secondary {
-    color: var(--main-text-secondary)
+    color: var(--main-text-secondary);
   }
   .bg-outline-text-secondary {
     border: 1px solid var(--main-text-secondary);
     background-color: #fff;
   }
   .bg-custom-red {
-    background-color: var(--main-red)
+    background-color: var(--main-red);
   }
   .text-custom-red {
-    color: var(--main-red)
+    color: var(--main-red);
   }
   .bg-outline-red {
     border: 1px solid var(--main-red);
     background-color: #fff;
   }
   .bg-custom-blue-light {
-    background-color: var(--main-blue-light)
+    background-color: var(--main-blue-light);
   }
   .text-custom-blue-light {
-    color: var(--main-blue-light)
+    color: var(--main-blue-light);
   }
   .bg-outline-blue-light {
     border: 1px solid var(--main-blue-light);
     background-color: #fff;
   }
   .bg-custom-blue-dark {
-    background-color: var(--main-blue-dark)
+    background-color: var(--main-blue-dark);
   }
   .text-custom-blue-dark {
-    color: var(--main-blue-dark)
+    color: var(--main-blue-dark);
   }
   .bg-outline-blue-dark {
     border: 1px solid var(--main-blue-dark);
     background-color: #fff;
   }
   .bg-main {
-    background-color: var(--main-text)
+    background-color: var(--main-text);
   }
   .text-main {
-    color: var(--main-text)
+    color: var(--main-text);
   }
   .bg-outline-main {
     border: 1px solid var(--main-text);
     background-color: #fff;
   }
   .font-comfortaa {
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
   }
   .font-montserrat {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
   .font-roboto {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
+  }
+  .btn-secondary {
+    @apply bg-white mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
   }
 }
 
 .rc-slider-track {
-  background-color: #007882!important;
+  background-color: #007882 !important;
 }
 
 .rc-slider-handle {
-  border: 1px solid #007882!important;
+  border: 1px solid #007882 !important;
   /* border-radius:  */
 }
 
