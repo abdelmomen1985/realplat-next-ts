@@ -2,6 +2,8 @@
   text-decoration: none;
   @apply pb-1;
   font-weight: 600;
+  text-align: center;
+
   &.active {
     border-bottom: 3px solid var(--main-color);
     color: var(--main-color);
@@ -12,9 +14,28 @@
     border-bottom: 3px solid var(--main-color);
     color: var(--main-color);
   }
+
+  @media screen and (max-width: 760px) {
+    margin: auto;
+  }
 }
 
 .verticalLine {
   width: 80%;
   margin: auto;
+}
+
+.dropDownMenu {
+  z-index: 999;
+  width: 250px;
+  top: 30px;
+  left: 0;
+  right: 0;
+  position: absolute;
+
+  @media screen and (max-width: 760px) {
+    top: 0;
+    position: relative;
+  }
+
 }

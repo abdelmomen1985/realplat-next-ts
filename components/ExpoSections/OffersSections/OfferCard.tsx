@@ -15,7 +15,7 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           borderTopLeftRadius: "0.5rem",
           borderTopRightRadius: "0.5rem",
         }} />
-      <div className="relative w-full px-3 py-2 cursor-pointer" onClick={() => router.push(`/${locale}/expo/offer/${offer.id}`)}>
+      <div className="relative w-full px-3 py-2 cursor-pointer" onClick={() => router.push(`/${locale}/expo/offers/${offer.id}`)}>
         <img src={offer.projectDeveloperLogo} className="absolute top-1 left-10" style={{
           width: '28%',
           bottom: '65%',

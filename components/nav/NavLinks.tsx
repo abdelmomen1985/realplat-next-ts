@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useTranslation from "../../hooks/useTranslation";
 import ActiveLink from "./ActiveLink";
 import { AppContext } from "./../../Context/AppContextProvider";
 import LocaleSwitcher from "./LocalSwitch";
 import styles from "./navigation.module.scss";
 import clsx from "clsx";
+import UserDropDown from './UserDropDown';
 interface User {
   firstName: string;
   lastName: string;
@@ -12,7 +13,7 @@ interface User {
 }
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);
-
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false)
   const { t, locale } = useTranslation();
   let dummyUser: User = {
     firstName: "ahmned",
@@ -60,15 +61,18 @@ export const NavLinks = (props: any) => {
             </a>
           </ActiveLink>
 
-          <ActiveLink
-            activeClassName={styles.active}
-            href={`/${locale}/profile`}
-          >
-            <a className={clsx(styles.navLink, "mx-5 capitalize")}>
+          <span className="relative">
+            <a className={
+              clsx(styles.navLink, "mx-5 capitalize cursor-pointer ",
+                isUserMenuOpen ? styles.active : ' ')}
+              onClick={() => setIsUserMenuOpen(true)}
+            >
               <i className="far fa-user mx-1" aria-hidden="true"></i>{" "}
               {getUserName(dummyUser)}
             </a>
-          </ActiveLink>
+            <UserDropDown show={isUserMenuOpen} onClose={() => setIsUserMenuOpen(false)} />
+
+          </span>
 
           <a
             className={clsx(styles.navLink, "mx-5 cursor-pointer")}

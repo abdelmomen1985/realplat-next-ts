@@ -16,7 +16,7 @@ const MainOffersSection = () => {
     },
   ]
   return (
-    <section className="bg-secondary grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-8 justify-center items-center py-10 px-5 mb-3 mt-0">
+    <section className="bg-secondary grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-8 justify-center items-center py-10 px-5 mb-0 mt-0">
       <div className="md:ml-24 md:mr-5">
         <h4 className="text-3xl font-normal text-black text-opacity-50">Welcome to ..</h4>
         <h2 className="text-5xl font-bold text-custom-blue-dark">mellw’s Expo</h2>

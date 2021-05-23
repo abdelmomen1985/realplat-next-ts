@@ -3,7 +3,6 @@ import React from "react";
 import { getLocalizationProps } from "../../../Context/LangContext";
 import { initializeApollo } from "../../../lib/apolloClient";
 import useTranslation from "../../../hooks/useTranslation";
-import Carousel from "react-elastic-carousel";
 import { UNITS_BY_PK } from "../../../query/unitsQuery";
 import { GetServerSideProps } from "next";
 import {
@@ -15,6 +14,7 @@ import {
 import InteriorFeatures from './../../../components/Units/SingleUnit/InteriorFeatures';
 import DaysMarket from './../../../components/Units/SingleUnit/DaysMarket';
 import SimilarUnits from './../../../components/Units/SingleUnit/SimilarUnits';
+import SingleUnitHeroSection from './../../../components/Units/SingleUnit/SingleUnitHeroSection';
 
 import {
   FinancialSummary,
@@ -47,25 +47,7 @@ const SingleUnit = ({ unit }: { unit: any }) => {
   return (
     <Layout>
       <div className="container px-3 mx-auto">
-
-        <Carousel
-          pagination={false}
-          showArrows={false}
-          enableAutoPlay={true}
-          autoPlaySpeed={1000}
-        >
-          {unit.media.photos.map((image: any, key: any) => {
-            return (
-              <img
-                key={key}
-                className="w-full"
-                style={{ maxHeight: "250px" }}
-                src={image}
-                alt="unit image"
-              />
-            );
-          })}
-        </Carousel>
+        <SingleUnitHeroSection unit={unit} />
         {/* Unit Information */}
         <UnitInformation unit={unit} />
         {/* financial analysis */}
