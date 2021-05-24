@@ -4,7 +4,9 @@ import useTranslation from "../../hooks/useTranslation";
 import clsx from "clsx";
 import styles from "./navigation.module.scss";
 import { AnimatePresence, motion } from 'framer-motion';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faCogs, faMoneyBillWave, faLuggageCart } from "@fortawesome/free-solid-svg-icons";
+import { faUser as farUser, faHandshake as farHandShake, faBell as farBell } from "@fortawesome/free-regular-svg-icons";
 
 const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void }) => {
   const { t, locale } = useTranslation();
@@ -31,10 +33,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
         <li className="my-3 py-1 px-2 mx-auto">
           <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
-              <i
-                className="fas fa-heart text-custom-red mx-2"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon className="text-custom-red mx-2" icon={faHeart} aria-hidden="true" />{" "}
               Wishlist
             </a>
           </ActiveLink>
@@ -42,10 +41,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
         <li className="my-3 py-1 px-2 mx-auto">
           <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
-              <i
-                className="fas fa-cogs text-primary mx-2"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon icon={faCogs} className="text-primary mx-2" aria-hidden="true" />{" "}
               Settings
             </a>
           </ActiveLink>
@@ -53,10 +49,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
         <li className="my-3 py-1 px-2 mx-auto">
           <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
-              <i
-                className="far fa-bell text-primary mx-2"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon icon={farBell} className="text-primary mx-2" aria-hidden="true" />{" "}
               Notifications
             </a>
           </ActiveLink>
@@ -64,10 +57,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
         <li className="my-3 py-1 px-2 mx-auto">
           <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
-              <i
-                className="fas fa-money-bill-wave text-primary mx-1"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon icon={faMoneyBillWave} className="text-primary mx-1" aria-hidden="true" />{" "}
               Payment Reminder
             </a>
           </ActiveLink>
@@ -75,10 +65,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
         <li className="my-3 py-1 px-2 mx-auto">
           <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
-              <i
-                className="fas fa-luggage-cart text-primary mx-2"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon icon={faLuggageCart} className="text-primary mx-2" aria-hidden="true" />{" "}
               User Units
             </a>
           </ActiveLink>
@@ -86,10 +73,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
         <li className="my-3 py-1 px-2 mx-auto">
           <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
-              <i
-                className="far fa-handshake text-primary mx-2"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon icon={farHandShake} className="text-primary mx-2" aria-hidden="true" />{" "}
               Meetings
             </a>
           </ActiveLink>

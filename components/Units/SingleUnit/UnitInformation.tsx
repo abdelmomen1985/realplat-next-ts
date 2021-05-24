@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import useTranslation from "../../../hooks/useTranslation";
 import styles from './unit.module.scss'
 import clsx from 'clsx'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../../Context/AppContextProvider';
 export default function UnitInformation({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
   const [currentTab, setCurrentTab] = useState<number>(1)
+  const { isMobile } = useContext(AppContext)
+  console.log(unit.description)
   return (
-    <div className="px-5 py-3 grid grid-cols-1 md:grid-cols-2 grid-row-2 md:grid-rows-1 gap-3"
+    <div className="px-5 py-3 flex justify-center flex-wrap items-start"
       style={{
-        height: '70vh',
+        height: isMobile ? 'auto' : '100vh',
         maxHeight: '100%',
       }}
     >
@@ -30,7 +35,7 @@ export default function UnitInformation({ unit }: { unit: any }) {
             <p>{unit.description}</p>
           </div>}
       </div>
-      <div className="flex flex-wrap justify-start items-baseline py-6 my-3 relative">
+      <div className="flex justify-start items-baseline py-6 my-3 relative">
         {/* tabs here */}
         <div className={styles.tab}>
           <button className={clsx(styles.tabBtn, currentTab === 1 && styles.activeBtn)}
@@ -91,26 +96,26 @@ export default function UnitInformation({ unit }: { unit: any }) {
             Delivery Details
           </button>
           {currentTab === 2 && (
-            <div className={styles.secondTab}>
+            <div className={isMobile ? styles.firstTab : styles.secondTab}>
               <div className={styles.tabContainer}>
                 <h3 className="mt-5 mb-3 py-4 w-100 px-3 text-text-secondary flex justify-start items-center"
                   style={{ backgroundColor: '#F5F6F7' }}
                 >
-                  <i className="fas fa-calendar text-primary text-2xl font-medium mr-1" aria-hidden="true" />
+                  <FontAwesomeIcon icon={faCalendar} className="text-primary text-2xl font-medium mr-1" aria-hidden="true" />
                   <span className="text-2xl font-medium mx-2 capitalize">Delivery TimeLine</span>
                 </h3>
                 <div className="flex flex-wrap justify-between px-3 py-4 my-3 items-center">
                   <div>
                     <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
                     >
-                      <i className="fas fa-calendar text-primary text-xl font-medium mr-1" aria-hidden="true" />
+                      <FontAwesomeIcon icon={faCalendar} className="text-primary text-xl font-medium mr-1" aria-hidden="true" />
                       <span className="text-xl font-medium mx-2 capitalize">Year: {unit.delivery_year}</span>
                     </h4>
                   </div>
                   <div>
                     <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
                     >
-                      <i className="fas fa-calendar text-primary text-xl font-medium mr-1" aria-hidden="true" />
+                      <FontAwesomeIcon icon={faCalendar} className="text-primary text-xl font-medium mr-1" aria-hidden="true" />
                       <span className="text-xl font-medium mx-2 capitalize">Month: {unit.delivery_month}</span>
                     </h4>
                   </div>

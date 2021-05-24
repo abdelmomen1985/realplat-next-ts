@@ -13,7 +13,7 @@ const InteriorFeatures = ({ unit }: { unit: any }) => {
         <img src="/images/interior.png" />
         <span className="text-2xl font-medium mx-4 capitalize">Interior Features</span>
       </h3>
-      <ul className="list-disc my-5 py-4 px-5 mx-3 flex justify-between items-center">
+      <ul className="list-disc my-5 py-4 px-5 mx-3 flex flex-wrap justify-between items-center">
         <li className="my-2 text-text-secondary text-lg font-medium">Number of rooms: 5</li>
         <li className="my-2 text-text-secondary text-lg font-medium">Types of rooms: 3 bedrooms, 1 kitchen, 2 bathrooms</li>
       </ul>

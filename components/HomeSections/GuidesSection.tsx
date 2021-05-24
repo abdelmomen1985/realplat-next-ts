@@ -35,20 +35,20 @@ const GuidesSection = () => {
   return (
     <>
       <section className="my-3 w-full relative py-5 bg-secondary">
-        <div className="w-full md:w-2/3 my-8 py-7  mx-auto grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-4 px-10">
+        <div className="w-full md:w-2/3 my-8 py-7  mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-10">
           <div className="mr-3">
-            <h3 className="text-main text-3xl font-semibold my-4">
+            <h3 className="text-main text-3xl font-semibold my-4 whitespace-no-wrap">
               Mellw’s Guides
             </h3>
-            <p className="font-comfortaa text-black text-opacity-50">
+            <p className="font-comfortaa text-black text-opacity-50 text-xl  font-medium">
               With over 1 million+ homes for sale available on the website,
               Trulia can match you with a house you will want to call home.
             </p>
-            <button className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-lg px-3 py-2 shadow-md mx-auto ">
+            <button className="block bg-primary text-white text-md mt-5 mb-2 font-medium rounded-lg px-3 py-2 shadow-md mx-auto md:mx-0 ">
               See more guides
             </button>
           </div>
-          <div className="my-4 ml-3">
+          <div className="my-3 ml-0 md:my-4 md:ml-3">
             {guides.map((guide, i) => (
               <div key={i} className="flex justify-start items-center mb-5">
                 <img className="w-20" src={`/images/${guide.img}`} />
@@ -66,8 +66,8 @@ const GuidesSection = () => {
         </div>
         <img src="/images/house.png" className={styles.houseImg} />
       </section>
-      <section className="w-full py-6 px-3 my-3">
-        <h2 className="text-main my-3 text-3xl font-semibold text-center">
+      <section className="w-full py-6 px-3 my-5 md:my-3">
+        <h2 className="text-main my-3 text-2xl md:text-3xl font-semibold text-center">
           What’s happening at mellw.com
         </h2>
         <div className="flex justify-center md:justify-around flex-wrap flex-col md:flex-row items-center">

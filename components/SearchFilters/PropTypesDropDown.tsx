@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { FilterListType, PropertyType } from "../../interfaces/filters";
 import { GET_PROPERTY_TYPES } from "../../query/propertyTypes";
 import useTranslation from "./../../hooks/useTranslation";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 interface PropTypesDropDownProps {
   title: string;
   filtered: (val: FilterListType) => void;
@@ -27,6 +29,7 @@ export default function PropTypesDropDown({
   const [listTitle, setListTitle] = useState<string>(title);
   //const [setInnerFilterList] = useState<any[]>([]);
   const { t, locale } = useTranslation();
+  const { isMobile } = useContext(AppContext)
   const [propTypesInnerState, setPropTypesInnerState] = useState<any[]>(
     data?.property_types
   );
@@ -152,11 +155,12 @@ export default function PropTypesDropDown({
             {isOpen ? (
               <span>
                 {" "}
-                <i className="fas fa-angle-up ml-1"></i>
+                <FontAwesomeIcon icon={faAngleUp} className="ml-1" />
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down ml-1"></i>
+                <FontAwesomeIcon icon={faAngleDown} className="ml-1" />
+
               </span>
             )}
           </div>
@@ -166,12 +170,13 @@ export default function PropTypesDropDown({
             role="list"
             className="dd-list absolute"
             style={{
-              top: "0",
+              top: "50px",
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
-              width: "100%",
+              width: "250px",
               zIndex: 900,
+              right: isMobile ? '0' : 'auto'
             }}
           >
             {propTypesInnerState &&
@@ -190,7 +195,8 @@ export default function PropTypesDropDown({
                   onClick={() => multiSelectItem(item)}
                 >
                   {locale === "ar" ? item.name.ar : item.name.en}{" "}
-                  {item.selected ? <i className="fas fa-check"></i> : ""}
+                  {item.selected ? <FontAwesomeIcon icon={faCheck} />
+                    : ""}
                 </button>
               ))}
           </div>

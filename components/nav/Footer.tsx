@@ -45,8 +45,7 @@ function Footer({ title }: { title?: string }) {
           <div className="flex justify-center items-center">
             <button className="btn-primary">Know More</button>
             <button
-              className="btn-secondary ml-4"
-              style={{ border: "1px solid #7B53C1", color: "#7B53C1" }}
+              className="btn-outline-primary ml-4"
             >
               Contact Us
             </button>

@@ -3,7 +3,7 @@ import useTranslation from "../../hooks/useTranslation";
 // import Carousel from 'react-elastic-carousel';
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faCompress, faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const UnitCard = ({
   unit,
@@ -78,14 +78,14 @@ export const UnitCard = ({
                   className="cursor-pointer"
                   onClick={() => compareHandler(unit, wishlisted)}
                 >
-                  <i className="fas fa-compress-alt"></i>
+                  <FontAwesomeIcon icon={faCompressAlt} />
                 </span>
               ) : (
                 <span
                   className="cursor-pointer"
                   onClick={() => compareHandler(unit, wishlisted)}
                 >
-                  <i className="fas fa-compress"></i>
+                  <FontAwesomeIcon icon={faCompress} />
                 </span>
               )}
             </div>
@@ -104,6 +104,7 @@ export const UnitCard = ({
                 className="cursor-pointer"
                 onClick={() => wishListHandler(unit, wishlisted)}
               >
+
                 <FontAwesomeIcon
                   icon={faHeart}
                   style={{ color: "red", fontSize: "25px" }}
@@ -116,10 +117,8 @@ export const UnitCard = ({
                 className="cursor-pointer"
                 onClick={() => wishListHandler(unit, wishlisted)}
               >
-                <i
-                  className="fas fa-heart text-white hover:text-red-600 text-opacity-50 text-2xl"
-                  aria-hidden="true"
-                ></i>
+                <FontAwesomeIcon icon={faHeart} className="text-white hover:text-red-600 text-opacity-50 text-2xl"
+                  aria-hidden="true" />
               </span>
             )}
           </div>

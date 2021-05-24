@@ -1,9 +1,5 @@
 export { default as Header } from './nav/Header';
 export { default as Layout } from './Layouts/Layout';
-export { default as FinancialSummary } from './Units/SingleUnit/FinancialSummary';
 export { default as UnitInformation } from './Units/SingleUnit/UnitInformation';
-export { default as DeliveryDetails } from './Units/SingleUnit/DeliveryDetails';
 export { default as FinancialAnalysis } from './Units/SingleUnit/FinancialAnalysis';
-export { default as UnitDescription } from './Units/SingleUnit/UnitDescription';
 export { default as FloorPlan } from './Units/SingleUnit/FloorPlan';
-export { default as CompoundNdDeveloper } from './Units/SingleUnit/CompoundNdDeveloper';

@@ -28,6 +28,11 @@
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 3px 4px 10px 5px rgba(0, 0, 0, 0.16);
 
+    @media screen and (max-width: 760px) {
+      width: 90%;
+      margin: auto;
+    }
+
     .modalContent {
       position: relative;
       top: 20%;

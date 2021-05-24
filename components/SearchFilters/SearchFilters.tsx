@@ -6,6 +6,8 @@ import MoreFiltersModal from './MoreFiltersModal';
 import PropTypesDropDown from './PropTypesDropDown';
 import { FilterListType } from '../../interfaces/filters';
 import useTranslation from './../../hooks/useTranslation';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faPlus } from "@fortawesome/free-solid-svg-icons";
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
   filterListState: any;
@@ -63,9 +65,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
         `}
       </style>
       <section className="">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-1 bg-gray-300 py-5 w-100">
-
-
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-0 bg-gray-300 py-5 w-100">
           {/* Location */}
           <DropDown
             title="Location"
@@ -102,24 +102,28 @@ export default function SearchFilters(props: SearchFiltersProps) {
           />
           <div className="relative">
             <button
-              className="p-3 text-black border-none text-text-secondary text-lg font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
+              className="py-2 px-3 text-black border-none text-text-secondary text-lg font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
               onClick={() => {
                 props.setFilterListState({} as any);
                 console.log(props.filterListState);
               }}
             >
-              {t('clearFilters')} <i className="fas fa-times text-white bg-text-secondary px-2 py-1 mx-2 rounded-md shadow-md"></i>
+              {t('clearFilters')}
+              <FontAwesomeIcon icon={faTimes} style={{ width: 'auto !important' }}
+                className="text-white bg-text-secondary px-1 py-1 mx-1 rounded-md shadow-md" />
             </button>
           </div>
           <div className="relative">
             <button
-              className="p-3 text-black border-none text-text-secondary text-lg capitalize font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
+              className="py-2 px-3 text-black border-none text-text-secondary text-lg capitalize font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
               onClick={() => {
                 props.setFilterListState({} as any);
                 console.log(props.filterListState);
               }}
             >
-              {t('saveSearch')} <i className="fas fa-plus text-white bg-text-secondary px-2 py-1 mx-2 rounded-md shadow-md"></i>
+              {t('saveSearch')}
+              <FontAwesomeIcon icon={faPlus} style={{ width: 'auto !important' }}
+                className="text-white bg-text-secondary px-1 py-1 mx-1 rounded-md shadow-md" />
             </button>
           </div>
         </div>

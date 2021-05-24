@@ -53,7 +53,7 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-indigo-800 text-2xl py-5">
+        <h3 className="font-bold text-center text-primary text-2xl py-5">
           {t('projects')}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
@@ -80,7 +80,7 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
           href={`/${locale}/developers/[developer]`}
           as={`/${locale}` + '/developers/' + compound.developer.id}
         >
-          <a className="my-2 mx-auto w-11/12 rounded-md text-indigo-800 bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
+          <a className="my-2 mx-auto w-11/12 rounded-md text-primary bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
             {' '}
             {t('allProjectsDeveloper')}{' '}
             {locale === 'ar' ? <span>&larr;</span> : <span>&rarr;</span>}

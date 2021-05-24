@@ -16,7 +16,7 @@ const exhibitorsList = [
 ]
 const Exhibitors = () => {
   return (
-    <section className="bg-white my-5 py-2 px-6 mx-auto flex flex-wrap justify-between items-center">
+    <section className="bg-white my-5 py-2 px-6 mx-auto flex flex-wrap justify-center md:justify-between items-center">
       {
         exhibitorsList.map((exhibitor, i) => (
           <img className="rounded-lg shadow-lg  my-3" key={i} src={exhibitor} />

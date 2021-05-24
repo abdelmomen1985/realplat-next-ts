@@ -9,6 +9,7 @@ export type StateType = {
   setLoginModal: (val: any) => void;
   filterState: any,
   filterUnitsByCity: (val: string) => void;
+  isMobile?: boolean
 
 };
 

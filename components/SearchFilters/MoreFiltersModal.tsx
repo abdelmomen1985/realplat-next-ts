@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import useTranslation from './../../hooks/useTranslation';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp, faFilter, faTimes } from "@fortawesome/free-solid-svg-icons";
 interface MoreFiltersProps {
   filtered: (val: any) => void;
   filterListState: any;
@@ -233,15 +235,18 @@ export default function MoreFiltersModal({
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           <div>
-            <i className="fas fa-filter"></i> {t('moreFilters')}{' '}
+            {/* <FontAwesomeIcon icon={faFilter} /> */}
+            {t('moreFilters')}{' '}
             {isModalOpen ? (
               <span>
                 {' '}
-                <i className="fas fa-angle-up"></i>
+                <FontAwesomeIcon icon={faAngleUp} />
+
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <FontAwesomeIcon icon={faAngleDown} />
+
               </span>
             )}
           </div>
@@ -257,7 +262,7 @@ export default function MoreFiltersModal({
                   onClick={() => setIsModalOpen(false)}
                   className="mx-2 text-gray-500 font-bold text-md"
                 >
-                  <i className="fas fa-times"></i>
+                  <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <button
                   onClick={applyFiltersHandler}

@@ -6,6 +6,13 @@
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #e5e5e5;
+
+  @media screen and (max-width: 760px) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 6rem;
+  }
 }
 
 @mixin currentTabContainer ($width) {
@@ -22,10 +29,24 @@
     left: 0;
     border: 5px solid #fff;
   }
+
+  @media screen and (max-width: 760px) {
+    width: 250px;
+
+    &::after {
+      border: none;
+    }
+  }
 }
 
 .tab {
   // position: relative;
+  height: 100vh;
+
+  @media screen and (max-width: 760px) {
+    height: 130vh;
+
+  }
 
   .tabBtn {
     color: var(--main-text-secondary);

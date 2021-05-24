@@ -38,7 +38,11 @@ const CustomModal = (
 	}, []);
 	const handleClick = (e: any) => {
 		// clicked inside the modal
+		e.stopPropagation();
+
+		console.log(modalRef?.current?.contains(e.target))
 		if (modalRef?.current?.contains(e.target)) {
+
 			return;
 		}
 		// outside the modal
@@ -48,8 +52,9 @@ const CustomModal = (
 		<AnimatePresence exitBeforeEnter>
 			{show &&
 				<motion.div className={styles.backdrop} variants={backdrop} initial="hidden" animate="visible" exit="hidden">
-					<motion.div className={styles.modal} variants={modal}>
-						<div ref={modalRef} style={{ ...style }} className={styles.modalContent}>
+
+					<motion.div ref={modalRef} className={styles.modal} variants={modal}>
+						<div style={{ ...style }} className={styles.modalContent}>
 							{children}
 						</div>
 					</motion.div>

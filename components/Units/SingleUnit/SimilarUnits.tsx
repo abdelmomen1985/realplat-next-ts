@@ -66,7 +66,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
   );
   return (
     <>
-      <h2 className="text-4xl font-semibold  text-text-secondary my-3 px-2 py-3">Similar Homes You May Like</h2>
+      <h2 className="text-2xl md:text-4xl font-semibold text-text-secondary my-3 px-2 py-3">Similar Homes You May Like</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-3 gap-2 justify-items-center justify-center items-center">
         {
           innerUnits.length > 0 &&

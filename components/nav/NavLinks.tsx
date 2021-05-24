@@ -6,6 +6,10 @@ import LocaleSwitcher from "./LocalSwitch";
 import styles from "./navigation.module.scss";
 import clsx from "clsx";
 import UserDropDown from './UserDropDown';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faUser as farUser } from "@fortawesome/free-regular-svg-icons";
+
 interface User {
   firstName: string;
   lastName: string;
@@ -53,10 +57,8 @@ export const NavLinks = (props: any) => {
             href={`/${locale}/profile/wishlist`}
           >
             <a className={clsx(styles.navLink, "mx-5")}>
-              <i
-                className="fas fa-heart text-custom-red mx-1"
-                aria-hidden="true"
-              ></i>{" "}
+              <FontAwesomeIcon icon={faHeart} className="text-custom-red mx-1" aria-hidden="true" />
+              {" "}
               Wishlist
             </a>
           </ActiveLink>
@@ -67,7 +69,7 @@ export const NavLinks = (props: any) => {
                 isUserMenuOpen ? styles.active : ' ')}
               onClick={() => setIsUserMenuOpen(true)}
             >
-              <i className="far fa-user mx-1" aria-hidden="true"></i>{" "}
+              <FontAwesomeIcon icon={farUser} className="mx-1" aria-hidden="true" />{" "}
               {getUserName(dummyUser)}
             </a>
             <UserDropDown show={isUserMenuOpen} onClose={() => setIsUserMenuOpen(false)} />

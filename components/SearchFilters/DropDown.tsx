@@ -2,7 +2,8 @@ import { useQuery } from "@apollo/client";
 import React, { useState, useEffect, useRef } from "react";
 import { GET_LOCATIONS } from "../../query/locations";
 import useTranslation from "./../../hooks/useTranslation";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 interface Ddprops {
   title: string;
   list: any;
@@ -133,13 +134,14 @@ export default function DropDown(props: Ddprops) {
           <div className="dd-header-title flex justify-between items-center">
             {listTitle !== 'location' && <span className="circularIcon"></span>} {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpenState ? (
+
               <span>
                 {" "}
-                <i className="fas fa-angle-up ml-1"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down ml-1"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
               </span>
             )}
           </div>
@@ -149,12 +151,12 @@ export default function DropDown(props: Ddprops) {
             role="list"
             className="dd-list absolute"
             style={{
-              top: "0",
+              top: "50px",
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: "100%",
+              width: "250px",
             }}
           >
             {locationsInnerState.map((item: any) => (
@@ -174,7 +176,10 @@ export default function DropDown(props: Ddprops) {
                 }}
               >
                 {locale === "ar" ? item.sk_city.name_ar : item.sk_city.name}{" "}
-                {item.selected ? <i className="fas fa-times"></i> : null}
+
+                {item.selected ?
+                  <FontAwesomeIcon icon={faTimes} />
+                  : null}
               </button>
             ))}
           </div>

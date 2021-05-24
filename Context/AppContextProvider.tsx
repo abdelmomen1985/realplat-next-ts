@@ -9,16 +9,19 @@ import { AppReducer } from "./AppReducer";
 import { ACTION_TYPES, StateType } from "./contextUtils";
 import { useRouter } from "next/router";
 import useTranslation from "./../hooks/useTranslation";
+import useWindowSize from './../hooks/useWindowSize';
+
 
 const initialState = {
   user: undefined,
   comparing: [] as any[],
-  filterState: {} as any
+  filterState: {} as any,
 } as StateType;
-
 export const AppContext = createContext<StateType>(initialState);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
+  const deviceSize = useWindowSize();
+
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const router = useRouter();
   const { locale } = useTranslation();
@@ -65,6 +68,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
   const contextValues: StateType = {
     ...state,
+    isMobile: deviceSize.width < 768,
     setUser,
     setComparing,
     clearComparing,

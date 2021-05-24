@@ -34,7 +34,7 @@ const CompoundCard = ({ compound }: { compound: any }) => {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <h1 className="text-indigo-800 mb-2"> {compound.name[locale]}</h1>
+          <h1 className="text-primary mb-2"> {compound.name[locale]}</h1>
           {compound.description && (
             <p className="text-gray-700 text-base">
               {compound.description[locale]}
@@ -69,7 +69,7 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-indigo-800 text-3xl">
+        <h3 className="font-bold text-center text-primary text-3xl">
           {t('projects')}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">

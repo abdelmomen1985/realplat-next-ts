@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { NavLinks } from "./NavLinks";
 import AuthModal from "../Auth/AuthModal";
 import { AppContext } from "../../Context/AppContextProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 function Header() {
   // const [loginModal, setLoginModal] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -64,19 +66,15 @@ function Header() {
 
             <div className="cursor-pointer block md:hidden bg-transparent border-none focus:outline-none outline-none">
               {isMobileMenuOpen ? (
-                <i
-                  className="fas fa-times text-black font-medium text-lg hover:text-indigo-800"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                  }}
-                ></i>
+                <FontAwesomeIcon className=" text-black font-medium text-lg hover:text-primary" icon={faBars} onClick={() => {
+                  setIsMobileMenuOpen(false);
+                }} />
               ) : (
-                <i
-                  className="fas fa-bars hover:text-indigo-800 text-black font-medium text-xl"
+                <FontAwesomeIcon icon={faBars} className="hover:text-primary text-black font-medium text-xl"
                   onClick={() => {
                     setIsMobileMenuOpen(true);
                   }}
-                ></i>
+                />
               )}
             </div>
           </nav>

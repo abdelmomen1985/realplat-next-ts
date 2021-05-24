@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "rc-slider/assets/index.css";
 import RangeSlider from "../Range/RangeSlider";
 import useTranslation from "./../../hooks/useTranslation";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileInvoiceDollar, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 const pricesList = [
   {
     title: "downPay",
@@ -98,15 +99,15 @@ export default function PricesModal(props: any) {
           onClick={toggleModal}
         >
           <div className="dd-header-title">
-            <i className="fas fa-file-invoice-dollar"></i> {t("priceRange")}{" "}
+            {/* <FontAwesomeIcon icon={faFileInvoiceDollar} /> */} {t("priceRange")}{" "}
             {isModalOpen ? (
               <span>
                 {" "}
-                <i className="fas fa-angle-up"></i>
+                <FontAwesomeIcon icon={faAngleUp} />
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <FontAwesomeIcon icon={faAngleDown} />
               </span>
             )}
           </div>
@@ -115,12 +116,12 @@ export default function PricesModal(props: any) {
           <div
             className="dd-list absolute"
             style={{
-              top: "0",
+              top: "50px",
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: "100%",
+              width: "250px",
             }}
           >
             {pricesList.map((item) => {

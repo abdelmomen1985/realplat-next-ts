@@ -1,6 +1,8 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import styles from './homeStyles.module.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 interface SearchData {
   searchQuery: string;
@@ -25,7 +27,7 @@ const SearchForm = ({ placeHolder, title }: { placeHolder: string, title: string
         })} />
 
       <button>
-        <i className="fas fa-search" />
+        <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
       </button>
     </form>
   )

@@ -14,8 +14,8 @@ const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
           <img style={{ borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', height: '100%', width: '100%' }} src={unit.media.photos[0]} />
         </div>
         <div className="ml-1 w-1/3 relative">
-          <img style={{ borderTopRightRadius: '10px', width: '99%' }} className="mb-1 w-full" src={unit.media.photos[0]} />
-          <img style={{ borderBottomRightRadius: '10px', width: '99%' }} className="mt-1 w-full" src={unit.media.photos[0]} />
+          <img style={{ borderTopRightRadius: '10px', width: '99%' }} className="mb-1 w-full" src={unit.media.photos[1]} />
+          <img style={{ borderBottomRightRadius: '10px', width: '99%' }} className="mt-1 w-full" src={unit.media.photos[2]} />
           <button
             onClick={() => setIsModalOpen(true)}
             className="flex justify-between items-center rounded-md px-3 py-2 text-white text-lg font-medium"

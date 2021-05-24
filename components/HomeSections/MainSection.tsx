@@ -5,7 +5,8 @@ import clsx from "clsx";
 import styles from "./homeStyles.module.scss";
 import SearchForm from "./SearchForm";
 import { AppContext } from "./../../Context/AppContextProvider";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 const suggestedCities = [
   {
     _id: "5f3a53188b15b7006d8ad6bb",
@@ -46,12 +47,13 @@ const suggestedCities = [
 const MainSection = () => {
   const router = useRouter();
   const { locale } = useTranslation();
-  const { filterUnitsByCity } = useContext(AppContext);
+  const { filterUnitsByCity, isMobile } = useContext(AppContext);
   const filterByCityHandler = (cityId: string) => {
     console.log(cityId);
     filterUnitsByCity(cityId);
     router.push(`/${locale}/units`);
   };
+  console.log(isMobile)
   return (
     <>
       <section
@@ -99,14 +101,11 @@ const MainSection = () => {
         </div>
       </section>
       <section className="w-full my-8">
-        <div className="w-4/5 mx-auto rounded-md shadow-md flex justify-center items-center py-3 px-5">
+        <div className="w-11/12 md:w-4/5 mx-auto rounded-md shadow-md flex flex-wrap justify-center items-center py-3 px-5">
           <h3 className="flex justify-center items-center">
-            <i
-              className="fas fa-heart text-custom-red mx-2 text-4xl"
-              aria-hidden="true"
-            ></i>
+            <FontAwesomeIcon className="text-custom-red mx-2 text-4xl" icon={faHeart} />
             <span>
-              Take a deep dive and browse original <br /> neighborhood photos,
+              Take a deep dive and browse original{!isMobile && <br />} neighborhood photos,
               drone footage
             </span>
           </h3>

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CustomModal from '../../common/CustomModal/CustomModal'
 
 const MainOffersSection = () => {
+  const [showModal, setShowModal] = useState<number>(0)
+
   const services = [
     {
       img: '/images/booking.png',
@@ -36,15 +39,24 @@ const MainOffersSection = () => {
         <div className="my-2">
           {
             services.map((service, i) => (
-              <div key={i} className="flex justify-start items-center my-3">
+              <div key={i} className="flex justify-center md:justify-start items-center my-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setShowModal(i + 1) }}>
                 <img src={service.img} className="mr-2" />
-                <h5 className="text-xl font-semibold capitalize text-custom-blue-light">{service.title}</h5>
+                <h5 className="text-xl font-semibold capitalize text-custom-blue-light ">{service.title}</h5>
               </div>
             ))
           }
         </div>
 
       </div>
+      <CustomModal show={showModal === 1} onClose={() => setShowModal(0)}>
+        <h3>Let's Talk about Budget management</h3>
+      </CustomModal>
+      <CustomModal show={showModal === 2} onClose={() => setShowModal(0)}>
+        <h3>Let's Talk about Finding the Best Deals</h3>
+      </CustomModal>
+      <CustomModal show={showModal === 3} onClose={() => setShowModal(0)}>
+        <h3>Let's Talk about How to book your unit online</h3>
+      </CustomModal>
     </section>
   )
 }

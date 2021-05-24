@@ -39,7 +39,7 @@
       width: 20%;
     }
 
-    i {
+    .searchIcon {
       color: #fff;
       font-size: 30px;
       font-weight: 600
@@ -69,6 +69,7 @@
   font-family: 'Roboto', sans-serif;
   transition: all ease-in 0.2s;
   cursor: pointer;
+
   &::after {
     content: "";
     position: absolute;
@@ -93,7 +94,10 @@
   right: -2.5rem;
 
   @media screen and (max-width: 500px) {
-    right: 0;
+    left: -15px;
+    right: auto;
+    width: 12rem;
+    bottom: -2rem;
   }
 }
 
