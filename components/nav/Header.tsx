@@ -42,7 +42,7 @@ function Header() {
     <>
       <header className="relative my-2 p-2 pb-4">
         <div style={{ bottom: "0", width: "100%" }}>
-          <nav className="container mx-auto px-4 flex flex-row justify-between space-y-3 md:space-y-0">
+          <nav className="container px-5 flex flex-row justify-between space-y-3 md:space-y-0">
             <h1
               className="text-bold text-2xl p-0.5 cursor-pointer"
               style={{ padding: "0.125rem" }}

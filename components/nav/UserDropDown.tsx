@@ -39,7 +39,7 @@ const UserDropDown = ({ show, onClose }: { show: boolean, onClose: () => void })
           </ActiveLink>
         </li>
         <li className="my-3 py-1 px-2 mx-auto">
-          <ActiveLink href={`/${locale}/profile/wishlist`} activeClassName={styles.active}>
+          <ActiveLink href={`/${locale}/profile/settings`} activeClassName={styles.active}>
             <a onClick={() => onClose()} className={clsx(styles.navLink, "mx-5 flex justify-center items-center p-0 m-0")}>
               <FontAwesomeIcon icon={faCogs} className="text-primary mx-2" aria-hidden="true" />{" "}
               Settings
