@@ -1,7 +1,12 @@
 import { gql } from '@apollo/client';
 
 import { UNIT_FIELDS } from './unitsQuery';
-
+export const USER_FIELDS = `
+id
+name
+username
+email
+`
 export const USER_WISHLIST = gql`
 query user_wishlist($user_id: uuid) {
     user_wishlist_aggregate(where: {user_id: 
@@ -40,3 +45,33 @@ mutation sign_up($name: String, $username: String, $password: String) {
     affected_rows 
   }
 }`
+export const UPDATE_USER = gql`
+mutation updateUserData
+(
+  $id: uuid!,
+  $username: String,
+  $password: String,
+  $name: String,
+  # $gender: String,
+  # $marital_status: String
+  ){
+  update_users_by_pk(pk_columns: {id: $id},
+   _set: 
+  {
+    id: $id,
+    username:$username,
+    passwired: $password,
+    # gender: $gender,
+    # marital_status:$marital_status
+  }) {
+    ${USER_FIELDS} 
+  }
+}
+`
+export const GET_USER_BY_ID = gql`
+  query users_by_pk($id: uuid! ){
+    users_by_pk (id: $id) {
+      ${USER_FIELDS} 
+    }      
+  }
+`
