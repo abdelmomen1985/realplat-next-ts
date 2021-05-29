@@ -10,22 +10,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faUser as farUser } from "@fortawesome/free-regular-svg-icons";
 
-interface User {
-  firstName: string;
-  lastName: string;
-  id?: string;
-}
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false)
   const { t, locale } = useTranslation();
-  let dummyUser: User = {
-    firstName: "ahmned",
-    lastName: "sarhan",
-    id: user?.id,
-  };
-  const getUserName = (user: User) => {
-    return `${user.firstName.charAt(0).toLocaleUpperCase()}.${user.lastName}`;
+
+  const getUserName = (username: string) => {
+    let fullUsername = username;
+    if (fullUsername?.split(' ').length > 1) {
+      return fullUsername?.split(' ')[0].charAt(0) + '.' + fullUsername?.split(' ')[1]
+    } else {
+      return fullUsername;
+    }
   };
   // export const NavLinks = () => {
   return (
@@ -70,7 +66,7 @@ export const NavLinks = (props: any) => {
               onClick={() => setIsUserMenuOpen(true)}
             >
               <FontAwesomeIcon icon={farUser} className="mx-1" aria-hidden="true" />{" "}
-              {getUserName(dummyUser)}
+              {getUserName(user?.name)}
             </a>
             <UserDropDown show={isUserMenuOpen} onClose={() => setIsUserMenuOpen(false)} />
 

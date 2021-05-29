@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Layout } from '../../../../components/exports'
 import ProfileHero from '../../../../components/Profile/ProfileHero'
@@ -7,16 +7,18 @@ import ProfileTabs from './../../../../components/Profile/ProfileTabs';
 import AccountSettings from './../../../../components/Profile/ProfileTabs/AccountSettings';
 import PersonalInfo from './../../../../components/Profile/ProfileTabs/PersonalInfo';
 import ProfileNotifications from './../../../../components/Profile/ProfileTabs/ProfileNotifications';
+import { AppContext } from './../../../../Context/AppContextProvider';
 
 const UserSettingsPage = () => {
   const [currentTap, setCurrentTap] = useState<number>(1)
+  const { user } = useContext(AppContext)
   return (
     <Layout>
       <ProfileHero />
       <ProfileTabs currentTap={currentTap} setCurrentTap={setCurrentTap} >
-        {currentTap === 1 && <AccountSettings />}
-        {currentTap === 2 && <PersonalInfo />}
-        {currentTap === 3 && <AccountSettings />}
+        {currentTap === 1 && <AccountSettings userData={user} />}
+        {currentTap === 2 && <PersonalInfo userData={user} />}
+        {/* {currentTap === 3 && <AccountSettings />} */}
         {currentTap === 4 && <ProfileNotifications />}
       </ProfileTabs>
     </Layout>

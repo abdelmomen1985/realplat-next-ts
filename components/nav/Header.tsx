@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 function Header() {
   // const [loginModal, setLoginModal] = useState<boolean>(false);
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const { loginModal, setLoginModal } = useContext(AppContext);
   const mobileMenu = useRef<HTMLDivElement>(null);
@@ -60,7 +59,7 @@ function Header() {
             >
               <NavLinks
                 setLoginModal={setLoginModal}
-                setAuthenticated={setAuthenticated}
+
               />
             </div>
 
@@ -83,7 +82,6 @@ function Header() {
       {loginModal && (
         <AuthModal
           setLoginModal={setLoginModal}
-          setAuthenticated={setAuthenticated}
         />
       )}
     </>

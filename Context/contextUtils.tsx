@@ -1,6 +1,12 @@
+export type UserType = {
+  id: string,
+  username?: string,
+  email?: string | null,
+  name?: string
+} | undefined
 export type StateType = {
   // day
-  user: { id: string } | undefined;
+  user: UserType;
   setUser: (user: { id: string } | undefined) => void;
   comparing: any[];
   setComparing: (val: any) => void;

@@ -1,20 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form'
 import styles from '../profile.module.scss';
 import { uploadImageMultiple } from '../../../utils/uploadImageMultiple'
-
-const AccountSettings = () => {
+import { UserType } from '../../../Context/contextUtils';
+import { hashIt } from '../../../utils/hashPass';
+import { cleanObjects } from '../../../utils/cleanObjects'
+import { useMutation } from '@apollo/client';
+import { UPDATE_USER } from './../../../query/user';
+import { } from 'react';
+import { AppContext } from './../../../Context/AppContextProvider';
+const AccountSettings = ({ userData }: { userData: UserType }) => {
   const [showPass, setShowPass] = useState<boolean>(false)
   const [showConfirmPass, setShowConfirmPass] = useState<boolean>(false)
   const [profileImg, setProfileImg] = useState<undefined | string>("")
+  const [updateUserHandler] = useMutation(UPDATE_USER)
+  const { setUser } = useContext(AppContext)
   const { register, errors, handleSubmit } = useForm({
     mode: 'onTouched',
     reValidateMode: 'onBlur'
   })
-  const editUserHandler = (data: any) => {
-    console.log(data)
+  const editUserHandler = async (data: any) => {
+    // let hashedPass = await hashIt(cleanData?.password);
+    let newData = {
+      username: data?.email,
+      password: data?.password
+    }
+    let cleanData = cleanObjects(newData)
+    updateUserHandler({
+      variables: {
+        ...cleanData,
+        id: userData?.id
+      }
+    }).then(res => {
+      console.log(res.data)
+      setUser({ ...res.data.update_users_by_pk })
+    }).catch(err => {
+      console.log(err)
+    })
+
   }
   const uploadProfileHandler = async (files: any) => {
     let blobs = await uploadImageMultiple(files)
