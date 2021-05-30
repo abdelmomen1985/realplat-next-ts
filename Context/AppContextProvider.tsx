@@ -9,16 +9,17 @@ import { AppReducer } from "./AppReducer";
 import { ACTION_TYPES, StateType } from "./contextUtils";
 import { useRouter } from "next/router";
 import useTranslation from "./../hooks/useTranslation";
-import useWindowSize from './../hooks/useWindowSize';
-import { useLazyQuery } from '@apollo/client';
-import { GET_USER_BY_ID } from './../query/user';
-
+import useWindowSize from "./../hooks/useWindowSize";
+import { useLazyQuery } from "@apollo/client";
+import { GET_USER_BY_ID } from "./../query/user";
+import { User } from "../interfaces";
 
 const initialState = {
   user: undefined,
   comparing: [] as any[],
   filterState: {} as any,
 } as StateType;
+
 export const AppContext = createContext<StateType>(initialState);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -29,12 +30,14 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const { locale } = useTranslation();
   const [fetchUserData, { data: userData }] = useLazyQuery(GET_USER_BY_ID, {
     onCompleted() {
+      console.log("onCompleted setUser", { ...userData.users_by_pk });
       setUser({ ...userData.users_by_pk });
     },
     onError(error) {
-      console.log(error)
-    }
-  })
+      console.log(error);
+    },
+    fetchPolicy: "no-cache",
+  });
   useEffect(() => {
     const getUserSession = async () => {
       const response = await fetch("/api/getUserSession", {
@@ -43,18 +46,35 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       });
       if (response.status === 200) {
         let currentUser = await response.json();
-        let currentUserId = currentUser.id
+        let currentUserId = currentUser.id;
         fetchUserData({
           variables: {
-            id: currentUserId
+            id: currentUserId,
           },
-        })
-      };;
+        });
+      }
     };
     getUserSession();
   }, []);
 
-  const setUser = (user: any) => {
+  const updateUser = async () => {
+    console.log("will updateUser");
+    const response = await fetch("/api/getUserSession", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.status === 200) {
+      let currentUser = await response.json();
+      let currentUserId = currentUser.id;
+      fetchUserData({
+        variables: {
+          id: currentUserId,
+        },
+      });
+    }
+  };
+
+  const setUser = (user: User | undefined) => {
     dispatch({
       type: ACTION_TYPES.SET_USER,
       payload: user,
@@ -81,18 +101,19 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       type: ACTION_TYPES.FILTER_BY_CITY,
       payload: cityId,
     });
-  }
+  };
   const [loginModal, setLoginModal] = useState(false);
 
   const contextValues: StateType = {
     ...state,
-    isMobile: deviceSize.width < 768,
+    isMobile: deviceSize?.width! < 768,
     setUser,
+    updateUser,
     setComparing,
     clearComparing,
     loginModal,
     setLoginModal,
-    filterUnitsByCity
+    filterUnitsByCity,
   };
   return (
     <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

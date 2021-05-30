@@ -1,22 +1,18 @@
-export type UserType = {
-  id: string,
-  username?: string,
-  email?: string | null,
-  name?: string
-} | undefined
+import { User } from "../interfaces";
+
 export type StateType = {
   // day
-  user: UserType;
-  setUser: (user: { id: string } | undefined) => void;
+  user: User | undefined;
+  setUser: (user: User | undefined) => void;
+  updateUser: () => void;
   comparing: any[];
   setComparing: (val: any) => void;
   clearComparing: () => void;
   loginModal: Boolean;
   setLoginModal: (val: any) => void;
-  filterState: any,
+  filterState: any;
   filterUnitsByCity: (val: string) => void;
-  isMobile?: boolean
-
+  isMobile?: boolean;
 };
 
 export const setStorageItems = (name: string, items: any[]) => {
@@ -33,10 +29,11 @@ export const getStorageSingleItem = (name: string): object | undefined => {
 };
 
 export const ACTION_TYPES = {
-  SET_USER: 'SET_USER',
-  SET_COMPARING: ' SET_COMPARING',
-  CLEAR_COMPARING: 'CLEAR_COMPARING',
-  FILTER_BY_CITY: 'FILTER_BY_CITY'
+  SET_USER: "SET_USER",
+  UPDATE_USER: "UPDATE_USER",
+  SET_COMPARING: " SET_COMPARING",
+  CLEAR_COMPARING: "CLEAR_COMPARING",
+  FILTER_BY_CITY: "FILTER_BY_CITY",
 };
 
 export type Action = {

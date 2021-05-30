@@ -166,13 +166,12 @@ export const UNITS_BY_PK = gql`
   }
 `;
 export const USER_WISHLIST_IDS = gql`
-query user_wishlist($user_id: uuid) {
-    user_wishlist_aggregate(where: {user_id: 
-        {_eq: $user_id}}) {
+  query user_wishlist($user_id: uuid) {
+    user_wishlist_aggregate(where: { user_id: { _eq: $user_id } }) {
       nodes {
-       unit{
-        id
-       }
+        unit {
+          id
+        }
       }
     }
   }

@@ -5,25 +5,27 @@ import { AppContext } from "./../../Context/AppContextProvider";
 import LocaleSwitcher from "./LocalSwitch";
 import styles from "./navigation.module.scss";
 import clsx from "clsx";
-import UserDropDown from './UserDropDown';
+import UserDropDown from "./UserDropDown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faUser as farUser } from "@fortawesome/free-regular-svg-icons";
 
+const shortenName = (username: string) => {
+  let fullUsername = username;
+  if (fullUsername?.split(" ").length > 1) {
+    return (
+      fullUsername?.split(" ")[0].charAt(0) + "." + fullUsername?.split(" ")[1]
+    );
+  } else {
+    return fullUsername;
+  }
+};
+
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
   const { t, locale } = useTranslation();
 
-  const getUserName = (username: string) => {
-    let fullUsername = username;
-    if (fullUsername?.split(' ').length > 1) {
-      return fullUsername?.split(' ')[0].charAt(0) + '.' + fullUsername?.split(' ')[1]
-    } else {
-      return fullUsername;
-    }
-  };
-  // export const NavLinks = () => {
   return (
     <>
       <style jsx>{``}</style>
@@ -53,23 +55,35 @@ export const NavLinks = (props: any) => {
             href={`/${locale}/profile/wishlist`}
           >
             <a className={clsx(styles.navLink, "mx-5")}>
-              <FontAwesomeIcon icon={faHeart} className="text-custom-red mx-1" aria-hidden="true" />
-              {" "}
+              <FontAwesomeIcon
+                icon={faHeart}
+                className="text-custom-red mx-1"
+                aria-hidden="true"
+              />{" "}
               Wishlist
             </a>
           </ActiveLink>
 
           <span className="relative">
-            <a className={
-              clsx(styles.navLink, "mx-5 capitalize cursor-pointer ",
-                isUserMenuOpen ? styles.active : ' ')}
+            <a
+              className={clsx(
+                styles.navLink,
+                "mx-5 capitalize cursor-pointer ",
+                isUserMenuOpen ? styles.active : " "
+              )}
               onClick={() => setIsUserMenuOpen(true)}
             >
-              <FontAwesomeIcon icon={farUser} className="mx-1" aria-hidden="true" />{" "}
-              {getUserName(user?.name)}
+              <FontAwesomeIcon
+                icon={farUser}
+                className="mx-1"
+                aria-hidden="true"
+              />{" "}
+              {user?.name && shortenName(user?.name)}
             </a>
-            <UserDropDown show={isUserMenuOpen} onClose={() => setIsUserMenuOpen(false)} />
-
+            <UserDropDown
+              show={isUserMenuOpen}
+              onClose={() => setIsUserMenuOpen(false)}
+            />
           </span>
 
           <a
