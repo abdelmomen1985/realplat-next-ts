@@ -39,7 +39,7 @@ const MainOffersSection = () => {
         <div className="my-2">
           {
             services.map((service, i) => (
-              <div key={i} className="flex justify-center md:justify-start items-center my-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setShowModal(i + 1) }}>
+              <div key={i} className="flex justify-start  items-center my-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setShowModal(i + 1) }}>
                 <img src={service.img} className="mr-2" />
                 <h5 className="text-xl font-semibold capitalize text-custom-blue-light ">{service.title}</h5>
               </div>

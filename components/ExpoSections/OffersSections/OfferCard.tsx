@@ -21,7 +21,7 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           bottom: '65%',
           left: '-1%',
         }} />
-        <h4 className="text-center text-xl font-semibold">{offer.projectName}</h4>
+        <h4 className="text-center text-xl font-semibold ml-12 md:ml-1">{offer.projectName}</h4>
         <div className="flex justify-start items-center my-4 mx-3">
           <img src="/images/from.png" className="mr-2" />
           <p className="text-md font-medium text-black">From: {offer.startingPrice}</p>

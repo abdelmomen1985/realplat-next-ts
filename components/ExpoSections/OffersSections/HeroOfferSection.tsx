@@ -3,9 +3,28 @@ import { Slide } from 'react-slideshow-image'
 import 'react-slideshow-image/dist/styles.css'
 import styles from './offerSections.module.scss'
 import { AppContext } from './../../../Context/AppContextProvider';
+import { useMutation } from '@apollo/client'
+import { ADD_MEETING, NEW_MEETING } from '../../../query/zoom-meetings'
 
 const HeroOfferSection = ({ unit }: { unit: any }) => {
-  const { isMobile } = useContext(AppContext)
+  const { isMobile, user } = useContext(AppContext);
+
+  const [createMeeting] = useMutation(NEW_MEETING);
+
+  const [insertMeeting] = useMutation(ADD_MEETING);
+
+  const createZoomMeeting = () => {
+    createMeeting()
+      .then(res => {
+        insertMeeting({ variables: { user_id: user?.id, zoom_data: { ...res?.data?.create_meeting } } })
+          .then(res => {
+            console.log(res.data.insert_meetings_one)
+            window.open(res?.data?.insert_meetings_one?.zoom_data?.join_url, "_blank")
+          })
+      }).catch(err => {
+        console.log(err)
+      })
+  }
   return (
     <section className="w-full p-0 m-0 mb-5 relative">
       <Slide easing="ease-in" transitionDuration={500}
@@ -30,9 +49,9 @@ const HeroOfferSection = ({ unit }: { unit: any }) => {
           <h5 className="font-normal text-base md:text-lg text-black ">
             Prices From {unit.startingPrice}
           </h5>
-          <div className="flex flex-wrap justify-start md:justify-between items-center">
-            <button className="btn-primary m-0 my-2 md:mr-2">Book Now</button>
-            <button className="btn-outline-primary m-0 my-2 md:ml-2">Zoom Meeting</button>
+          <div className="flex flex-wrap flex-col md:flex-row justify-between  items-center">
+            <button className="btn-primary w-full my-2 mx-auto md:w-auto md:mr-2 ">Book Now</button>
+            <button className="btn-outline-primary w-full mx-auto md:w-auto my-2 md:ml-2" onClick={createZoomMeeting} >Zoom Meeting</button>
           </div>
         </div>
       </div>

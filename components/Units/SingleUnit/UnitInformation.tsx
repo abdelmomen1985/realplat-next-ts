@@ -19,14 +19,14 @@ export default function UnitInformation({ unit }: { unit: any }) {
     >
       <div>
         <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">
-          <button className="flex justify-between items-center py-2 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
-            <img className="mr-1" src="/images/phone.png" /> Call
+          <button className="flex justify-between items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
+            <img className="mr-0 md:mr-1" src="/images/phone.png" /> {isMobile ? '' : 'Call'}
           </button>
           <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-            <img className="mr-1" src="/images/whatsapp.png" /> WhatsApp
+            <img className="mr-0 md:mr-1" src="/images/whatsapp.png" /> {isMobile ? '' : 'WhatsApp'}
           </button>
           <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-            <img className="mr-1" src="/images/message.png" /> Message
+            <img className="mr-0 md:mr-1" src="/images/message.png" /> {isMobile ? '' : 'Message'}
           </button>
         </div>
         {unit.description &&

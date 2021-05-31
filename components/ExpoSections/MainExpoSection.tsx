@@ -28,7 +28,7 @@ const MainExpoSection = () => {
       <section
         className="flex flex-wrap bg-local pt-20 items-end justify-between py-10 pb-16 px-8 mb-4 mx-3 rounded-2xl"
         style={{
-          background: "url(/images/hero/expo-hero-1.png) no-repeat 50% fixed",
+          background: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('/images/hero/expo-hero-1.png') center center / cover no-repeat fixed",
           backgroundSize: "cover",
           minHeight: "80vh",
           backgroundPosition: "center",
@@ -54,7 +54,7 @@ const MainExpoSection = () => {
             ))}
           </div>
           <button
-            className="mt-4 mb-10 bg-primary text-white text-lg font-medium w-3/4 px-16 py-3 rounded-3xl shadow-md"
+            className="mt-4 mb-10 bg-primary text-white text-lg font-medium w-3/4 px-5 md:px-16  py-3 rounded-3xl shadow-md"
             onClick={() => router.push(`/${locale}/expo/offers`)}
           >
             Register Now

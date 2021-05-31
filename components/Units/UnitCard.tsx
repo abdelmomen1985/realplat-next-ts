@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import useTranslation from "../../hooks/useTranslation";
 // import Carousel from 'react-elastic-carousel';
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCompress, faCompressAlt } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 
 export const UnitCard = ({
   unit,
@@ -19,6 +20,7 @@ export const UnitCard = ({
   const { t, locale } = useTranslation();
   const router = useRouter();
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  const { isMobile } = useContext(AppContext)
   useEffect(() => {
     if (unit && unit?.media.length) {
       setImageUrl(unit?.media[0]);
@@ -162,15 +164,15 @@ export const UnitCard = ({
               <span className="ml-2">{unit.bathrooms}ba</span>
             </span>
           </div>
-          <div className=" py-6 flex flex-wrap lg:flex-no-wrap justify-center lg:justify-between items-center">
-            <button className="flex justify-between items-center py-2 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
-              <img className="mr-1" src="/images/phone.png" /> Call
+          <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">
+            <button className="flex justify-between items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
+              <img className="mr-0 md:mr-1" src="/images/phone.png" /> {isMobile ? '' : 'Call'}
             </button>
             <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-              <img className="mr-1" src="/images/whatsapp.png" /> WhatsApp
+              <img className="mr-0 md:mr-1" src="/images/whatsapp.png" /> {isMobile ? '' : 'WhatsApp'}
             </button>
             <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-              <img className="mr-1" src="/images/message.png" /> Message
+              <img className="mr-0 md:mr-1" src="/images/message.png" /> {isMobile ? '' : 'Message'}
             </button>
           </div>
         </div>

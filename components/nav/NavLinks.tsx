@@ -31,13 +31,13 @@ export const NavLinks = (props: any) => {
       <style jsx>{``}</style>
       <div className="ml-4">
         <ActiveLink activeClassName={styles.active} href={`/${locale}/units`}>
-          <a className={clsx(styles.navLink, "ml-12 mr-3")}>Search</a>
+          <a className={clsx(styles.navLink, "ml-12 mr-3")}>{t("navSearch")}</a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/`}>
-          <a className={clsx(styles.navLink, "mx-3")}>New Projects</a>
+          <a className={clsx(styles.navLink, "mx-3")}>{t("navProjects")}</a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/expo`}>
-          <a className={clsx(styles.navLink, "mx-3")}>Mellw's Expo</a>
+          <a className={clsx(styles.navLink, "mx-3")}>{t("navExpo")}</a>
         </ActiveLink>
       </div>
       {!user?.id ? (
@@ -60,7 +60,7 @@ export const NavLinks = (props: any) => {
                 className="text-custom-red mx-1"
                 aria-hidden="true"
               />{" "}
-              Wishlist
+              {t("navWishList")}
             </a>
           </ActiveLink>
 
