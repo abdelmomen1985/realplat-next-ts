@@ -4,14 +4,14 @@ import 'react-slideshow-image/dist/styles.css'
 import styles from './offerSections.module.scss'
 import { AppContext } from './../../../Context/AppContextProvider';
 import { useMutation } from '@apollo/client'
-import { ADD_MEETING, NEW_MEETING } from '../../../query/zoom-meetings'
+import { INSERT_MEETING, CREATE_ZOOM_MEETING } from '../../../query/zoom-meetings'
 
 const HeroOfferSection = ({ unit }: { unit: any }) => {
   const { isMobile, user } = useContext(AppContext);
 
-  const [createMeeting] = useMutation(NEW_MEETING);
+  const [createMeeting] = useMutation(CREATE_ZOOM_MEETING);
 
-  const [insertMeeting] = useMutation(ADD_MEETING);
+  const [insertMeeting] = useMutation(INSERT_MEETING);
 
   const createZoomMeeting = () => {
     createMeeting()
@@ -31,7 +31,7 @@ const HeroOfferSection = ({ unit }: { unit: any }) => {
         autoplay={false}
         indicators={isMobile ? false : true}
         arrows={false}>
-        {unit.projectImages.map((img, i) => (
+        {unit.projectImages.map((img:any, i:any) => (
           <div key={i} className={styles.eachSlide}>
             <div style={{ 'backgroundImage': `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'none', backgroundSize: 'cover' }}>
             </div>
