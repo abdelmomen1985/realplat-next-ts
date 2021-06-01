@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCompress, faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from './../../Context/AppContextProvider';
-
+import clsx from 'clsx'
 export const UnitCard = ({
   unit,
   wishListHandler,
@@ -166,13 +166,13 @@ export const UnitCard = ({
           </div>
           <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">
             <button className="flex justify-between items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
-              <img className="mr-0 md:mr-1" src="/images/phone.png" /> {isMobile ? '' : 'Call'}
+              <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/phone.png" /> {isMobile ? '' : t('call')}
             </button>
             <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-              <img className="mr-0 md:mr-1" src="/images/whatsapp.png" /> {isMobile ? '' : 'WhatsApp'}
+              <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/whatsapp.png" /> {isMobile ? '' : t('whatsapp')}
             </button>
             <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-              <img className="mr-0 md:mr-1" src="/images/message.png" /> {isMobile ? '' : 'Message'}
+              <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/message.png" /> {isMobile ? '' : t('message')}
             </button>
           </div>
         </div>

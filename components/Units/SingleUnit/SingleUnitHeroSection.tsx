@@ -4,13 +4,16 @@ import { Slide } from 'react-slideshow-image';
 import CustomModal from './../../common/CustomModal/CustomModal';
 import 'react-slideshow-image/dist/styles.css'
 import { AppContext } from './../../../Context/AppContextProvider';
+import useTranslation from './../../../hooks/useTranslation';
+import clsx from 'clsx';
 const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
   const { isMobile } = useContext(AppContext)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const { t, locale } = useTranslation()
   return (
     <section>
 
-      <div className="block md:flex justify-center items-start relative">
+      <div className={clsx(locale === 'en' ? 'flex-row' : 'flex-row-reverse', "block md:flex justify-center items-start relative")}>
         <div className="mr-1 h-full w-full md:w-2/3">
           <img style={{ borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', height: '100%', width: '100%' }} src={unit.media.photos[0]} />
         </div>

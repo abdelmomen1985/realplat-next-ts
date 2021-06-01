@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import styles from "./navigation.module.scss";
 import Link from "next/link";
+import clsx from 'clsx'
+import useTranslation from './../../hooks/useTranslation';
 
 const dummyLinks = [
   "Lorem ipsum dolor",
@@ -33,7 +35,7 @@ function Footer({ title }: { title?: string }) {
   const [citiesLinks, setCitiesLinks] = useState(dummyLinks);
   const [compoundsLinks, setCompoundsLinks] = useState(dummyLinks);
   const [aboutLinks, setAboutLinks] = useState(dummyLinks);
-
+  const { locale, t } = useTranslation()
   return (
     <footer className="mt-5">
       {title !== "Expo Page" && (
@@ -43,11 +45,11 @@ function Footer({ title }: { title?: string }) {
             do eiusmod tempor incididunt ut labore
           </h5>
           <div className="flex justify-center items-center">
-            <button className="btn-primary">Know More</button>
+            <button className="btn-primary">{t('knowMoreBtn')}</button>
             <button
-              className="btn-outline-primary ml-4"
+              className={clsx(locale === 'en' ? 'ml-4' : 'mr-4', "btn-outline-primary")}
             >
-              Contact Us
+              {t('contactBtn')}
             </button>
           </div>
         </section>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "rc-slider/assets/index.css";
 import RangeSlider from "../Range/RangeSlider";
 import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileInvoiceDollar, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 const pricesList = [
   {
     title: "downPay",
@@ -46,6 +47,7 @@ export default function PricesModal(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const node = useRef<HTMLDivElement>(null);
+  const { isMobile } = useContext(AppContext)
   const [pricesFilterState, setPricesFilterState] = useState<PricesFilterType>({
     fin_down_payment: pricesList[0].value,
     fin_monthly_payment: pricesList[1].value,
@@ -92,22 +94,22 @@ export default function PricesModal(props: any) {
           }
         `}
       </style>
-      <div className="dd-wrapper mx-auto relative " ref={node}>
+      <div className="dd-wrapper w-11/12 lg:w-auto mx-auto relative " ref={node}>
         <button
           type="button"
-          className="dd-header border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
+          className="dd-header text-lg md:text-base w-11/12 lg:w-auto border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
           onClick={toggleModal}
         >
-          <div className="dd-header-title">
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
             {/* <FontAwesomeIcon icon={faFileInvoiceDollar} /> */} {t("priceRange")}{" "}
             {isModalOpen ? (
               <span>
                 {" "}
-                <FontAwesomeIcon icon={faAngleUp} />
+                <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
               </span>
             ) : (
               <span>
-                <FontAwesomeIcon icon={faAngleDown} />
+                <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
               </span>
             )}
           </div>
@@ -121,7 +123,10 @@ export default function PricesModal(props: any) {
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: "250px",
+              width: isMobile ? '90%' : "250px",
+              left: isMobile ? '0' : 'auto',
+              right: isMobile ? '0' : 'auto',
+              margin: isMobile ? '0 auto' : ''
             }}
           >
             {pricesList.map((item) => {

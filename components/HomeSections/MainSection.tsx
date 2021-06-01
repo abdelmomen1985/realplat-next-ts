@@ -46,7 +46,7 @@ const suggestedCities = [
 ];
 const MainSection = () => {
   const router = useRouter();
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   const { filterUnitsByCity, isMobile } = useContext(AppContext);
   const filterByCityHandler = (cityId: string) => {
     console.log(cityId);
@@ -65,19 +65,17 @@ const MainSection = () => {
           backgroundPosition: "center",
         }}
       >
-        <h2
-          className="text-3xl md:text-6xl text-center text-white py-3  font-medium"
+        <h1
+          className="text-3xl md:text-6xl text-center text-white py-3 font-medium lg:w-2/4"
           style={{ textShadow: "4px 4px 5px rgba(0,0,0,0.5)" }}
         >
-          <span>Discover a place</span>
-          <br />
-          <span>you'll love to live</span>
-        </h2>
-        <SearchForm placeHolder="Search our listed units" title="main" />
+          {t('heroHeader')}
+        </h1>
+        <SearchForm placeHolder={t('searchPlaceHolder')} title="main" />
 
         <div className="flex flex-wrap justify-center md:justify-between text-center items-center my-3">
           <h3 className="text-white text-xl md:text-3xl font-medium mx-1">
-            Search our listed units with ease
+            {t('heroSearch')}
           </h3>
           <button
             className={clsx(
@@ -85,7 +83,7 @@ const MainSection = () => {
               "bg-primary shadow-md rounded-md  py-1 px-4 font-medium mx-1  text-white capitalize"
             )}
           >
-            Learn More
+            {t('learnMore')}
           </button>
         </div>
         <div className="flex flex-wrap w-4/5 justify-between my-5 items-center">
@@ -110,7 +108,7 @@ const MainSection = () => {
             </span>
           </h3>
           <button className="bg-transparent underline cursor-pointer text-primary capitalize mx-2">
-            Learn More
+            {t('learnMore')}
           </button>
         </div>
       </section>

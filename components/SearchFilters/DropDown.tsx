@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { GET_LOCATIONS } from "../../query/locations";
 import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 interface Ddprops {
   title: string;
   list: any;
@@ -19,6 +20,7 @@ export default function DropDown(props: Ddprops) {
   const [isOpenState, setIsOpenState] = useState(false);
   const [listTitle, setListTitle] = useState(props.title);
   const [locationsInnerState, setLocationsInnerState] = useState(data?.units);
+  const { isMobile } = useContext(AppContext)
   // const list = props.list;
   const { t, locale } = useTranslation();
   const node = useRef<HTMLDivElement>(null);
@@ -125,13 +127,13 @@ export default function DropDown(props: Ddprops) {
           }
         `}
       </style>
-      <div className="dd-wrapper mx-auto relative" ref={node}>
+      <div className="dd-wrapper w-11/12 lg:w-auto mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
+          className="w-11/12 lg:w-auto dd-header text-lg md:text-base border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={toggleList}
         >
-          <div className="dd-header-title flex justify-between items-center">
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
             {listTitle !== 'location' && <span className="circularIcon"></span>} {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpenState ? (
 
@@ -156,7 +158,10 @@ export default function DropDown(props: Ddprops) {
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: "250px",
+              width: isMobile ? '90%' : "250px",
+              left: isMobile ? '0' : 'auto',
+              right: isMobile ? '0' : 'auto',
+              margin: isMobile ? '0 auto' : ''
             }}
           >
             {locationsInnerState.map((item: any) => (

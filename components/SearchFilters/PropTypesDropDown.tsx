@@ -141,15 +141,15 @@ export default function PropTypesDropDown({
           }
         `}
       </style>
-      <div className="dd-wrapper mx-auto relative" ref={node}>
+      <div className="dd-wrapper  w-11/12 lg:w-auto mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
+          className="dd-header text-lg md:text-base w-11/12 lg:w-auto border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
           onClick={() => {
             toggOpen(!isOpen);
           }}
         >
-          <div className="dd-header-title flex justify-between items-center">
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
             {listTitle !== 'prop_type' && <span className="circularIcon"></span>}
             {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpen ? (
@@ -174,9 +174,11 @@ export default function PropTypesDropDown({
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
-              width: "250px",
               zIndex: 900,
-              right: isMobile ? '0' : 'auto'
+              width: isMobile ? '90%' : "250px",
+              left: isMobile ? '0' : 'auto',
+              right: isMobile ? '0' : 'auto',
+              margin: isMobile ? '0 auto' : ''
             }}
           >
             {propTypesInnerState &&

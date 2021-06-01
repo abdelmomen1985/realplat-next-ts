@@ -164,16 +164,19 @@
 .react-slideshow-container+ul.indicators li {
   width: 15px !important;
   height: 15px !important;
-  ;
   margin: 0 5px 0 10px !important;
-  ;
 }
 
 .react-slideshow-container+ul.indicators .each-slideshow-indicator::before {
   width: 20px !important;
-  ;
   height: 20px !important;
-  ;
   background: #fff !important;
-  ;
+}
+
+.react-slideshow-wrapper.slide {
+  direction: ltr;
+}
+
+.react-slideshow-container {
+  direction: ltr;
 }

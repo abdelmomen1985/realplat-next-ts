@@ -229,23 +229,23 @@ export default function MoreFiltersModal({
           }
         `}
       </style>
-      <div className="relative mx-auto">
+      <div className="relative w-11/12 lg:w-auto mx-auto">
         <button
-          className="dd-header border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
+          className="dd-header text-lg md:text-base  w-11/12 lg:w-auto border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          <div>
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
             {/* <FontAwesomeIcon icon={faFilter} /> */}
             {t('moreFilters')}{' '}
             {isModalOpen ? (
               <span>
                 {' '}
-                <FontAwesomeIcon icon={faAngleUp} />
+                <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
 
               </span>
             ) : (
               <span>
-                <FontAwesomeIcon icon={faAngleDown} />
+                <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
 
               </span>
             )}

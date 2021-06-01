@@ -23,7 +23,7 @@ const MainOffersSection = () => {
       <div className="md:ml-24 md:mr-5">
         <h4 className="text-3xl font-normal text-black text-opacity-50">Welcome to ..</h4>
         <h2 className="text-5xl font-bold text-custom-blue-dark">mellw’s Expo</h2>
-        <p className="text-lg text-black text-opacity-50">With over 1 million+ homes for sale available on<br /> the website, Trulia can match you with a house you will<br /> want to call home.</p>
+        <p className="text-lg text-black text-opacity-50">With over 1 million+ homes for sale available on<br /> the website, Mellw can match you with a house you will<br /> want to call home.</p>
         <button
           className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-3xl px-12 py-3 shadow-md mx-auto ">
           Contact Us</button>

@@ -2,7 +2,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import { locales } from "../../i18n/config";
 import useTranslation from "../../hooks/useTranslation";
-import styles from './navigation.module.scss'
 import clsx from 'clsx'
 const LocaleSwitcher: React.FC = () => {
   const router = useRouter();

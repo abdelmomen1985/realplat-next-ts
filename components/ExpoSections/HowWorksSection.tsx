@@ -26,7 +26,7 @@ const HowWorksSection = () => {
           <h3 className="text-main text-3xl font-bold my-4 text-custom-blue-dark"
           >How it works</h3>
           <p className="font-comfortaa text-black text-opacity-50">
-            With over 1 million+ homes for sale available on the website, Trulia can match you with a house you will want to call home.
+            With over 1 million+ homes for sale available on the website, Mellw can match you with a house you will want to call home.
           </p>
           <button
             className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-3xl w-3/4  px-12 py-3 shadow-md mx-auto ">
