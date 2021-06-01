@@ -61,6 +61,7 @@ const PersonalInfo = () => {
         {
           method: "POST",
           body: data,
+          mode: "no-cors",
         }
       );
       const respData = await response.json();
