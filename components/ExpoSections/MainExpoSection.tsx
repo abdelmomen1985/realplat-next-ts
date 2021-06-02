@@ -6,21 +6,33 @@ import { AppContext } from "../../Context/AppContextProvider";
 
 const MainExpoSection = () => {
   const router = useRouter();
-  const { locale } = useTranslation();
+  const { locale, t } = useTranslation();
   const { filterUnitsByCity } = useContext(AppContext);
 
   const heroServices = [
     {
       img: "/images/dollar-expo.png",
-      title: "Exclusive Deals",
+      title: {
+        en: "Exclusive Deals",
+        ar: "عروض حصرية",
+
+      }
     },
     {
       img: "/images/time-expo.png",
-      title: "Limited Time",
+      title: {
+        en: "Limited Time",
+        ar: "وقت محدود",
+
+      }
     },
     {
       img: "/images/stat-expo.png",
-      title: "instant info",
+      title: {
+        en: "instant info",
+        ar: "معلومات فورية",
+
+      }
     },
   ];
   return (
@@ -34,30 +46,26 @@ const MainExpoSection = () => {
           backgroundPosition: "center",
         }}
       >
-        <div>
+        <div className="w-full md:w-2/4">
           <h2 className="text-3xl md:text-6xl text-white py-3  font-medium">
-            mellw’s Expo
+            {t('mellwExpo')}
           </h2>
           <p className="text-md text-white">
-            Lovely 4 BR, 2 Bath home with Vaulted Ceilings, Open Concept
-            <br />
-            Kitchen & Family Room, Solid Flooring throughout (tumbled
-            <br />
-            Travertine everywhere except BRs which are Wood floors).
+            {t('expoDesc')}
           </p>
           <div className="flex flex-wrap items-center justify-between my-3 mx-1">
             {heroServices.map((service, i) => (
               <p key={i} className="flex justify-start items-center text-white">
-                <img src={service.img} className="mr-2" />
-                <span className="capitalize">{service.title}</span>
+                <img src={service.img} className={locale === 'en' ? "mr-2" : 'ml-2'} />
+                <span className="capitalize">{service.title[locale]}</span>
               </p>
             ))}
           </div>
           <button
-            className="mt-4 mb-10 bg-primary text-white text-lg font-medium w-3/4 px-5 md:px-16  py-3 rounded-3xl shadow-md"
+            className="mt-4 mb-10 bg-primary capitalize text-white text-lg font-medium w-3/4 px-5 md:px-16  py-3 rounded-3xl shadow-md"
             onClick={() => router.push(`/${locale}/expo/offers`)}
           >
-            Register Now
+            {t('registerBtn')}
           </button>
         </div>
         <div className="flex flex-wrap justify-center md:justify-between text-center items-center my-3">

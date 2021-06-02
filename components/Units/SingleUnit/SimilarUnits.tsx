@@ -7,6 +7,7 @@ import { REMOVE_FROM_WISHLIST } from './../../../query/user';
 import { UnitCard } from './../UnitCard';
 import { useQuery } from '@apollo/client';
 import { USER_WISHLIST_IDS } from '../../../query/unitsQuery';
+import useTranslation from './../../../hooks/useTranslation';
 
 const SimilarUnits = ({ units }: { units: Unit[] }) => {
   const { user, setComparing, setLoginModal } = useContext(AppContext);
@@ -14,7 +15,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
   const { data, refetch } = useQuery(USER_WISHLIST_IDS);
-
+  const { t } = useTranslation()
   const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
     // handle add to the server
     if (user) {
@@ -66,7 +67,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
   );
   return (
     <>
-      <h2 className="text-2xl md:text-4xl font-semibold text-text-secondary my-3 px-2 py-3">Similar Homes You May Like</h2>
+      <h2 className="text-2xl md:text-4xl font-semibold text-text-secondary my-3 px-2 py-3">{t('simHomes')}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-3 gap-2 justify-items-center justify-center items-center">
         {
           innerUnits.length > 0 &&

@@ -10,12 +10,12 @@ export default function FinancialAnalysis({ unit }: { unit: any }) {
         style={{ backgroundColor: '#F5F6F7' }}
       >
         <img src="/images/dollar.png" />
-        <span className="text-2xl font-medium mx-4 capitalize">Financial Details</span>
+        <span className="text-2xl font-medium mx-4 capitalize">{t('finDetails')}</span>
       </h3>
       <ul className="list-disc my-5 py-4 px-5 mx-3">
-        <li className="my-2 text-text-secondary text-lg font-medium">Price per SQMT: {(unit.fin_total / unit.land).toFixed()} {t('egp')}</li>
-        <li className="my-2 text-text-secondary text-lg font-medium">Total Price: {(unit.fin_total).toFixed()} {t('egp')}</li>
-        <li className="my-2 text-text-secondary text-lg font-medium">NPV: {(unit.npv).toFixed()} {t('egp')}</li>
+        <li className="my-2 text-text-secondary text-lg font-medium">{t('pricePerM')}: {(unit.fin_total / unit.land).toFixed()} {t('egp')}</li>
+        <li className="my-2 text-text-secondary text-lg font-medium">{t('totalPrice')}: {(unit.fin_total).toFixed()} {t('egp')}</li>
+        <li className="my-2 text-text-secondary text-lg font-medium">{t('NPV')}: {(unit.npv).toFixed()} {t('egp')}</li>
 
       </ul>
     </div>

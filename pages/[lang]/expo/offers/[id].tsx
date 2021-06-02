@@ -12,6 +12,7 @@ import FinancialAnalysis from './../../../../components/Units/SingleUnit/Financi
 import UnitInformation from './../../../../components/Units/SingleUnit/UnitInformation';
 import MainOffersSection from './../../../../components/ExpoSections/OffersSections/MainOffersSection';
 import HeroOfferSection from '../../../../components/ExpoSections/OffersSections/HeroOfferSection';
+import useTranslation from './../../../../hooks/useTranslation';
 
 
 
@@ -196,7 +197,7 @@ const RegularMap = withScriptjs(
 );
 const SingleOffer = () => {
   const [singleUnitState, setSingleUnitState] = useState(singleUnit);
-  console.log(singleUnit)
+  const { t, locale } = useTranslation()
   return (
     <Layout title="Expo Page">
       <MainOffersSection />
@@ -213,7 +214,7 @@ const SingleOffer = () => {
             style={{ backgroundColor: '#F5F6F7' }}
           >
             <img src="/images/location.png" />
-            <span className="text-2xl font-medium mx-4 capitalize">Location</span>
+            <span className="text-2xl font-medium mx-4 capitalize">{t('location')}</span>
           </h3>
           <RegularMap
             googleMapURL="https://maps.googleapis.com/maps/api/js"

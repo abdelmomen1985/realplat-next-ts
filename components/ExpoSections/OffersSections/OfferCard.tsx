@@ -2,7 +2,7 @@ import React from 'react'
 import useTranslation from "../../../hooks/useTranslation";
 import { useRouter } from "next/router";
 import { Offer } from '../../../interfaces'
-
+import clsx from 'clsx';
 const OfferCard = ({ offer }: { offer: Offer }) => {
   const { t, locale } = useTranslation();
   const router = useRouter();
@@ -21,14 +21,14 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           bottom: '65%',
           left: '-1%',
         }} />
-        <h4 className="text-center text-xl font-semibold ml-12 md:ml-1">{offer.projectName}</h4>
+        <h4 className={clsx("text-center text-xl font-semibold", locale === 'en' ? "ml-12 md:ml-1" : "mr-12 md:mr-1")}>{offer.projectName}</h4>
         <div className="flex justify-start items-center my-4 mx-3">
-          <img src="/images/from.png" className="mr-2" />
-          <p className="text-md font-medium text-black">From: {offer.startingPrice}</p>
+          <img src="/images/from.png" className={locale === 'en' ? "mr-2" : 'ml-2'} />
+          <p className="text-md font-medium text-black">{t('from')}: {offer.startingPrice}</p>
         </div>
         <div className="flex justify-start items-center my-4 mx-3">
-          <img src="/images/discount.png" className="mr-2" />
-          <p className="text-md font-medium text-black">Discount: {offer.discountPer}%</p>
+          <img src="/images/discount.png" className={locale === 'en' ? "mr-2" : 'ml-2'} />
+          <p className="text-md font-medium text-black">{t('discount')}: {offer.discountPer}%</p>
         </div>
       </div>
     </div>

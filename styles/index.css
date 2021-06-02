@@ -28,6 +28,7 @@
   }
   .leave-here {
     font-family: "Roboto", sans-serif;
+    font-family: "Cairo", sans-serif;
   }
 }
 
@@ -110,6 +111,9 @@
   }
   .font-roboto {
     font-family: "Roboto", sans-serif;
+  }
+  .font-cairo {
+    font-family: "Cairo", sans-serif;
   }
 }
 

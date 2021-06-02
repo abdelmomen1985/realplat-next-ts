@@ -76,8 +76,27 @@
     }
   }
 
+  .firstArTab {
+    @include currentTab('auto');
+    border-top-left-radius: 0;
+    right: 0;
+
+    .tabContainer {
+      @include currentTabContainer(121px)
+    }
+  }
+
+  .secondArTab {
+    @include currentTab('auto');
+    border-top-left-radius: 0;
+
+    .tabContainer {
+      @include currentTabContainer(196px)
+    }
+  }
+
   .secondTab {
-    @include currentTab(17.5%);
+    @include currentTab(31.5%);
     border-top-left-radius: 0;
 
     .tabContainer {
