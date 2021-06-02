@@ -56,14 +56,10 @@ const PersonalInfo = () => {
       let url = URL.createObjectURL(imageBlob);
       setProfileImg(url);
 
-      const response = await fetch(
-        "https://7080-white-badger-jj9pwo1a.ws-eu08.gitpod.io/upload",
-        {
-          method: "POST",
-          body: data,
-          mode: "no-cors",
-        }
-      );
+      const response = await fetch("https://hubgraph.herokuapp.com/upload", {
+        method: "POST",
+        body: data,
+      });
       const respData = await response.json();
       if (respData.url) {
         console.log("will setProfileImg ", respData.url);

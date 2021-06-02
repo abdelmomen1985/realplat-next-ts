@@ -2,7 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { locales } from "../../i18n/config";
 import useTranslation from "../../hooks/useTranslation";
-import clsx from 'clsx'
+import styles from "./navigation.module.scss";
+import clsx from "clsx";
 const LocaleSwitcher: React.FC = () => {
   const router = useRouter();
   const handleLocaleChange = React.useCallback(
@@ -22,11 +23,21 @@ const LocaleSwitcher: React.FC = () => {
       // style={{ display: "inline-block", outline: "none !important" }}
       className="mx-2 inline-block outline-none focus:outline-none"
     >
-      {locale === 'en' ?
-        <a onClick={() => handleLocaleChange('ar')} className={clsx(styles.navLink, "cursor-pointer")} >العربية</a>
-        :
-        <a onClick={() => handleLocaleChange('en')} className={clsx(styles.navLink, "cursor-pointer")}>English</a>
-      }
+      {locale === "en" ? (
+        <a
+          onClick={() => handleLocaleChange("ar")}
+          className={clsx(styles.navLink, "cursor-pointer")}
+        >
+          العربية
+        </a>
+      ) : (
+        <a
+          onClick={() => handleLocaleChange("en")}
+          className={clsx(styles.navLink, "cursor-pointer")}
+        >
+          English
+        </a>
+      )}
       {/* <label className="language-switcher">
         <select onChange={handleLocaleChange} defaultValue={locale}>
           {locales.map((el) => (

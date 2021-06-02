@@ -5,7 +5,7 @@ import clsx from "clsx";
 import styles from "./homeStyles.module.scss";
 import SearchForm from "./SearchForm";
 import { AppContext } from "./../../Context/AppContextProvider";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 const suggestedCities = [
   {
@@ -53,7 +53,7 @@ const MainSection = () => {
     filterUnitsByCity(cityId);
     router.push(`/${locale}/units`);
   };
-  console.log(isMobile)
+  console.log(isMobile);
   return (
     <>
       <section
@@ -61,21 +61,23 @@ const MainSection = () => {
         style={{
           background: "url(/images/hp-hero-desktop-3.png) no-repeat 50% fixed",
           backgroundSize: "cover",
-          minHeight: "80vh",
+          minHeight: "70vh",
           backgroundPosition: "center",
         }}
       >
         <h1
-          className="text-3xl md:text-6xl text-center text-white py-3 font-medium lg:w-2/4"
+          className="text-3xl md:text-4xl text-center text-white py-3 font-bold lg:w-2/4"
           style={{ textShadow: "4px 4px 5px rgba(0,0,0,0.5)" }}
         >
-          {t('heroHeader')}
+          {t("heroHeader")}
+          <br />
+          {t("heroHeader2nd")}
         </h1>
-        <SearchForm placeHolder={t('searchPlaceHolder')} title="main" />
+        <SearchForm placeHolder={t("searchPlaceHolder")} title="main" />
 
         <div className="flex flex-wrap justify-center md:justify-between text-center items-center my-3">
-          <h3 className="text-white text-xl md:text-3xl font-medium mx-1">
-            {t('heroSearch')}
+          <h3 className="text-white text-xl md:text-2xl font-medium mx-1">
+            {t("heroSearch")}
           </h3>
           <button
             className={clsx(
@@ -83,7 +85,7 @@ const MainSection = () => {
               "bg-primary shadow-md rounded-md  py-1 px-4 font-medium mx-1  text-white capitalize"
             )}
           >
-            {t('learnMore')}
+            {t("learnMore")}
           </button>
         </div>
         <div className="flex flex-wrap w-4/5 justify-between my-5 items-center">
@@ -101,14 +103,17 @@ const MainSection = () => {
       <section className="w-full my-8">
         <div className="w-11/12 md:w-4/5 mx-auto rounded-md shadow-md flex flex-wrap justify-center items-center py-3 px-5">
           <h3 className="flex justify-center items-center">
-            <FontAwesomeIcon className="text-custom-red mx-2 text-4xl" icon={faHeart} />
+            <FontAwesomeIcon
+              className="text-custom-red mx-2 text-4xl"
+              icon={faHeart}
+            />
             <span>
-              Take a deep dive and browse original{!isMobile && <br />} neighborhood photos,
-              drone footage
+              Take a deep dive and browse original{!isMobile && <br />}{" "}
+              neighborhood photos, drone footage
             </span>
           </h3>
           <button className="bg-transparent underline cursor-pointer text-primary capitalize mx-2">
-            {t('learnMore')}
+            {t("learnMore")}
           </button>
         </div>
       </section>
