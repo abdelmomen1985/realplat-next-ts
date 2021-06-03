@@ -17,9 +17,10 @@ interface Slide {
 }
 const CustomSlide = ({ imgs }: { imgs: Slide[] }) => {
   const { locale } = useTranslation();
-  const { filterUnitsByCity, isMobile } = useContext(AppContext);
+  const { filterUnitsGlobal, isMobile } = useContext(AppContext);
   const filterByCityHandler = (cityId: string) => {
-    filterUnitsByCity(cityId);
+    console.log(cityId);
+    filterUnitsGlobal({ sk_city: cityId });
     router.push(`/${locale}/units`);
   };
   return (

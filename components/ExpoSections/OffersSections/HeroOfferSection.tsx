@@ -31,7 +31,7 @@ const HeroOfferSection = ({ unit }: { unit: any }) => {
         autoplay={false}
         indicators={isMobile ? false : true}
         arrows={false}>
-        {unit.projectImages.map((img:any, i:any) => (
+        {unit.projectImages.map((img: any, i: any) => (
           <div key={i} className={styles.eachSlide}>
             <div style={{ 'backgroundImage': `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'none', backgroundSize: 'cover' }}>
             </div>
@@ -43,7 +43,7 @@ const HeroOfferSection = ({ unit }: { unit: any }) => {
           <img className={styles.logoImg} src={unit.projectDeveloperLogo} />
         </div>
         <div className="mt-0 mb-4 mx-3 py-3 px-2">
-          <h3 className="font-semibold  text-xl md:text-3xl text-black mt-2 mb-3">
+          <h3 className="font-semibold  text-xl md:text-2xl text-black mt-2 mb-3">
             {unit.projectName}
           </h3>
           <h5 className="font-normal text-base md:text-lg text-black ">

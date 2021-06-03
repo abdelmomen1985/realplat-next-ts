@@ -5,11 +5,13 @@ export type FilterListType = {
   fin_years?: number[];
   fin_monthly_payment?: number[];
   sk_city?: string;
+  sk_district?: string;
   bedrooms?: number;
   bathrooms?: number;
   delivery_year?: number;
-  space?:number[];
+  space?: number[];
   finishing_type: string;
+  compound_id: string;
 
 };
 

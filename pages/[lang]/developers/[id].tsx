@@ -64,12 +64,12 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
           <img src={developer.media.page_icon} className="w-full" />
         </div>
         <div className="col-span-2 justify-center align-middle mt-2 mx-2">
-          <h3 className="font-bold text-4xl">{developer.name[locale]}</h3>
+          <h3 className="font-bold text-3xl">{developer.name[locale]}</h3>
           <p className="text-gray-400">{developer.description[locale]}</p>
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-primary text-3xl">
+        <h3 className="font-bold text-center text-primary text-2xl">
           {t('projects')}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">

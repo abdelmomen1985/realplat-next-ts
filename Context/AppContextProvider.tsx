@@ -96,10 +96,10 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       payload: null,
     });
   };
-  const filterUnitsByCity = (cityId: string) => {
+  const filterUnitsGlobal = (filterState: any) => {
     dispatch({
       type: ACTION_TYPES.FILTER_BY_CITY,
-      payload: cityId,
+      payload: filterState,
     });
   };
   const [loginModal, setLoginModal] = useState(false);
@@ -113,7 +113,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     clearComparing,
     loginModal,
     setLoginModal,
-    filterUnitsByCity,
+    filterUnitsGlobal,
   };
   return (
     <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

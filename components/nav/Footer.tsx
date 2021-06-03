@@ -83,7 +83,7 @@ function Footer({ title }: { title?: string }) {
         </a>
         <h3>
           <Link href="/">
-            <a className="text-black text-5xl font-comfortaa text-medium text-center">
+            <a className="text-black text-3xl font-comfortaa text-medium text-center">
               mellw
             </a>
           </Link>

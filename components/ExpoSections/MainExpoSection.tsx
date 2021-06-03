@@ -7,7 +7,7 @@ import { AppContext } from "../../Context/AppContextProvider";
 const MainExpoSection = () => {
   const router = useRouter();
   const { locale, t } = useTranslation();
-  const { filterUnitsByCity } = useContext(AppContext);
+  const { filterUnitsGlobal } = useContext(AppContext);
 
   const heroServices = [
     {
@@ -47,7 +47,7 @@ const MainExpoSection = () => {
         }}
       >
         <div className="w-full md:w-2/4">
-          <h2 className="text-3xl md:text-6xl text-white py-3  font-medium">
+          <h2 className="text-2xl md:text-4xl text-white py-3  font-medium">
             {t('mellwExpo')}
           </h2>
           <p className="text-md text-white">
@@ -62,7 +62,7 @@ const MainExpoSection = () => {
             ))}
           </div>
           <button
-            className="mt-4 mb-10 bg-primary capitalize text-white text-lg font-medium w-3/4 px-5 md:px-16  py-3 rounded-3xl shadow-md"
+            className="mt-4 mb-10 bg-primary capitalize text-white text-lg font-medium w-3/4 px-5 md:px-16  py-3 rounded-2xl shadow-md"
             onClick={() => router.push(`/${locale}/expo/offers`)}
           >
             {t('registerBtn')}

@@ -96,7 +96,7 @@ const GuidesSection = () => {
         <img src="/images/house.png" className={styles.houseImg} />
       </section>
       <section className="w-full py-6 px-3 my-5 md:my-3">
-        <h2 className="text-main my-3 text-2xl md:text-3xl font-semibold text-center">
+        <h2 className="text-main my-3 text-2xl md:text-2xl font-semibold text-center">
           What’s happening at mellw.com
         </h2>
         <div className="flex justify-center md:justify-around flex-wrap flex-col md:flex-row items-center">

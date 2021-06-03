@@ -15,17 +15,12 @@ import InteriorFeatures from './../../../components/Units/SingleUnit/InteriorFea
 import DaysMarket from './../../../components/Units/SingleUnit/DaysMarket';
 import SimilarUnits from './../../../components/Units/SingleUnit/SimilarUnits';
 import SingleUnitHeroSection from './../../../components/Units/SingleUnit/SingleUnitHeroSection';
-
+import BreadCrumbs from './../../../components/Units/SingleUnit/BreadCrumbs';
 import {
-  FinancialSummary,
-  Header,
   Layout,
   UnitInformation,
-  DeliveryDetails,
-  FinancialAnalysis,
-  UnitDescription,
   FloorPlan,
-  CompoundNdDeveloper,
+  FinancialAnalysis
 } from "./../../../components/exports";
 const defaultOptions = { scrollwheel: false };
 
@@ -46,6 +41,7 @@ const SingleUnit = ({ unit }: { unit: any }) => {
 
   return (
     <Layout>
+      <BreadCrumbs unit={unit} />
       <div className="container px-3 mx-auto">
         <SingleUnitHeroSection unit={unit} />
         {/* Unit Information */}

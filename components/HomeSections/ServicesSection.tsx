@@ -57,7 +57,7 @@ const ServicesSection = () => {
   return (
     <section className="w-full py-2 px-3 my-2">
       <div className="mx-20">
-        <h2 className="text-main text-center text-2xl md:text-4xl font-semibold">
+        <h2 className="text-main text-center text-2xl md:text-3xl font-semibold">
           {t("mellwHelp")} ...
         </h2>
         <div className="my-10 grid grid-cols-1 md:grid-cols-3 grid-rows-3 md:grid-rows-1 gap-5 ">

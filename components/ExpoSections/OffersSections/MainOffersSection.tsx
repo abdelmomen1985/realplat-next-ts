@@ -32,11 +32,11 @@ const MainOffersSection = () => {
   return (
     <section className="bg-secondary grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-8 justify-center items-center py-10 px-5 mb-0 mt-0">
       <div className={clsx(locale === 'en' ? "md:ml-24 md:mr-5" : "md:mr-24 md:ml-5")}>
-        <h4 className="text-3xl font-normal text-black text-opacity-50">{t('welcomeTo')}..</h4>
-        <h2 className="text-5xl font-bold text-custom-blue-dark">{t('mellwExpo')}</h2>
+        <h4 className="text-2xl font-normal text-black text-opacity-50">{t('welcomeTo')}..</h4>
+        <h2 className="text-3xl font-bold text-custom-blue-dark">{t('mellwExpo')}</h2>
         <p className="text-lg text-black text-opacity-50">{t('guideHeader')}</p>
         <button
-          className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-3xl px-12 py-3 shadow-md mx-auto ">
+          className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-2xl px-12 py-3 shadow-md mx-auto ">
           {t('contactBtn')}</button>
       </div>
       <div className={clsx(locale === "en" ? "md:mr-10 md:ml-24" : "md:ml-10 md:mr-24", "w-full")}>

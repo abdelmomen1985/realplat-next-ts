@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCompress, faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from './../../Context/AppContextProvider';
 import clsx from 'clsx'
+import Link from 'next/link';
 export const UnitCard = ({
   unit,
   wishListHandler,
@@ -26,8 +27,8 @@ export const UnitCard = ({
       setImageUrl(unit?.media[0]);
     }
   }, [unit]);
-  const singleUnitHandler = (unitId: string) => {
-    router.push(`/${locale}/units/[unit]/`, `/${locale}/units/${unitId}/`, {
+  const singleUnitHandler = () => {
+    router.push(`/${locale}/units/[unit]/`, `/${locale}/units/${unit.id}/`, {
       shallow: true,
     });
   };
@@ -45,12 +46,13 @@ export const UnitCard = ({
       >
         <div className="relative">
           <img
-            className="w-full"
+            className="w-full cursor-pointer"
             style={{
               maxHeight: "250px",
               borderTopLeftRadius: "0.5rem",
               borderTopRightRadius: "0.5rem",
             }}
+            onClick={singleUnitHandler}
             src={imageUrl}
             onError={imageErrorHandler}
             alt="unit image"
@@ -125,57 +127,56 @@ export const UnitCard = ({
             )}
           </div>
         </div>
-        <div
-          className="cursor-pointer"
-          onClick={() => {
-            singleUnitHandler(unit.id);
-          }}
+        <Link
+          href={`/${locale}/units/${unit.id}/`}
         >
-          <div className="px-6 py-4 flex justify-between">
-            <div>
-              <p className="text-lg font-medium font-roboto capitalize text-text-secondary">
-                {unit.property_type.name[locale]} {t("in")}{" "}
-                {unit.compound.name[locale]} {t("compound")}
-                {t("comma")} {unit.bedrooms} {t("bedrooms")} <br />{" "}
-                {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
-              </p>
-              <p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary">
-                {t("downPay")}: {unit.fin_down_payment} {t("egp")}
-              </p>
+          <a>
+            <div className="px-6 py-4 flex justify-between">
+              <div>
+                <p className="text-lg font-medium font-roboto capitalize text-text-secondary">
+                  {unit.property_type.name[locale]} {t("in")}{" "}
+                  {unit.compound.name[locale]} {t("compound")}
+                  {t("comma")} {unit.bedrooms} {t("bedrooms")} <br />{" "}
+                  {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
+                </p>
+                <p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary">
+                  {t("downPay")}: {unit.fin_down_payment} {t("egp")}
+                </p>
+              </div>
             </div>
-          </div>
-          <div
-            className="px-6 py-4 flex justify-between items-center"
-            style={{ backgroundColor: "#E5E5E5" }}
-          >
-            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
-              <img src="/images/land.png" />{" "}
-              <span className="ml-2">{unit.land}M</span>
-            </span>
-            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
-              <img src="/images/bed.png" />{" "}
-              <span className="ml-2">{unit.bedrooms}bd</span>
-            </span>
-            {/* <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
+            <div
+              className="px-6 py-4 flex justify-between items-center"
+              style={{ backgroundColor: "#E5E5E5" }}
+            >
+              <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
+                <img src="/images/land.png" />{" "}
+                <span className="ml-2">{unit.land}M</span>
+              </span>
+              <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
+                <img src="/images/bed.png" />{" "}
+                <span className="ml-2">{unit.bedrooms}bd</span>
+              </span>
+              {/* <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary" >
               <img src="/images/garden.png" /> <span className="ml-2">{unit.bedrooms}</span>
             </span> */}
-            <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
-              <img src="/images/bath.png" />{" "}
-              <span className="ml-2">{unit.bathrooms}ba</span>
-            </span>
-          </div>
-          <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">
-            <button className="flex justify-between items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
-              <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/phone.png" /> {isMobile ? '' : t('call')}
-            </button>
-            <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-              <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/whatsapp.png" /> {isMobile ? '' : t('whatsapp')}
-            </button>
-            <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
-              <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/message.png" /> {isMobile ? '' : t('message')}
-            </button>
-          </div>
-        </div>
+              <span className="flex justify-between items-center px-3 py-1 text-lg font-semibold  mr-2 mb-2 text-text-secondary">
+                <img src="/images/bath.png" />{" "}
+                <span className="ml-2">{unit.bathrooms}ba</span>
+              </span>
+            </div>
+            <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">
+              <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+                <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/message.png" /> {isMobile ? '' : t('message')}
+              </button>
+              <button className="flex justify-between items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
+                <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/phone.png" /> {isMobile ? '' : t('call')}
+              </button>
+              <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+                <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/whatsapp.png" /> {isMobile ? '' : t('whatsapp')}
+              </button>
+            </div>
+          </a>
+        </Link>
       </div>
     </div>
   );

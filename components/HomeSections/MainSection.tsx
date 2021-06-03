@@ -47,10 +47,10 @@ const suggestedCities = [
 const MainSection = () => {
   const router = useRouter();
   const { t, locale } = useTranslation();
-  const { filterUnitsByCity, isMobile } = useContext(AppContext);
+  const { filterUnitsGlobal, isMobile } = useContext(AppContext);
   const filterByCityHandler = (cityId: string) => {
     console.log(cityId);
-    filterUnitsByCity(cityId);
+    filterUnitsGlobal({ sk_city: cityId });
     router.push(`/${locale}/units`);
   };
   console.log(isMobile);
@@ -66,7 +66,7 @@ const MainSection = () => {
         }}
       >
         <h1
-          className="text-3xl md:text-4xl text-center text-white py-3 font-bold lg:w-2/4"
+          className="text-2xl md:text-3xl text-center text-white py-3 font-bold lg:w-2/4"
           style={{ textShadow: "4px 4px 5px rgba(0,0,0,0.5)" }}
         >
           {t("heroHeader")}
@@ -104,7 +104,7 @@ const MainSection = () => {
         <div className="w-11/12 md:w-4/5 mx-auto rounded-md shadow-md flex flex-wrap justify-center items-center py-3 px-5">
           <h3 className="flex justify-center items-center">
             <FontAwesomeIcon
-              className="text-custom-red mx-2 text-4xl"
+              className="text-custom-red mx-2 text-3xl"
               icon={faHeart}
             />
             <span>

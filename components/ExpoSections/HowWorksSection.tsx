@@ -44,13 +44,13 @@ const HowWorksSection = () => {
       <div
         className="w-full md:w-2/3 my-8 py-7  mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-10">
         <div className={clsx(locale === 'en' ? "mr-3" : 'ml-3', "mt-2")}>
-          <h3 className="text-main text-3xl font-bold my-4 text-custom-blue-dark"
+          <h3 className="text-main text-2xl font-bold my-4 text-custom-blue-dark"
           >{t('howWorks')}</h3>
           <p className="font-comfortaa text-black text-opacity-50">
             {t('guideHeader')}
           </p>
           <button
-            className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-3xl w-3/4  px-12 py-3 shadow-md mx-auto ">
+            className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-2xl w-3/4  px-12 py-3 shadow-md mx-auto ">
             {t('contactBtn')}</button>
         </div>
         <div className={clsx("my-4", locale === 'en' ? "ml-3" : 'mr-3')}>

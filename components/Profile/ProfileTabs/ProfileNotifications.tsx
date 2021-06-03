@@ -49,7 +49,7 @@ const ProfileNotifications = () => {
     <section className="w-full mx-auto px-5 py-4 my-3">
       <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
         <div className="col-span-1 md:col-span-2">
-          <h2 className="text-3xl text-black font-bold mt-2 mb-6">
+          <h2 className="text-2xl text-black font-bold mt-2 mb-6">
             Create new alert ! </h2>
           <form className="my-5 mr-12" onSubmit={handleSubmit(createAlertHandler)}>
             <div className="my-5 relative">
@@ -111,7 +111,7 @@ const ProfileNotifications = () => {
         </div>
         <div className="col-span-1 md:col-span-4">
           <div className="mr-12 bg-white px-5 py-6 bg-outline-secondary">
-            <h2 className="text-3xl text-black font-bold mt-2 mb-6">
+            <h2 className="text-2xl text-black font-bold mt-2 mb-6">
               My Alerts </h2>
             <table className={clsx(styles.table, 'my-5')}>
               <tbody>

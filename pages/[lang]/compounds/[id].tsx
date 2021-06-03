@@ -48,7 +48,7 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
           <img src={compound.media.page_icon} className="w-full" />
         </div>
         <div className="col-span-2 justify-center align-middle mt-2 mx-2">
-          <h3 className="font-bold text-4xl">{compound.name[locale]}</h3>
+          <h3 className="font-bold text-3xl">{compound.name[locale]}</h3>
           <p className="text-gray-400">{compound.description[locale]}</p>
         </div>
       </div>

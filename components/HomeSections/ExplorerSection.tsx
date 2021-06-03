@@ -266,7 +266,7 @@ const ExplorerSection = () => {
   return (
     <section>
       <main>
-        <h3 className="text-center py-3"><span className="font-comfortaa text-5xl font-semibold">{t('explorerTitle').split(' ')[0]} </span><span className="text-main text-2xl font-semibold">{t('explorerTitle').split(' ')[1]}</span></h3>
+        <h3 className="text-center py-3"><span className="font-comfortaa text-3xl font-semibold">{t('explorerTitle').split(' ')[0]} </span><span className="text-main text-2xl font-semibold">{t('explorerTitle').split(' ')[1]}</span></h3>
         <p className="text-left md:text-center text-sm font-normal px-10">
           {t('explorerHeader')}</p>
       </main>

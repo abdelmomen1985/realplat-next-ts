@@ -6,6 +6,7 @@ export const UNIT_FIELDS = `
   bedrooms
   bua
   sk_city
+  sk_district
   fin_total
   fin_monthly_payment
   fin_down_payment
@@ -14,6 +15,7 @@ export const UNIT_FIELDS = `
   compound {
     name
     developer {
+      id
       name(path: "ar")
       media(path: "card_icon")
     }
@@ -56,6 +58,7 @@ export const UNITS_AGGREGATE = gql`
     $fin_years_min: Int
     $fin_years_max: Int
     $sk_city_comparison: jsonb
+    $sk_district_comparison: jsonb
     $bathrooms: Int
     $bedrooms: Int
     $delivery_year_min: Int
@@ -64,6 +67,8 @@ export const UNITS_AGGREGATE = gql`
     $land_max:  Int 
     $finishing_type: String
     $user_id: uuid
+    $compound_id: uuid
+
   ) {
     units_aggregate(
       limit: 50
@@ -73,6 +78,7 @@ export const UNITS_AGGREGATE = gql`
           _gte: $fin_down_payment_min
           _lte: $fin_down_payment_max
         }
+        compound_id: {_eq: $compound_id}
         fin_monthly_payment: {
           _gte: $fin_monthly_payment_min
           _lte: $fin_monthly_payment_max
@@ -87,6 +93,9 @@ export const UNITS_AGGREGATE = gql`
         }
         sk_city:{
           _contains: $sk_city_comparison
+        }
+        sk_district:{
+          _contains: $sk_district_comparison
         }
         bathrooms: {
           _eq: $bathrooms
@@ -162,6 +171,7 @@ export const UNITS_BY_PK = gql`
         id
       }
       sk_city
+      sk_district
     }
   }
 `;

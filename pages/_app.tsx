@@ -4,6 +4,7 @@ import { useApollo } from "../lib/apolloClient";
 import { LanguageProvider } from "../Context/LangContext";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { AppContextProvider } from "../Context/AppContextProvider";
+import 'react-day-picker/lib/style.css';
 
 export default function MyApp(ctx: any) {
   const apolloClient = useApollo(ctx.pageProps.initialApolloState);
