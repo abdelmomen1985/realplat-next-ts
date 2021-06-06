@@ -16,7 +16,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
   const { data, refetch } = useQuery(USER_WISHLIST_IDS);
   const { t } = useTranslation()
-  const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
+  const wishListHandler = async (unit: Unit, wishlisted: boolean) => {
     // handle add to the server
     if (user) {
       unit.wishListed = !wishlisted;
@@ -49,7 +49,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
       setLoginModal(true);
     }
   };
-  const compareHandler = (unit: any, wishlisted: Boolean) => {
+  const compareHandler = (unit: any, wishlisted: boolean) => {
     console.log(unit);
     unit.comparing = !unit.comparing;
     let comparedUnit: Unit = { ...unit, wishListed: wishlisted };

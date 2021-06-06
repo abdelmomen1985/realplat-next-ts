@@ -8,7 +8,7 @@ export type StateType = {
   comparing: any[];
   setComparing: (val: any) => void;
   clearComparing: () => void;
-  loginModal: Boolean;
+  loginModal: boolean;
   setLoginModal: (val: any) => void;
   filterState: any;
   filterUnitsGlobal: (val: any) => void;

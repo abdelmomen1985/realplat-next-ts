@@ -52,7 +52,7 @@ export default function WhishList() {
     }
   }, [data]);
 
-  const compareHandler = (unit: Unit, wishlisted: Boolean) => {
+  const compareHandler = (unit: Unit, wishlisted: boolean) => {
     console.log(unit);
     unit.comparing = !unit.comparing;
     let comparedUnit: Unit = { ...unit, wishListed: wishlisted };
@@ -67,7 +67,7 @@ export default function WhishList() {
 
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
 
-  const removeFromWishListHandler = async (unit: Unit, wishlisted: Boolean) => {
+  const removeFromWishListHandler = async (unit: Unit, wishlisted: boolean) => {
     console.log(unit);
     unit.wishListed = !wishlisted;
     let wishListedUnit: Unit = { ...unit };

@@ -42,8 +42,8 @@ export type Unit = {
     name: any;
     id: string;
   };
-  wishListed: Boolean;
-  comparing: Boolean;
+  wishListed: boolean;
+  comparing: boolean;
 };
 
 export type Offer = {

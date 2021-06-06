@@ -5,6 +5,7 @@ import { LanguageProvider } from "../Context/LangContext";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { AppContextProvider } from "../Context/AppContextProvider";
 import 'react-day-picker/lib/style.css';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 export default function MyApp(ctx: any) {
   const apolloClient = useApollo(ctx.pageProps.initialApolloState);

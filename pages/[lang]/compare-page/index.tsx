@@ -35,7 +35,7 @@ const ComparePage: NextPage = () => {
       console.log("leaving and clearing", comparing);
     };
   }, []);
-  const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
+  const wishListHandler = async (unit: Unit, wishlisted: boolean) => {
     // handle add to the server
     if (user) {
       unit.wishListed = !wishlisted;

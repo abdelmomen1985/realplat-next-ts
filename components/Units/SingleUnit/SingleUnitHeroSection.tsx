@@ -1,17 +1,66 @@
 import React, { useContext, useState } from 'react'
-import { Unit } from '../../../interfaces'
 import { Slide } from 'react-slideshow-image';
-import CustomModal from './../../common/CustomModal/CustomModal';
 import 'react-slideshow-image/dist/styles.css'
+import clsx from 'clsx';
+import { useMutation } from '@apollo/client';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
+import {
+  EmailShareButton, FacebookShareButton, FacebookMessengerShareButton,
+  WhatsappShareButton, TwitterShareButton, PinterestShareButton,
+  EmailIcon, WhatsappIcon, TwitterIcon, PinterestIcon, FacebookIcon, FacebookMessengerIcon
+} from 'react-share'
+import { Unit } from '../../../interfaces'
+
 import { AppContext } from './../../../Context/AppContextProvider';
 import useTranslation from './../../../hooks/useTranslation';
-import clsx from 'clsx';
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../query/user';
+
+import CustomModal from './../../common/CustomModal/CustomModal';
+import styles from './unit.module.scss'
+
+
+
 const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
-  const { isMobile } = useContext(AppContext)
+  const { isMobile, user, setLoginModal, setComparing } = useContext(AppContext)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isWishListed, setIsWishListed] = useState<Boolean>(unit.wishListed)
   const { t, locale } = useTranslation()
+  const [addWishList] = useMutation(ADD_TO_WISHLIST);
+  const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
+
+  const wishListHandler = async () => {
+    // handle add to the server
+    if (user) {
+      unit.wishListed = !unit.wishListed;
+      let wishListedUnit: Unit = { ...unit };
+      if (wishListedUnit.wishListed) {
+        await addWishList({
+          variables: {
+            user_id: user.id,
+            unit_id: unit.id,
+          },
+        });
+      } else {
+        await removeWishList({
+          variables: {
+            user_id: user.id,
+            unit_id: unit.id,
+          },
+        });
+      }
+    } else {
+      console.log('u should see a modal man');
+      setLoginModal(true);
+    }
+  };
+  const compareHandler = () => {
+    unit.comparing = !unit.comparing;
+    let comparedUnit: Unit = { ...unit };
+    setComparing(comparedUnit);
+  };
   return (
-    <section>
+    <section className="relative">
 
       <div className={clsx(locale === 'en' ? 'flex-row' : 'flex-row-reverse', "block md:flex justify-center items-start relative")}>
         <div className="mr-1 h-full w-full md:w-2/3">
@@ -52,6 +101,55 @@ const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
           })}
         </Slide>
       </CustomModal>
+
+      <div className={styles.shareContainer}>
+        {/* create tool tips for these buttons */}
+        <button onClick={wishListHandler}>
+          {unit.wishListed ? <FontAwesomeIcon
+            icon={faHeart}
+            style={{ color: "red", fontSize: "25px" }}
+            aria-hidden="true"
+            className=" text-custom-red hover:text-white hover:text-opacity-50 text-opacity-50 text-2xl"
+          />
+            :
+            <FontAwesomeIcon icon={faHeart} className="text-white hover:text-red-600 text-opacity-50 text-2xl"
+              aria-hidden="true" />}
+        </button>
+        <button>
+          <FontAwesomeIcon icon={faShare} />
+        </button>
+
+        <button onClick={compareHandler}>compare</button>
+        <div className="relative">
+          <div className={clsx(styles.shareContainer, styles.shareBtns)}>
+            <EmailShareButton
+              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
+              <EmailIcon round={true} size={32} />
+            </EmailShareButton>
+            <FacebookShareButton
+              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
+              <FacebookIcon round={true} size={32} />
+            </FacebookShareButton>
+            <FacebookMessengerShareButton
+              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
+              <FacebookMessengerIcon round={true} size={32} />
+            </FacebookMessengerShareButton>
+
+            <WhatsappShareButton
+              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
+              <WhatsappIcon round={true} size={32} />
+            </WhatsappShareButton>
+            <TwitterShareButton
+              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
+              <TwitterIcon round={true} size={32} />
+            </TwitterShareButton>
+            <PinterestShareButton
+              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
+              <PinterestIcon round={true} size={32} />
+            </PinterestShareButton>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

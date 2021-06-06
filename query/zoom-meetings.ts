@@ -50,6 +50,7 @@ query pastMeetings($meetingIds: [String!]!) {
     participants_count
     start_time
     type
+    uuid
   }
 }
 `

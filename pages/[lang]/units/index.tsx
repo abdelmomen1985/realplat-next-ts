@@ -104,7 +104,7 @@ const UnitsPage: NextPage<{
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
 
-  const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
+  const wishListHandler = async (unit: Unit, wishlisted: boolean) => {
     // handle add to the server
     if (user) {
       unit.wishListed = !wishlisted;
@@ -137,7 +137,7 @@ const UnitsPage: NextPage<{
       setLoginModal(true);
     }
   };
-  const compareHandler = (unit: any, wishlisted: Boolean) => {
+  const compareHandler = (unit: any, wishlisted: boolean) => {
     console.log(unit);
     unit.comparing = !unit.comparing;
     let comparedUnit: Unit = { ...unit, wishListed: wishlisted };

@@ -3,7 +3,7 @@ import { Unit } from '../../interfaces';
 import useTranslation from './../../hooks/useTranslation';
 
 const ComparingDesktop = ({ comparingUnits, wishListHandler }:
-  { comparingUnits: any, wishListHandler: (unit: Unit, wishListed: Boolean) => void }) => {
+  { comparingUnits: any, wishListHandler: (unit: Unit, wishListed: boolean) => void }) => {
   const { t, locale } = useTranslation();
 
   return (

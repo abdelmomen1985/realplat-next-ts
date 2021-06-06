@@ -1,30 +1,29 @@
 import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { Unit } from '../../interfaces';
 import useTranslation from './../../hooks/useTranslation';
 
 
 const ComparingMobile = ({ comparingUnits, wishListHandler }:
-  { comparingUnits: any, wishListHandler: (unit: Unit, wishListed: Boolean) => void }) => {
+  { comparingUnits: any, wishListHandler: (unit: Unit, wishListed: boolean) => void }) => {
   const { t, locale } = useTranslation();
   return (
     <Table className="">
       <Thead className="bg-primary text-white">
         <Tr>
-          <th>{t("prop_type")}</th>
-          <th>{t("totalPrice")}</th>
-          <th>{t("pricePerM")}</th>
-          <th>{t("landArea")}</th>
-          <th>{t("bua")}</th>
-          <th>{t("deliveryDate")}</th>
-          <th>{t("downPay")}</th>
-          <th>{t("monthlyPay")}</th>
-          <th>{t("totalYears")}</th>
-          <th>{t("bedrooms")}</th>
-          <th>{t("bathrooms")}</th>
-          <th>{t("location")}</th>
-          <th>{t("wishList")}</th>
+          <Th>{t("prop_type")}</Th>
+          <Th>{t("totalPrice")}</Th>
+          <Th>{t("pricePerM")}</Th>
+          <Th>{t("landArea")}</Th>
+          <Th>{t("bua")}</Th>
+          <Th>{t("deliveryDate")}</Th>
+          <Th>{t("downPay")}</Th>
+          <Th>{t("monthlyPay")}</Th>
+          <Th>{t("totalYears")}</Th>
+          <Th>{t("bedrooms")}</Th>
+          <Th>{t("bathrooms")}</Th>
+          <Th>{t("location")}</Th>
+          <Th>{t("wishList")}</Th>
         </Tr>
       </Thead>
       {comparingUnits.map((unit: any) => (

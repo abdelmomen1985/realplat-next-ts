@@ -112,3 +112,16 @@
   right: 10px;
   z-index: 999;
 }
+
+.shareContainer {
+  position: absolute;
+  top: 10%;
+  right: -30px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.shareBtns {
+  right: -25px;
+}
