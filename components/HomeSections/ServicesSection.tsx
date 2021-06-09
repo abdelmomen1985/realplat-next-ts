@@ -23,7 +23,7 @@ const ServicesSection = () => {
     },
     {
       title: {
-        en: "best value",
+        en: "Best value",
         ar: "أفضل قيمة",
       },
       description: {
@@ -39,7 +39,7 @@ const ServicesSection = () => {
     },
     {
       title: {
-        en: "Endless Opportunities",
+        en: "Great Opportunities",
         ar: "فرص بلا حدود",
       },
       description: {

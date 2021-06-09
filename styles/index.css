@@ -13,18 +13,21 @@
     --main-text-secondary: #443c53;
     overflow-x: hidden;
   }
-  button, input, a:active {
+  button,
+  input,
+  a:active {
     outline: none !important;
   }
   h1 {
     @apply text-2xl;
-    font-family: "Comfortaa", cursive;
+    font-family: "Comfortaa", "Cairo", cursive;
   }
   small {
     font-family: "Comfortaa", cursive;
   }
   h2 {
     @apply text-xl;
+    font-family: "Comfortaa", "Cairo", cursive;
   }
   .leave-here {
     font-family: "Roboto", sans-serif;
@@ -156,7 +159,7 @@
   display: block !important;
 }
 
-.react-slideshow-container+ul.indicators {
+.react-slideshow-container + ul.indicators {
   position: absolute;
   top: 15px;
   left: 0;
@@ -165,13 +168,13 @@
   margin: auto;
 }
 
-.react-slideshow-container+ul.indicators li {
+.react-slideshow-container + ul.indicators li {
   width: 15px !important;
   height: 15px !important;
   margin: 0 5px 0 10px !important;
 }
 
-.react-slideshow-container+ul.indicators .each-slideshow-indicator::before {
+.react-slideshow-container + ul.indicators .each-slideshow-indicator::before {
   width: 20px !important;
   height: 20px !important;
   background: #fff !important;

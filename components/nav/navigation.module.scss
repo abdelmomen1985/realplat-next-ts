@@ -1,18 +1,15 @@
 .navLink {
   text-decoration: none;
-  @apply pb-1;
-  font-weight: 600;
+  @apply p-2;
+  font-family: "Comfortaa", "Cairo", cursive;
+  font-weight: 700;
   text-align: center;
-
-  &.active {
-    border-bottom: 3px solid var(--main-color);
-    color: var(--main-color);
-  }
 
   &:hover,
   &:active {
-    border-bottom: 3px solid var(--main-color);
-    color: var(--main-color);
+    color: white;
+    background-color: var(--main-color);
+    @apply rounded-lg;
   }
 
   @media screen and (max-width: 760px) {
@@ -37,5 +34,4 @@
     top: 0;
     position: relative;
   }
-
 }

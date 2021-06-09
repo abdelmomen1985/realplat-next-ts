@@ -1,17 +1,22 @@
-import React from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import { Unit } from '../../interfaces';
-import useTranslation from './../../hooks/useTranslation';
+import React from "react";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Unit } from "../../interfaces";
+import { _capitalizeFirst } from "../../lib/_utilFunctions";
+import useTranslation from "./../../hooks/useTranslation";
 
-
-const ComparingMobile = ({ comparingUnits, wishListHandler }:
-  { comparingUnits: any, wishListHandler: (unit: Unit, wishListed: boolean) => void }) => {
+const ComparingMobile = ({
+  comparingUnits,
+  wishListHandler,
+}: {
+  comparingUnits: any;
+  wishListHandler: (unit: Unit, wishListed: boolean) => void;
+}) => {
   const { t, locale } = useTranslation();
   return (
     <Table className="">
       <Thead className="bg-primary text-white">
         <Tr>
-          <Th>{t("prop_title")}</Th>
+          <Th></Th>
           <Th>{t("prop_type")}</Th>
           <Th>{t("totalPrice")}</Th>
           <Th>{t("pricePerM")}</Th>
@@ -28,16 +33,15 @@ const ComparingMobile = ({ comparingUnits, wishListHandler }:
         </Tr>
       </Thead>
       {comparingUnits.map((unit: any) => (
-        <Tbody
-          key={unit.id}
-          className="text-primary"
-        >
+        <Tbody key={unit.id} className="text-primary">
           <Tr>
-            <Td>{unit.property_type.name[locale]} {t("in")}{" "}
-              {unit.compound.name[locale]} {t("compound")}
-              {t("comma")} {unit.bedrooms} {t("bedrooms")}{t("comma")}{" "}
+            <Th>
+              {_capitalizeFirst(unit.property_type.name[locale] as string)}
+              {t("in")} {unit.compound.name[locale]} {t("compound")}
+              {t("comma")} {unit.bedrooms} {t("bedrooms")}
+              {t("comma")}{" "}
               {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
-            </Td>
+            </Th>
             <Td>{unit.property_type.name[locale]}</Td>
             <Td>
               {unit.fin_total} {t("egp")}
@@ -72,10 +76,9 @@ const ComparingMobile = ({ comparingUnits, wishListHandler }:
               {locale === "ar" ? unit.sk_city.name_ar : unit.sk_city.name}
             </Td>
             <Td>
-
               <button
                 onClick={() => wishListHandler(unit, unit.wishListed)}
-                className={unit.wishListed ? 'bg-primary' : 'bg-custom-red'}
+                className={unit.wishListed ? "bg-primary" : "bg-custom-red"}
                 style={{
                   color: "#fff",
                   borderRadius: "5px",
@@ -86,17 +89,14 @@ const ComparingMobile = ({ comparingUnits, wishListHandler }:
                   textAlign: "center",
                 }}
               >
-                {unit.wishListed
-                  ? "Remove from WishList"
-                  : "Add to Wish List"}
+                {unit.wishListed ? "Remove" : "Add"}
               </button>
             </Td>
           </Tr>
         </Tbody>
-      ))
-      }
-    </Table >
-  )
-}
+      ))}
+    </Table>
+  );
+};
 
-export default ComparingMobile
+export default ComparingMobile;

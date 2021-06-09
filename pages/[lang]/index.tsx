@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Layout from "../../components/Layouts/Layout";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getLocalizationProps } from "../../Context/LangContext";
@@ -7,6 +7,9 @@ import MainSection from "./../../components/HomeSections/MainSection";
 import ServicesSection from "./../../components/HomeSections/ServicesSection";
 import ExplorerSection from "./../../components/HomeSections/ExplorerSection";
 import GuidesSection from "./../../components/HomeSections/GuidesSection";
+import Exhibitors from "../../components/ExpoSections/Exhibitors";
+import HowWorksSection from "../../components/ExpoSections/HowWorksSection";
+import MainExpoSection from "../../components/ExpoSections/MainExpoSection";
 
 const IndexPage: NextPage = () => {
   // const { t } = useTranslation();
@@ -19,14 +22,15 @@ const IndexPage: NextPage = () => {
   }, []);
   return (
     <Layout title="Realestate Brand">
-      {/* top section */}
       <MainSection />
-      {/* services section   */}
       <ServicesSection />
-      {/* explorer section */}
       <ExplorerSection />
-      {/* guides section */}
       <GuidesSection />
+      {/* top section 
+      <MainExpoSection />
+      <Exhibitors />
+      <HowWorksSection />
+      */}
     </Layout>
   );
 };

@@ -31,10 +31,10 @@ export const NavLinks = (props: any) => {
       <style jsx>{``}</style>
       <div className="ml-4">
         <ActiveLink activeClassName={styles.active} href={`/${locale}/units`}>
-          <a className={clsx(styles.navLink, "ml-12 mr-3")}>{t("navSearch")}</a>
+          <a className={clsx(styles.navLink, "mx-3")}> {t("navSearch")} </a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/`}>
-          <a className={clsx(styles.navLink, "mx-3")}>{t("navProjects")}</a>
+          <a className={clsx(styles.navLink, "mx-3")}> {t("navProjects")} </a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/expo`}>
           <a className={clsx(styles.navLink, "mx-3")}>{t("navExpo")}</a>
