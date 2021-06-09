@@ -22,15 +22,15 @@ const IndexPage: NextPage = () => {
   }, []);
   return (
     <Layout title="Realestate Brand">
+      {/* top section 
       <MainSection />
       <ServicesSection />
       <ExplorerSection />
       <GuidesSection />
-      {/* top section 
+      */}
       <MainExpoSection />
       <Exhibitors />
       <HowWorksSection />
-      */}
     </Layout>
   );
 };
