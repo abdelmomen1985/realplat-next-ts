@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import clsx from 'clsx';
 import { useMutation } from '@apollo/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faShareAlt, faCompressAlt, faCompress } from '@fortawesome/free-solid-svg-icons';
 import {
   EmailShareButton, FacebookShareButton, FacebookMessengerShareButton,
   WhatsappShareButton, TwitterShareButton, PinterestShareButton,
   EmailIcon, WhatsappIcon, TwitterIcon, PinterestIcon, FacebookIcon, FacebookMessengerIcon
 } from 'react-share'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Unit } from '../../../interfaces'
 
 import { AppContext } from './../../../Context/AppContextProvider';
@@ -21,14 +22,17 @@ import styles from './unit.module.scss'
 
 
 
+
 const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
+  const shareMenuRef = useRef<HTMLDivElement>(null)
   const { isMobile, user, setLoginModal, setComparing } = useContext(AppContext)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [isWishListed, setIsWishListed] = useState<Boolean>(unit.wishListed)
+  const [isWishListed, setIsWishListed] = useState<boolean>(unit.wishListed)
+  const [showShareList, setShowShareList] = useState<boolean>(false)
   const { t, locale } = useTranslation()
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
-
+  let shareUrl = `https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/${locale}/units/${unit.id}`;
   const wishListHandler = async () => {
     // handle add to the server
     if (user) {
@@ -59,10 +63,32 @@ const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
     let comparedUnit: Unit = { ...unit };
     setComparing(comparedUnit);
   };
+  const clickHandler = (e: any) => {
+    if (shareMenuRef.current?.contains(e.target)) {
+      return
+    }
+    setShowShareList(false)
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', clickHandler);
+    return () => {
+      document.removeEventListener('mousedown', clickHandler)
+    }
+  }, [])
+  const shareMenuAnimations = {
+    hidden: {
+      opacity: 0,
+      y: -15
+    },
+    visible: {
+      opacity: 1,
+      y: 0
+    }
+  }
   return (
     <section className="relative">
 
-      <div className={clsx(locale === 'en' ? 'flex-row' : 'flex-row-reverse', "block md:flex justify-center items-start relative")}>
+      <div className={clsx(locale === 'en' ? 'flex-row' : 'flex-row-reverse', "block md:flex justify-center items-start relative w-full md:w-4/5 mx-auto")}>
         <div className="mr-1 h-full w-full md:w-2/3">
           <img style={{ borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', height: '100%', width: '100%' }} src={unit.media.photos[0]} />
         </div>
@@ -109,46 +135,55 @@ const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
             icon={faHeart}
             style={{ color: "red", fontSize: "25px" }}
             aria-hidden="true"
-            className=" text-custom-red hover:text-white hover:text-opacity-50 text-opacity-50 text-2xl"
+            className="text-custom-red hover:text-gray-500 mt-1 hover:text-opacity-50 text-opacity-50 text-xl"
           />
             :
-            <FontAwesomeIcon icon={faHeart} className="text-white hover:text-red-600 text-opacity-50 text-2xl"
+            <FontAwesomeIcon icon={faHeart} className="text-gray-500 mt-1 hover:text-red-600 text-opacity-50 text-xl"
               aria-hidden="true" />}
         </button>
-        <button>
-          <FontAwesomeIcon icon={faShare} />
+        <button onClick={() => setShowShareList(prev => !prev)}>
+          <FontAwesomeIcon className="text-primary text-xl" icon={faShareAlt} />
         </button>
 
-        <button onClick={compareHandler}>compare</button>
-        <div className="relative">
-          <div className={clsx(styles.shareContainer, styles.shareBtns)}>
-            <EmailShareButton
-              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
-              <EmailIcon round={true} size={32} />
-            </EmailShareButton>
-            <FacebookShareButton
-              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
-              <FacebookIcon round={true} size={32} />
-            </FacebookShareButton>
-            <FacebookMessengerShareButton
-              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
-              <FacebookMessengerIcon round={true} size={32} />
-            </FacebookMessengerShareButton>
+        <button onClick={compareHandler}>
+          {unit.comparing ?
+            <FontAwesomeIcon className="text-primary text-xl mt-1" icon={faCompress} />
+            :
+            <FontAwesomeIcon className="text-primary text-xl mt-1" icon={faCompressAlt} />}
+        </button>
 
-            <WhatsappShareButton
-              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
-              <WhatsappIcon round={true} size={32} />
-            </WhatsappShareButton>
-            <TwitterShareButton
-              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
-              <TwitterIcon round={true} size={32} />
-            </TwitterShareButton>
-            <PinterestShareButton
-              url={`https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/en/units/${unit.id}`} >
-              <PinterestIcon round={true} size={32} />
-            </PinterestShareButton>
-          </div>
-        </div>
+        <AnimatePresence exitBeforeEnter>
+          {showShareList &&
+            <motion.div variants={shareMenuAnimations} initial="hidden" animate="visible" exit="hidden" ref={shareMenuRef} className={clsx(styles.shareContainer, styles.shareBtns)}>
+              <EmailShareButton
+                url={shareUrl} >
+                <EmailIcon round={true} size={32} />
+              </EmailShareButton>
+              <FacebookShareButton
+                url={shareUrl} >
+                <FacebookIcon round={true} size={32} />
+              </FacebookShareButton>
+              <FacebookMessengerShareButton
+                url={shareUrl} >
+                <FacebookMessengerIcon round={true} size={32} />
+              </FacebookMessengerShareButton>
+
+              <WhatsappShareButton
+                url={shareUrl} >
+                <WhatsappIcon round={true} size={32} />
+              </WhatsappShareButton>
+              <TwitterShareButton
+                url={shareUrl} >
+                <TwitterIcon round={true} size={32} />
+              </TwitterShareButton>
+              <PinterestShareButton
+                url={shareUrl} >
+                <PinterestIcon round={true} size={32} />
+              </PinterestShareButton>
+            </motion.div>
+          }
+        </AnimatePresence>
+
       </div>
     </section>
   )

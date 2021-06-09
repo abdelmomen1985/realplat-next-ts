@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import clsx from 'clsx'
 import styles from './homeStyles.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,15 +17,19 @@ interface Slide {
 }
 const CustomSlide = ({ imgs }: { imgs: Slide[] }) => {
   const { locale } = useTranslation();
-  const { filterUnitsGlobal, isMobile } = useContext(AppContext);
+  const { filterUnitsGlobal, isMobile, isTablet } = useContext(AppContext);
+
+  // useEffect(() => {
+  //   console.log(isTablet);
+  // }, [isTablet])
+
   const filterByCityHandler = (cityId: string) => {
-    console.log(cityId);
     filterUnitsGlobal({ sk_city: cityId });
     router.push(`/${locale}/units`);
   };
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 my-4 px-3 mx-auto"
-      style={{ height: isMobile ? '70vh' : 'auto' }}
+      style={{ height: isMobile || isTablet ? '70vh' : 'auto' }}
     >
       <div className="py-1 mx-1 md:py-2 md:mx-2">
         <div className={clsx(styles.slideImageContainer)}>

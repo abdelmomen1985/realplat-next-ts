@@ -197,3 +197,8 @@
 .responsiveTable td .tdBefore {
   width: calc(50% - 5px) !important;
 }
+
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}

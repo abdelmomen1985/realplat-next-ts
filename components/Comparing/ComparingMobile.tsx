@@ -11,6 +11,7 @@ const ComparingMobile = ({ comparingUnits, wishListHandler }:
     <Table className="">
       <Thead className="bg-primary text-white">
         <Tr>
+          <Th>{t("prop_title")}</Th>
           <Th>{t("prop_type")}</Th>
           <Th>{t("totalPrice")}</Th>
           <Th>{t("pricePerM")}</Th>
@@ -32,6 +33,11 @@ const ComparingMobile = ({ comparingUnits, wishListHandler }:
           className="text-primary"
         >
           <Tr>
+            <Td>{unit.property_type.name[locale]} {t("in")}{" "}
+              {unit.compound.name[locale]} {t("compound")}
+              {t("comma")} {unit.bedrooms} {t("bedrooms")}{t("comma")}{" "}
+              {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
+            </Td>
             <Td>{unit.property_type.name[locale]}</Td>
             <Td>
               {unit.fin_total} {t("egp")}

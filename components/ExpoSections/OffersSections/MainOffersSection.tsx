@@ -31,16 +31,16 @@ const MainOffersSection = () => {
   ]
   return (
     <section className="bg-secondary grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-8 justify-center items-center py-10 px-5 mb-0 mt-0">
-      <div className={clsx(locale === 'en' ? "md:ml-24 md:mr-5" : "md:mr-24 md:ml-5")}>
+      <div className={clsx(locale === 'en' ? "lg:ml-24 lg:mr-5" : "lg:mr-24 lg:ml-5")}>
         <h4 className="text-2xl font-normal text-black text-opacity-50">{t('welcomeTo')}..</h4>
         <h2 className="text-3xl font-bold text-custom-blue-dark">{t('mellwExpo')}</h2>
         <p className="text-lg text-black text-opacity-50">{t('guideHeader')}</p>
         <button
-          className="bg-primary text-white text-md mt-5 mb-2 font-medium rounded-2xl px-12 py-3 shadow-md mx-auto ">
+          className="bg-primary text-white text-base mt-5 mb-2 font-medium rounded-2xl px-12 py-3 shadow-md mx-auto ">
           {t('contactBtn')}</button>
       </div>
-      <div className={clsx(locale === "en" ? "md:mr-10 md:ml-24" : "md:ml-10 md:mr-24", "w-full")}>
-        <div className="flex justify-center items-center py-3 w-full md:w-2/4 px-2 bg-gray-400 ">
+      <div className={clsx(locale === "en" ? "lg:mr-10 lg:ml-24" : "lg:ml-10 lg:mr-24", "w-full")}>
+        <div className="flex justify-center items-center py-3 w-full  lg:w-2/4 px-2 bg-gray-400 ">
           <img src="/images/timer.png" className={clsx(locale === 'en' ? "mr-1" : 'ml-1')} />
           <div>
             <h4 className="text-xl text-black text-opacity-50">{t('offerTo')}..</h4>

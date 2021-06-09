@@ -27,7 +27,7 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user, setComparing, setLoginModal, filterState, isMobile } = useContext(AppContext);
+  const { user, setComparing, setLoginModal, filterState, isMobile, isTablet } = useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
   const [showFiltersMenu, setShowFiltersMenu] = useState(false)
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
@@ -162,9 +162,9 @@ const UnitsPage: NextPage<{
   return (
     <LanguageProvider localization={localization}>
       <Layout title="Brand Logo Here">
-        <div className={clsx(isMobile && 'flex justify-end', "mx-4 my-5")}>
+        <div className={clsx(isMobile || isTablet && 'flex justify-end', "mx-4 my-5")}>
 
-          {isMobile ? (
+          {isMobile || isTablet ? (
             <>
               <button
                 className="btn-outline-primary text-2xl m-0"
@@ -208,7 +208,7 @@ const UnitsPage: NextPage<{
 
         </div>
         {loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center justify-center items-center">
           {!loading &&
             innerUnits &&
             innerUnits.map((unit: any) => (

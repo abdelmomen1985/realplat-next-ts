@@ -9,6 +9,7 @@ const ComparingDesktop = ({ comparingUnits, wishListHandler }:
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 px-2 mx-auto">
       <div className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl bg-primary text-white">
+        <h4 style={{ marginBottom: '30px' }}>{t("prop_title")}</h4>
         <h4>{t("prop_type")}</h4>
         <h4>{t("totalPrice")}</h4>
         <h4>{t("pricePerM")}</h4>
@@ -28,6 +29,12 @@ const ComparingDesktop = ({ comparingUnits, wishListHandler }:
           key={unit.id}
           className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl text-primary"
         >
+          <h3>
+            {unit.property_type.name[locale]} {t("in")}{" "}
+            {unit.compound.name[locale]} {t("compound")}
+            {t("comma")} {unit.bedrooms} {t("bedrooms")}{t("comma")}{" "}
+            {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
+          </h3>
           <h3>{unit.property_type.name[locale]}</h3>
           <h3>
             {unit.fin_total} {t("egp")}

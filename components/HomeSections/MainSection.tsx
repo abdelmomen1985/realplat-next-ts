@@ -47,13 +47,15 @@ const suggestedCities = [
 const MainSection = () => {
   const router = useRouter();
   const { t, locale } = useTranslation();
-  const { filterUnitsGlobal, isMobile } = useContext(AppContext);
+  const { filterUnitsGlobal, isMobile, isTablet } = useContext(AppContext);
   const filterByCityHandler = (cityId: string) => {
     console.log(cityId);
     filterUnitsGlobal({ sk_city: cityId });
     router.push(`/${locale}/units`);
   };
   console.log(isMobile);
+  console.log(isTablet);
+
   return (
     <>
       <section

@@ -24,11 +24,11 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
         <h4 className={clsx("text-center text-xl font-semibold", locale === 'en' ? "ml-12 md:ml-1" : "mr-12 md:mr-1")}>{offer.projectName}</h4>
         <div className="flex justify-start items-center my-4 mx-3">
           <img src="/images/from.png" className={locale === 'en' ? "mr-2" : 'ml-2'} />
-          <p className="text-md font-medium text-black">{t('from')}: {offer.startingPrice}</p>
+          <p className="text-base font-medium text-black">{t('from')}: {offer.startingPrice}</p>
         </div>
         <div className="flex justify-start items-center my-4 mx-3">
           <img src="/images/discount.png" className={locale === 'en' ? "mr-2" : 'ml-2'} />
-          <p className="text-md font-medium text-black">{t('discount')}: {offer.discountPer}%</p>
+          <p className="text-base font-medium text-black">{t('discount')}: {offer.discountPer}%</p>
         </div>
       </div>
     </div>

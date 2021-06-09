@@ -1,5 +1,7 @@
 import React from "react";
 import useTranslation from "../../../hooks/useTranslation";
+import styles from './unit.module.scss'
+import clsx from 'clsx'
 export default function FloorPlan({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
 
@@ -12,7 +14,9 @@ export default function FloorPlan({ unit }: { unit: any }) {
         <span className="text-2xl font-medium mx-4 capitalize">{t("floorPlan")}</span>
       </h3>
 
-      <img src={unit.media.floor_plan} className="w-4/5 mx-auto" />
+      <div className={styles.floorPlanContainer}>
+        <img src={unit.media.floor_plan} className={clsx(styles.floorPlan, "w-4/5 mx-auto")} />
+      </div>
     </div>
   );
 }

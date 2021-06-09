@@ -13,6 +13,7 @@ export type StateType = {
   filterState: any;
   filterUnitsGlobal: (val: any) => void;
   isMobile?: boolean;
+  isTablet?: boolean;
 };
 
 export const setStorageItems = (name: string, items: any[]) => {

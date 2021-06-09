@@ -126,7 +126,9 @@ export default function PricesModal(props: any) {
               width: isMobile ? '90%' : "250px",
               left: isMobile ? '0' : 'auto',
               right: isMobile ? '0' : 'auto',
-              margin: isMobile ? '0 auto' : ''
+              margin: isMobile ? '0 auto' : '',
+              fontSize: '17px',
+              fontWeight: 500
             }}
           >
             {pricesList.map((item) => {
@@ -154,7 +156,7 @@ export default function PricesModal(props: any) {
             })}
             <button
               onClick={applyFiltersHandler}
-              className="w-full rounded-md bg-primary text-white font-bold text-md p-3 mt-2 mb-1 mx-auto"
+              className="w-full rounded-md bg-primary text-white font-bold text-base p-3 mt-2 mb-1 mx-auto"
             >
               Apply
             </button>

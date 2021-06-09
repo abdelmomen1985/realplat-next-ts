@@ -26,10 +26,7 @@ export default function UnitInformation({ unit }: { unit: any }) {
   }, [locale])
   return (
     <div className="px-5 py-3 grid grid-cols-1 md:grid-cols-2 items-start"
-      style={{
-        height: isMobile ? 'auto' : '100vh',
-        maxHeight: '100%',
-      }}
+
     >
       <div>
         <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">

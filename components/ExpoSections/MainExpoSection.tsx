@@ -50,7 +50,7 @@ const MainExpoSection = () => {
           <h2 className="text-2xl md:text-4xl text-white py-3  font-medium">
             {t('mellwExpo')}
           </h2>
-          <p className="text-md text-white">
+          <p className="text-base text-white">
             {t('expoDesc')}
           </p>
           <div className="flex flex-wrap items-center justify-between my-3 mx-1">

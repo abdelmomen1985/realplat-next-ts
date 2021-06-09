@@ -65,7 +65,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
         `}
       </style>
       <section className="">
-        <div className="text-center lg:text-justify gap-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-6 lg:grid-cols-8 md:gap-0 bg-gray-300 py-5 w-100">
+        <div className="text-center lg:text-justify gap-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-8 md:gap-0 bg-gray-300 py-5 w-100">
           {/* Location */}
           <DropDown
             title="Location"

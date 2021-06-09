@@ -64,7 +64,7 @@ const GuidesSection = () => {
   return (
     <>
       <section className="my-3 w-full relative py-5 bg-secondary">
-        <div className="w-full md:w-2/3 my-8 py-7  mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-10">
+        <div className="w-full lg:w-2/3 my-8 py-7  mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 px-10">
           <div className="mr-3">
             <h3 className="text-main text-2xl font-semibold my-4 whitespace-no-wrap">
               {t("guideTitle")}
@@ -72,7 +72,7 @@ const GuidesSection = () => {
             <p className="font-comfortaa text-black text-opacity-50 text-xl  font-medium">
               {t("guideHeader")}
             </p>
-            <button className="block bg-primary text-white text-md mt-5 mb-2 font-medium rounded-lg px-3 py-2 shadow-md mx-auto md:mx-0 ">
+            <button className="block bg-primary text-white text-base mt-5 mb-2 font-medium rounded-lg px-3 py-2 shadow-md mx-auto md:mx-0 ">
               {t("guidesBtn")}
             </button>
           </div>

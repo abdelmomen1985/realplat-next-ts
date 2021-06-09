@@ -105,6 +105,10 @@ const common = {
   paymentYears: "سنوات السداد",
   navSign: "تسجيل دخول",
   navSignOut: "تسجيل خروج",
+  prop_title: "اسم العقار",
+  back: "رجوع",
+
+
 };
 
 export default common;

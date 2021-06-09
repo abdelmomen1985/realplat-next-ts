@@ -93,7 +93,12 @@
   width: 16rem;
   right: -2.5rem;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 767px) {
+    right: -8px;
+    width: 13rem;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
     left: -15px;
     right: auto;
     width: 12rem;

@@ -105,6 +105,8 @@ const common = {
   paymentYears: "Payment Years",
   navSign: "Sign In",
   navSignOut: "Sign Out",
+  prop_title: "Property Title",
+  back: "Back",
 };
 
 export default common;

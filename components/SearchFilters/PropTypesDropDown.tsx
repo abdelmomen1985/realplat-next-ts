@@ -191,8 +191,9 @@ export default function PropTypesDropDown({
                     margin: "5px auto",
                     textAlign: "center",
                     fontSize: "16px",
-                    fontWeight: "bolder",
+                    fontWeight: 500,
                   }}
+
                   key={item.id}
                   onClick={() => multiSelectItem(item)}
                 >

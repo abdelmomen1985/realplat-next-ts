@@ -85,10 +85,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       type: ACTION_TYPES.SET_COMPARING,
       payload: unit,
     });
-    if (state.comparing.length === 1) {
-      router.push(`/${locale}/compare-page`);
-    }
-    console.log(state.comparing);
   };
   const clearComparing = () => {
     dispatch({
@@ -104,9 +100,15 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   };
   const [loginModal, setLoginModal] = useState(false);
 
+  // const checkTablet = (windowWidth: number) => {
+  //     if(   ){
+
+  //     }
+  // }
   const contextValues: StateType = {
     ...state,
     isMobile: deviceSize?.width! < 768,
+    isTablet: 767 < deviceSize?.width! && deviceSize?.width! < 1023,
     setUser,
     updateUser,
     setComparing,

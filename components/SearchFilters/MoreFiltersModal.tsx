@@ -260,19 +260,19 @@ export default function MoreFiltersModal({
               >
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="mx-2 text-gray-500 font-bold text-md"
+                  className="mx-2 text-gray-500 font-bold text-base"
                 >
                   <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <button
                   onClick={applyFiltersHandler}
-                  className="mx-2 bg-primary font-bold text-md text-white py-3 px-5 shadow-md"
+                  className="mx-2 bg-primary font-bold text-base text-white py-3 px-5 shadow-md"
                 >
                   {t('apply')}
                 </button>
                 <button
                   onClick={clearAllHandler}
-                  className="mx-2 bg-white font-bold text-md text-gray-500 py-3 px-5 shadow-md"
+                  className="mx-2 bg-white font-bold text-base text-gray-500 py-3 px-5 shadow-md"
                 >
                   {t('clearAll')}
                 </button>
