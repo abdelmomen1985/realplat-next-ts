@@ -4,8 +4,12 @@ import { FilterListType, PropertyType } from "../../interfaces/filters";
 import { GET_PROPERTY_TYPES } from "../../query/propertyTypes";
 import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { AppContext } from './../../Context/AppContextProvider';
+import {
+  faCheck,
+  faAngleUp,
+  faAngleDown,
+} from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "./../../Context/AppContextProvider";
 interface PropTypesDropDownProps {
   title: string;
   filtered: (val: FilterListType) => void;
@@ -20,7 +24,6 @@ export default function PropTypesDropDown({
   title,
   filtered,
   filterListState,
-  icon,
   entryPoint,
   isOpen,
   toggOpen,
@@ -29,7 +32,7 @@ export default function PropTypesDropDown({
   const [listTitle, setListTitle] = useState<string>(title);
   //const [setInnerFilterList] = useState<any[]>([]);
   const { t, locale } = useTranslation();
-  const { isMobile } = useContext(AppContext)
+  const { isMobile } = useContext(AppContext);
   const [propTypesInnerState, setPropTypesInnerState] = useState<any[]>(
     data?.property_types
   );
@@ -130,27 +133,29 @@ export default function PropTypesDropDown({
             color: #ffffff;
             background-color: #007882;
           }
-          .circularIcon{
+          .circularIcon {
             width: 10px;
             height: 10px;
             margin-right: 5px;
-            background-color: #EDAE49;
+            background-color: #edae49;
             border-radius: 50%;
             border: transparent;
-            display: block
+            display: block;
           }
         `}
       </style>
-      <div className="dd-wrapper  w-11/12 lg:w-auto mx-auto relative" ref={node}>
+      <div className="dd-wrapper  w-11/12  mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header text-lg md:text-base w-11/12 lg:w-auto border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
+          className="dd-header text-lg md:text-base w-11/12 border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
           onClick={() => {
             toggOpen(!isOpen);
           }}
         >
           <div className="dd-header-title flex justify-center lg:justify-between items-center">
-            {listTitle !== 'prop_type' && <span className="circularIcon"></span>}
+            {listTitle !== "prop_type" && (
+              <span className="circularIcon"></span>
+            )}
             {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpen ? (
               <span>
@@ -160,7 +165,6 @@ export default function PropTypesDropDown({
             ) : (
               <span>
                 <FontAwesomeIcon icon={faAngleDown} className="ml-1" />
-
               </span>
             )}
           </div>
@@ -175,10 +179,10 @@ export default function PropTypesDropDown({
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 900,
-              width: isMobile ? '90%' : "250px",
-              left: isMobile ? '0' : 'auto',
-              right: isMobile ? '0' : 'auto',
-              margin: isMobile ? '0 auto' : ''
+              width: isMobile ? "90%" : "250px",
+              left: isMobile ? "0" : "auto",
+              right: isMobile ? "0" : "auto",
+              margin: isMobile ? "0 auto" : "",
             }}
           >
             {propTypesInnerState &&
@@ -193,13 +197,11 @@ export default function PropTypesDropDown({
                     fontSize: "16px",
                     fontWeight: 500,
                   }}
-
                   key={item.id}
                   onClick={() => multiSelectItem(item)}
                 >
                   {locale === "ar" ? item.name.ar : item.name.en}{" "}
-                  {item.selected ? <FontAwesomeIcon icon={faCheck} />
-                    : ""}
+                  {item.selected ? <FontAwesomeIcon icon={faCheck} /> : ""}
                 </button>
               ))}
           </div>

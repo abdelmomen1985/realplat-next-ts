@@ -28,6 +28,7 @@ const common = {
   knowMoreBtn: "اعرف المزيد",
   call: "مكالمة",
   whatsapp: "واتساب",
+  zoom: "زووم",
   message: "رسالة",
   deliveryDetails: "بيانات التشطيب",
   localeSwitcher: "اللغة",
@@ -43,7 +44,7 @@ const common = {
   expoDesc:
     "جميل 4 غرف نوم ، 2 حمام منزل مع أسقف مقببة ، مطبخ مفتوح وغرفة عائلية ، أرضيات صلبة في جميع الأنحاء (ترافرتين متدلي في كل مكان باستثناء غرف النوم التي هي أرضيات خشبية).",
   registerBtn: "سجل الآن",
-  howWorks: "كيف يسير الأمر",
+  howWorks: "كيف يعمل ميلو",
   welcomeTo: "مرحبًا في",
   offerTo: "سوف ينتهي العرض في",
   pricePerM: "سعر المتر",
@@ -106,7 +107,7 @@ const common = {
   paymentYears: "سنوات السداد",
   navSign: "تسجيل دخول",
   navSignOut: "تسجيل خروج",
-  prop_title: "اسم العقار",
+  propTitle: "اسم العقار",
   back: "رجوع",
 };
 

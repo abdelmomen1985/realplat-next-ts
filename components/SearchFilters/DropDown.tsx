@@ -3,8 +3,12 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { GET_LOCATIONS } from "../../query/locations";
 import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { AppContext } from './../../Context/AppContextProvider';
+import {
+  faAngleDown,
+  faAngleUp,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "./../../Context/AppContextProvider";
 interface Ddprops {
   title: string;
   list: any;
@@ -20,7 +24,7 @@ export default function DropDown(props: Ddprops) {
   const [isOpenState, setIsOpenState] = useState(false);
   const [listTitle, setListTitle] = useState(props.title);
   const [locationsInnerState, setLocationsInnerState] = useState(data?.units);
-  const { isMobile } = useContext(AppContext)
+  const { isMobile } = useContext(AppContext);
   // const list = props.list;
   const { t, locale } = useTranslation();
   const node = useRef<HTMLDivElement>(null);
@@ -58,16 +62,17 @@ export default function DropDown(props: Ddprops) {
     };
   }, []);
   useEffect(() => {
-
     if (data && locationsInnerState.length > 0) {
       locationsInnerState.map((single: any) => {
         if (single.sk_city._id === props.filterListState.sk_city) {
-          console.log(single.sk_city.name)
-          setListTitle(locale === "ar" ? single.sk_city.name_ar : single.sk_city.name)
+          console.log(single.sk_city.name);
+          setListTitle(
+            locale === "ar" ? single.sk_city.name_ar : single.sk_city.name
+          );
         }
-      })
+      });
     }
-  }, [locationsInnerState])
+  }, [locationsInnerState]);
   const handleClick = (e: any) => {
     if (node?.current?.contains(e.target)) {
       // inside click
@@ -109,34 +114,33 @@ export default function DropDown(props: Ddprops) {
     <>
       <style jsx>
         {`
-      
           .filter-button:hover {
             box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
             border: transparent;
             color: #ffffff;
             background-color: #007882;
           }
-          .circularIcon{
+          .circularIcon {
             width: 10px;
             height: 10px;
             margin-right: 5px;
-            background-color: #EDAE49;
+            background-color: #edae49;
             border-radius: 50%;
             border: transparent;
-            display: block
+            display: block;
           }
         `}
       </style>
-      <div className="dd-wrapper w-11/12 lg:w-auto mx-auto relative" ref={node}>
+      <div className="dd-wrapper  w-11/12 mx-auto relative" ref={node}>
         <button
           type="button"
-          className="w-11/12 lg:w-auto dd-header text-lg md:text-base border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
+          className=" dd-header w-11/12 text-lg md:text-base border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={toggleList}
         >
           <div className="dd-header-title flex justify-center lg:justify-between items-center">
-            {listTitle !== 'location' && <span className="circularIcon"></span>} {t(`${listTitle.toLowerCase()}`)}{" "}
+            {listTitle !== "location" && <span className="circularIcon"></span>}{" "}
+            {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpenState ? (
-
               <span>
                 {" "}
                 <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
@@ -158,10 +162,10 @@ export default function DropDown(props: Ddprops) {
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: isMobile ? '90%' : "250px",
-              left: isMobile ? '0' : 'auto',
-              right: isMobile ? '0' : 'auto',
-              margin: isMobile ? '0 auto' : ''
+              width: isMobile ? "90%" : "250px",
+              left: isMobile ? "0" : "auto",
+              right: isMobile ? "0" : "auto",
+              margin: isMobile ? "0 auto" : "",
             }}
           >
             {locationsInnerState.map((item: any) => (
@@ -181,10 +185,7 @@ export default function DropDown(props: Ddprops) {
                 }}
               >
                 {locale === "ar" ? item.sk_city.name_ar : item.sk_city.name}{" "}
-
-                {item.selected ?
-                  <FontAwesomeIcon icon={faTimes} />
-                  : null}
+                {item.selected ? <FontAwesomeIcon icon={faTimes} /> : null}
               </button>
             ))}
           </div>

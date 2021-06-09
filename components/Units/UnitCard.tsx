@@ -62,10 +62,10 @@ export const UnitCard = ({
   }, []);
   return (
     <AnimatePresence exitBeforeEnter>
-      <div className="w-full my-3 flex justify-center">
+      <div className="w-full my-3 flex ">
         <div
           className={
-            "m-2 max-w-sm rounded-xl shadow-xl flex-1 relative " +
+            "m-2 max-w-sm  rounded-xl shadow-xl flex-1 relative " +
             (unit.comparing ? "bg-primary text-white" : "bg-white")
           }
         >
@@ -158,12 +158,12 @@ export const UnitCard = ({
             <a>
               <div className="px-6 py-4 flex justify-between">
                 <div>
-                  <p className="text-lg font-medium font-roboto capitalize text-text-secondary">
+                  <h3 className="text-lg font-medium font-roboto capitalize text-text-secondary">
                     {unit.property_type.name[locale]} {t("in")}{" "}
                     {unit.compound.name[locale]} {t("compound")}
                     {t("comma")} {unit.bedrooms} {t("bedrooms")} <br />{" "}
                     {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
-                  </p>
+                  </h3>
                   <p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary">
                     {t("totalPrice")}: {unit.fin_total} {t("egp")}
                   </p>
@@ -215,7 +215,7 @@ export const UnitCard = ({
                 style={{
                   position: "absolute",
                   bottom: "-9rem",
-                  right: "-5rem",
+                  right: "2rem",
                   zIndex: 999,
                 }}
               >
@@ -248,6 +248,16 @@ export const UnitCard = ({
                     src="/images/whatsapp.png"
                   />{" "}
                   {isMobile ? "" : t("whatsapp")}
+                </button>
+                <button className="flex  w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+                  <img
+                    className={clsx(
+                      "mr-0",
+                      locale === "en" ? "md:mr-1" : "md:ml-1"
+                    )}
+                    src="/images/zoom.png"
+                  />{" "}
+                  {isMobile ? "" : t("zoom")}
                 </button>
               </motion.div>
             )}

@@ -1,53 +1,50 @@
-import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import useTranslation from '../../hooks/useTranslation';
-import { AppContext } from '../../Context/AppContextProvider';
-import { useLazyQuery } from '@apollo/client';
-import { GET_USER_BY_ID } from '../../query/user'
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { AppContext } from "../../Context/AppContextProvider";
+import { useLazyQuery } from "@apollo/client";
+import { GET_USER_BY_ID } from "../../query/user";
 export default function Login(props: any) {
   const { setUser } = useContext(AppContext);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(
-    undefined
-  );
-  const router = useRouter();
-  const { locale } = useTranslation();
+  const [errorMessage, setErrorMessage] =
+    useState<string | undefined>(undefined);
+
   const { register, handleSubmit, errors } = useForm();
   const [fetchUserData, { data: userData }] = useLazyQuery(GET_USER_BY_ID, {
     onCompleted() {
-      console.log(userData.users_by_pk)
+      console.log(userData.users_by_pk);
       setUser({ ...userData.users_by_pk });
       props.setLoginModal(false);
-      return router.push(`/${locale}/profile/wishlist`)
+      return;
     },
     onError(error) {
-      console.log(error)
-    }
-  })
+      console.log(error);
+    },
+  });
   const onLogin = async (data: any) => {
     const email = data.email;
     const password = data.password;
 
-    await fetch('/api/sessions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("/api/sessions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     })
       .then(async (response) => {
         if (response.ok) {
-          const userResp = await fetch('/api/getUserSession', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+          const userResp = await fetch("/api/getUserSession", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
           });
           if (userResp.status === 200) {
             let currentUser = await userResp.json();
-            let currentUserId = currentUser.id
+            let currentUserId = currentUser.id;
             fetchUserData({
               variables: {
-                id: currentUserId
+                id: currentUserId,
               },
-            })
-          };
+            });
+          }
         } else {
           const errorResp = await response.json();
           const errorText = errorResp.message;
@@ -60,19 +57,7 @@ export default function Login(props: any) {
   };
   return (
     <form onSubmit={handleSubmit(onLogin)}>
-      <style jsx>
-        {`
-          .form-group label {
-            font-size: 14px;
-            padding: 5px;
-          }
-          .form-group input {
-            border-radius: 5px;
-            padding: 5px;
-            width: 100%;
-          }
-        `}
-      </style>
+      <style jsx>{``}</style>
       <div className="form-group">
         <label className="block my-2" htmlFor="email">
           Email
@@ -82,10 +67,10 @@ export default function Login(props: any) {
           name="email"
           placeholder="Email"
           ref={register({
-            required: 'Email is Required',
+            required: "Email is Required",
             pattern: {
               value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: 'Please Enter A valid Email Address',
+              message: "Please Enter A valid Email Address",
             },
           })}
         />
@@ -104,7 +89,7 @@ export default function Login(props: any) {
           name="password"
           placeholder="Password"
           ref={register({
-            required: 'Password is Required',
+            required: "Password is Required",
             minLength: {
               value: 8,
               message: "password can't be shorter than 8 Characters",

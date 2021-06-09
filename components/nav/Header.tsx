@@ -4,7 +4,7 @@ import { NavLinks } from "./NavLinks";
 import AuthModal from "../Auth/AuthModal";
 import { AppContext } from "../../Context/AppContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 function Header() {
   // const [loginModal, setLoginModal] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
@@ -41,7 +41,7 @@ function Header() {
     <>
       <header className="relative my-2 p-2 pb-4">
         <div style={{ bottom: "0", width: "100%" }}>
-          <nav className="container px-5 flex flex-row justify-between space-y-3 lg:space-y-0">
+          <nav className="container px-5 flex flex-row justify-between ">
             <h1
               className="text-bold text-2xl p-0.5 cursor-pointer"
               style={{ padding: "0.125rem" }}
@@ -53,29 +53,26 @@ function Header() {
             <div
               ref={mobileMenu}
               className={
-                "pt-2 hidden lg:flex flex-wrap lg:flex-row flex-col lg:justify-between  w-full " +
+                "pt-2 hidden lg:flex flex-wrap lg:flex-row flex-col justify-between  w-full " +
                 (isMobileMenuOpen ? "mobile-menu " : "")
               }
             >
-              <NavLinks
-                setLoginModal={setLoginModal}
-
-              />
+              <NavLinks setLoginModal={setLoginModal} />
             </div>
 
             <div className="cursor-pointer block lg:hidden bg-transparent border-none focus:outline-none outline-none">
-              <FontAwesomeIcon className=" text-black font-medium text-lg hover:text-primary" icon={faBars} onClick={() => {
-                setIsMobileMenuOpen(prev => !prev);
-              }} />
+              <FontAwesomeIcon
+                className=" text-black font-medium text-lg hover:text-primary"
+                icon={faBars}
+                onClick={() => {
+                  setIsMobileMenuOpen((prev) => !prev);
+                }}
+              />
             </div>
           </nav>
         </div>
       </header>
-      {loginModal && (
-        <AuthModal
-          setLoginModal={setLoginModal}
-        />
-      )}
+      {loginModal && <AuthModal setLoginModal={setLoginModal} />}
     </>
   );
 }

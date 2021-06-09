@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import DropDown from './DropDown';
-import { Unit } from '../../interfaces/index';
-import PricesModal from './PricesModal';
-import MoreFiltersModal from './MoreFiltersModal';
-import PropTypesDropDown from './PropTypesDropDown';
-import { FilterListType } from '../../interfaces/filters';
-import useTranslation from './../../hooks/useTranslation';
+import React, { useEffect, useState } from "react";
+import DropDown from "./DropDown";
+import { Unit } from "../../interfaces/index";
+import PricesModal from "./PricesModal";
+import MoreFiltersModal from "./MoreFiltersModal";
+import PropTypesDropDown from "./PropTypesDropDown";
+import { FilterListType } from "../../interfaces/filters";
+import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPlus } from "@fortawesome/free-solid-svg-icons";
 interface SearchFiltersProps {
@@ -47,25 +47,8 @@ export default function SearchFilters(props: SearchFiltersProps) {
 
   return (
     <>
-      <style jsx>
-        {`
-          .filter-button {
-            color: #007882;
-            border: 1px solid #007882;
-            border-radius: 5px;
-            font-weight: 500;
-            outline: none;
-          }
-          .filter-button:hover {
-            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
-            border: transparent;
-            color: #ffffff;
-            background-color: #007882;
-          }
-        `}
-      </style>
       <section className="">
-        <div className="text-center lg:text-justify gap-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-8 md:gap-0 bg-gray-300 py-5 w-100">
+        <div className="text-center lg:text-justify grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-6 gap-2 bg-gray-300 py-5 w-100">
           {/* Location */}
           <DropDown
             title="Location"
@@ -108,22 +91,24 @@ export default function SearchFilters(props: SearchFiltersProps) {
                 console.log(props.filterListState);
               }}
             >
-              {t('clearFilters')}
-              <FontAwesomeIcon icon={faTimes} style={{ width: 'auto !important' }}
-                className="text-white bg-text-secondary px-1 py-1 mx-1 rounded-md shadow-md" />
+              {t("clearFilters")}
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="text-red-600 fa-lg  px-1 py-1 mx-1 "
+              />
             </button>
-          </div>
-          <div className="relative">
+
             <button
               className="py-2 px-3 text-black border-none text-text-secondary text-lg capitalize font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
               onClick={() => {
-                props.setFilterListState({} as any);
-                console.log(props.filterListState);
+                // TODO save search logic
               }}
             >
-              {t('saveSearch')}
-              <FontAwesomeIcon icon={faPlus} style={{ width: 'auto !important' }}
-                className="text-white bg-text-secondary px-1 py-1 mx-1 rounded-md shadow-md" />
+              {t("saveSearch")}
+              <FontAwesomeIcon
+                icon={faPlus}
+                className="text-green-500  px-1 py-1 mx-1  "
+              />
             </button>
           </div>
         </div>

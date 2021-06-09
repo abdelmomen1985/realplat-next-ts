@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import useTranslation from './../../hooks/useTranslation';
+import React, { useState, useEffect } from "react";
+import { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
+import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp, faFilter, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAngleUp,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 interface MoreFiltersProps {
   filtered: (val: any) => void;
   filterListState: any;
 }
 const innerList = [
   {
-    key: 'bedrooms',
-    icon: 'fas fa-bed',
-    title: 'Bedrooms',
+    key: "bedrooms",
+    icon: "fas fa-bed",
+    title: "Bedrooms",
     values: [
       {
         val: 1,
@@ -37,9 +41,9 @@ const innerList = [
     ],
   },
   {
-    key: 'bathrooms',
-    icon: 'fas fa-toilet',
-    title: 'Bathrooms',
+    key: "bathrooms",
+    icon: "fas fa-toilet",
+    title: "Bathrooms",
     values: [
       {
         val: 1,
@@ -64,49 +68,49 @@ const innerList = [
     ],
   },
   {
-    key: 'delivery_year',
-    icon: 'fas fa-calendar',
-    title: 'Delivery Date',
+    key: "delivery_year",
+    icon: "fas fa-calendar",
+    title: "Delivery Date",
     values: [
       {
-        title: 'Ready_To_Move',
+        title: "Ready_To_Move",
         val: 2019,
         selected: false,
       },
       {
         val: 2020,
-        title: '2020',
+        title: "2020",
         selected: false,
       },
       {
         val: 2021,
-        title: '2021',
+        title: "2021",
         selected: false,
       },
       {
         val: 2022,
-        title: '2022',
+        title: "2022",
         selected: false,
       },
       {
         val: 2023,
-        title: '+2023',
+        title: "+2023",
         selected: false,
       },
     ],
   },
   {
     selected: false,
-    key: 'finishing_type',
-    icon: 'fas fa-paint-roller',
-    title: 'Finishing Type',
+    key: "finishing_type",
+    icon: "fas fa-paint-roller",
+    title: "Finishing Type",
     values: [
       {
-        val: 'FF',
+        val: "FF",
         selected: false,
       },
       {
-        val: 'SF',
+        val: "SF",
         selected: false,
       },
     ],
@@ -121,12 +125,12 @@ export default function MoreFiltersModal({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t, locale } = useTranslation();
   useEffect(() => {
-    console.log('use Effect is running');
+    console.log("use Effect is running");
     if (
       Object.keys(filterListState).length === 0 &&
       filterListState.constructor === Object
     ) {
-      console.log('use Effect condition is running');
+      console.log("use Effect condition is running");
       setInnerFiltersState({});
       setInnerListState(innerList);
     }
@@ -144,7 +148,7 @@ export default function MoreFiltersModal({
       if (item.key === key) {
         let newValues = (item.values as any).map((value: any) => {
           if (value.val === selectedValue.val) return selectedValue;
-          console.log('that value' + selectedValue.val);
+          console.log("that value" + selectedValue.val);
           return { ...value, selected: false };
         });
         return { ...item, values: newValues };
@@ -229,24 +233,22 @@ export default function MoreFiltersModal({
           }
         `}
       </style>
-      <div className="relative w-11/12 lg:w-auto mx-auto">
+      <div className="relative w-11/12 mx-auto">
         <button
-          className="dd-header text-lg md:text-base  w-11/12 lg:w-auto border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
+          className="dd-header text-lg md:text-base  w-11/12  border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           <div className="dd-header-title flex justify-center lg:justify-between items-center">
             {/* <FontAwesomeIcon icon={faFilter} /> */}
-            {t('moreFilters')}{' '}
+            {t("moreFilters")}{" "}
             {isModalOpen ? (
               <span>
-                {' '}
+                {" "}
                 <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
-
               </span>
             ) : (
               <span>
                 <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
-
               </span>
             )}
           </div>
@@ -256,7 +258,7 @@ export default function MoreFiltersModal({
             <section className="modal w-full md:w-1/2">
               <div
                 className="modal-header mb-5 border-b-2 pb-2"
-                style={{ direction: locale === 'ar' ? 'ltr' : 'rtl' }}
+                style={{ direction: locale === "ar" ? "ltr" : "rtl" }}
               >
                 <button
                   onClick={() => setIsModalOpen(false)}
@@ -268,24 +270,24 @@ export default function MoreFiltersModal({
                   onClick={applyFiltersHandler}
                   className="mx-2 bg-primary font-bold text-base text-white py-3 px-5 shadow-md"
                 >
-                  {t('apply')}
+                  {t("apply")}
                 </button>
                 <button
                   onClick={clearAllHandler}
                   className="mx-2 bg-white font-bold text-base text-gray-500 py-3 px-5 shadow-md"
                 >
-                  {t('clearAll')}
+                  {t("clearAll")}
                 </button>
               </div>
               <div className="modal-body">
                 <div className="flex flex-wrap">
                   <div className="flex-auto">
-                    <h3>{t('space')}</h3>
+                    <h3>{t("space")}</h3>
                   </div>
                   <div className="flex-auto">
                     <span>
-                      {innerFiltersState.space ? innerFiltersState.space[0] : 0}{' '}
-                      {t('meter')}
+                      {innerFiltersState.space ? innerFiltersState.space[0] : 0}{" "}
+                      {t("meter")}
                       <span className="mSquare">2</span>
                     </span>
                     <Range
@@ -302,8 +304,8 @@ export default function MoreFiltersModal({
                     <span>
                       {innerFiltersState.space
                         ? innerFiltersState.space[1]
-                        : 500}{' '}
-                      {t('meter')}
+                        : 500}{" "}
+                      {t("meter")}
                       <span className="mSquare">2</span>
                     </span>
                   </div>
@@ -313,7 +315,7 @@ export default function MoreFiltersModal({
                     <div className="flex flex-wrap my-2" key={item.key}>
                       <div className="flex-auto">
                         <h3>
-                          <i className={item.icon}></i>{' '}
+                          <i className={item.icon}></i>{" "}
                           {t(`${item.key}`) ? t(`${item.key}`) : item.title}
                         </h3>
                       </div>
@@ -325,8 +327,8 @@ export default function MoreFiltersModal({
                               <button
                                 key={index}
                                 className={
-                                  'bg-white font-bold rounded-sm mx-2 my-2 px-3 py-1 shadow-md filterVal-button ' +
-                                  (value.selected ? 'active' : null)
+                                  "bg-white font-bold rounded-sm mx-2 my-2 px-3 py-1 shadow-md filterVal-button " +
+                                  (value.selected ? "active" : null)
                                 }
                                 onClick={() => filterHandler(value, item.key)}
                               >
@@ -335,8 +337,8 @@ export default function MoreFiltersModal({
                                     ? t(`${value.title}`)
                                     : value.title
                                   : t(`${value.val}`)
-                                    ? t(`${value.val}`)
-                                    : value.val}
+                                  ? t(`${value.val}`)
+                                  : value.val}
                               </button>
                             );
                           }

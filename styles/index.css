@@ -29,6 +29,10 @@
     @apply text-xl;
     font-family: "Comfortaa", "Cairo", cursive;
   }
+  h3,
+  h4 {
+    font-family: "Comfortaa", "Cairo", cursive;
+  }
   .leave-here {
     font-family: "Roboto", sans-serif;
     font-family: "Cairo", sans-serif;
@@ -144,13 +148,14 @@
 .mobile-menu {
   display: block;
   position: absolute;
-  background: rgba(250, 250, 250, 0.7);
+  background: rgba(250, 250, 250, 0.95);
   width: 90%;
   top: 80%;
   left: auto;
   padding: 20px;
   text-align: center;
   z-index: 999;
+  @apply shadow-lg;
   /* transition: all .5s ease-in-out; */
 }
 
@@ -204,4 +209,26 @@
 button:disabled {
   opacity: 0.8;
   cursor: not-allowed;
+}
+.form-group label {
+  font-size: 14px;
+  padding: 5px;
+}
+.form-group input {
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
+}
+.filter-button {
+  color: #007882;
+  border: 1px solid #007882;
+  border-radius: 5px;
+  font-weight: 500;
+  outline: none;
+}
+.filter-button:hover {
+  box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+  border: transparent;
+  color: #ffffff;
+  background-color: #007882;
 }

@@ -1,15 +1,20 @@
-import React from 'react'
-import { Unit } from '../../interfaces';
-import useTranslation from './../../hooks/useTranslation';
+import React from "react";
+import { Unit } from "../../interfaces";
+import useTranslation from "./../../hooks/useTranslation";
 
-const ComparingDesktop = ({ comparingUnits, wishListHandler }:
-  { comparingUnits: any, wishListHandler: (unit: Unit, wishListed: boolean) => void }) => {
+const ComparingDesktop = ({
+  comparingUnits,
+  wishListHandler,
+}: {
+  comparingUnits: any;
+  wishListHandler: (unit: Unit, wishListed: boolean) => void;
+}) => {
   const { t, locale } = useTranslation();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 px-2 mx-auto">
-      <div className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl bg-primary text-white">
-        <h4 style={{ marginBottom: '30px' }}>{t("prop_title")}</h4>
+    <div className="grid grid-cols-1 md:grid-cols-3 px-2 mx-auto w-8/12">
+      <div className="py-3 border px-5 rounded-md mx-auto w-full font-bold text-xl bg-primary text-white">
+        <h4 style={{ marginBottom: "30px" }}></h4>
         <h4>{t("prop_type")}</h4>
         <h4>{t("totalPrice")}</h4>
         <h4>{t("pricePerM")}</h4>
@@ -27,12 +32,13 @@ const ComparingDesktop = ({ comparingUnits, wishListHandler }:
       {comparingUnits.map((unit: any) => (
         <div
           key={unit.id}
-          className="py-3 border px-5 rounded-md mx-auto w-full text-center font-bold text-xl text-primary"
+          className="py-3 border px-5 rounded-md mx-auto w-full  font-bold text-xl text-primary"
         >
           <h3>
             {unit.property_type.name[locale]} {t("in")}{" "}
             {unit.compound.name[locale]} {t("compound")}
-            {t("comma")} {unit.bedrooms} {t("bedrooms")}{t("comma")}{" "}
+            {t("comma")} {unit.bedrooms} {t("bedrooms")}
+            {t("comma")}{" "}
             {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
           </h3>
           <h3>{unit.property_type.name[locale]}</h3>
@@ -64,13 +70,10 @@ const ComparingDesktop = ({ comparingUnits, wishListHandler }:
           </h3>
           <h3>{unit.bedrooms}</h3>
           <h3>{unit.bathrooms}</h3>
-          <h3>
-            {" "}
-            {locale === "ar" ? unit.sk_city.name_ar : unit.sk_city.name}
-          </h3>
+          <h3> {locale === "ar" ? unit.sk_city.name_ar : unit.sk_city.name}</h3>
           <button
             onClick={() => wishListHandler(unit, unit.wishListed)}
-            className={unit.wishListed ? 'bg-primary' : 'bg-custom-red'}
+            className={unit.wishListed ? "bg-primary" : "bg-custom-red"}
             style={{
               color: "#fff",
               borderRadius: "5px",
@@ -81,15 +84,13 @@ const ComparingDesktop = ({ comparingUnits, wishListHandler }:
               textAlign: "center",
             }}
           >
-            {unit.wishListed
-              ? "Remove from WishList"
-              : "Add to Wish List"}
+            {unit.wishListed ? "Remove from WishList" : "Add to Wish List"}
           </button>
         </div>
         //   <UnitCard key={unit.id} unit={unit} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ComparingDesktop
+export default ComparingDesktop;

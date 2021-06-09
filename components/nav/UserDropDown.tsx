@@ -4,17 +4,6 @@ import useTranslation from "../../hooks/useTranslation";
 import clsx from "clsx";
 import styles from "./navigation.module.scss";
 import { AnimatePresence } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faCogs,
-  faMoneyBillWave,
-  faLuggageCart,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faHandshake as farHandShake,
-  faBell as farBell,
-} from "@fortawesome/free-regular-svg-icons";
 
 const UserDropDown = ({
   show,
@@ -52,16 +41,14 @@ const UserDropDown = ({
             <ActiveLink href={`/${locale}/profile/wishlist`}>
               <a
                 onClick={() => onClose()}
-                className={clsx(
-                  styles.navLink,
-                  "mx-5 flex justify-center items-center p-0 m-0"
-                )}
+                className={clsx(styles.navLink, "mx-5 flex p-0 m-0")}
               >
+                {/** 
                 <FontAwesomeIcon
                   className="text-custom-red mx-2"
                   icon={faHeart}
                   aria-hidden="true"
-                />{" "}
+                />*/}
                 Wishlist
               </a>
             </ActiveLink>
@@ -70,16 +57,14 @@ const UserDropDown = ({
             <ActiveLink href={`/${locale}/profile/settings`}>
               <a
                 onClick={() => onClose()}
-                className={clsx(
-                  styles.navLink,
-                  "mx-5 flex justify-center items-center p-0 m-0"
-                )}
+                className={clsx(styles.navLink, "mx-5 flex p-0 m-0")}
               >
+                {/** 
                 <FontAwesomeIcon
                   icon={faCogs}
                   className="text-primary mx-2"
                   aria-hidden="true"
-                />{" "}
+                />*/}
                 Settings
               </a>
             </ActiveLink>
@@ -88,16 +73,14 @@ const UserDropDown = ({
             <ActiveLink href={`/${locale}/profile/wishlist`}>
               <a
                 onClick={() => onClose()}
-                className={clsx(
-                  styles.navLink,
-                  "mx-5 flex justify-center items-center p-0 m-0"
-                )}
+                className={clsx(styles.navLink, "mx-5 flex p-0 m-0")}
               >
+                {/** 
                 <FontAwesomeIcon
                   icon={farBell}
                   className="text-primary mx-2"
                   aria-hidden="true"
-                />{" "}
+                />*/}
                 Notifi
               </a>
             </ActiveLink>
@@ -106,16 +89,14 @@ const UserDropDown = ({
             <ActiveLink href={`/${locale}/profile/wishlist`}>
               <a
                 onClick={() => onClose()}
-                className={clsx(
-                  styles.navLink,
-                  "mx-5 flex justify-center items-center p-0 m-0"
-                )}
+                className={clsx(styles.navLink, "mx-5 flex p-0 m-0")}
               >
+                {/** 
                 <FontAwesomeIcon
                   icon={faMoneyBillWave}
                   className="text-primary mx-1"
                   aria-hidden="true"
-                />{" "}
+                />*/}
                 {t("Reminders")}
               </a>
             </ActiveLink>
@@ -124,16 +105,14 @@ const UserDropDown = ({
             <ActiveLink href={`/${locale}/profile/wishlist`}>
               <a
                 onClick={() => onClose()}
-                className={clsx(
-                  styles.navLink,
-                  "mx-5 flex justify-center items-center p-0 m-0"
-                )}
+                className={clsx(styles.navLink, "mx-5 flex p-0 m-0")}
               >
+                {/** 
                 <FontAwesomeIcon
                   icon={faLuggageCart}
-                  className="text-primary mx-2"
+                  className="mx-2 active-nav-icon text-primary"
                   aria-hidden="true"
-                />{" "}
+                />*/}
                 User Units
               </a>
             </ActiveLink>
@@ -142,16 +121,14 @@ const UserDropDown = ({
             <ActiveLink href={`/${locale}/profile/meetings`}>
               <a
                 onClick={() => onClose()}
-                className={clsx(
-                  styles.navLink,
-                  "mx-5 flex justify-center items-center p-0 m-0"
-                )}
+                className={clsx(styles.navLink, "mx-5 flex p-0 m-0")}
               >
+                {/** 
                 <FontAwesomeIcon
                   icon={farHandShake}
                   className="text-primary mx-2"
                   aria-hidden="true"
-                />{" "}
+                />*/}
                 Meetings
               </a>
             </ActiveLink>

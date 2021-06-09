@@ -1,25 +1,25 @@
-import { useLazyQuery, useMutation } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import Layout from '../../../components/Layouts/Layout';
-import { UnitCard } from '../../../components/Units/UnitCard';
-import { AppContext } from '../../../Context/AppContextProvider';
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import React, { useContext, useEffect, useState } from "react";
+import Layout from "../../../components/Layouts/Layout";
+import { UnitCard } from "../../../components/Units/UnitCard";
+import { AppContext } from "../../../Context/AppContextProvider";
 import {
   getLocalizationProps,
   LanguageProvider,
-} from '../../../Context/LangContext';
-import { Localization } from '../../../i18n/types';
-import { FilterListType } from '../../../interfaces/filters';
-import { Unit } from '../../../interfaces/index';
-import { initializeApollo } from '../../../lib/apolloClient';
-import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
-import SearchFilters from './../../../components/SearchFilters/SearchFilters';
-import LoadingCircle from './../../../components/common/LoadingCircle';
-import CustomModal from './../../../components/common/CustomModal/CustomModal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSlidersH, faTimes } from '@fortawesome/free-solid-svg-icons';
-import clsx from 'clsx'
+} from "../../../Context/LangContext";
+import { Localization } from "../../../i18n/types";
+import { FilterListType } from "../../../interfaces/filters";
+import { Unit } from "../../../interfaces/index";
+import { initializeApollo } from "../../../lib/apolloClient";
+import { ALL_UNITS, UNITS_AGGREGATE } from "../../../query/unitsQuery";
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../../../query/user";
+import SearchFilters from "./../../../components/SearchFilters/SearchFilters";
+import LoadingCircle from "./../../../components/common/LoadingCircle";
+import CustomModal from "./../../../components/common/CustomModal/CustomModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faSlidersH, faTimes } from "@fortawesome/free-solid-svg-icons";
+import clsx from "clsx";
 const UnitsPage: NextPage<{
   units: Unit[];
   localization: Localization;
@@ -27,13 +27,14 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user, setComparing, setLoginModal, filterState, isMobile, isTablet } = useContext(AppContext);
+  const { user, setComparing, setLoginModal, filterState, isMobile, isTablet } =
+    useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
-  const [showFiltersMenu, setShowFiltersMenu] = useState(false)
+  const [showFiltersMenu, setShowFiltersMenu] = useState(false);
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
     UNITS_AGGREGATE,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     }
   );
   const getUnitsAggregate = async () => {
@@ -64,7 +65,7 @@ const UnitsPage: NextPage<{
         user_id:
           user?.id && user.id.length > 0
             ? user?.id
-            : '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
+            : "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       },
     });
   };
@@ -72,12 +73,12 @@ const UnitsPage: NextPage<{
     getUnitsAggregate();
   }, []);
   useEffect(() => {
-    setFilterListState({ ...filterState })
+    setFilterListState({ ...filterState });
     // getUnitsAggregate();
     // console.log(filterListState, filterState)
-  }, [filterState])
+  }, [filterState]);
   useEffect(() => {
-    console.log('filterListState changed to', filterListState);
+    console.log("filterListState changed to", filterListState);
     getUnitsAggregate();
     // if (!loading && refetch) {
     //   console.log('refetching');
@@ -133,7 +134,7 @@ const UnitsPage: NextPage<{
       }
       if (refetch) refetch();
     } else {
-      console.log('u should see a modal man');
+      console.log("u should see a modal man");
       setLoginModal(true);
     }
   };
@@ -162,37 +163,46 @@ const UnitsPage: NextPage<{
   return (
     <LanguageProvider localization={localization}>
       <Layout title="Brand Logo Here">
-        <div className={clsx(isMobile || isTablet && 'flex justify-end', "mx-4 my-5")}>
-
+        <div
+          className={clsx(
+            isMobile || (isTablet && "flex justify-end"),
+            "mx-4 my-5"
+          )}
+        >
           {isMobile || isTablet ? (
             <>
               <button
                 className="btn-outline-primary text-2xl m-0"
-                onClick={() => setShowFiltersMenu(true)} >
+                onClick={() => setShowFiltersMenu(true)}
+              >
                 <FontAwesomeIcon className="mr-2" icon={faSlidersH} />
-                Show Filters</button>
-              <CustomModal show={showFiltersMenu} onClose={() => setShowFiltersMenu(false)}
+                Show Filters
+              </button>
+              <CustomModal
+                show={showFiltersMenu}
+                onClose={() => setShowFiltersMenu(false)}
                 wrapperStyle={{
-                  position: 'absolute',
-                  top: '0',
-                  width: '100%',
-                  transform: 'translate(0, 0)',
+                  position: "absolute",
+                  top: "0",
+                  width: "100%",
+                  transform: "translate(0, 0)",
                 }}
               >
                 <button
                   className="flex justify-end items-center w-full px-2 py-3 text-2xl font-medium text-custom-red"
-                  onClick={() => setShowFiltersMenu(false)} >
+                  onClick={() => setShowFiltersMenu(false)}
+                >
                   <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <SearchFilters
                   setFilterListState={setFilterListState}
                   filterListState={filterListState}
                   units={units}
-
                 />
                 <button
                   className="btn-primary flex justify-center items-center mx-auto text-2xl"
-                  onClick={() => setShowFiltersMenu(false)}>
+                  onClick={() => setShowFiltersMenu(false)}
+                >
                   <FontAwesomeIcon className="mr-2" icon={faHome} />
                   Show Homes
                 </button>
@@ -205,10 +215,9 @@ const UnitsPage: NextPage<{
               units={units}
             />
           )}
-
         </div>
-        {loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center justify-center items-center">
+        {loading && <LoadingCircle width={"200px"} margin={"5em auto"} />}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-start justify-center items-start">
           {!loading &&
             innerUnits &&
             innerUnits.map((unit: any) => (
@@ -241,7 +250,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   for (let unit in dummyUnits) {
     units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
   }
-  const localization = getLocalizationProps(ctx, 'common');
+  const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
       localization,
@@ -252,7 +261,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
     fallback: false,
   };
 };

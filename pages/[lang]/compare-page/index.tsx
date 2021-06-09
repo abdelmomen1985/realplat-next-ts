@@ -9,18 +9,17 @@ import useTranslation from "../../../hooks/useTranslation";
 import { Unit } from "../../../interfaces/index";
 import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../../../query/user";
 
-import ComparingDesktop from '../../../components/Comparing/ComparingDesktop';
-import ComparingMobile from '../../../components/Comparing/ComparingMobile';
+import ComparingDesktop from "../../../components/Comparing/ComparingDesktop";
+import ComparingMobile from "../../../components/Comparing/ComparingMobile";
 
 const ComparePage: NextPage = () => {
-  const { comparing, clearComparing, user, setLoginModal, isMobile } = useContext(
-    AppContext
-  );
+  const { comparing, clearComparing, user, setLoginModal, isMobile } =
+    useContext(AppContext);
 
   const [comparingUnits, setComparingUnits] = useState<any[]>(comparing);
 
   const router = useRouter();
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
   useEffect(() => {
@@ -85,9 +84,17 @@ const ComparePage: NextPage = () => {
             <h3 className="py-3 text-center font-bold text-2xl text-primary">
               Comparing those units
             </h3>
-            {isMobile ?
-              <ComparingMobile comparingUnits={comparingUnits} wishListHandler={wishListHandler} />
-              : <ComparingDesktop comparingUnits={comparingUnits} wishListHandler={wishListHandler} />}
+            {isMobile ? (
+              <ComparingMobile
+                comparingUnits={comparingUnits}
+                wishListHandler={wishListHandler}
+              />
+            ) : (
+              <ComparingDesktop
+                comparingUnits={comparingUnits}
+                wishListHandler={wishListHandler}
+              />
+            )}
           </>
         )}
       </Layout>
