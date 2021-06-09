@@ -5,7 +5,6 @@ import { getLocalizationProps } from '../../../Context/LangContext';
 import useTranslation from '../../../hooks/useTranslation';
 import { initializeApollo } from '../../../lib/apolloClient';
 import { allCompounds } from '../../../query/compounds';
-import Header from './../../../components/Layouts/Header';
 
 export type Compound = {
   name: { ar: string; en: string };
@@ -26,7 +25,7 @@ const MyCard = ({ compound }: { compound: any }) => {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <h1 className="text-indigo-800 mb-2"> {compound.name[locale]}</h1>
+          <h1 className="text-primary mb-2"> {compound.name[locale]}</h1>
           <p className="text-gray-700 text-base">
             {compound.description[locale]}
           </p>
@@ -57,7 +56,6 @@ const MyCard = ({ compound }: { compound: any }) => {
 const CompoundsPage = ({ compounds }: { compounds: Compound[] }) => {
   return (
     <Layout title="Realstate Brand">
-      <Header />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
         {compounds &&
           compounds.map((compound: any) => (

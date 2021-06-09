@@ -1,79 +1,104 @@
-import React, { useContext } from 'react';
-import useTranslation from '../../hooks/useTranslation';
-import ActiveLink from './../ActiveLink';
-import { AppContext } from './../../Context/AppContextProvider';
+import React, { useContext, useState } from "react";
+import useTranslation from "../../hooks/useTranslation";
+import ActiveLink from "./ActiveLink";
+import { AppContext } from "./../../Context/AppContextProvider";
+import LocaleSwitcher from "./LocalSwitch";
+import styles from "./navigation.module.scss";
+import clsx from "clsx";
+import UserDropDown from "./UserDropDown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faUser as farUser } from "@fortawesome/free-regular-svg-icons";
+
+const shortenName = (username: string) => {
+  let fullUsername = username;
+  if (fullUsername?.split(" ").length > 1) {
+    return (
+      fullUsername?.split(" ")[0].charAt(0) + "." + fullUsername?.split(" ")[1]
+    );
+  } else {
+    return fullUsername;
+  }
+};
 
 export const NavLinks = (props: any) => {
   const { user, setUser } = useContext(AppContext);
-
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
   const { t, locale } = useTranslation();
 
-  // export const NavLinks = () => {
   return (
     <>
-      <style jsx>{`
-        .nav-link {
-          text-decoration: none;
-          font-size: 18px;
-          padding-bottom: 5px;
-          font-weight: 500;
-        }
-        .active {
-          border-bottom: 3px solid #3c40c6;
-          color: #3c40c6;
-        }
-        .nav-link:hover,
-        .nav-link:active {
-          border-bottom: 3px solid #3c40c6;
-          color: #3c40c6;
-        }
-      `}</style>
-      <ActiveLink activeClassName="active" href={`/${locale}/`}>
-        <a className="nav-link mx-2">{t('navHome')}</a>
-      </ActiveLink>
-      <ActiveLink activeClassName="active" href={`/${locale}/about`}>
-        <a className="nav-link mx-2">{t('navAbout')}</a>
-      </ActiveLink>
-      <ActiveLink activeClassName="active" href={`/${locale}/compounds`}>
-        <a className="nav-link mx-2">{t('navCompounds')}</a>
-      </ActiveLink>
-      <ActiveLink activeClassName="active" href={`/${locale}/developers`}>
-        <a className="nav-link mx-2">{t('navDevelopers')}</a>
-      </ActiveLink>
-      <ActiveLink activeClassName="active" href={`/${locale}/units`}>
-        <a className="nav-link mx-2">{t('navUnits')}</a>
-      </ActiveLink>
-
+      <style jsx>{``}</style>
+      <div className="ml-4">
+        <ActiveLink activeClassName={styles.active} href={`/${locale}/units`}>
+          <a className={clsx(styles.navLink, "ml-12 mr-3")}>{t("navSearch")}</a>
+        </ActiveLink>
+        <ActiveLink activeClassName={styles.active} href={`/${locale}/`}>
+          <a className={clsx(styles.navLink, "mx-3")}>{t("navProjects")}</a>
+        </ActiveLink>
+        <ActiveLink activeClassName={styles.active} href={`/${locale}/expo`}>
+          <a className={clsx(styles.navLink, "mx-3")}>{t("navExpo")}</a>
+        </ActiveLink>
+      </div>
       {!user?.id ? (
         <a
-          className="nav-link mx-2 cursor-pointer"
+          className={clsx(styles.navLink, "mx-5 cursor-pointer")}
           onClick={() => props.setLoginModal(true)}
         >
-          {t('navSign')}
+          {t("navSign")}
         </a>
       ) : (
-        <>
+        <div>
+          <LocaleSwitcher />
+          <ActiveLink
+            activeClassName={styles.active}
+            href={`/${locale}/profile/wishlist`}
+          >
+            <a className={clsx(styles.navLink, "mx-5")}>
+              <FontAwesomeIcon
+                icon={faHeart}
+                className="text-custom-red mx-1"
+                aria-hidden="true"
+              />{" "}
+              {t("navWishList")}
+            </a>
+          </ActiveLink>
+
+          <span className="relative">
+            <a
+              className={clsx(
+                styles.navLink,
+                "mx-5 capitalize cursor-pointer ",
+                isUserMenuOpen ? styles.active : " "
+              )}
+              onClick={() => setIsUserMenuOpen(true)}
+            >
+              <FontAwesomeIcon
+                icon={farUser}
+                className="mx-1"
+                aria-hidden="true"
+              />{" "}
+              {user?.name && shortenName(user?.name)}
+            </a>
+            <UserDropDown
+              show={isUserMenuOpen}
+              onClose={() => setIsUserMenuOpen(false)}
+            />
+          </span>
+
           <a
-            className="nav-link mx-2 cursor-pointer"
+            className={clsx(styles.navLink, "mx-5 cursor-pointer")}
             onClick={async () => {
-              const response = await fetch('/api/sessions', {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
+              const response = await fetch("/api/sessions", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
               });
               if (response.status === 204) setUser(undefined);
             }}
           >
-            {t('navSignOut')}
+            {t("navSignOut")}
           </a>
-          <ActiveLink
-            activeClassName="active"
-            href={`/${locale}/profile/wishlist`}
-          >
-            <a className="nav-link mx-2">
-              <i className="far fa-heart" aria-hidden="true"></i>
-            </a>
-          </ActiveLink>
-        </>
+        </div>
       )}
     </>
   );

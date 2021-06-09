@@ -1,0 +1,26 @@
+.eachSlide>div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 350px;
+}
+
+.logoImg {
+  position: absolute;
+  bottom: 15%;
+  width: 250px;
+  left: 8%;
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 180px;
+    bottom: auto;
+    top: 50%;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 100px;
+    bottom: auto;
+    top: 50%;
+  }
+}

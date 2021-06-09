@@ -5,9 +5,12 @@
 // import User from 'path/to/interfaces';
 
 export type User = {
-  id: number;
-  name: string;
-  lang: string;
+  id: string;
+  username?: string;
+  email?: string | null;
+  name?: string;
+  ext_data?: any;
+  media?: any;
 };
 
 export type Unit = {
@@ -39,6 +42,15 @@ export type Unit = {
     name: any;
     id: string;
   };
-  wishListed: Boolean;
-  comparing: Boolean;
+  wishListed: boolean;
+  comparing: boolean;
+};
+
+export type Offer = {
+  id: number | string;
+  projectName: string;
+  projectImage: string;
+  projectDeveloperLogo: string;
+  startingPrice: string;
+  discountPer: string;
 };

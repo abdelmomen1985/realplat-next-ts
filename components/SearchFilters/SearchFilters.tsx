@@ -6,6 +6,8 @@ import MoreFiltersModal from './MoreFiltersModal';
 import PropTypesDropDown from './PropTypesDropDown';
 import { FilterListType } from '../../interfaces/filters';
 import useTranslation from './../../hooks/useTranslation';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faPlus } from "@fortawesome/free-solid-svg-icons";
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
   filterListState: any;
@@ -48,20 +50,32 @@ export default function SearchFilters(props: SearchFiltersProps) {
       <style jsx>
         {`
           .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
+            color: #007882;
+            border: 1px solid #007882;
             border-radius: 5px;
             font-weight: 500;
             outline: none;
           }
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
           }
         `}
       </style>
       <section className="">
-        <div className="grid grid-cols-2 sm:grid-cols-3 mx-auto md:grid-cols-5 gap-1">
+        <div className="text-center lg:text-justify gap-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-8 md:gap-0 bg-gray-300 py-5 w-100">
+          {/* Location */}
+          <DropDown
+            title="Location"
+            icon="fas fa-map-marked-alt"
+            list={locations}
+            multiSelect={false}
+            filtered={props.setFilterListState}
+            filterListState={props.filterListState}
+            entryPoint="sk_city"
+          />
           {/* property Type */}
 
           <PropTypesDropDown
@@ -75,16 +89,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
               setOpenPropTypeDD(flag);
             }}
           />
-          {/* Location */}
-          <DropDown
-            title="Location"
-            icon="fas fa-map-marked-alt"
-            list={locations}
-            multiSelect={false}
-            filtered={props.setFilterListState}
-            filterListState={props.filterListState}
-            entryPoint="sk_city"
-          />
+
           {/* prices */}
           {/* recreate another Component with Ranges */}
           <PricesModal
@@ -97,13 +102,28 @@ export default function SearchFilters(props: SearchFiltersProps) {
           />
           <div className="relative">
             <button
-              className="p-3 filter-button"
+              className="py-2 px-3 text-black border-none text-text-secondary text-lg font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
               onClick={() => {
                 props.setFilterListState({} as any);
                 console.log(props.filterListState);
               }}
             >
               {t('clearFilters')}
+              <FontAwesomeIcon icon={faTimes} style={{ width: 'auto !important' }}
+                className="text-white bg-text-secondary px-1 py-1 mx-1 rounded-md shadow-md" />
+            </button>
+          </div>
+          <div className="relative">
+            <button
+              className="py-2 px-3 text-black border-none text-text-secondary text-lg capitalize font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
+              onClick={() => {
+                props.setFilterListState({} as any);
+                console.log(props.filterListState);
+              }}
+            >
+              {t('saveSearch')}
+              <FontAwesomeIcon icon={faPlus} style={{ width: 'auto !important' }}
+                className="text-white bg-text-secondary px-1 py-1 mx-1 rounded-md shadow-md" />
             </button>
           </div>
         </div>

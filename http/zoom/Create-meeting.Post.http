@@ -1,0 +1,8 @@
+POST https://api.zoom.us/v2/users/c9IXVNdRT82n90hZQ9Iuaw/meetings
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InYtRVdIX25RU3N5ZTZQYnpOOTFjYmciLCJleHAiOjE2MjI2MTU2MjAsImlhdCI6MTYyMjAxMDgyMX0.9EKHhFa5D7Gj0mb3o4d3jFTfWKnbqSw01ozsSJI1fVM
+Content-type: application/json
+
+{
+  "topic": "Mellw's Meeting",
+  "type": 1
+}

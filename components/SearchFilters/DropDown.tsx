@@ -1,8 +1,10 @@
 import { useQuery } from "@apollo/client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { GET_LOCATIONS } from "../../query/locations";
 import useTranslation from "./../../hooks/useTranslation";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 interface Ddprops {
   title: string;
   list: any;
@@ -18,6 +20,7 @@ export default function DropDown(props: Ddprops) {
   const [isOpenState, setIsOpenState] = useState(false);
   const [listTitle, setListTitle] = useState(props.title);
   const [locationsInnerState, setLocationsInnerState] = useState(data?.units);
+  const { isMobile } = useContext(AppContext)
   // const list = props.list;
   const { t, locale } = useTranslation();
   const node = useRef<HTMLDivElement>(null);
@@ -32,12 +35,10 @@ export default function DropDown(props: Ddprops) {
     }
   }, [data?.units]);
   useEffect(() => {
-    console.log("use Effect is running");
     if (
       Object.keys(props.filterListState).length === 0 &&
       props.filterListState.constructor === Object
     ) {
-      console.log("use Effect condition is running");
       setListTitle("location");
       if (data?.units) {
         const dummyData = [...data?.units];
@@ -56,6 +57,17 @@ export default function DropDown(props: Ddprops) {
       document.removeEventListener("mousedown", handleClick);
     };
   }, []);
+  useEffect(() => {
+
+    if (data && locationsInnerState.length > 0) {
+      locationsInnerState.map((single: any) => {
+        if (single.sk_city._id === props.filterListState.sk_city) {
+          console.log(single.sk_city.name)
+          setListTitle(locale === "ar" ? single.sk_city.name_ar : single.sk_city.name)
+        }
+      })
+    }
+  }, [locationsInnerState])
   const handleClick = (e: any) => {
     if (node?.current?.contains(e.target)) {
       // inside click
@@ -69,10 +81,8 @@ export default function DropDown(props: Ddprops) {
   };
 
   const selectItem = (item: any) => {
-    console.log(item.sk_city._id);
     item.selected = !item.selected;
     const newArray = locationsInnerState.map((single: any) => {
-      console.log(single);
       if (single.sk_city._id === item.sk_city._id) return item;
       return { ...single, selected: false };
     });
@@ -99,35 +109,41 @@ export default function DropDown(props: Ddprops) {
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-            outline: none;
-          }
+      
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
+          }
+          .circularIcon{
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            background-color: #EDAE49;
+            border-radius: 50%;
+            border: transparent;
+            display: block
           }
         `}
       </style>
-      <div className="dd-wrapper relative" ref={node}>
+      <div className="dd-wrapper w-11/12 lg:w-auto mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header p-3 filter-button"
+          className="w-11/12 lg:w-auto dd-header text-lg md:text-base border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={toggleList}
         >
-          <div className="dd-header-title">
-            <i className={props.icon}></i> {t(`${listTitle.toLowerCase()}`)}{" "}
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
+            {listTitle !== 'location' && <span className="circularIcon"></span>} {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpenState ? (
+
               <span>
                 {" "}
-                <i className="fas fa-angle-up"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
               </span>
             )}
           </div>
@@ -137,12 +153,15 @@ export default function DropDown(props: Ddprops) {
             role="list"
             className="dd-list absolute"
             style={{
-              top: "0",
+              top: "50px",
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: "100%",
+              width: isMobile ? '90%' : "250px",
+              left: isMobile ? '0' : 'auto',
+              right: isMobile ? '0' : 'auto',
+              margin: isMobile ? '0 auto' : ''
             }}
           >
             {locationsInnerState.map((item: any) => (
@@ -162,7 +181,10 @@ export default function DropDown(props: Ddprops) {
                 }}
               >
                 {locale === "ar" ? item.sk_city.name_ar : item.sk_city.name}{" "}
-                {item.selected ? <i className="fas fa-times"></i> : null}
+
+                {item.selected ?
+                  <FontAwesomeIcon icon={faTimes} />
+                  : null}
               </button>
             ))}
           </div>

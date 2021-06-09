@@ -17,31 +17,31 @@ const LoadingCircle = ({
           width: ${width};
           height: ${width};
           border-radius: 50%;
-          background: #2a4365;
+          background: #007882;
           background: -moz-linear-gradient(
             left,
-            #2a4365 10%,
-            rgba(42, 67, 101, 0) 42%
+            #007882 10%,
+            rgba(0, 120, 130, 0) 42%
           );
           background: -webkit-linear-gradient(
             left,
-            #2a4365 10%,
-            rgba(42, 67, 101, 0) 42%
+            #007882 10%,
+            rgba(0, 120, 130, 0) 42%
           );
           background: -o-linear-gradient(
             left,
-            #2a4365 10%,
-            rgba(42, 67, 101, 0) 42%
+            #007882 10%,
+            rgba(0, 120, 130, 0) 42%
           );
           background: -ms-linear-gradient(
             left,
-            #2a4365 10%,
-            rgba(42, 67, 101, 0) 42%
+            #007882 10%,
+            rgba(0, 120, 130, 0) 42%
           );
           background: linear-gradient(
             to right,
-            #2a4365 10%,
-            rgba(42, 67, 101, 0) 42%
+            #007882 10%,
+            rgba(0, 120, 130, 0) 42%
           );
           position: relative;
           -webkit-animation: load3 1.4s infinite linear;
@@ -53,7 +53,7 @@ const LoadingCircle = ({
         .loader:before {
           width: 50%;
           height: 50%;
-          background: #2a4365;
+          background: #007882;
           border-radius: 100% 0 0 0;
           position: absolute;
           top: 0;

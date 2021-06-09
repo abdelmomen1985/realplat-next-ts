@@ -1,0 +1,187 @@
+@mixin currentTab($left) {
+  position: absolute;
+  left: $left;
+  margin-top: 1px;
+  box-shadow: 0px 1px 1px 2px rgb(229 229 229 / 40%);
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+
+  @media screen and (max-width: 760px) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 6rem;
+  }
+}
+
+@mixin currentTabContainer ($width) {
+  width: 100%;
+  position: relative;
+  padding: 5px 0;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: $width;
+    top: -1.6px;
+    left: 0;
+    border: 5px solid #fff;
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 250px;
+
+    &::after {
+      border: none;
+    }
+  }
+}
+
+.tab {
+  // position: relative;
+  height: 100vh;
+
+  @media screen and (max-width: 760px) {
+    height: 130vh;
+
+  }
+
+  .tabBtn {
+    color: var(--main-text-secondary);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .activeBtn {
+    background-color: #fff;
+    box-shadow: 0px -1px 1px 2px rgba(229, 229, 229, 0.4);
+    border-radius: 10px;
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: none;
+    padding: 5px 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .firstTab {
+    @include currentTab(5.5px);
+    border-top-left-radius: 0;
+
+    .tabContainer {
+      @include currentTabContainer(121px)
+    }
+  }
+
+  .firstArTab {
+    @include currentTab('auto');
+    border-top-left-radius: 0;
+    right: 0;
+
+    .tabContainer {
+      @include currentTabContainer(121px)
+    }
+  }
+
+  .secondArTab {
+    @include currentTab('auto');
+    border-top-left-radius: 0;
+
+    .tabContainer {
+      @include currentTabContainer(196px)
+    }
+  }
+
+  .secondTab {
+    @include currentTab(31.5%);
+    border-top-left-radius: 0;
+
+    .tabContainer {
+      @include currentTabContainer(196px)
+    }
+  }
+
+}
+
+.moreImgsBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999;
+}
+
+.shareContainer {
+  position: absolute;
+  top: 10%;
+  right: 6%;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 8px;
+    margin: 5px auto;
+  }
+
+  @media screen and (max-width: 769px) {
+    position: relative;
+    flex-direction: row;
+    justify-content: flex-start;
+    top: auto;
+    right: auto;
+    flex-wrap: wrap;
+
+    button {
+      margin: 5px 10px;
+    }
+  }
+}
+
+.shareBtns {
+  right: -41px;
+  top: 40%;
+
+
+  button {
+    background-color: transparent !important;
+    box-shadow: 0 0 4px 4px rgb(0 0 0 / 20%);
+    border-radius: 50%;
+
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.3s ease-in;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    top: 5px;
+    right: -60px;
+
+    button {
+      margin: 5px;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1022px) {
+    top: 53px;
+    right: 96px;
+
+    button {
+      margin: 5px;
+    }
+  }
+}
+
+.floorPlanContainer {
+  overflow: hidden;
+
+  .floorPlan:hover {
+    transform: scale(1.25);
+  }
+}

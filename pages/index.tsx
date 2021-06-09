@@ -1,6 +1,6 @@
-import React from 'react';
-import Head from 'next/head';
-import { getInitialLocale } from '../i18n/getInitialLocale';
+import React from "react";
+import Head from "next/head";
+import { getInitialLocale } from "../i18n/getInitialLocale";
 
 const Index: React.FC = () => {
   React.useEffect(() => {

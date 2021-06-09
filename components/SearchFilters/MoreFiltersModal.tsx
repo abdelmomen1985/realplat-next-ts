@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import useTranslation from './../../hooks/useTranslation';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp, faFilter, faTimes } from "@fortawesome/free-solid-svg-icons";
 interface MoreFiltersProps {
   filtered: (val: any) => void;
   filterListState: any;
@@ -182,17 +184,11 @@ export default function MoreFiltersModal({
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #ffffff;
-            background-color: #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-            outline: none;
-          }
           .filter-button:hover {
-            color: #192a56;
-            border: 1px solid #192a56;
-            background-color: #fff;
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
+            color: #fff;
+            background-color: #007882;
           }
           .overlay {
             position: fixed;
@@ -221,7 +217,7 @@ export default function MoreFiltersModal({
           .filterVal-button:active,
           .filterVal-button:hover,
           .filterVal-button.active {
-            background-color: #192a56;
+            background-color: #007882;
             color: #fff;
           }
           .mSquare {
@@ -233,21 +229,24 @@ export default function MoreFiltersModal({
           }
         `}
       </style>
-      <div className="relative">
+      <div className="relative w-11/12 lg:w-auto mx-auto">
         <button
-          className="p-3 filter-button"
+          className="dd-header text-lg md:text-base  w-11/12 lg:w-auto border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          <div>
-            <i className="fas fa-filter"></i> {t('moreFilters')}{' '}
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
+            {/* <FontAwesomeIcon icon={faFilter} /> */}
+            {t('moreFilters')}{' '}
             {isModalOpen ? (
               <span>
                 {' '}
-                <i className="fas fa-angle-up"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
+
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
+
               </span>
             )}
           </div>
@@ -261,19 +260,19 @@ export default function MoreFiltersModal({
               >
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="mx-2 text-gray-500 font-bold text-md"
+                  className="mx-2 text-gray-500 font-bold text-base"
                 >
-                  <i className="fas fa-times"></i>
+                  <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <button
                   onClick={applyFiltersHandler}
-                  className="mx-2 bg-blue-900 font-bold text-md text-white py-3 px-5 shadow-md"
+                  className="mx-2 bg-primary font-bold text-base text-white py-3 px-5 shadow-md"
                 >
                   {t('apply')}
                 </button>
                 <button
                   onClick={clearAllHandler}
-                  className="mx-2 bg-white font-bold text-md text-gray-500 py-3 px-5 shadow-md"
+                  className="mx-2 bg-white font-bold text-base text-gray-500 py-3 px-5 shadow-md"
                 >
                   {t('clearAll')}
                 </button>
@@ -336,8 +335,8 @@ export default function MoreFiltersModal({
                                     ? t(`${value.title}`)
                                     : value.title
                                   : t(`${value.val}`)
-                                  ? t(`${value.val}`)
-                                  : value.val}
+                                    ? t(`${value.val}`)
+                                    : value.val}
                               </button>
                             );
                           }

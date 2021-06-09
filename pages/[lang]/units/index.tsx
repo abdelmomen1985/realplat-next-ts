@@ -1,7 +1,6 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import Header from '../../../components/Layouts/Header';
 import Layout from '../../../components/Layouts/Layout';
 import { UnitCard } from '../../../components/Units/UnitCard';
 import { AppContext } from '../../../Context/AppContextProvider';
@@ -17,7 +16,10 @@ import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
 import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
 import SearchFilters from './../../../components/SearchFilters/SearchFilters';
 import LoadingCircle from './../../../components/common/LoadingCircle';
-
+import CustomModal from './../../../components/common/CustomModal/CustomModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faSlidersH, faTimes } from '@fortawesome/free-solid-svg-icons';
+import clsx from 'clsx'
 const UnitsPage: NextPage<{
   units: Unit[];
   localization: Localization;
@@ -25,8 +27,9 @@ const UnitsPage: NextPage<{
   const [filterListState, setFilterListState] = useState<FilterListType>(
     {} as any
   );
-  const { user, setComparing, setLoginModal } = useContext(AppContext);
+  const { user, setComparing, setLoginModal, filterState, isMobile, isTablet } = useContext(AppContext);
   const [innerUnits, setInnerUnits] = useState(units);
+  const [showFiltersMenu, setShowFiltersMenu] = useState(false)
   const [getUnitsAgg, { data, refetch, loading }] = useLazyQuery(
     UNITS_AGGREGATE,
     {
@@ -45,7 +48,9 @@ const UnitsPage: NextPage<{
         fin_total_max: filterListState?.fin_total?.[1],
         fin_years_min: filterListState?.fin_years?.[0],
         fin_years_max: filterListState?.fin_years?.[1],
+        compound_id: filterListState.compound_id,
         sk_city_comparison: { _id: filterListState?.sk_city },
+        sk_district_comparison: { _id: filterListState?.sk_district },
         bedrooms: filterListState?.bedrooms,
         bathrooms: filterListState?.bathrooms,
         land_min: filterListState?.space?.[0],
@@ -66,13 +71,18 @@ const UnitsPage: NextPage<{
   useEffect(() => {
     getUnitsAggregate();
   }, []);
-  const node = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setFilterListState({ ...filterState })
+    // getUnitsAggregate();
+    // console.log(filterListState, filterState)
+  }, [filterState])
   useEffect(() => {
     console.log('filterListState changed to', filterListState);
-    if (!loading && refetch) {
-      console.log('refetching');
-      getUnitsAggregate();
-    }
+    getUnitsAggregate();
+    // if (!loading && refetch) {
+    //   console.log('refetching');
+
+    // }
   }, [filterListState]);
 
   useEffect(() => {
@@ -94,7 +104,7 @@ const UnitsPage: NextPage<{
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
 
-  const wishListHandler = async (unit: Unit, wishlisted: Boolean) => {
+  const wishListHandler = async (unit: Unit, wishlisted: boolean) => {
     // handle add to the server
     if (user) {
       unit.wishListed = !wishlisted;
@@ -127,7 +137,7 @@ const UnitsPage: NextPage<{
       setLoginModal(true);
     }
   };
-  const compareHandler = (unit: any, wishlisted: Boolean) => {
+  const compareHandler = (unit: any, wishlisted: boolean) => {
     console.log(unit);
     unit.comparing = !unit.comparing;
     let comparedUnit: Unit = { ...unit, wishListed: wishlisted };
@@ -152,16 +162,53 @@ const UnitsPage: NextPage<{
   return (
     <LanguageProvider localization={localization}>
       <Layout title="Brand Logo Here">
-        <Header />
-        <div className="mx-4 my-5" ref={node}>
-          <SearchFilters
-            setFilterListState={setFilterListState}
-            filterListState={filterListState}
-            units={units}
-          />
+        <div className={clsx(isMobile || isTablet && 'flex justify-end', "mx-4 my-5")}>
+
+          {isMobile || isTablet ? (
+            <>
+              <button
+                className="btn-outline-primary text-2xl m-0"
+                onClick={() => setShowFiltersMenu(true)} >
+                <FontAwesomeIcon className="mr-2" icon={faSlidersH} />
+                Show Filters</button>
+              <CustomModal show={showFiltersMenu} onClose={() => setShowFiltersMenu(false)}
+                wrapperStyle={{
+                  position: 'absolute',
+                  top: '0',
+                  width: '100%',
+                  transform: 'translate(0, 0)',
+                }}
+              >
+                <button
+                  className="flex justify-end items-center w-full px-2 py-3 text-2xl font-medium text-custom-red"
+                  onClick={() => setShowFiltersMenu(false)} >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+                <SearchFilters
+                  setFilterListState={setFilterListState}
+                  filterListState={filterListState}
+                  units={units}
+
+                />
+                <button
+                  className="btn-primary flex justify-center items-center mx-auto text-2xl"
+                  onClick={() => setShowFiltersMenu(false)}>
+                  <FontAwesomeIcon className="mr-2" icon={faHome} />
+                  Show Homes
+                </button>
+              </CustomModal>
+            </>
+          ) : (
+            <SearchFilters
+              setFilterListState={setFilterListState}
+              filterListState={filterListState}
+              units={units}
+            />
+          )}
+
         </div>
         {loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center justify-center items-center">
           {!loading &&
             innerUnits &&
             innerUnits.map((unit: any) => (

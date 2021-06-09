@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import useTranslation from '../../hooks/useTranslation';
 import { AppContext } from '../../Context/AppContextProvider';
+import { useLazyQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../query/user'
 export default function Login(props: any) {
   const { setUser } = useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -11,6 +13,17 @@ export default function Login(props: any) {
   const router = useRouter();
   const { locale } = useTranslation();
   const { register, handleSubmit, errors } = useForm();
+  const [fetchUserData, { data: userData }] = useLazyQuery(GET_USER_BY_ID, {
+    onCompleted() {
+      console.log(userData.users_by_pk)
+      setUser({ ...userData.users_by_pk });
+      props.setLoginModal(false);
+      return router.push(`/${locale}/profile/wishlist`)
+    },
+    onError(error) {
+      console.log(error)
+    }
+  })
   const onLogin = async (data: any) => {
     const email = data.email;
     const password = data.password;
@@ -26,10 +39,15 @@ export default function Login(props: any) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
           });
-          if (userResp.status === 200) setUser(await userResp.json());
-          props.setLoginModal(false);
-          props.setAuthenticated(true);
-          return router.push(`/${locale}/profile/wishlist`);
+          if (userResp.status === 200) {
+            let currentUser = await userResp.json();
+            let currentUserId = currentUser.id
+            fetchUserData({
+              variables: {
+                id: currentUserId
+              },
+            })
+          };
         } else {
           const errorResp = await response.json();
           const errorText = errorResp.message;
@@ -101,7 +119,7 @@ export default function Login(props: any) {
       </div>
       <button
         type="submit"
-        className="my-5 mx-auto block bg-blue-900 text-white text-center py-3 px-8 w-full rounded-md"
+        className="my-5 mx-auto block bg-primary text-white text-center py-3 px-8 w-full rounded-md"
       >
         Sign In
       </button>

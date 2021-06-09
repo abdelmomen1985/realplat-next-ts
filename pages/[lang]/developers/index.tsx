@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
-import Header from './../../../components/Layouts/Header';
 import useTranslation from './../../../hooks/useTranslation';
 import { allDevelopers } from '../../../query/developers';
 
@@ -29,7 +28,7 @@ const DeveloperCard = ({ developer }: { developer: any }) => {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <h1 className="text-indigo-800 mb-2"> {developer.name[locale]}</h1>
+          <h1 className="text-primary mb-2"> {developer.name[locale]}</h1>
           {/* <p className="text-gray-700 text-base">
             {developer.description[locale]}
           </p> */}
@@ -63,7 +62,6 @@ const DevelopersPage = ({ developers }: { developers: Developer[] }) => {
   // const { t, locale } = useTranslation();
   return (
     <Layout title="Real Estate Brand">
-      <Header />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
         {developers &&
           developers.map((developer: any) => (

@@ -1,25 +1,22 @@
 import React from "react";
 import useTranslation from "../../../hooks/useTranslation";
+import styles from './unit.module.scss'
+import clsx from 'clsx'
 export default function FloorPlan({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
 
   return (
-    <div className="px-5 py-3">
-      <h3
-        style={{
-          width: "100%",
-          textAlign: locale === "en" ? "left" : "right",
-          background: "rgba(149,165,166, 0.5)",
-          color: "rgb(44,62,80)",
-          fontSize: "20px",
-          fontWeight: "bold",
-          padding: "5px 10px",
-          margin: "15px 3px",
-        }}
+    <div className="my-3 border-gray-300 rounded-md shadow-md">
+      <h3 className="mb-3 py-4 rounded-md w-100 px-5 text-text-secondary flex justify-start items-center"
+        style={{ backgroundColor: '#F5F6F7' }}
       >
-        {t("floorPlan")}
+        <img src="/images/location.png" />
+        <span className="text-2xl font-medium mx-4 capitalize">{t("floorPlan")}</span>
       </h3>
-      <img src={unit.media.floor_plan} className="w-full" />
+
+      <div className={styles.floorPlanContainer}>
+        <img src={unit.media.floor_plan} className={clsx(styles.floorPlan, "w-4/5 mx-auto")} />
+      </div>
     </div>
   );
 }

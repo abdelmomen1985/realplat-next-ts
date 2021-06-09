@@ -4,7 +4,6 @@ import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
 import { COMPOUNDS_BY_PK } from '../../../query/compounds';
-import Header from './../../../components/Layouts/Header';
 import { UnitCard } from './../../../components/Units/UnitCard';
 import useTranslation from './../../../hooks/useTranslation';
 export type Compound = {
@@ -44,19 +43,17 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
   };
   return (
     <Layout>
-      <Header />
-      {/* Header */}
       <div className="grid grid-cols-3 gap-10 bg-blue-800 text-white justify-center p-2">
         <div>
           <img src={compound.media.page_icon} className="w-full" />
         </div>
         <div className="col-span-2 justify-center align-middle mt-2 mx-2">
-          <h3 className="font-bold text-4xl">{compound.name[locale]}</h3>
+          <h3 className="font-bold text-3xl">{compound.name[locale]}</h3>
           <p className="text-gray-400">{compound.description[locale]}</p>
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-indigo-800 text-2xl py-5">
+        <h3 className="font-bold text-center text-primary text-2xl py-5">
           {t('projects')}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">
@@ -83,7 +80,7 @@ const SingleCompound = ({ compound }: { compound: Compound }) => {
           href={`/${locale}/developers/[developer]`}
           as={`/${locale}` + '/developers/' + compound.developer.id}
         >
-          <a className="my-2 mx-auto w-11/12 rounded-md text-indigo-800 bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
+          <a className="my-2 mx-auto w-11/12 rounded-md text-primary bg-indigo-300 font-bold text-xl block text-center py-3 px-3 mb-3">
             {' '}
             {t('allProjectsDeveloper')}{' '}
             {locale === 'ar' ? <span>&larr;</span> : <span>&rarr;</span>}

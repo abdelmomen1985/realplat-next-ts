@@ -1,0 +1,7 @@
+POST https://3000-rose-antlion-1mmpmv40.ws-eu07.gitpod.io/api/demo
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+  hello
+}

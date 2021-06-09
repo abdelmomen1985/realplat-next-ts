@@ -3,7 +3,6 @@ import React from "react";
 import { getLocalizationProps } from "../../../Context/LangContext";
 import { initializeApollo } from "../../../lib/apolloClient";
 import useTranslation from "../../../hooks/useTranslation";
-import Carousel from "react-elastic-carousel";
 import { UNITS_BY_PK } from "../../../query/unitsQuery";
 import { GetServerSideProps } from "next";
 import {
@@ -12,17 +11,16 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-
+import InteriorFeatures from './../../../components/Units/SingleUnit/InteriorFeatures';
+import DaysMarket from './../../../components/Units/SingleUnit/DaysMarket';
+import SimilarUnits from './../../../components/Units/SingleUnit/SimilarUnits';
+import SingleUnitHeroSection from './../../../components/Units/SingleUnit/SingleUnitHeroSection';
+import BreadCrumbs from './../../../components/Units/SingleUnit/BreadCrumbs';
 import {
-  FinancialSummary,
-  Header,
   Layout,
   UnitInformation,
-  DeliveryDetails,
-  FinancialAnalysis,
-  UnitDescription,
   FloorPlan,
-  CompoundNdDeveloper,
+  FinancialAnalysis
 } from "./../../../components/exports";
 const defaultOptions = { scrollwheel: false };
 
@@ -39,73 +37,44 @@ const RegularMap = withScriptjs(
 );
 
 const SingleUnit = ({ unit }: { unit: any }) => {
-  const { t, locale } = useTranslation();
+  // const { t, locale } = useTranslation();
 
   return (
     <Layout>
-      <Header />
+      <BreadCrumbs unit={unit} />
       <div className="container px-3 mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div className="col-span-1 md:col-span-2">
-            <Carousel
-              pagination={false}
-              showArrows={false}
-              enableAutoPlay={true}
-              autoPlaySpeed={1000}
-            >
-              {unit.media.photos.map((image: any, key: any) => {
-                return (
-                  <img
-                    key={key}
-                    className="w-full"
-                    style={{ maxHeight: "250px" }}
-                    src={image}
-                    alt="unit image"
-                  />
-                );
-              })}
-            </Carousel>
-            {/* Unit Information */}
-            <UnitInformation unit={unit} />
-            {/* delivery details */}
-            <DeliveryDetails unit={unit} />
-            {/* financial analysis */}
-            <FinancialAnalysis unit={unit} />
-            {/* unit description */}
-            <UnitDescription unit={unit} />
-            {/* location */}
-            <div className="my-3">
-              {/* map api that recieves lat and lang */}
-              <h3
-                style={{
-                  width: "100%",
-                  textAlign: locale === "en" ? "left" : "right",
-                  background: "rgba(149,165,166, 0.5)",
-                  color: "rgb(44,62,80)",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  padding: "5px 10px",
-                  margin: "15px 3px",
-                }}
-              >
-                {t("location")}
-              </h3>
-              <RegularMap
-                googleMapURL="https://maps.googleapis.com/maps/api/js"
-                loadingElement={<div style={{ height: "100%" }} />}
-                containerElement={<div style={{ height: "280px" }} />}
-                mapElement={<div style={{ height: "100%" }} />}
-                defaultCenter={{ lat: unit.lat, lng: unit.lng }}
-              />
-            </div>
-            {/* floor plan */}
-            <FloorPlan unit={unit} />
-            {/* compound & developer */}
-            <CompoundNdDeveloper unit={unit} />
-          </div>
-          {/* financial summary */}
-          <FinancialSummary unit={unit} />
+        <SingleUnitHeroSection unit={unit} />
+        {/* Unit Information */}
+        <UnitInformation unit={unit} />
+        {/* financial analysis */}
+        <FinancialAnalysis unit={unit} />
+        {/* location */}
+        <div className="my-3 border-gray-300 rounded-md shadow-md">
+          {/* map api that recieves lat and lang */}
+          <h3 className="mb-3 py-4 w-100 px-5 text-text-secondary rounded-md flex justify-start items-center"
+            style={{ backgroundColor: '#F5F6F7' }}
+          >
+            <img src="/images/location.png" />
+            <span className="text-2xl font-medium mx-4 capitalize">Location</span>
+          </h3>
+          <RegularMap
+            googleMapURL="https://maps.googleapis.com/maps/api/js"
+            loadingElement={<div style={{ height: "100%" }} />}
+            containerElement={<div style={{ height: "280px", margin: '10px' }} />}
+            mapElement={<div style={{
+              height: "95%", borderRadius: '15px'
+            }} />}
+            defaultCenter={{ lat: unit.lat, lng: unit.lng }}
+          />
         </div>
+        {/* floor plan */}
+        <FloorPlan unit={unit} />
+        {/* interior features */}
+        <InteriorFeatures unit={unit} />
+        {/* days on the market */}
+        <DaysMarket />
+        {/* similar units */}
+        <SimilarUnits units={unit?.compound?.units} />
       </div>
     </Layout>
   );

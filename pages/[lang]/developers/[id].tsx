@@ -5,7 +5,6 @@ import Layout from '../../../components/Layouts/Layout';
 import { getLocalizationProps } from '../../../Context/LangContext';
 import { initializeApollo } from '../../../lib/apolloClient';
 import { GET_DEVELOPER_BY_PK } from '../../../query/developers';
-import Header from './../../../components/Layouts/Header';
 import useTranslation from './../../../hooks/useTranslation';
 
 export type Developer = {
@@ -35,7 +34,7 @@ const CompoundCard = ({ compound }: { compound: any }) => {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <h1 className="text-indigo-800 mb-2"> {compound.name[locale]}</h1>
+          <h1 className="text-primary mb-2"> {compound.name[locale]}</h1>
           {compound.description && (
             <p className="text-gray-700 text-base">
               {compound.description[locale]}
@@ -60,19 +59,17 @@ const SingleDeveloper = ({ developer }: { developer: Developer }) => {
   // console.log(window.location.href);
   return (
     <Layout>
-      <Header />
-      {/* Header */}
       <div className="grid grid-cols-3 gap-10 bg-blue-800 text-white justify-center p-2">
         <div>
           <img src={developer.media.page_icon} className="w-full" />
         </div>
         <div className="col-span-2 justify-center align-middle mt-2 mx-2">
-          <h3 className="font-bold text-4xl">{developer.name[locale]}</h3>
+          <h3 className="font-bold text-3xl">{developer.name[locale]}</h3>
           <p className="text-gray-400">{developer.description[locale]}</p>
         </div>
       </div>
       <div className="my-4">
-        <h3 className="font-bold text-center text-indigo-800 text-3xl">
+        <h3 className="font-bold text-center text-primary text-2xl">
           {t('projects')}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center justify-center items-center">

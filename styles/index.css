@@ -3,36 +3,138 @@
 @tailwind utilities;
 @layer base {
   body {
-    font-family: Cairo;
+    font-family: "Montserrat", sans-serif;
+    --main-color: #007882;
+    --main-blue-light: #052386;
+    --main-blue-dark: #012b55;
+    --main-red: #ff5d3e;
+    --main-text: #3b4144;
+    --main-secondary: #f3f1f7;
+    --main-text-secondary: #443c53;
+    overflow-x: hidden;
   }
-  button {
+  button, input, a:active {
     outline: none !important;
   }
   h1 {
     @apply text-2xl;
-    font-family: Cairo;
+    font-family: "Comfortaa", cursive;
+  }
+  small {
+    font-family: "Comfortaa", cursive;
   }
   h2 {
     @apply text-xl;
   }
-  @font-face {
-    font-family: Cairo;
-    font-weight: 400;
-    src: url(../assets/fonts/Cairo-Regular.ttf) format("ttf");
+  .leave-here {
+    font-family: "Roboto", sans-serif;
+    font-family: "Cairo", sans-serif;
   }
-  @font-face {
-    font-family: Cairo;
-    font-weight: 500;
-    src: url(../assets/fonts/Cairo-SemiBold.ttf) format("ttf");
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--main-color);
+  }
+  .text-primary {
+    color: var(--main-color);
+  }
+  .bg-outline-primary {
+    border: 1px solid var(--main-color);
+    background-color: #fff;
+  }
+  .bg-secondary {
+    background-color: var(--main-secondary);
+  }
+  .text-secondary {
+    color: var(--main-secondary);
+  }
+  .bg-outline-secondary {
+    border: 1px solid var(--main-secondary);
+    background-color: #fff;
+  }
+  .bg-text-secondary {
+    background-color: var(--main-text-secondary);
+  }
+  .text-text-secondary {
+    color: var(--main-text-secondary);
+  }
+  .bg-outline-text-secondary {
+    border: 1px solid var(--main-text-secondary);
+    background-color: #fff;
+  }
+  .bg-custom-red {
+    background-color: var(--main-red);
+  }
+  .text-custom-red {
+    color: var(--main-red);
+  }
+  .bg-outline-red {
+    border: 1px solid var(--main-red);
+    background-color: #fff;
+  }
+  .bg-custom-blue-light {
+    background-color: var(--main-blue-light);
+  }
+  .text-custom-blue-light {
+    color: var(--main-blue-light);
+  }
+  .bg-outline-blue-light {
+    border: 1px solid var(--main-blue-light);
+    background-color: #fff;
+  }
+  .bg-custom-blue-dark {
+    background-color: var(--main-blue-dark);
+  }
+  .text-custom-blue-dark {
+    color: var(--main-blue-dark);
+  }
+  .bg-outline-blue-dark {
+    border: 1px solid var(--main-blue-dark);
+    background-color: #fff;
+  }
+  .bg-main {
+    background-color: var(--main-text);
+  }
+  .text-main {
+    color: var(--main-text);
+  }
+  .bg-outline-main {
+    border: 1px solid var(--main-text);
+    background-color: #fff;
+  }
+  .font-comfortaa {
+    font-family: "Comfortaa", cursive;
+  }
+  .font-montserrat {
+    font-family: "Montserrat", sans-serif;
+  }
+  .font-roboto {
+    font-family: "Roboto", sans-serif;
+  }
+  .font-cairo {
+    font-family: "Cairo", sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
+  }
+  .btn-secondary {
+    @apply bg-white mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
+  }
+  .btn-outline-primary {
+    @apply bg-transparent bg-outline-primary text-primary mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
   }
 }
 
 .rc-slider-track {
-  background-color: #2a4365 !important;
+  background-color: #007882 !important;
 }
 
 .rc-slider-handle {
-  border: 1px solid #2a4365 !important;
+  border: 1px solid #007882 !important;
   /* border-radius:  */
 }
 
@@ -52,4 +154,51 @@
 .mobile-menu a {
   font-weight: 700 !important;
   display: block !important;
+}
+
+.react-slideshow-container+ul.indicators {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  width: 20%;
+  margin: auto;
+}
+
+.react-slideshow-container+ul.indicators li {
+  width: 15px !important;
+  height: 15px !important;
+  margin: 0 5px 0 10px !important;
+}
+
+.react-slideshow-container+ul.indicators .each-slideshow-indicator::before {
+  width: 20px !important;
+  height: 20px !important;
+  background: #fff !important;
+}
+
+.react-slideshow-wrapper.slide {
+  direction: ltr;
+}
+
+.react-slideshow-container {
+  direction: ltr;
+}
+
+/* responsive table */
+
+.responsiveTable tbody tr td.pivoted {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  text-align: right !important;
+  margin-right: 5px;
+}
+
+.responsiveTable td .tdBefore {
+  width: calc(50% - 5px) !important;
+}
+
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
 }

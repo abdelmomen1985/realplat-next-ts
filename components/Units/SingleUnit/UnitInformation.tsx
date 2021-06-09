@@ -1,82 +1,139 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import useTranslation from "../../../hooks/useTranslation";
-
+import styles from './unit.module.scss'
+import clsx from 'clsx'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../../Context/AppContextProvider';
 export default function UnitInformation({ unit }: { unit: any }) {
   const { t, locale } = useTranslation();
+  const [currentTab, setCurrentTab] = useState<number>(1)
+  const [firstTab, setFirstTab] = useState(styles.firstTab);
+  const [secondTab, setSecondTab] = useState(styles.secondTab);
+  const { isMobile } = useContext(AppContext)
 
+  useEffect(() => {
+
+
+    if (locale === 'en') {
+      setFirstTab(styles.firstTab)
+      setSecondTab(styles.secondTab)
+
+    } else {
+      setFirstTab(styles.firstArTab)
+      setSecondTab(styles.secondArTab)
+    }
+  }, [locale])
   return (
-    <div className="px-5 py-3">
-      <style jsx>
-        {`
-          .mSquare {
-            font-size: 75%;
-            line-height: 0;
-            position: relative;
-            vertical-align: baseline;
-            top: -5px;
-          }
-        `}
-      </style>
-      <h3
-        style={{
-          width: "100%",
-          textAlign: locale === "en" ? "left" : "right",
-          background: "rgba(149,165,166, 0.5)",
-          color: "rgb(44,62,80)",
-          fontSize: "20px",
-          fontWeight: "bold",
-          padding: "15px 10px",
-          margin: "15px 3px",
-        }}
-      >
-        {t("unitInfo")}
-      </h3>
-      <div className="flex flex-wrap justify-between py-3 px-2">
-        <div>
-          <h5 className="capitalize">
-            <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t("unitType")}
-            </span>
-            : {unit.property_type.name[locale]}
-          </h5>
+    <div className="px-5 py-3 grid grid-cols-1 md:grid-cols-2 items-start"
+
+    >
+      <div>
+        <div className=" py-6 flex my-3 flex-wrap lg:flex-no-wrap justify-center md:justify-start items-center">
+          <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+            <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/message.png" /> {isMobile ? '' : t('message')}
+          </button>
+          <button className="flex justify-between items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
+            <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/phone.png" /> {isMobile ? '' : t('call')}
+          </button>
+          <button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+            <img className={clsx("mr-0", locale === 'en' ? "md:mr-1" : "md:ml-1")} src="/images/whatsapp.png" /> {isMobile ? '' : t('whatsapp')}
+          </button>
         </div>
+        {unit.description &&
+          <div>
+            <h3 className="py-2 text-text-secondary font-medium text-2xl">{t('description')}</h3>
+            <p>{unit.description}</p>
+          </div>}
       </div>
-      <div className="flex flex-wrap justify-between py-3 px-2">
-        <div>
-          <h5 className="capitalize">
-            <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t("landArea")}
-            </span>
-            : {unit.land} {t("meter")}
-            <span className="mSquare">2</span>
-          </h5>
+      <div className="flex justify-start items-baseline py-6 my-3 relative">
+        {/* tabs here */}
+        <div className={styles.tab}>
+          <button className={clsx(styles.tabBtn, currentTab === 1 && styles.activeBtn)}
+            onClick={() => setCurrentTab(1)}
+          >
+            {t('unitInfo')}
+          </button>
+          {currentTab === 1 && (
+            <div className={firstTab}>
+              <div className={styles.tabContainer}>
+                <h3 className="mt-5 mb-3 py-4 w-100 px-3 text-text-secondary flex justify-start items-center"
+                  style={{ backgroundColor: '#F5F6F7' }}
+                >
+                  <img src="/images/compound.png" />
+                  <span className="text-2xl font-medium mx-2 capitalize">{t('compound')}: {unit.compound.name[locale]}</span>
+                </h3>
+                <div className="flex flex-wrap justify-between px-3 py-4 my-3 items-center">
+                  <div>
+                    <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <img src="/images/land.png" />
+                      <span className="text-xl font-medium mx-2 capitalize">{t('space')}: {unit.land}{t('meter')}</span>
+                    </h4>
+                    <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <img src="/images/bath.png" />
+                      <span className="text-xl font-medium mx-2 capitalize">{t('bathrooms')}: {unit.bathrooms}</span>
+                    </h4>
+
+                  </div>
+                  <div>
+                    <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <img src="/images/proptype.png" />
+                      <span className="text-xl font-medium mx-2 capitalize">{t('type')}: {unit.property_type.name[locale]}</span>
+                    </h4>
+                    <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <img src="/images/bed.png" />
+                      <span className="text-xl font-medium mx-2 capitalize">{t('bedrooms')}: {unit.bedrooms}</span>
+                    </h4>
+
+                    {/* <h3 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <img src="/images/garden.png" />
+                      <span className="text-xl font-medium mx-2 capitalize">garden: {unit.compound.name[locale]}</span>
+                    </h3> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        <div>
-          <h5 className="capitalize">
-            <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t("bua")}
-            </span>
-            : {unit.bua} {t("meter")}
-            <span className="mSquare">2</span>
-          </h5>
-        </div>
-      </div>
-      <div className="flex flex-wrap justify-between py-3 px-2">
-        <div>
-          <h5 className="capitalize">
-            <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t("bedrooms")}
-            </span>
-            : {unit.bedrooms}
-          </h5>
-        </div>
-        <div>
-          <h5 className="capitalize">
-            <span className="text-indigo-800 font-bold">
-              <i className="fas fa-home"></i> {t("bathrooms")}
-            </span>
-            : {unit.bathrooms}
-          </h5>
+        <div className={styles.tab}>
+          <button className={clsx(styles.tabBtn, currentTab === 2 && styles.activeBtn)}
+            onClick={() => setCurrentTab(2)}
+          >
+            {t('deliveryDetails')}
+          </button>
+          {currentTab === 2 && (
+            <div className={isMobile ? firstTab : secondTab}>
+              <div className={styles.tabContainer}>
+                <h3 className="mt-5 mb-3 py-4 w-100 px-3 text-text-secondary flex justify-start items-center"
+                  style={{ backgroundColor: '#F5F6F7' }}
+                >
+                  <FontAwesomeIcon icon={faCalendar} className="text-primary text-2xl font-medium mr-1" aria-hidden="true" />
+                  <span className="text-2xl font-medium mx-2 capitalize">{t('deliveryTime')}</span>
+                </h3>
+                <div className="flex flex-wrap justify-between px-3 py-4 my-3 items-center">
+                  <div>
+                    <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <FontAwesomeIcon icon={faCalendar} className="text-primary text-xl font-medium mr-1" aria-hidden="true" />
+                      <span className="text-xl font-medium mx-2 capitalize">{t('year')}: {unit.delivery_year}</span>
+                    </h4>
+                  </div>
+                  <div>
+                    <h4 className="mt-3 mb-2 py-4  px-3 text-text-secondary flex justify-start items-center"
+                    >
+                      <FontAwesomeIcon icon={faCalendar} className="text-primary text-xl font-medium mr-1" aria-hidden="true" />
+                      <span className="text-xl font-medium mx-2 capitalize">{t('month')}: {unit.delivery_month}</span>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

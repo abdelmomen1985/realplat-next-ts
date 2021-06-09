@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { FilterListType, PropertyType } from "../../interfaces/filters";
 import { GET_PROPERTY_TYPES } from "../../query/propertyTypes";
 import useTranslation from "./../../hooks/useTranslation";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 interface PropTypesDropDownProps {
   title: string;
   filtered: (val: FilterListType) => void;
@@ -27,6 +29,7 @@ export default function PropTypesDropDown({
   const [listTitle, setListTitle] = useState<string>(title);
   //const [setInnerFilterList] = useState<any[]>([]);
   const { t, locale } = useTranslation();
+  const { isMobile } = useContext(AppContext)
   const [propTypesInnerState, setPropTypesInnerState] = useState<any[]>(
     data?.property_types
   );
@@ -121,36 +124,43 @@ export default function PropTypesDropDown({
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-          }
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
+          }
+          .circularIcon{
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            background-color: #EDAE49;
+            border-radius: 50%;
+            border: transparent;
+            display: block
           }
         `}
       </style>
-      <div className="dd-wrapper relative" ref={node}>
+      <div className="dd-wrapper  w-11/12 lg:w-auto mx-auto relative" ref={node}>
         <button
           type="button"
-          className="dd-header p-3 filter-button"
+          className="dd-header text-lg md:text-base w-11/12 lg:w-auto border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
           onClick={() => {
             toggOpen(!isOpen);
           }}
         >
-          <div className="dd-header-title">
-            <i className={icon}></i> {t(`${listTitle.toLowerCase()}`)}{" "}
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
+            {listTitle !== 'prop_type' && <span className="circularIcon"></span>}
+            {t(`${listTitle.toLowerCase()}`)}{" "}
             {isOpen ? (
               <span>
                 {" "}
-                <i className="fas fa-angle-up"></i>
+                <FontAwesomeIcon icon={faAngleUp} className="ml-1" />
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <FontAwesomeIcon icon={faAngleDown} className="ml-1" />
+
               </span>
             )}
           </div>
@@ -160,12 +170,15 @@ export default function PropTypesDropDown({
             role="list"
             className="dd-list absolute"
             style={{
-              top: "0",
+              top: "50px",
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
-              width: "100%",
               zIndex: 900,
+              width: isMobile ? '90%' : "250px",
+              left: isMobile ? '0' : 'auto',
+              right: isMobile ? '0' : 'auto',
+              margin: isMobile ? '0 auto' : ''
             }}
           >
             {propTypesInnerState &&
@@ -178,13 +191,15 @@ export default function PropTypesDropDown({
                     margin: "5px auto",
                     textAlign: "center",
                     fontSize: "16px",
-                    fontWeight: "bolder",
+                    fontWeight: 500,
                   }}
+
                   key={item.id}
                   onClick={() => multiSelectItem(item)}
                 >
                   {locale === "ar" ? item.name.ar : item.name.en}{" "}
-                  {item.selected ? <i className="fas fa-check"></i> : ""}
+                  {item.selected ? <FontAwesomeIcon icon={faCheck} />
+                    : ""}
                 </button>
               ))}
           </div>

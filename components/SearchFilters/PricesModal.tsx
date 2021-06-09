@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "rc-slider/assets/index.css";
 import RangeSlider from "../Range/RangeSlider";
 import useTranslation from "./../../hooks/useTranslation";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileInvoiceDollar, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from './../../Context/AppContextProvider';
 const pricesList = [
   {
     title: "downPay",
@@ -16,19 +18,19 @@ const pricesList = [
     key: "fin_monthly_payment",
     value: [0, 300000],
     unit: "Egp",
-    step: 100000,
+    step: 5000,
   },
   {
     title: "totalPrice",
     key: "fin_total",
-    value: [0, 8000000],
+    value: [0, 25000000],
     unit: "Egp",
     step: 100000,
   },
   {
     title: "paymentYears",
     key: "fin_years",
-    value: [0, 10],
+    value: [0, 15],
     unit: "Years",
     step: 1,
   },
@@ -45,6 +47,7 @@ export default function PricesModal(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const node = useRef<HTMLDivElement>(null);
+  const { isMobile } = useContext(AppContext)
   const [pricesFilterState, setPricesFilterState] = useState<PricesFilterType>({
     fin_down_payment: pricesList[0].value,
     fin_monthly_payment: pricesList[1].value,
@@ -82,34 +85,31 @@ export default function PricesModal(props: any) {
     <>
       <style jsx>
         {`
-          .filter-button {
-            color: #192a56;
-            border: 1px solid #192a56;
-            border-radius: 5px;
-            font-weight: 500;
-          }
+          
           .filter-button:hover {
+            box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+            border: transparent;
             color: #ffffff;
-            background-color: #192a56;
+            background-color: #007882;
           }
         `}
       </style>
-      <div className="dd-wrapper relative" ref={node}>
+      <div className="dd-wrapper w-11/12 lg:w-auto mx-auto relative " ref={node}>
         <button
           type="button"
-          className="dd-header p-3 filter-button"
+          className="dd-header text-lg md:text-base w-11/12 lg:w-auto border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"
           onClick={toggleModal}
         >
-          <div className="dd-header-title">
-            <i className="fas fa-file-invoice-dollar"></i> {t("priceRange")}{" "}
+          <div className="dd-header-title flex justify-center lg:justify-between items-center">
+            {/* <FontAwesomeIcon icon={faFileInvoiceDollar} /> */} {t("priceRange")}{" "}
             {isModalOpen ? (
               <span>
                 {" "}
-                <i className="fas fa-angle-up"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleUp} />
               </span>
             ) : (
               <span>
-                <i className="fas fa-angle-down"></i>
+                <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
               </span>
             )}
           </div>
@@ -118,12 +118,17 @@ export default function PricesModal(props: any) {
           <div
             className="dd-list absolute"
             style={{
-              top: "0",
+              top: "50px",
               background: "#fff",
               borderRadius: "5px",
               boxShadow: "0 2px 2px #eee",
               zIndex: 999,
-              width: "100%",
+              width: isMobile ? '90%' : "250px",
+              left: isMobile ? '0' : 'auto',
+              right: isMobile ? '0' : 'auto',
+              margin: isMobile ? '0 auto' : '',
+              fontSize: '17px',
+              fontWeight: 500
             }}
           >
             {pricesList.map((item) => {
@@ -151,7 +156,7 @@ export default function PricesModal(props: any) {
             })}
             <button
               onClick={applyFiltersHandler}
-              className="w-full rounded-md bg-blue-900 text-white font-bold text-md p-3 mt-2 mb-1 mx-auto"
+              className="w-full rounded-md bg-primary text-white font-bold text-base p-3 mt-2 mb-1 mx-auto"
             >
               Apply
             </button>
