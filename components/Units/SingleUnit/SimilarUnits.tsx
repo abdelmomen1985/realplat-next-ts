@@ -1,21 +1,21 @@
-import React, { useContext, useState } from 'react'
-import { Unit } from '../../../interfaces'
-import { AppContext } from './../../../Context/AppContextProvider';
-import { useMutation } from '@apollo/client';
-import { ADD_TO_WISHLIST } from '../../../query/user';
-import { REMOVE_FROM_WISHLIST } from './../../../query/user';
-import { UnitCard } from './../UnitCard';
-import { useQuery } from '@apollo/client';
-import { USER_WISHLIST_IDS } from '../../../query/unitsQuery';
-import useTranslation from './../../../hooks/useTranslation';
+import React, { useContext, useState } from "react";
+import { Unit } from "../../../interfaces";
+import { AppContext } from "./../../../Context/AppContextProvider";
+import { useMutation } from "@apollo/client";
+import { ADD_TO_WISHLIST } from "../../../query/user";
+import { REMOVE_FROM_WISHLIST } from "./../../../query/user";
+import { UnitCard } from "./../UnitCard";
+import { useQuery } from "@apollo/client";
+import { USER_WISHLIST_IDS } from "../../../query/unitsQuery";
+import useTranslation from "./../../../hooks/useTranslation";
 
 const SimilarUnits = ({ units }: { units: Unit[] }) => {
   const { user, setComparing, setLoginModal } = useContext(AppContext);
-  const [innerUnits, setInnerUnits] = useState<Unit[]>(units)
+  const [innerUnits, setInnerUnits] = useState<Unit[]>(units);
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
   const { data, refetch } = useQuery(USER_WISHLIST_IDS);
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const wishListHandler = async (unit: Unit, wishlisted: boolean) => {
     // handle add to the server
     if (user) {
@@ -43,7 +43,6 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
           },
         });
         if (refetch) refetch();
-
       }
     } else {
       setLoginModal(true);
@@ -67,10 +66,11 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
   );
   return (
     <>
-      <h2 className="text-2xl md:text-3xl font-semibold text-text-secondary my-3 px-2 py-3">{t('simHomes')}</h2>
+      <h2 className="text-xl font-semibold text-text-secondary my-3 px-2 py-3">
+        {t("simHomes")}
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-3 gap-2 justify-items-center justify-center items-center">
-        {
-          innerUnits.length > 0 &&
+        {innerUnits.length > 0 &&
           innerUnits.map((unit: any) => (
             <UnitCard
               key={unit.id}
@@ -85,7 +85,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
         {innerUnits.length === 0 && <div>No Units Found</div>}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SimilarUnits
+export default SimilarUnits;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DropDown from "./DropDown";
 import { Unit } from "../../interfaces/index";
 import PricesModal from "./PricesModal";
@@ -8,6 +8,8 @@ import { FilterListType } from "../../interfaces/filters";
 import useTranslation from "./../../hooks/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPlus } from "@fortawesome/free-solid-svg-icons";
+import clsx from "clsx";
+import { AppContext } from "../../Context/AppContextProvider";
 interface SearchFiltersProps {
   setFilterListState: (val: FilterListType) => void;
   filterListState: any;
@@ -19,7 +21,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
   const [openPropTypeDD, setOpenPropTypeDD] = useState(false);
   const unitList: any = props.units;
   const prices: any = [];
-
+  const { isMobile } = useContext(AppContext);
   const locations: any = [];
   useEffect(() => {
     for (let unit in unitList) {
@@ -83,7 +85,7 @@ export default function SearchFilters(props: SearchFiltersProps) {
             filtered={props.setFilterListState}
             filterListState={props.filterListState}
           />
-          <div className="relative">
+          <div className={clsx("relative", !isMobile ? "col-span-2" : "")}>
             <button
               className="py-2 px-3 text-black border-none text-text-secondary text-lg font-medium hover:bg-gray-100 rounded-md hover:shadow-md"
               onClick={() => {

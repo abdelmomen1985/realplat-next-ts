@@ -28,22 +28,22 @@ export const NavLinks = (props: any) => {
 
   return (
     <>
-      <div className="ml-4">
+      <div className="mx-4">
         <ActiveLink activeClassName={styles.active} href={`/${locale}/units`}>
-          <a className={clsx(styles.navLink, "mx-3")}> {t("navSearch")} </a>
+          <a className={clsx(styles.navLink, "mx-2")}> {t("navSearch")} </a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/`}>
-          <a className={clsx(styles.navLink, "mx-3")}> {t("navProjects")} </a>
+          <a className={clsx(styles.navLink, "mx-2")}> {t("navProjects")} </a>
         </ActiveLink>
         <ActiveLink activeClassName={styles.active} href={`/${locale}/expo`}>
-          <a className={clsx(styles.navLink, "mx-3")}>{t("navExpo")}</a>
+          <a className={clsx(styles.navLink, "mx-2")}>{t("navExpo")}</a>
         </ActiveLink>
       </div>
       <div>
         <LocaleSwitcher />
         {!user?.id ? (
           <a
-            className={clsx(styles.navLink, "mx-5 cursor-pointer")}
+            className={clsx(styles.navLink, "mx-4 cursor-pointer")}
             onClick={() => props.setLoginModal(true)}
           >
             {t("navSign")}
@@ -87,7 +87,7 @@ export const NavLinks = (props: any) => {
             </span>
 
             <a
-              className={clsx(styles.navLink, "mx-5 cursor-pointer")}
+              className={clsx(styles.navLink, "mx-2 cursor-pointer")}
               onClick={async () => {
                 const response = await fetch("/api/sessions", {
                   method: "DELETE",

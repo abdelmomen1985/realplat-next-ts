@@ -26,6 +26,7 @@ const common = {
   guidesBtn: "see more guides",
   contactBtn: "contact us",
   knowMoreBtn: "know more",
+  getInTouch: "Get in touch",
   call: "Call",
   whatsapp: "Whatsapp",
   zoom: "Zoom",

@@ -203,7 +203,7 @@ export const UnitCard = ({
                 setShowContactMenu((prev) => !prev);
               }}
             >
-              Get in touch
+              {t("getInTouch")}
             </button>
             {showContactMenu && (
               <motion.div
@@ -219,44 +219,52 @@ export const UnitCard = ({
                   zIndex: 999,
                 }}
               >
-                <button className="flex justify-center w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+                <button
+                  className={clsx(
+                    "flex w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary",
+                    isMobile ? "justify-center" : ""
+                  )}
+                >
                   <img
-                    className={clsx(
-                      "mr-0",
-                      locale === "en" ? "md:mr-1" : "md:ml-1"
-                    )}
-                    src="/images/message.png"
+                    className={"mx-2"}
+                    src="/images/call-to-action/message.png"
                   />{" "}
                   {isMobile ? "" : t("message")}
                 </button>
-                <button className="flex justify-center w-full items-center py-3 my-2 px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white">
+                <button
+                  className={clsx(
+                    "flex w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-primary rounded-md text-white",
+                    isMobile ? "justify-center" : ""
+                  )}
+                >
                   <img
-                    className={clsx(
-                      "mr-0",
-                      locale === "en" ? "md:mr-1" : "md:ml-1"
-                    )}
-                    src="/images/phone.png"
-                  />{" "}
+                    className={"mx-2"}
+                    src="/images/call-to-action/phone.png"
+                  />
                   {isMobile ? "" : t("call")}
                 </button>
-                <button className="flex justify-center w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+                <button
+                  className={clsx(
+                    "flex w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary",
+                    isMobile ? "justify-center" : ""
+                  )}
+                >
                   <img
-                    className={clsx(
-                      "mr-0",
-                      locale === "en" ? "md:mr-1" : "md:ml-1"
-                    )}
-                    src="/images/whatsapp.png"
-                  />{" "}
+                    className={"mx-2"}
+                    src="/images/call-to-action/whatsapp.png"
+                  />
                   {isMobile ? "" : t("whatsapp")}
                 </button>
-                <button className="flex  w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+                <button
+                  className={clsx(
+                    "flex w-full items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary",
+                    isMobile ? "justify-center" : ""
+                  )}
+                >
                   <img
-                    className={clsx(
-                      "mr-0",
-                      locale === "en" ? "md:mr-1" : "md:ml-1"
-                    )}
-                    src="/images/zoom.png"
-                  />{" "}
+                    className={"mx-2"}
+                    src="/images/call-to-action/zoom.png"
+                  />
                   {isMobile ? "" : t("zoom")}
                 </button>
               </motion.div>

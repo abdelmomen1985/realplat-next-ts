@@ -39,9 +39,9 @@ const SingleUnitHeroSection = ({ unit }: { unit: Unit }) => {
   const { isMobile, user, setLoginModal, setComparing } =
     useContext(AppContext);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isWishListed, setIsWishListed] = useState<boolean>(unit.wishListed);
+
   const [showShareList, setShowShareList] = useState<boolean>(false);
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   const [addWishList] = useMutation(ADD_TO_WISHLIST);
   const [removeWishList] = useMutation(REMOVE_FROM_WISHLIST);
   let shareUrl = `https://realplat-next-ts2-git-dev-abdelmomen1985.vercel.app/${locale}/units/${unit.id}`;
