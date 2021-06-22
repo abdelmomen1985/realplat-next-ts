@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   body {
     font-family: "Montserrat", sans-serif;
@@ -11,6 +12,24 @@
     --main-text: #3b4144;
     --main-secondary: #f3f1f7;
     --main-text-secondary: #443c53;
+    --gray200: #f5f4f8;
+    --gray700: #666276;
+    --gray800: #443f56;
+    --gray900: #1e1b2c;
+    --outrageous-orange: #fd56311a;
+    --primary: #fd5631;
+    --white: #ffffff;
+
+    --font-size-l: 16px;
+    --font-size-m: 14px;
+    --font-size-s: 12px;
+    --font-size-xl: 20px;
+    --font-size-xxl: 24px;
+    --font-size-xxxxl2: 36px;
+    --font-size-xxxxxl: 56px;
+
+    --font-family-noto_sans: "Noto Sans", Helvetica;
+    --font-family-public_sans: "Public Sans", Helvetica;
     overflow-x: hidden;
   }
   button,
@@ -40,6 +59,9 @@
 }
 
 @layer utilities {
+  .btn {
+    @apply py-2 px-6 rounded;
+  }
   .bg-primary {
     background-color: var(--main-color);
   }

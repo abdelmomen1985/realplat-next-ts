@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import Layout from "../../components/Layouts/Layout";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getLocalizationProps } from "../../Context/LangContext";
-// import useTranslation from '../../hooks/useTranslation';
+import FinderExpoHead from "../../components/FinderExpoSections/FinderExpoHead";
+/*
+import useTranslation from '../../hooks/useTranslation';
 import MainSection from "./../../components/HomeSections/MainSection";
 import ServicesSection from "./../../components/HomeSections/ServicesSection";
 import ExplorerSection from "./../../components/HomeSections/ExplorerSection";
@@ -10,6 +12,7 @@ import GuidesSection from "./../../components/HomeSections/GuidesSection";
 import Exhibitors from "../../components/ExpoSections/Exhibitors";
 import HowWorksSection from "../../components/ExpoSections/HowWorksSection";
 import MainExpoSection from "../../components/ExpoSections/MainExpoSection";
+*/
 
 const IndexPage: NextPage = () => {
   // const { t } = useTranslation();
@@ -21,17 +24,21 @@ const IndexPage: NextPage = () => {
     });
   }, []);
   return (
+    /* top section 
     <Layout title="Realestate Brand">
-      {/* top section 
+      
       <MainSection />
       <ServicesSection />
       <ExplorerSection />
       <GuidesSection />
-      */}
+      
       <MainExpoSection />
       <Exhibitors />
       <HowWorksSection />
-    </Layout>
+      
+      </Layout>
+      */
+    <FinderExpoHead />
   );
 };
 
