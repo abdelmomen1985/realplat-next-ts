@@ -142,6 +142,20 @@
 .border_1pxGray800 {
   border: 1px solid var(--gray800);
 }
+.notosansNormalWhite_14px {
+  color: var(--white);
+  font-family: var(--font-family-noto_sans);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 400;
+}
+.notosansBoldWhite_20px {
+  color: var(--white);
+  font-family: var(--font-family-noto_sans);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
 
 .expo2 {
   max-width: 1024px;
@@ -289,6 +303,21 @@
   @apply flex self-center mx-2 my-4 px-4 py-1;
   mix-blend-mode: normal;
 }
+.gradientBadge {
+  border-radius: 4px;
+  @apply inline-flex self-center px-2 py-1;
+  background: linear-gradient(26.21deg, #5d3cf2 0%, #fd5631 108.88%);
+  color: var(--white);
+  font-family: var(--font-family-noto_sans);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+  &.blueBadge {
+    background: #3c76f2;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+}
 
 .expoBadge:hover {
   background-color: var(--white);
@@ -307,11 +336,15 @@
   height: 400px;
 }
 
-.expoHalfTop {
-  background: url("/images/finder/luxury-2nd-top-bg.png");
+.expoHalf {
   height: 200px;
-}
-.expoHalfBtm {
-  background: url("/images/finder/luxury-2nd-top-bg.png");
-  height: 200px;
+  background-size: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  &.halfTop {
+    background-image: url("/images/finder/luxury-2nd-top-bg.png");
+  }
+  &.halfBtm {
+    background-image: url("/images/finder/luxury-2nd-btm-bg.png");
+  }
 }

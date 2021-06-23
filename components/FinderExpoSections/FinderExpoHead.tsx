@@ -423,34 +423,83 @@ export default function FinderExpoHead() {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex ">
+        <div className="mt-8 flex">
           <div
             className={clsx(
               "flex-1",
+              "flex",
+              "justify-items-end",
               styles.expoFull,
               "m-1",
               "mr-2",
               "relative"
             )}
           >
-            <div className="absolute inset-4 ">Mellw Expo</div>
+            <div className={clsx("absolute", "top-4", "left-4")}>
+              <div className={clsx(styles.gradientBadge)}>Mellw Expo</div>
+              <div className={clsx(styles.gradientBadge, styles.blueBadge)}>
+                New
+              </div>
+            </div>
+
+            <div className={clsx("self-end", "m-4")}>
+              <div className={clsx(styles.notosansNormalWhite_14px)}>
+                COMMERCIAL
+              </div>
+              <div className={clsx(styles.notosansBoldWhite_20px)}>
+                Luxury Office Space
+              </div>
+
+              <div className={clsx("mt-1", "flex")}>
+                <img src="/images/finder/pin.svg" alt="" />
+                <div className={clsx(styles.notosansNormalWhite_14px, "mx-2")}>
+                  Down Town, New Capital Cairo, Cairo
+                </div>
+              </div>
+            </div>
           </div>
           <div className="flex-1 flex flex-col">
             <div
               className={clsx(
                 "flex-1",
-                styles.expoFull,
-                styles.expoHalfTop,
+                "flex",
+                "justify-items-end",
+                "mr-2",
+                "relative",
+                styles.expoHalf,
+                styles.halfTop,
                 "m-1"
               )}
             >
-              top
+              <div className={clsx("absolute", "top-4", "left-4")}>
+                <div className={clsx(styles.gradientBadge)}>Mellw Expo</div>
+                <div className={clsx(styles.gradientBadge, styles.blueBadge)}>
+                  New
+                </div>
+              </div>
+              <div className={clsx("self-end", "m-4")}>
+                <div className={clsx(styles.notosansNormalWhite_14px)}>
+                  COMMERCIAL
+                </div>
+                <div className={clsx(styles.notosansBoldWhite_20px)}>
+                  Luxury Office Space
+                </div>
+
+                <div className={clsx("mt-1", "flex")}>
+                  <img src="/images/finder/pin.svg" alt="" />
+                  <div
+                    className={clsx(styles.notosansNormalWhite_14px, "mx-2")}
+                  >
+                    Down Town, New Capital Cairo, Cairo
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               className={clsx(
                 "flex-1",
-                styles.expoFull,
-                styles.expoHalfBtm,
+                styles.expoHalf,
+                styles.halfBtm,
                 "m-1",
                 "mt-4"
               )}
