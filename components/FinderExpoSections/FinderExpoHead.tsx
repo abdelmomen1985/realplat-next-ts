@@ -127,8 +127,8 @@ export default function FinderExpoHead() {
         </div>
         <div className="flex">
           <div className="mt-12">
-            <h1 className={clsx(styles.notosansBoldOutrageousOrange_56px)}>
-              <div className="span0 notosans-bold-outrageous-orange-56px">
+            <h1 className={clsx("")}>
+              <div className={clsx(styles.notosansBoldOutrageousOrange_56px)}>
                 Mellw Expo
               </div>
               <div className={styles.notosansNormalMirage_36px}>
@@ -271,7 +271,7 @@ export default function FinderExpoHead() {
           </div>
         </div>
         {/* home cards */}
-        <div className={styles.homeCards}>
+        <div className={clsx(styles.homeCards)}>
           <div className={styles.homeCardsCard}>
             <img
               className="mt-2"
@@ -424,12 +424,37 @@ export default function FinderExpoHead() {
           </div>
         </div>
         <div className="mt-8 flex ">
-          <div className={clsx("flex-1", styles.expoFull, "m-1", "mr-2")}>
-            te
+          <div
+            className={clsx(
+              "flex-1",
+              styles.expoFull,
+              "m-1",
+              "mr-2",
+              "relative"
+            )}
+          >
+            <div className="absolute inset-4 ">Mellw Expo</div>
           </div>
           <div className="flex-1 flex flex-col">
-            <div className={clsx("flex-1", styles.expoFull, "m-1")}>top</div>
-            <div className={clsx("flex-1", styles.expoFull, "m-1", "mt-4")}>
+            <div
+              className={clsx(
+                "flex-1",
+                styles.expoFull,
+                styles.expoHalfTop,
+                "m-1"
+              )}
+            >
+              top
+            </div>
+            <div
+              className={clsx(
+                "flex-1",
+                styles.expoFull,
+                styles.expoHalfBtm,
+                "m-1",
+                "mt-4"
+              )}
+            >
               btm
             </div>
           </div>

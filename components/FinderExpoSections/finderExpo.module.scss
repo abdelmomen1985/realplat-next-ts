@@ -129,6 +129,7 @@
   font-size: var(--font-size-xxxxxl);
   font-style: normal;
   font-weight: 700;
+  line-height: 72px;
 }
 .notosans-normal-mirage-36px,
 .notosansNormalMirage_36px {
@@ -250,11 +251,11 @@
 .homeCards {
   display: flex;
   width: 100%;
-  @apply mt-16;
+  @apply mt-16 mx-2;
 }
 
 .homeCardsCard {
-  @apply mt-4;
+  @apply m-4;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -292,7 +293,10 @@
 .expoBadge:hover {
   background-color: var(--white);
   box-shadow: 0px 4px 12px #1f1b2d14, 0px 2px 2px #1f1b2d14;
-  color: var(--primary);
+  cursor: pointer;
+  span {
+    color: var(--primary);
+  }
 }
 
 .expoFull {
@@ -303,10 +307,11 @@
   height: 400px;
 }
 
-.expoHalf {
-  background: url("/images/finder/luxury-bg.png");
-  background-size: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+.expoHalfTop {
+  background: url("/images/finder/luxury-2nd-top-bg.png");
+  height: 200px;
+}
+.expoHalfBtm {
+  background: url("/images/finder/luxury-2nd-top-bg.png");
   height: 200px;
 }

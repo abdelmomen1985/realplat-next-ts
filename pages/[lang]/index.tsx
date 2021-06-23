@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Layout from "../../components/Layouts/Layout";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getLocalizationProps } from "../../Context/LangContext";
 import FinderExpoHead from "../../components/FinderExpoSections/FinderExpoHead";
