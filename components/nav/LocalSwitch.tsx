@@ -38,15 +38,6 @@ const LocaleSwitcher: React.FC = () => {
           English
         </a>
       )}
-      {/* <label className="language-switcher">
-        <select onChange={handleLocaleChange} defaultValue={locale}>
-          {locales.map((el) => (
-            <option key={el} value={el}>
-              {el}
-            </option>
-          ))}
-        </select>
-      </label> */}
     </div>
   );
 };
