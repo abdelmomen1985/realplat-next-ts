@@ -1,7 +1,68 @@
 import React, { useState } from "react";
 import styles from "./finderExpo.module.scss";
 import clsx from "clsx";
+import SearchByCity from "./SearchByCity";
 
+const SectionTitle = ({ title }: { title: string }) => {
+  return (
+    <div className="flex">
+      <h1
+        className={clsx(
+          styles.notosansBoldMirage_28px,
+          "font-semibold",
+          "flex-grow"
+        )}
+      >
+        {title}
+      </h1>
+      <div className={clsx("flex-grow")}></div>
+      <div
+        className={clsx(
+          "flex",
+          "items-center",
+          styles.notosansNormalDolphin_14px
+        )}
+      >
+        View All
+        <img src="/images/finder/arrow.svg" alt="" />
+      </div>
+    </div>
+  );
+};
+const ExpoCardUnit = () => {
+  return (
+    <div
+      className={clsx(
+        "flex-1",
+        "flex",
+        "justify-items-end",
+        "mr-2",
+        "relative",
+        styles.expoHalf,
+        styles.halfTop,
+        "m-1"
+      )}
+    >
+      <div className={clsx("absolute", "top-4", "left-4")}>
+        <div className={clsx(styles.gradientBadge)}>Mellw Expo</div>
+        <div className={clsx(styles.gradientBadge, styles.blueBadge)}>New</div>
+      </div>
+      <div className={clsx("self-end", "m-4")}>
+        <div className={clsx(styles.notosansNormalWhite_14px)}>COMMERCIAL</div>
+        <div className={clsx(styles.notosansBoldWhite_20px)}>
+          Luxury Office Space
+        </div>
+
+        <div className={clsx("mt-1", "flex")}>
+          <img src="/images/finder/pin.svg" alt="" />
+          <div className={clsx(styles.notosansNormalWhite_14px, "mx-2")}>
+            Down Town, New Capital Cairo, Cairo
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 const RecommededCard = () => {
   return (
     <div className={styles.recommendCard}>
@@ -348,28 +409,7 @@ export default function FinderExpoHead() {
         </div>
         {/* Recommended Properties */}
         <div className="mt-16">
-          <div className="flex">
-            <h1
-              className={clsx(
-                styles.notosansBoldMirage_28px,
-                "font-semibold",
-                "flex-grow"
-              )}
-            >
-              Recommended Properties
-            </h1>
-            <div className={clsx("flex-grow")}></div>
-            <div
-              className={clsx(
-                "flex",
-                "items-center",
-                styles.notosansNormalDolphin_14px
-              )}
-            >
-              View All
-              <img src="/images/finder/arrow.svg" alt="" />
-            </div>
-          </div>
+          <SectionTitle title="Recommended Properties" />
         </div>
         {/* cards */}
         <div className="mt-8 flex">
@@ -423,6 +463,7 @@ export default function FinderExpoHead() {
             </div>
           </div>
         </div>
+        {/* Expo Promo Units */}
         <div className="mt-8 flex">
           <div
             className={clsx(
@@ -459,43 +500,9 @@ export default function FinderExpoHead() {
             </div>
           </div>
           <div className="flex-1 flex flex-col">
-            <div
-              className={clsx(
-                "flex-1",
-                "flex",
-                "justify-items-end",
-                "mr-2",
-                "relative",
-                styles.expoHalf,
-                styles.halfTop,
-                "m-1"
-              )}
-            >
-              <div className={clsx("absolute", "top-4", "left-4")}>
-                <div className={clsx(styles.gradientBadge)}>Mellw Expo</div>
-                <div className={clsx(styles.gradientBadge, styles.blueBadge)}>
-                  New
-                </div>
-              </div>
-              <div className={clsx("self-end", "m-4")}>
-                <div className={clsx(styles.notosansNormalWhite_14px)}>
-                  COMMERCIAL
-                </div>
-                <div className={clsx(styles.notosansBoldWhite_20px)}>
-                  Luxury Office Space
-                </div>
-
-                <div className={clsx("mt-1", "flex")}>
-                  <img src="/images/finder/pin.svg" alt="" />
-                  <div
-                    className={clsx(styles.notosansNormalWhite_14px, "mx-2")}
-                  >
-                    Down Town, New Capital Cairo, Cairo
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
+            <ExpoCardUnit />
+            <ExpoCardUnit />
+            {/* <div
               className={clsx(
                 "flex-1",
                 styles.expoHalf,
@@ -505,7 +512,57 @@ export default function FinderExpoHead() {
               )}
             >
               btm
-            </div>
+            </div> */}
+          </div>
+        </div>
+        {/* Calc Hero Section */}
+        <div className={clsx(styles.calcHero)}>
+          <div className={clsx("")}>
+            <img src="/images/finder/calc-illustration.png" alt="" />
+          </div>
+          <div className={clsx("mt-16 ml-10")}>
+            <h1 className={clsx(styles.notoxxxl)}>
+              Calculate your Payment Plan with Real Estate Developers
+              <span className={clsx(styles.zoom)}> Zoom </span>
+              Meetings
+            </h1>
+            <p className={clsx("mt-10", styles.notosansNormalDolphin_16px)}>
+              Book online or communicate directly with real estate developers
+              through a zoom meeting, wherever you are and never miss any
+              oppurtunity.
+            </p>
+            <button className={clsx("my-4", "btn", styles.brimaryBtn)}>
+              Join Mellw Expo
+            </button>
+          </div>
+        </div>
+        {/* Search By City */}
+        <div className="mt-16">
+          <SectionTitle title="Search By City " />
+        </div>
+        <SearchByCity />
+        {/* Our Partners */}
+        <div className="mt-16">
+          <SectionTitle title="Our Partners " />
+        </div>
+        <div className={clsx("flex", "mt-10")}>
+          <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
+            EMAAR
+          </div>
+          <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
+            MODON
+          </div>
+          <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
+            IMKAN
+          </div>
+          <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
+            City Edge
+          </div>
+          <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
+            SODIC
+          </div>
+          <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
+            Palm Hills
           </div>
         </div>
       </div>

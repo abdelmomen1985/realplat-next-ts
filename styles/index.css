@@ -19,13 +19,16 @@
     --outrageous-orange: #fd56311a;
     --primary: #fd5631;
     --white: #ffffff;
-
+    --info: #3c76f2;
+    --nobel: #b1b1b1;
     --font-size-l: 16px;
     --font-size-m: 14px;
     --font-size-s: 12px;
     --font-size-xl: 20px;
     --font-size-xxl: 24px;
-    --font-size-xxxxl2: 36px;
+    --font-size-xxl2: 28px;
+    --font-size-xxxl: 32px;
+    --font-size-xxxxl: 36px;
     --font-size-xxxxxl: 56px;
 
     --font-family-noto_sans: "Noto Sans", Helvetica;
@@ -155,6 +158,22 @@
   }
   .btn-outline-primary {
     @apply bg-transparent bg-outline-primary text-primary mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .text-shadow-none {
+    text-shadow: none;
   }
 }
 

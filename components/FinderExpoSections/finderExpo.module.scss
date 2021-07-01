@@ -29,6 +29,15 @@
   font-style: normal;
   font-weight: 400;
 }
+
+.notosansNormalDolphin_16px {
+  color: var(--gray700);
+  font-family: var(--font-family-noto_sans);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+}
+
 .notosansBoldDolphin_16px {
   color: var(--gray700);
   font-family: var(--font-family-noto_sans);
@@ -135,7 +144,7 @@
 .notosansNormalMirage_36px {
   color: var(--gray900);
   font-family: var(--font-family-noto_sans);
-  font-size: var(--font-size-xxxxl2);
+  font-size: var(--font-size-xxxxl);
   font-style: normal;
   font-weight: 400;
 }
@@ -333,11 +342,10 @@
   background-size: 100%;
   border-radius: 12px;
   overflow: hidden;
-  height: 400px;
+  height: 390px;
 }
 
 .expoHalf {
-  height: 200px;
   background-size: 100%;
   border-radius: 12px;
   overflow: hidden;
@@ -346,5 +354,42 @@
   }
   &.halfBtm {
     background-image: url("/images/finder/luxury-2nd-btm-bg.png");
+  }
+}
+.calcHero {
+  @apply mt-16 flex;
+  img {
+    max-width: 350px;
+  }
+  h1 {
+    line-height: 130%;
+  }
+  .zoom {
+    color: #3c76f2;
+  }
+}
+.cityCard {
+  @apply flex-1 rounded-lg shadow mr-4 overflow-hidden;
+  &:hover {
+    @apply shadow-lg;
+  }
+}
+.notoxxxl {
+  color: var(--gray900);
+  font-family: var(--font-family-noto_sans);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+.notosansBoldNobel_28px {
+  color: var(--nobel);
+  font-family: var(--font-family-noto_sans);
+  font-size: var(--font-size-xxl2);
+  font-style: normal;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: var(--gray900);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
