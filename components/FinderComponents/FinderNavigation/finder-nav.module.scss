@@ -25,4 +25,52 @@
 .lang {
   align-items: center;
   display: flex;
-  min-width: 66px;}
+  min-width: 66px;
+}
+
+.navLink {
+  text-decoration: none;
+  @apply p-2;
+  font-family: "Noto Sans", 'Cairo', sans-serif;
+  color: var(--gray800);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+
+  &:hover,
+  &:active {
+    color: var(--white);
+    background-color: var(--primary);
+    @apply rounded-lg;
+  }
+
+  @media screen and (max-width: 760px) {
+    margin: auto;
+  }
+}
+
+.navBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 5px 15px;
+
+  border-radius: 5px;
+
+  img {
+    margin-inline: 5px;
+  }
+
+  &:hover {
+    color: var(--white);
+    background-color: var(--primary);
+
+    img {
+
+      filter: brightness(6);
+
+    }
+  }
+}

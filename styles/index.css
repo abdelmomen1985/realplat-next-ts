@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   body {
     font-family: "Montserrat", sans-serif;
@@ -21,6 +20,7 @@
     --white: #ffffff;
     --info: #3c76f2;
     --nobel: #b1b1b1;
+    --success: #07C98B;
     --font-size-l: 16px;
     --font-size-m: 14px;
     --font-size-s: 12px;
@@ -30,14 +30,11 @@
     --font-size-xxxl: 32px;
     --font-size-xxxxl: 36px;
     --font-size-xxxxxl: 56px;
-
     --font-family-noto_sans: "Noto Sans", Helvetica;
     --font-family-public_sans: "Public Sans", Helvetica;
     overflow-x: hidden;
   }
-  button,
-  input,
-  a:active {
+  button, input, a:active {
     outline: none !important;
   }
   h1 {
@@ -51,8 +48,7 @@
     @apply text-xl;
     font-family: "Comfortaa", "Cairo", cursive;
   }
-  h3,
-  h4 {
+  h3, h4 {
     font-family: "Comfortaa", "Cairo", cursive;
   }
   .leave-here {
@@ -74,6 +70,50 @@
   .bg-outline-primary {
     border: 1px solid var(--main-color);
     background-color: #fff;
+  }
+  .bg-red {
+    background-color: var(--primary)
+  }
+  .text-red {
+    color: var(--primary)
+  }
+  .bg-outline-red {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background-color: transparent;
+  }
+  .bg-info {
+    background-color: var(--info)
+  }
+  .text-info {
+    color: var(--info)
+  }
+  .bg-outline-info {
+    border: 1px solid var(--info);
+    color: var(--info);
+    background-color: transparent;
+  }
+  .bg-success {
+    background-color: var(--success)
+  }
+  .text-success {
+    color: var(--success)
+  }
+  .bg-outline-success {
+    border: 1px solid var(--success);
+    color: var(--success);
+    background-color: transparent;
+  }
+  .bg-nobel {
+    background-color: var(--nobel)
+  }
+  .text-nobel {
+    color: var(--nobel)
+  }
+  .bg-outline-nobel {
+    border: 1px solid var(--nobel);
+    color: var(--nobel);
+    background-color: transparent;
   }
   .bg-secondary {
     background-color: var(--main-secondary);
@@ -159,19 +199,15 @@
   .btn-outline-primary {
     @apply bg-transparent bg-outline-primary text-primary mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
   }
-
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-
   .text-shadow-md {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
   }
-
   .text-shadow-lg {
     text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
   }
-
   .text-shadow-none {
     text-shadow: none;
   }
@@ -205,7 +241,7 @@
   display: block !important;
 }
 
-.react-slideshow-container + ul.indicators {
+.react-slideshow-container+ul.indicators {
   position: absolute;
   top: 15px;
   left: 0;
@@ -214,13 +250,13 @@
   margin: auto;
 }
 
-.react-slideshow-container + ul.indicators li {
+.react-slideshow-container+ul.indicators li {
   width: 15px !important;
   height: 15px !important;
   margin: 0 5px 0 10px !important;
 }
 
-.react-slideshow-container + ul.indicators .each-slideshow-indicator::before {
+.react-slideshow-container+ul.indicators .each-slideshow-indicator::before {
   width: 20px !important;
   height: 20px !important;
   background: #fff !important;
@@ -251,15 +287,18 @@ button:disabled {
   opacity: 0.8;
   cursor: not-allowed;
 }
+
 .form-group label {
   font-size: 14px;
   padding: 5px;
 }
+
 .form-group input {
   border-radius: 5px;
   padding: 5px;
   width: 100%;
 }
+
 .filter-button {
   color: #007882;
   border: 1px solid #007882;
@@ -267,6 +306,7 @@ button:disabled {
   font-weight: 500;
   outline: none;
 }
+
 .filter-button:hover {
   box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
   border: transparent;
