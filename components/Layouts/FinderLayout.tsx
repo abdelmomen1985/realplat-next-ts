@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import Head from 'next/head';
 import useTranslation from './../../hooks/useTranslation';
 import FinderHeader from './../FinderComponents/FinderNavigation/FinderHeader';
+import FinderFooter from './../FinderComponents/FinderNavigation/FinderFooter';
 type LayoutProps = {
 	children?: ReactNode;
 	title?: string;
@@ -23,10 +24,7 @@ const FinderLayout = ({
 					}
 				`}
 			</style>
-			<div
-				className="expo2"
-				style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}
-			>
+			<div style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}>
 				<Head>
 					<title>{title}</title>
 					<meta charSet="utf-8" />
@@ -38,7 +36,7 @@ const FinderLayout = ({
 				<FinderHeader />
 				{children}
 
-				{/* <Footer title={title} /> */}
+				<FinderFooter />
 			</div>
 		</>
 	);

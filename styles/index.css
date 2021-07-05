@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Noto Sans", "Cairo", Helvetica;
     --main-color: #007882;
     --main-blue-light: #052386;
     --main-blue-dark: #012b55;
@@ -36,20 +36,25 @@
   }
   button, input, a:active {
     outline: none !important;
+    font-family: "Noto Sans", "Cairo", Helvetica;
   }
   h1 {
     @apply text-2xl;
-    font-family: "Comfortaa", "Cairo", cursive;
+    font-family: "Noto Sans", "Cairo", Helvetica;
+    /* font-family: "Comfortaa", "Cairo", cursive; */
   }
   small {
-    font-family: "Comfortaa", cursive;
+    font-family: "Noto Sans", "Cairo", Helvetica;
+    /* font-family: "Comfortaa", cursive; */
   }
   h2 {
     @apply text-xl;
-    font-family: "Comfortaa", "Cairo", cursive;
+    font-family: "Noto Sans", "Cairo", Helvetica;
+    /* font-family: "Comfortaa", "Cairo", cursive; */
   }
   h3, h4 {
-    font-family: "Comfortaa", "Cairo", cursive;
+    font-family: "Noto Sans", "Cairo", Helvetica;
+    /* font-family: "Comfortaa", "Cairo", cursive; */
   }
   .leave-here {
     font-family: "Roboto", sans-serif;
@@ -141,7 +146,7 @@
   .text-custom-red {
     color: var(--main-red);
   }
-  .bg-outline-red {
+  .bg-outline-custom-red {
     border: 1px solid var(--main-red);
     background-color: #fff;
   }
@@ -187,6 +192,12 @@
   .font-cairo {
     font-family: "Cairo", sans-serif;
   }
+  .font-noto-sans {
+    font-family: var(--font-family-noto_sans);
+  }
+  .font-public-sans {
+    font-family: var(--font-family-public_sans);
+  }
 }
 
 @layer components {
@@ -214,11 +225,11 @@
 }
 
 .rc-slider-track {
-  background-color: #007882 !important;
+  background-color: var(--primary) !important;
 }
 
 .rc-slider-handle {
-  border: 1px solid #007882 !important;
+  border: 1px solid var(--primary) !important;
   /* border-radius:  */
 }
 
@@ -297,19 +308,4 @@ button:disabled {
   border-radius: 5px;
   padding: 5px;
   width: 100%;
-}
-
-.filter-button {
-  color: #007882;
-  border: 1px solid #007882;
-  border-radius: 5px;
-  font-weight: 500;
-  outline: none;
-}
-
-.filter-button:hover {
-  box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
-  border: transparent;
-  color: #ffffff;
-  background-color: #007882;
 }

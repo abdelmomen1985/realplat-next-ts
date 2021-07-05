@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import useTranslation from './../../hooks/useTranslation';
+import useTranslation from '../../../../hooks/useTranslation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faAngleDown,
@@ -116,7 +116,7 @@ const innerList = [
 		],
 	},
 ];
-export default function MoreFiltersModal({
+export default function FinderMoreFiltersModal({
 	filtered,
 	filterListState,
 }: MoreFiltersProps) {
@@ -189,18 +189,18 @@ export default function MoreFiltersModal({
 			<style jsx>
 				{`
 					.filter-button {
-						color: #007882;
-						border: 1px solid #007882;
+						color: var(--primary);
+						border: 1px solid var(--primary);
 						border-radius: 5px;
 						font-weight: 500;
 						outline: none;
 					}
 
 					.filter-button:hover {
-						box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+						box-shadow: 0 0 6px 2px rgba(253, 86, 49, 0.4);
 						border: transparent;
 						color: #ffffff;
-						background-color: #007882;
+						background-color: var(--primary);
 					}
 					.overlay {
 						position: fixed;
@@ -229,7 +229,7 @@ export default function MoreFiltersModal({
 					.filterVal-button:active,
 					.filterVal-button:hover,
 					.filterVal-button.active {
-						background-color: #007882;
+						background-color: var(--primary);
 						color: #fff;
 					}
 					.mSquare {
@@ -241,7 +241,7 @@ export default function MoreFiltersModal({
 					}
 				`}
 			</style>
-			<div className="relative w-11/12 mx-auto">
+			<div className="relative font-noto-sans w-11/12 mx-auto">
 				<button
 					className="dd-header text-lg md:text-base  w-11/12  border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
 					onClick={() => setIsModalOpen(!isModalOpen)}
@@ -276,7 +276,7 @@ export default function MoreFiltersModal({
 								</button>
 								<button
 									onClick={applyFiltersHandler}
-									className="mx-2 bg-primary font-bold text-base text-white py-3 px-5 shadow-md"
+									className="mx-2 bg-red font-bold text-base text-white py-3 px-5 shadow-md"
 								>
 									{t('apply')}
 								</button>

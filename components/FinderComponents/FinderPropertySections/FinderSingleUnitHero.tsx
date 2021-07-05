@@ -32,7 +32,7 @@ import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../query/user';
 import CustomModal from './../../common/CustomModal/CustomModal';
 import styles from './finder-prop.module.scss';
 
-const FinderSingleUnitHero = ({ unit }: { unit: any }) => {
+const FinderSingleUnitHero = ({ unit }: { unit: Unit }) => {
 	const shareMenuRef = useRef<HTMLDivElement>(null);
 	const { isMobile, user, setLoginModal, setComparing } = useContext(
 		AppContext

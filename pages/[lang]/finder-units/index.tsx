@@ -1,29 +1,28 @@
-import { useLazyQuery, useMutation } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import React, { useContext, useEffect, useState } from 'react';
-import Layout from '../../../components/Layouts/Layout';
-import { UnitCard } from '../../../components/Units/UnitCard';
-import { AppContext } from '../../../Context/AppContextProvider';
-import {
-	getLocalizationProps,
-	LanguageProvider,
-} from '../../../Context/LangContext';
-import { Localization } from '../../../i18n/types';
-import { FilterListType } from '../../../interfaces/filters';
-import { Unit } from '../../../interfaces/index';
-import { initializeApollo } from '../../../lib/apolloClient';
-import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../../../query/user';
-import SearchFilters from './../../../components/SearchFilters/SearchFilters';
-import LoadingCircle from './../../../components/common/LoadingCircle';
-import CustomModal from './../../../components/common/CustomModal/CustomModal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSlidersH, faTimes } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useContext, useState } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { getLocalizationProps } from '../../../Context/LangContext';
+
 import clsx from 'clsx';
-const UnitsPage: NextPage<{
-	units: Unit[];
-	localization: Localization;
-}> = ({ units, localization }) => {
+import useTranslation from '../../../hooks/useTranslation';
+import { initializeApollo } from '../../../lib/apolloClient';
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { ALL_UNITS, UNITS_AGGREGATE } from '../../../query/unitsQuery';
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from './../../../query/user';
+import { Unit } from '../../../interfaces';
+import { FilterListType } from '../../../interfaces/filters';
+import { AppContext } from './../../../Context/AppContextProvider';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSlidersH, faHome, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import FinderLayout from '../../../components/Layouts/FinderLayout';
+import CustomModal from './../../../components/common/CustomModal/CustomModal';
+import LoadingCircle from './../../../components/common/LoadingCircle';
+import FinderSearchFilters from './../../../components/FinderComponents/FinderPropertySections/FinderUnitFilters/FinderSearchFilters';
+import FinderUnitCard from '../../../components/FinderComponents/FinderPropertySections/FinderUnits/FinderUnitCard';
+
+const FinderExpoPage = ({ units }: { units: any[] }) => {
+	// const { t, locale } = useTranslation();
 	const [filterListState, setFilterListState] = useState<FilterListType>(
 		{} as any
 	);
@@ -75,21 +74,16 @@ const UnitsPage: NextPage<{
 			},
 		});
 	};
+
 	useEffect(() => {
 		getUnitsAggregate();
 	}, []);
 	useEffect(() => {
 		setFilterListState({ ...filterState });
-		// getUnitsAggregate();
-		// console.log(filterListState, filterState)
 	}, [filterState]);
 	useEffect(() => {
 		console.log('filterListState changed to', filterListState);
 		getUnitsAggregate();
-		// if (!loading && refetch) {
-		//   console.log('refetching');
-
-		// }
 	}, [filterListState]);
 
 	useEffect(() => {
@@ -144,6 +138,7 @@ const UnitsPage: NextPage<{
 			setLoginModal(true);
 		}
 	};
+
 	const compareHandler = (unit: Unit, wishlisted: boolean) => {
 		console.log(unit);
 		unit.comparing = !unit.comparing;
@@ -156,98 +151,94 @@ const UnitsPage: NextPage<{
 		setComparing(comparedUnit);
 		setInnerUnits(dummyUnits);
 	};
-	/*
-  useEffect(() => {
-    setInnerUnits([]);
-    console.log("ReFetching");
-  }, [filterListState]);
-  */
+
 	const wishlist_ids = data?.user_wishlist_aggregate.nodes.map(
 		(node: any) => node.unit.id
 	);
 
+	useEffect(() => {
+		console.log(units);
+	}, []);
 	return (
-		<LanguageProvider localization={localization}>
-			<Layout title="Brand Logo Here">
-				<div
-					className={clsx(
-						isMobile || (isTablet && 'flex justify-end'),
-						'mx-4 my-5'
-					)}
-				>
-					{isMobile || isTablet ? (
-						<>
+		<FinderLayout title="Expo page">
+			<div
+				className={clsx(
+					isMobile || (isTablet && 'flex justify-end'),
+					'mx-4 my-5'
+				)}
+			>
+				{isMobile || isTablet ? (
+					<>
+						<button
+							className="btn-outline-primary bg-outline-red font-public-sans text-2xl m-0"
+							onClick={() => setShowFiltersMenu(true)}
+						>
+							<FontAwesomeIcon className="mr-2" icon={faSlidersH} />
+							Show Filters
+						</button>
+						<CustomModal
+							show={showFiltersMenu}
+							onClose={() => setShowFiltersMenu(false)}
+							wrapperStyle={{
+								position: 'absolute',
+								top: '0',
+								width: '100%',
+								transform: 'translate(0, 0)',
+							}}
+						>
 							<button
-								className="btn-outline-primary text-2xl m-0"
-								onClick={() => setShowFiltersMenu(true)}
+								className="flex justify-end items-center w-full px-2 py-3 text-2xl font-medium text-custom-red"
+								onClick={() => setShowFiltersMenu(false)}
 							>
-								<FontAwesomeIcon className="mr-2" icon={faSlidersH} />
-								Show Filters
+								<FontAwesomeIcon icon={faTimes} />
 							</button>
-							<CustomModal
-								show={showFiltersMenu}
-								onClose={() => setShowFiltersMenu(false)}
-								wrapperStyle={{
-									position: 'absolute',
-									top: '0',
-									width: '100%',
-									transform: 'translate(0, 0)',
-								}}
-							>
-								<button
-									className="flex justify-end items-center w-full px-2 py-3 text-2xl font-medium text-custom-red"
-									onClick={() => setShowFiltersMenu(false)}
-								>
-									<FontAwesomeIcon icon={faTimes} />
-								</button>
-								<SearchFilters
-									setFilterListState={setFilterListState}
-									filterListState={filterListState}
-									units={units}
-								/>
-								<button
-									className="btn-primary flex justify-center items-center mx-auto text-2xl"
-									onClick={() => setShowFiltersMenu(false)}
-								>
-									<FontAwesomeIcon className="mr-2" icon={faHome} />
-									Show Homes
-								</button>
-							</CustomModal>
-						</>
-					) : (
-						<SearchFilters
-							setFilterListState={setFilterListState}
-							filterListState={filterListState}
-							units={units}
-						/>
-					)}
-				</div>
-				{loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-start justify-center items-start">
-					{!loading &&
-						innerUnits &&
-						innerUnits.map((unit: Unit) => (
-							<UnitCard
-								key={unit.id}
-								unit={unit}
-								wishListHandler={wishListHandler}
-								compareHandler={compareHandler}
-								wishlisted={
-									wishlist_ids?.filter((id: any) => id === unit.id).length > 0
-								}
+							<FinderSearchFilters
+								setFilterListState={setFilterListState}
+								filterListState={filterListState}
+								units={units}
 							/>
-						))}
-					{innerUnits.length === 0 && !loading && <div>No Units Found</div>}
-				</div>
-			</Layout>
-		</LanguageProvider>
+							<button
+								className="btn-primary flex justify-center font-nano-sans items-center mx-auto text-2xl"
+								onClick={() => setShowFiltersMenu(false)}
+							>
+								<FontAwesomeIcon className="mr-2" icon={faHome} />
+								Show Homes
+							</button>
+						</CustomModal>
+					</>
+				) : (
+					<FinderSearchFilters
+						setFilterListState={setFilterListState}
+						filterListState={filterListState}
+						units={units}
+					/>
+				)}
+			</div>
+			{loading && <LoadingCircle width={'200px'} margin={'5em auto'} />}
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-start justify-center items-start">
+				{!loading &&
+					innerUnits &&
+					innerUnits.map((unit: Unit) => (
+						<FinderUnitCard
+							key={unit.id}
+							unit={unit}
+							wishListHandler={wishListHandler}
+							compareHandler={compareHandler}
+							wishlisted={
+								wishlist_ids?.filter((id: any) => id === unit.id).length > 0
+							}
+						/>
+					))}
+				{innerUnits.length === 0 && !loading && <div>No Units Found</div>}
+			</div>
+		</FinderLayout>
 	);
 };
 
+export default FinderExpoPage;
+
 export const getStaticProps: GetStaticProps = async (ctx) => {
-	// Example for including static props in a Next.js function component page.
-	// Don't forget to include the respective types for any props passed into
-	// the component.
+	const localization = getLocalizationProps(ctx, 'common');
 	const client = initializeApollo();
 	const resp = await client.query({ query: ALL_UNITS });
 
@@ -256,7 +247,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 	for (let unit in dummyUnits) {
 		units.push({ ...dummyUnits[unit], wishListed: false, comparing: false });
 	}
-	const localization = getLocalizationProps(ctx, 'common');
 	return {
 		props: {
 			localization,
@@ -264,11 +254,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 		},
 	};
 };
-
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
 		paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
 		fallback: false,
 	};
 };
-export default UnitsPage;

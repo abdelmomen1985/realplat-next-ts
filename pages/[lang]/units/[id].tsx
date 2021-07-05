@@ -17,8 +17,9 @@ import {
 	FinancialAnalysis,
 } from './../../../components/exports';
 import UnitLocation from '../../../components/Units/SingleUnit/UnitLocation';
+import { Unit } from '../../../interfaces';
 
-const SingleUnit = ({ unit }: { unit: any }) => {
+const SingleUnit = ({ unit }: { unit: Unit }) => {
 	// const { t, locale } = useTranslation();
 
 	return (
@@ -54,7 +55,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       id: unitId,
     },
   });
-  const unit: any = resp?.data.units_by_pk;
+  const unit: Unit = resp?.data.units_by_pk;
   const localization = getLocalizationProps(ctx, "common");
   return {
     props: {
@@ -69,7 +70,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const resp = await client.query({ query: FULL_UNITS });
   const units: any = resp?.data.units;
   const paths: any[] = [];
-  units.forEach((unit: any) => {
+  units.forEach((unit: Unit) => {
     paths.push({ params: { lang: "ar", id: unit.id } });
     paths.push({ params: { lang: "en", id: unit.id } });
   });
@@ -89,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			id: unitId,
 		},
 	});
-	const unit: any = resp?.data.units_by_pk;
+	const unit: Unit = resp?.data.units_by_pk;
 	const localization = getLocalizationProps(context, 'common');
 	return {
 		props: {

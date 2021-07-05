@@ -1,0 +1,9 @@
+ .compareBtn {
+   @apply bg-white rounded-md p-3;
+   color: var(--primary);
+
+   &:hover {
+     background-color: var(--primary);
+     color: var(--white);
+   }
+ }

@@ -1,15 +1,15 @@
 import { useQuery } from '@apollo/client';
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { FilterListType, PropertyType } from '../../interfaces/filters';
-import { GET_PROPERTY_TYPES } from '../../query/propertyTypes';
-import useTranslation from './../../hooks/useTranslation';
+import { FilterListType, PropertyType } from '../../../../interfaces/filters';
+import { GET_PROPERTY_TYPES } from '../../../../query/propertyTypes';
+import useTranslation from '../../../../hooks/useTranslation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faCheck,
 	faAngleUp,
 	faAngleDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { AppContext } from './../../Context/AppContextProvider';
+import { AppContext } from '../../../../Context/AppContextProvider';
 interface PropTypesDropDownProps {
 	title: string;
 	filtered: (val: FilterListType) => void;
@@ -20,7 +20,7 @@ interface PropTypesDropDownProps {
 	toggOpen: (flag: boolean) => void;
 }
 
-export default function PropTypesDropDown({
+export default function FinderPropTypesDropDown({
 	title,
 	filtered,
 	filterListState,
@@ -128,18 +128,18 @@ export default function PropTypesDropDown({
 			<style jsx>
 				{`
 					.filter-button {
-						color: #007882;
-						border: 1px solid #007882;
+						color: var(--primary);
+						border: 1px solid var(--primary);
 						border-radius: 5px;
 						font-weight: 500;
 						outline: none;
 					}
 
 					.filter-button:hover {
-						box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+						box-shadow: 0 0 6px 2px rgba(253, 86, 49, 0.4);
 						border: transparent;
 						color: #ffffff;
-						background-color: #007882;
+						background-color: var(--primary);
 					}
 					.circularIcon {
 						width: 10px;
@@ -152,7 +152,10 @@ export default function PropTypesDropDown({
 					}
 				`}
 			</style>
-			<div className="dd-wrapper  w-11/12  mx-auto relative" ref={node}>
+			<div
+				className="dd-wrapper font-noto-sans w-11/12  mx-auto relative"
+				ref={node}
+			>
 				<button
 					type="button"
 					className="dd-header text-lg md:text-base w-11/12 border py-3 px-3 bg-white border-gray-400 rounded-md font-medium filter-button"

@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const UNIT_FIELDS = `
   id
@@ -12,12 +12,15 @@ export const UNIT_FIELDS = `
   fin_down_payment
   fin_years
   land
+  description
   compound {
     name
     developer {
       id
       name(path: "ar")
       media(path: "card_icon")
+      phone 
+      email
     }
   }
   delivery_month
@@ -147,6 +150,8 @@ export const UNITS_BY_PK = gql`
           name
           media
           id
+          phone
+          email
         }
         units(limit: 3) {
           ${UNIT_FIELDS}
@@ -176,13 +181,13 @@ export const UNITS_BY_PK = gql`
   }
 `;
 export const USER_WISHLIST_IDS = gql`
-  query user_wishlist($user_id: uuid) {
-    user_wishlist_aggregate(where: { user_id: { _eq: $user_id } }) {
-      nodes {
-        unit {
-          id
-        }
-      }
-    }
-  }
+	query user_wishlist($user_id: uuid) {
+		user_wishlist_aggregate(where: { user_id: { _eq: $user_id } }) {
+			nodes {
+				unit {
+					id
+				}
+			}
+		}
+	}
 `;

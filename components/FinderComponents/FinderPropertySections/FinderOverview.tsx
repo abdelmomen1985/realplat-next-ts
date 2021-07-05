@@ -1,7 +1,8 @@
 import React from 'react';
+import { Unit } from '../../../interfaces';
 import useTranslation from './../../../hooks/useTranslation';
 
-const FinderOverview = ({ unit }: { unit: any }) => {
+const FinderOverview = ({ unit }: { unit: Unit }) => {
 	const { t, locale } = useTranslation();
 	return (
 		<section className="my-3">

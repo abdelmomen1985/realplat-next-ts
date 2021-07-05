@@ -39,7 +39,7 @@ const FinderHeader = () => {
 					</ActiveLink>
 
 					<ActiveLink
-						href={`/${locale}/explore`}
+						href={`/${locale}/finder-units`}
 						activeClassName={styles.active}
 					>
 						<a className={clsx(styles.navLink, 'mx-3')}>Explore</a>

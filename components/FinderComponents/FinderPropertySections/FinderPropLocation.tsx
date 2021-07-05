@@ -9,6 +9,7 @@ import {
 
 import styles from './finder-prop.module.scss';
 import useTranslation from './../../../hooks/useTranslation';
+import { Unit } from '../../../interfaces';
 
 const defaultOptions = { scrollwheel: false };
 const RegularMap = withScriptjs(
@@ -22,7 +23,7 @@ const RegularMap = withScriptjs(
 		</GoogleMap>
 	))
 );
-const FinderPropLocation = ({ unit }: { unit: any }) => {
+const FinderPropLocation = ({ unit }: { unit: Unit }) => {
 	const { t, locale } = useTranslation();
 	return (
 		<section className="w-full my-4 relative">

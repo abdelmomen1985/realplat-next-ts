@@ -7,10 +7,16 @@ import {
 	faLinkedinIn,
 	faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+import ReactStars from 'react-rating-stars-component';
+
 import { AppContext } from '../../../../Context/AppContextProvider';
+import useTranslation from './../../../../hooks/useTranslation';
+
+import { Unit } from '../../../../interfaces';
 
 import styles from '../finder-prop.module.scss';
-const FinderPropRequest = ({ unit }: { unit: any }) => {
+const FinderPropRequest = ({ unit }: { unit: Unit }) => {
+	const { t, locale } = useTranslation();
 	const { register, reset, handleSubmit, errors } = useForm({
 		mode: 'onTouched',
 		reValidateMode: 'onBlur',
@@ -24,9 +30,66 @@ const FinderPropRequest = ({ unit }: { unit: any }) => {
 		<section className="relative shadow-lg rounded-lg my-3 border-w border-gray-300 py-2 px-2">
 			<div className="flex justify-between items-start">
 				<div>
-					<img src="/images/" alt="" className="" />
-					<h3>{user?.name}</h3>
-					<p></p>
+					<img
+						src={unit?.compound?.developer?.media?.page_icon}
+						alt=""
+						className="my-2"
+						style={{
+							borderRadius: '50%',
+							width: '80px',
+							height: '80px',
+							objectFit: 'cover',
+							objectPosition: 'center right',
+						}}
+					/>
+					<h3
+						className="text-lg my-1 font-semibold"
+						style={{
+							color: '#454056',
+						}}
+					>
+						{unit?.compound?.developer?.name[locale]}
+					</h3>
+
+					<div className="flex my-1 justify-start items-center">
+						<ReactStars
+							count={5}
+							value={5}
+							edit={false}
+							size={24}
+							activeColor="#ffd700"
+						/>
+						<span
+							className="mx-1 text-base font-normal"
+							style={{
+								color: '#9691A4',
+							}}
+						>
+							(5 Reviews)
+						</span>
+					</div>
+					<h3
+						className="text-base my-1 mb-2 font-normal"
+						style={{
+							color: '#666276',
+						}}
+					>
+						{unit?.compound?.name[locale]}
+					</h3>
+					<h6
+						className="font-noto-sans text-base font-normal my-2 flex justify-start items-center"
+						style={{ color: '#454056' }}
+					>
+						<img src="/images/icons/phone.svg" />
+						<span className="mx-1">{unit?.compound?.developer?.phone}</span>
+					</h6>
+					<h6
+						className="font-noto-sans text-base font-normal my-2 flex justify-start items-center"
+						style={{ color: '#454056' }}
+					>
+						<img src="/images/icons/email.svg" />
+						<span className="mx-1">{unit?.compound?.developer?.email}</span>
+					</h6>
 				</div>
 				<div className="flex justify-center items-center">
 					<button className={styles.socialMediaIcon}>

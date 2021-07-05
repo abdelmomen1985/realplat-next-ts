@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/client';
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { GET_LOCATIONS } from '../../query/locations';
-import useTranslation from './../../hooks/useTranslation';
+import { GET_LOCATIONS } from '../../../../query/locations';
+import useTranslation from '../../../../hooks/useTranslation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faAngleDown,
 	faAngleUp,
 	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import { AppContext } from './../../Context/AppContextProvider';
+import { AppContext } from '../../../../Context/AppContextProvider';
 interface Ddprops {
 	title: string;
 	list: any;
@@ -19,7 +19,7 @@ interface Ddprops {
 	entryPoint: any;
 }
 
-export default function DropDown(props: Ddprops) {
+export default function FinderDropDown(props: Ddprops) {
 	const { data } = useQuery(GET_LOCATIONS);
 	const [isOpenState, setIsOpenState] = useState(false);
 	const [listTitle, setListTitle] = useState(props.title);
@@ -115,18 +115,18 @@ export default function DropDown(props: Ddprops) {
 			<style jsx>
 				{`
 					.filter-button {
-						color: #007882;
-						border: 1px solid #007882;
+						color: var(--primary);
+						border: 1px solid var(--primary);
 						border-radius: 5px;
 						font-weight: 500;
 						outline: none;
 					}
 
 					.filter-button:hover {
-						box-shadow: 0 0 6px 2px rgba(0, 120, 130, 0.4);
+						box-shadow: 0 0 6px 2px rgba(253, 86, 49, 0.4);
 						border: transparent;
 						color: #ffffff;
-						background-color: #007882;
+						background-color: var(--primary);
 					}
 					.circularIcon {
 						width: 10px;
@@ -139,7 +139,10 @@ export default function DropDown(props: Ddprops) {
 					}
 				`}
 			</style>
-			<div className="dd-wrapper  w-11/12 mx-auto relative" ref={node}>
+			<div
+				className="dd-wrapper font-noto-sans w-11/12 mx-auto relative"
+				ref={node}
+			>
 				<button
 					type="button"
 					className=" dd-header w-11/12 text-lg md:text-base border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
