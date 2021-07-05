@@ -3,8 +3,10 @@ image:
 
 tasks:
   - init: npm install && npm run build
-    command: npm run start
+    command: npm run dev
 
 vscode:
   extensions:
     - bradlc.vscode-tailwindcss@0.4.3:OmgUwJW/nFom0SHcYT4VnQ==
+visibility:
+  - public
