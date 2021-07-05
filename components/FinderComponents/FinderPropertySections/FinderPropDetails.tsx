@@ -1,14 +1,20 @@
 import React from 'react';
+import { Unit } from '../../../interfaces';
 import useTranslation from './../../../hooks/useTranslation';
 
-const FinderPropDetails = ({ unit }: { unit: any }) => {
+const FinderPropDetails = ({ unit }: { unit: Unit }) => {
 	const { t, locale } = useTranslation();
 	return (
 		<section className="my-5">
 			<h3 className="my-2 text-lg font-semibold capitalize ">
 				{t('propDetails')}
 			</h3>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('type')}:{' '}
 				</span>
@@ -16,13 +22,23 @@ const FinderPropDetails = ({ unit }: { unit: any }) => {
 					{unit?.property_type.name[locale]}
 				</span>
 			</h5>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('apartArea')}:{' '}
 				</span>
 				<span className="text-base font-normal capitalize">{unit?.land}</span>
 			</h5>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('built')}:{' '}
 				</span>
@@ -30,7 +46,12 @@ const FinderPropDetails = ({ unit }: { unit: any }) => {
 					{unit?.delivery_year}
 				</span>
 			</h5>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('bedrooms')}:{' '}
 				</span>
@@ -38,7 +59,12 @@ const FinderPropDetails = ({ unit }: { unit: any }) => {
 					{unit?.bedrooms}
 				</span>
 			</h5>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('bathrooms')}:{' '}
 				</span>
@@ -46,7 +72,12 @@ const FinderPropDetails = ({ unit }: { unit: any }) => {
 					{unit?.bathrooms}
 				</span>
 			</h5>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('parkingPlaces')}: {unit?.parking}
 				</span>
@@ -54,7 +85,12 @@ const FinderPropDetails = ({ unit }: { unit: any }) => {
 					{unit?.parking}
 				</span>
 			</h5>
-			<h5 className="text-gray-700 my-1">
+			<h5
+				className="font-noto-sans my-1"
+				style={{
+					color: '#666276',
+				}}
+			>
 				<span className="text-base font-semibold capitalize">
 					{t('petsAllowed')}:{' '}
 				</span>

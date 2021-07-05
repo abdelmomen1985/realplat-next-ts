@@ -13,6 +13,9 @@
   height: 80px;
   width: 1024px;
   mix-blend-mode: normal;
+  max-width: 1024;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .menu {
@@ -72,5 +75,18 @@
       filter: brightness(6);
 
     }
+  }
+}
+
+.footerApp {
+  position: absolute;
+  height: 40vh;
+  bottom: -4.4rem;
+
+
+  @media screen and (max-width: 1023px) {
+    position: relative;
+    height: auto;
+    bottom: auto;
   }
 }

@@ -4,12 +4,12 @@ import { AppContext } from './../../../Context/AppContextProvider';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_WISHLIST } from '../../../query/user';
 import { REMOVE_FROM_WISHLIST } from './../../../query/user';
-import { UnitCard } from './../UnitCard';
 import { useQuery } from '@apollo/client';
 import { USER_WISHLIST_IDS } from '../../../query/unitsQuery';
 import useTranslation from './../../../hooks/useTranslation';
+import FinderUnitCard from './FinderUnits/FinderUnitCard';
 
-const SimilarUnits = ({ units }: { units: Unit[] }) => {
+const FinderSimilarUnits = ({ units }: { units: Unit[] }) => {
 	const { user, setComparing, setLoginModal } = useContext(AppContext);
 	const [innerUnits, setInnerUnits] = useState<Unit[]>(units);
 	const [addWishList] = useMutation(ADD_TO_WISHLIST);
@@ -66,13 +66,13 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
 	);
 	return (
 		<>
-			<h2 className="text-xl font-semibold text-text-secondary my-3 px-2 py-3">
+			<h2 className="text-xl font-noto-sans font-semibold text-text-secondary my-3 px-2 py-3">
 				{t('simHomes')}
 			</h2>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-3 gap-2 justify-items-center justify-center items-center">
 				{innerUnits.length > 0 &&
 					innerUnits.map((unit: Unit) => (
-						<UnitCard
+						<FinderUnitCard
 							key={unit.id}
 							unit={unit}
 							wishListHandler={wishListHandler}
@@ -88,4 +88,4 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
 	);
 };
 
-export default SimilarUnits;
+export default FinderSimilarUnits;

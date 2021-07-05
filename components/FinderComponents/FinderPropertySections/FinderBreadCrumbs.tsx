@@ -7,8 +7,9 @@ import {
 	faChevronLeft,
 	faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
+import { Unit } from '../../../interfaces';
 
-const FinderBreadCrumbs = ({ unit }: { unit: any }) => {
+const FinderBreadCrumbs = ({ unit }: { unit: Unit }) => {
 	const router = useRouter();
 	const { t, locale } = useTranslation();
 	const { filterUnitsGlobal } = useContext(AppContext);
@@ -17,7 +18,7 @@ const FinderBreadCrumbs = ({ unit }: { unit: any }) => {
 		router.push(`/${locale}/units`);
 	};
 	return (
-		<div className="flex justify-start items-center mt-5 mb-4">
+		<div className="flex justify-start items-center mt-5 mb-4 capitalize">
 			<button
 				onClick={() =>
 					globalFilterByBreadCrumpHandler({ compound_id: unit.compound?.id })
