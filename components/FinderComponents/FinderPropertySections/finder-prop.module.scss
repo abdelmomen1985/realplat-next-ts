@@ -101,3 +101,23 @@
     color: var(--gray700)
   }
 }
+
+.directionsBtn {
+  background-color: var(--primary);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  padding: 1rem 2rem;
+  height: 30px;
+  padding: 1.5rem 1rem;
+  border-radius: 10px;
+
+  img {
+    margin-inline: 5px;
+
+  }
+}

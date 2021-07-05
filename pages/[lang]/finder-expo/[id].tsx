@@ -1,12 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { getLocalizationProps } from '../../../Context/LangContext';
-import {
-	withScriptjs,
-	withGoogleMap,
-	GoogleMap,
-	Marker,
-} from 'react-google-maps';
+
 import Link from 'next/link';
 import useTranslation from './../../../hooks/useTranslation';
 import { UNITS_BY_PK } from './../../../query/unitsQuery';
@@ -18,19 +13,8 @@ import FinderOverview from './../../../components/FinderComponents/FinderPropert
 import FinderPropDetails from './../../../components/FinderComponents/FinderPropertySections/FinderPropDetails';
 import FinderPropAmenities from './../../../components/FinderComponents/FinderPropertySections/FinderPropAmenities';
 import FinderPropRequest from './../../../components/FinderComponents/FinderPropertySections/FinderPropRequest/FinderPropRequest';
+import FinderPropLocation from './../../../components/FinderComponents/FinderPropertySections/FinderPropLocation';
 
-const defaultOptions = { scrollwheel: false };
-const RegularMap = withScriptjs(
-	withGoogleMap((props: any) => (
-		<GoogleMap
-			defaultZoom={12}
-			defaultCenter={props.defaultCenter}
-			defaultOptions={defaultOptions}
-		>
-			<Marker position={props.defaultCenter} />
-		</GoogleMap>
-	))
-);
 const SingleExpoPage = ({ unit }: { unit: any }) => {
 	const { t, locale } = useTranslation();
 
@@ -64,6 +48,7 @@ const SingleExpoPage = ({ unit }: { unit: any }) => {
 				</div>
 				<div>
 					<FinderPropRequest unit={unit} />
+					<FinderPropLocation unit={unit} />
 				</div>
 			</div>
 		</FinderLayout>
