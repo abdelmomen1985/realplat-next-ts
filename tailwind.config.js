@@ -1,16 +1,12 @@
 module.exports = {
-	future: {
-		// removeDeprecatedGapUtilities: true,
-		// purgeLayersByDefault: true,
-	},
-	purge: [],
-	theme: {
-		// fontFamily: {
-		//   body: ['Cairo'],
-		//   display: ['Cairo'],
-		// },
-		extend: {},
-	},
-	variants: {},
-	plugins: [],
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    // fontFamily: {
+    //   body: ['Cairo'],
+    //   display: ['Cairo'],
+    // },
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
 };
