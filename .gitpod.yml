@@ -5,8 +5,7 @@ tasks:
   - init: npm install && npm run build
     command: npm run dev
 
-vscode:
-  extensions:
-    - bradlc.vscode-tailwindcss@0.4.3:OmgUwJW/nFom0SHcYT4VnQ==
-visibility:
-  - public
+ports:
+  - port: 3000
+    onOpen: open-browser
+    visibility: public

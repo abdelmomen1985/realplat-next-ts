@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './finderExpo.module.scss';
 import clsx from 'clsx';
 import SearchByCity from './SearchByCity';
-import FinderHeader from './../FinderNavigation/FinderHeader';
+
 
 const SectionTitle = ({ title }: { title: string }) => {
 	return (
