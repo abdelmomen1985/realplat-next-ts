@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const UNIT_FIELDS = `
   id
@@ -74,7 +74,7 @@ export const UNITS_AGGREGATE = gql`
 
   ) {
     units_aggregate(
-      limit: 50
+      limit: 24
       where: {
         property_type_id: { _in: $pt_ids }
         fin_down_payment: {
@@ -181,13 +181,13 @@ export const UNITS_BY_PK = gql`
   }
 `;
 export const USER_WISHLIST_IDS = gql`
-	query user_wishlist($user_id: uuid) {
-		user_wishlist_aggregate(where: { user_id: { _eq: $user_id } }) {
-			nodes {
-				unit {
-					id
-				}
-			}
-		}
-	}
+  query user_wishlist($user_id: uuid) {
+    user_wishlist_aggregate(where: { user_id: { _eq: $user_id } }) {
+      nodes {
+        unit {
+          id
+        }
+      }
+    }
+  }
 `;

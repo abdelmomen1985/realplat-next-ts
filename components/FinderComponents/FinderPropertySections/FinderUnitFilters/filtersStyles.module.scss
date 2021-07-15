@@ -1,0 +1,45 @@
+.ddList {
+  top: 50px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px #eee;
+  z-index: 999;
+  width: 200px;
+  left: auto;
+  right: auto;
+  font-size: 16px;
+  @media screen and (max-width: 576px) {
+    width: 90%;
+  }
+  button {
+    &:hover {
+      .faCheckIcon {
+        opacity: 100%;
+      }
+    }
+  }
+}
+.circularIcon {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  background-color: #edae49;
+  border-radius: 50%;
+  border: transparent;
+  display: block;
+  align-self: center;
+}
+.filterButton {
+  @apply w-11/12 text-lg md:text-base border py-2 px-2 border-gray-400 bg-white rounded-md font-medium;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  font-weight: 500;
+  outline: none;
+  &:hover {
+    box-shadow: 0 0 6px 2px rgba(253, 86, 49, 0.4);
+    border: transparent;
+    color: #ffffff;
+    background-color: var(--primary);
+  }
+}

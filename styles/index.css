@@ -20,7 +20,7 @@
     --white: #ffffff;
     --info: #3c76f2;
     --nobel: #b1b1b1;
-    --success: #07C98B;
+    --success: #07c98b;
     --font-size-l: 16px;
     --font-size-m: 14px;
     --font-size-s: 12px;
@@ -34,7 +34,9 @@
     --font-family-public_sans: "Public Sans", Helvetica;
     overflow-x: hidden;
   }
-  button, input, a:active {
+  button,
+  input,
+  a:active {
     outline: none !important;
     font-family: "Noto Sans", "Cairo", Helvetica;
   }
@@ -52,7 +54,8 @@
     font-family: "Noto Sans", "Cairo", Helvetica;
     /* font-family: "Comfortaa", "Cairo", cursive; */
   }
-  h3, h4 {
+  h3,
+  h4 {
     font-family: "Noto Sans", "Cairo", Helvetica;
     /* font-family: "Comfortaa", "Cairo", cursive; */
   }
@@ -77,10 +80,10 @@
     background-color: #fff;
   }
   .bg-red {
-    background-color: var(--primary)
+    background-color: var(--primary);
   }
   .text-red {
-    color: var(--primary)
+    color: var(--primary);
   }
   .bg-outline-red {
     border: 1px solid var(--primary);
@@ -88,10 +91,10 @@
     background-color: transparent;
   }
   .bg-info {
-    background-color: var(--info)
+    background-color: var(--info);
   }
   .text-info {
-    color: var(--info)
+    color: var(--info);
   }
   .bg-outline-info {
     border: 1px solid var(--info);
@@ -99,10 +102,10 @@
     background-color: transparent;
   }
   .bg-success {
-    background-color: var(--success)
+    background-color: var(--success);
   }
   .text-success {
-    color: var(--success)
+    color: var(--success);
   }
   .bg-outline-success {
     border: 1px solid var(--success);
@@ -110,10 +113,10 @@
     background-color: transparent;
   }
   .bg-nobel {
-    background-color: var(--nobel)
+    background-color: var(--nobel);
   }
   .text-nobel {
-    color: var(--nobel)
+    color: var(--nobel);
   }
   .bg-outline-nobel {
     border: 1px solid var(--nobel);
@@ -201,6 +204,12 @@
 }
 
 @layer components {
+  .btn-fnd-primary {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: var(--font-size-m);
+  }
   .btn-primary {
     @apply bg-primary text-white mt-5 mb-2 font-medium rounded-lg px-4 py-2 shadow-md mx-auto;
   }
@@ -240,6 +249,7 @@
   width: 90%;
   top: 80%;
   left: auto;
+  right: 5%;
   padding: 20px;
   text-align: center;
   z-index: 999;
@@ -252,7 +262,7 @@
   display: block !important;
 }
 
-.react-slideshow-container+ul.indicators {
+.react-slideshow-container + ul.indicators {
   position: absolute;
   top: 15px;
   left: 0;
@@ -261,13 +271,13 @@
   margin: auto;
 }
 
-.react-slideshow-container+ul.indicators li {
+.react-slideshow-container + ul.indicators li {
   width: 15px !important;
   height: 15px !important;
   margin: 0 5px 0 10px !important;
 }
 
-.react-slideshow-container+ul.indicators .each-slideshow-indicator::before {
+.react-slideshow-container + ul.indicators .each-slideshow-indicator::before {
   width: 20px !important;
   height: 20px !important;
   background: #fff !important;
