@@ -5,38 +5,34 @@ import FinderUnitCard from "../FinderPropertySections/FinderUnits/FinderUnitCard
 import styles from "./finderExpo.module.scss";
 import FinderHomeCatIcons from "./FinderHomeCatIcons";
 import SearchByCity from "./SearchByCity";
+import SectionTitle from "./SectionTitle";
 
 const dummyUnit: Unit = {
   media: [
     "https://storage.googleapis.com/sakneen-api-files/160159044183502-%20Town%20House%20Back%20Alt%2001.jpeg",
   ],
+  property_type: {
+    name: {
+      ar: "شقة",
+      en: "apartment",
+    },
+  },
+  compound: {
+    name: {
+      ar: "دي جويا",
+      en: "De Joya",
+    },
+  },
+  sk_city: {
+    name: "Ein Sokhna",
+    name_ar: "العين السخنة",
+  },
+  fin_total: 6000000,
+  bedrooms: 2,
+  bua: 80,
+  bathrooms: 1,
 } as Unit;
-const SectionTitle = ({ title }: { title: string }) => {
-  return (
-    <div className="flex flex-col sm:flex-row m-2 sm:m-0">
-      <h1
-        className={clsx(
-          styles.notosansBoldMirage_28px,
-          "font-semibold",
-          "flex-grow"
-        )}
-      >
-        {title}
-      </h1>
-      <div className={clsx("flex-grow")}></div>
-      <div
-        className={clsx(
-          "flex",
-          "items-center",
-          styles.notosansNormalDolphin_14px
-        )}
-      >
-        View All
-        <img src="/images/finder/arrow.svg" alt="" />
-      </div>
-    </div>
-  );
-};
+
 const ExpoCardUnit = () => {
   return (
     <div
@@ -72,23 +68,23 @@ const ExpoCardUnit = () => {
   );
 };
 
-export default function FinderExpoHead() {
+export default function FinderExpo() {
   return (
     <>
       <div className={styles.expo2}>
         <div className="flex flex-col sm:flex-row">
-          <div className="mt-12">
-            <h1 className={clsx("mx-2 sm:m-0")}>
+          <div className="mt-12 p-4">
+            <h1 className={clsx("mx-2 sm:m-0 my-2")}>
               <div className={clsx(styles.notosansBoldOutrageousOrange_56px)}>
                 Mellw Expo
               </div>
-              <div className={styles.notosansNormalMirage_36px}>
+              <div className={clsx(styles.notosansNormalMirage_36px,"mt-4")}>
                 Online Property Show
               </div>
             </h1>
             <div
               className={clsx(
-                styles.notosansNormalDolphin_20px,
+                styles.notosansNormalDolphin_18px,
                 "mt-4 mx-2 sm:m-0"
               )}
             >
@@ -192,35 +188,43 @@ export default function FinderExpoHead() {
             unit={dummyUnit}
             wishListHandler={(_v1, _v2) => {}}
             compareHandler={(_v1, _v2) => {}}
+            canCompare={false}
           />
           <FinderUnitCard
             wishlisted={false}
             unit={dummyUnit}
             wishListHandler={(_v1, _v2) => {}}
             compareHandler={(_v1, _v2) => {}}
+            canCompare={false}
           />
           <FinderUnitCard
             wishlisted={false}
             unit={dummyUnit}
             wishListHandler={(_v1, _v2) => {}}
             compareHandler={(_v1, _v2) => {}}
+            canCompare={false}
           />
           <FinderUnitCard
             wishlisted={false}
             unit={dummyUnit}
             wishListHandler={(_v1, _v2) => {}}
             compareHandler={(_v1, _v2) => {}}
+            canCompare={false}
           />
         </div>
         {/* Mellw Expo */}
         <div className="mt-16">
-          <div className="flex items-center">
+          <div className="md:flex items-center m-2 md:m-0">
             <h1
               className={clsx(styles.notosansBoldMirage_28px, "font-semibold")}
             >
               Mellw Expo
             </h1>
-            <div className={clsx("flex-grow", "ml-16", "flex")}>
+            <div
+              className={clsx(
+                "md:flex-grow md:ml-16 flex overflow-x-scroll md:overflow-x-auto"
+              )}
+            >
               <div className={clsx(styles.expoBadge)}>
                 <span className={clsx(styles.notosansNormalGunPowder_14px)}>
                   Apartments
@@ -339,7 +343,9 @@ export default function FinderExpoHead() {
         <div className="mt-16">
           <SectionTitle title="Our Partners " />
         </div>
-        <div className={clsx("flex", "mt-10")}>
+        <div
+          className={clsx("flex mt-10 overflow-x-scroll md:overflow-x-auto")}
+        >
           <div className={clsx(styles.notosansBoldNobel_28px, "px-6")}>
             EMAAR
           </div>

@@ -200,7 +200,7 @@ const FinderExpoPage = ({ units }: { units: any[] }) => {
           />
         )}
       </div>
-      {loading && <LoadingCircle width={"200px"} margin={"5em auto"} />}
+      {loading && <LoadingCircle width={"100px"} margin={"5em auto"} />}
       <div className="m-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 gap-y-4 justify-items-start justify-center items-start">
         {!loading &&
           innerUnits &&

@@ -12,7 +12,7 @@ export default function FinderNavLinks() {
       {/* <div className={clsx(styles.navLink, 'mx-3')}>
 						Eng
 					</div> */}
-      <FinderLocaleSwitcher />
+
       <ActiveLink
         href={`/${locale}/finder-expo`}
         activeClassName={styles.active}
@@ -34,6 +34,8 @@ export default function FinderNavLinks() {
       <ActiveLink href={`/${locale}/blog`} activeClassName={styles.active}>
         <a className={clsx(styles.navLink, "mx-3")}>Blog</a>
       </ActiveLink>
+
+      <FinderLocaleSwitcher />
     </div>
   );
 }

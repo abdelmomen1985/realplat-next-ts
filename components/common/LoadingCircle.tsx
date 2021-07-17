@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const LoadingCircle = ({
   width,
@@ -17,30 +17,30 @@ const LoadingCircle = ({
           width: ${width};
           height: ${width};
           border-radius: 50%;
-          background: #007882;
+          background: var(--primary);
           background: -moz-linear-gradient(
             left,
-            #007882 10%,
+            var(--primary) 10%,
             rgba(0, 120, 130, 0) 42%
           );
           background: -webkit-linear-gradient(
             left,
-            #007882 10%,
+            var(--primary) 10%,
             rgba(0, 120, 130, 0) 42%
           );
           background: -o-linear-gradient(
             left,
-            #007882 10%,
+            var(--primary) 10%,
             rgba(0, 120, 130, 0) 42%
           );
           background: -ms-linear-gradient(
             left,
-            #007882 10%,
+            var(--primary) 10%,
             rgba(0, 120, 130, 0) 42%
           );
           background: linear-gradient(
             to right,
-            #007882 10%,
+            var(--primary) 10%,
             rgba(0, 120, 130, 0) 42%
           );
           position: relative;
@@ -53,19 +53,19 @@ const LoadingCircle = ({
         .loader:before {
           width: 50%;
           height: 50%;
-          background: #007882;
+          background: var(--primary);
           border-radius: 100% 0 0 0;
           position: absolute;
           top: 0;
           left: 0;
-          content: '';
+          content: "";
         }
         .loader:after {
           background: #ffffff;
           width: 75%;
           height: 75%;
           border-radius: 50%;
-          content: '';
+          content: "";
           margin: auto;
           position: absolute;
           top: 0;

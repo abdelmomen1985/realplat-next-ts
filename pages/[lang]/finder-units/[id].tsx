@@ -26,7 +26,7 @@ const SingleExpoPage = ({ unit }: { unit: Unit }) => {
       <div className={clsx(styles.finderExpo)}>
         <FinderBreadCrumbs unit={unit} />
         <FinderSingleUnitHero unit={unit} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 mx-2 md:mx-0">
           <div className="col-span-1 md:col-span-2">
             <div className="flex justify-start items-center ">
               <span className="bg-success capitalize text-white px-3 py-1 rounded border-transparent">

@@ -22,11 +22,13 @@ const FinderUnitCard = ({
   wishListHandler,
   compareHandler,
   wishlisted,
+  canCompare = true,
 }: {
   unit: Unit;
   wishListHandler: (val: any, val2: any) => void;
   compareHandler: (val: any, val2: any) => void;
   wishlisted: boolean;
+  canCompare?: boolean;
 }) => {
   const contactMenu = useRef<HTMLDivElement>(null);
   const { t, locale } = useTranslation();
@@ -87,31 +89,33 @@ const FinderUnitCard = ({
             onError={imageErrorHandler}
             alt="unit image"
           />
-          <div
-            className="absolute flex justify-between text-sm"
-            style={{ bottom: "50px", width: "100%" }}
-          >
+          {canCompare && (
             <div
-              className="btn-fnd-primary rounded-md p-3 text-white"
-              style={{ right: "15px", position: "absolute" }}
+              className="absolute flex justify-between text-sm"
+              style={{ bottom: "50px", width: "100%" }}
             >
-              {!unit.comparing ? (
-                <span
-                  className="cursor-pointer"
-                  onClick={() => compareHandler(unit, wishlisted)}
-                >
-                  <FontAwesomeIcon icon={faCompressAlt} />
-                </span>
-              ) : (
-                <span
-                  className="cursor-pointer"
-                  onClick={() => compareHandler(unit, wishlisted)}
-                >
-                  <FontAwesomeIcon icon={faCompress} />
-                </span>
-              )}
+              <div
+                className="btn-fnd-primary rounded-md p-3 text-white"
+                style={{ right: "15px", position: "absolute" }}
+              >
+                {!unit.comparing ? (
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => compareHandler(unit, wishlisted)}
+                  >
+                    <FontAwesomeIcon icon={faCompressAlt} />
+                  </span>
+                ) : (
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => compareHandler(unit, wishlisted)}
+                  >
+                    <FontAwesomeIcon icon={faCompress} />
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
+          )}
           <div
             className="absolute flex justify-between text-sm"
             style={{ top: "10px", width: "100%" }}
@@ -161,18 +165,18 @@ const FinderUnitCard = ({
             className={clsx(styles.notosansBoldGunPowder_16px, "mt-2", "mx-4")}
           >
             {unit.bedrooms} {t("bedrooms")} {unit.property_type.name[locale]}{" "}
-            {t("in")} {unit.compound.name[locale]} {t("compound")}|
-            {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
+            {t("in")} {unit.compound.name[locale]} {t("compound")}
           </p>
           <div
             className={clsx(styles.notosansNormalManatee_14px, "mt-2", "mx-4")}
           >
-            Mivida, New Cairo, Cairo
+            {unit.compound.name[locale]},{" "}
+            {locale === "en" ? unit.sk_city.name : unit.sk_city.name_ar}
           </div>
           <div className={clsx("mt-2", "mx-4", "flex")}>
             <img src="/images/finder/cash.svg" />
             <span className={clsx(styles.notosansBoldDolphin_16px, "mx-2")}>
-              EGP 6,000,000
+              EGP {unit.fin_total}
             </span>
           </div>
           <div className="my-4 flex justify-center">
@@ -181,21 +185,21 @@ const FinderUnitCard = ({
           <div className="my-4 flex justify-center">
             <div className="flex mx-3">
               <span className={clsx("mx-1", styles.notosansNormalDolphin_14px)}>
-                3
+                {unit.bua} ㎡
+              </span>
+              <img src="/images/finder/area.svg" />
+            </div>
+            <div className="flex mx-3">
+              <span className={clsx("mx-1", styles.notosansNormalDolphin_14px)}>
+                {unit.bedrooms}
               </span>
               <img src="/images/finder/bed.svg" />
             </div>
             <div className="flex mx-3">
               <span className={clsx("mx-1", styles.notosansNormalDolphin_14px)}>
-                1
+                {unit.bathrooms}
               </span>
               <img src="/images/finder/bath.svg" />
-            </div>
-            <div className="flex mx-3">
-              <span className={clsx("mx-1", styles.notosansNormalDolphin_14px)}>
-                2
-              </span>
-              <img src="/images/finder/car.svg" />
             </div>
           </div>
         </div>

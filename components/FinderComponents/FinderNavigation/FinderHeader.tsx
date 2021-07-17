@@ -65,7 +65,7 @@ const FinderHeader = () => {
 
         <div className="cursor-pointer block lg:hidden bg-transparent border-none focus:outline-none outline-none">
           <FontAwesomeIcon
-            className=" text-black font-medium text-lg hover:text-primary m-4"
+            className="font-medium text-lg m-4 fnd-primary"
             icon={faBars}
             onClick={() => {
               setIsMobileMenuOpen((prev) => !prev);

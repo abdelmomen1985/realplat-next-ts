@@ -128,8 +128,8 @@
   font-weight: 700;
 }
 
-.notosans-normal-dolphin-20px,
-.notosansNormalDolphin_20px {
+.notosans-normal-dolphin-18px,
+.notosansNormalDolphin_18px {
   color: var(--gray700);
   font-family: var(--font-family-noto_sans);
   font-size: var(--font-size-xl);
@@ -366,7 +366,7 @@
 }
 
 .calcHero {
-  @apply mt-16 flex;
+  @apply mt-16 md:flex;
 
   img {
     max-width: 350px;

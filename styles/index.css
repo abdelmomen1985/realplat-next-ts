@@ -24,7 +24,7 @@
     --font-size-l: 16px;
     --font-size-m: 14px;
     --font-size-s: 12px;
-    --font-size-xl: 20px;
+    --font-size-xl: 18px;
     --font-size-xxl: 24px;
     --font-size-xxl2: 28px;
     --font-size-xxxl: 32px;
@@ -62,6 +62,9 @@
   .leave-here {
     font-family: "Roboto", sans-serif;
     font-family: "Cairo", sans-serif;
+  }
+  .fnd-primary {
+    background-color: var(--primary);
   }
 }
 
