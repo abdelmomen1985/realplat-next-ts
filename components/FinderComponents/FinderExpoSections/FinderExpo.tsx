@@ -73,29 +73,29 @@ export default function FinderExpo() {
     <>
       <div className={styles.expo2}>
         <div className="flex flex-col sm:flex-row">
-          <div className="mt-12 p-4">
+          <div className="mt-4 md:mt-12 py-4 md:w-5/12">
             <h1 className={clsx("mx-2 sm:m-0 my-2")}>
-              <div className={clsx(styles.notosansBoldOutrageousOrange_56px)}>
-                Mellw Expo
-              </div>
-              <div className={clsx(styles.notosansNormalMirage_36px,"mt-4")}>
+              <div className={clsx(styles.homeMellwExpoH1)}>Mellw Expo</div>
+              <div className={clsx(styles.homeMellwExpoH1Sub, "mt-4")}>
                 Online Property Show
               </div>
             </h1>
-            <div
-              className={clsx(
-                styles.notosansNormalDolphin_18px,
-                "mt-4 mx-2 sm:m-0"
-              )}
-            >
-              Mellw your home search journey, and join Mellw Expo <br />
-              online from your comfort couch !
+            <div className="relative mt-4">
+              <div
+                className={clsx(
+                  styles.notosansNormalDolphin_18px,
+                  "mx-2 sm:m-0 absolute inset-0 w-screen"
+                )}
+              >
+                Mellw your home search journey, and join Mellw Expo <br />
+                online from your comfort couch !
+              </div>
             </div>
           </div>
-          <div className="image-1">
+          <div className="mt-16 md:mt-0 md:w-7/12">
             <div className="overlap-group1-1">
               <div className="bg"></div>
-              <img className="image-2" src="/images/finder/hero-image.png" />
+              <img className="" src="/images/finder/hero-image.png" />
             </div>
           </div>
         </div>

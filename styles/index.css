@@ -64,7 +64,7 @@
     font-family: "Cairo", sans-serif;
   }
   .fnd-primary {
-    background-color: var(--primary);
+    color: var(--primary);
   }
 }
 

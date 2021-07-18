@@ -83,7 +83,7 @@ const FinderHeader = () => {
           <img src="/images/finder/user.svg" />
           <span>Sign in</span>
         </button>
-        <button className={clsx("my-4 btn btn-fnd-primary")}>
+        <button className={clsx("my-4 btn btn-fnd-primary ")}>
           New Exhibitor
         </button>
       </div>

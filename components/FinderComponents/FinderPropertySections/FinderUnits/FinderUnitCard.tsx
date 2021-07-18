@@ -8,8 +8,7 @@ import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
 // import Carousel from 'react-elastic-carousel';
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { AppContext } from "../../../../Context/AppContextProvider";
+import React, { useEffect, useRef, useState } from "react";
 import useTranslation from "../../../../hooks/useTranslation";
 import { Unit } from "../../../../interfaces";
 import styles from "../../FinderExpoSections/finderExpo.module.scss";
@@ -35,7 +34,7 @@ const FinderUnitCard = ({
   const router = useRouter();
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [showContactMenu, setShowContactMenu] = useState<boolean>(false);
-  const { isMobile } = useContext(AppContext);
+  //const { isMobile } = useContext(AppContext);
   useEffect(() => {
     if (unit && unit?.media?.length) {
       setImageUrl(unit?.media[0]);

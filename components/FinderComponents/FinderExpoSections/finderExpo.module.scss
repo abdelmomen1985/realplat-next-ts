@@ -144,23 +144,27 @@
   font-weight: 700;
 }
 
-.notosans-bold-outrageous-orange-56px,
-.notosansBoldOutrageousOrange_56px {
+.homeMellwExpoH1 {
   color: var(--primary);
   font-family: var(--font-family-noto_sans);
   font-size: var(--font-size-xxxxxl);
   font-style: normal;
   font-weight: 700;
   line-height: 72px;
+  @media screen and (max-width: 760px) {
+    @apply text-5xl;
+  }
 }
 
-.notosans-normal-mirage-36px,
-.notosansNormalMirage_36px {
+.homeMellwExpoH1Sub {
   color: var(--gray900);
   font-family: var(--font-family-noto_sans);
   font-size: var(--font-size-xxxxl);
   font-style: normal;
   font-weight: 400;
+  @media screen and (max-width: 760px) {
+    @apply text-3xl;
+  }
 }
 
 .border_1pxGray800 {
@@ -386,6 +390,10 @@
 
   &:hover {
     @apply shadow-lg;
+    .cardOver {
+      @apply flex items-center;
+      background-color: rgb(31, 27, 45, 65%);
+    }
   }
 }
 

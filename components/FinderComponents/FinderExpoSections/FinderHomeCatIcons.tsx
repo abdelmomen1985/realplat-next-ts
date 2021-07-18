@@ -19,7 +19,7 @@ export default function FinderHomeCatIcons() {
   };
   const [squareIcons, setSquareIcons] = useState(squareIconsDefault);
   return (
-    <div className={clsx(styles.categoriesXSScroll, "mt-16 flex")}>
+    <div className={clsx(styles.categoriesXSScroll, "mt-8 flex")}>
       <div
         className={styles.categorysquare}
         onMouseOver={() => {
