@@ -213,6 +213,7 @@ const FinderExpoPage = ({ units }: { units: any[] }) => {
               wishlisted={
                 wishlist_ids?.filter((id: any) => id === unit.id).length > 0
               }
+              canCompare={false}
             />
           ))}
         {innerUnits.length === 0 && !loading && <div>No Units Found</div>}

@@ -162,7 +162,6 @@ export default function FinderPropTypesDropDown({
                     display: "block",
                     margin: ".5em",
                     fontSize: "16px",
-                    fontWeight: 500,
                   }}
                   key={item.id}
                   onClick={() => multiSelectItem(item)}
@@ -172,11 +171,15 @@ export default function FinderPropTypesDropDown({
                       <FontAwesomeIcon
                         style={{ width: "1em" }}
                         icon={faTimes}
+                        className="fnd-primary"
                       />
                     ) : (
                       <FontAwesomeIcon
                         icon={faCheck}
-                        className={clsx(styles.faCheckIcon, "opacity-0")}
+                        className={clsx(
+                          styles.faCheckIcon,
+                          "opacity-0 fnd-primary"
+                        )}
                       />
                     )}
                   </span>

@@ -154,7 +154,6 @@ export default function FinderDropDown(props: Ddprops) {
                   display: "block",
                   margin: ".5em",
                   fontSize: "16px",
-                  fontWeight: 500,
                 }}
                 key={item.sk_city._id}
                 onClick={() => {
@@ -163,11 +162,17 @@ export default function FinderDropDown(props: Ddprops) {
               >
                 <span style={{ display: "inline-block", width: "1em" }}>
                   {item.selected ? (
-                    <FontAwesomeIcon style={{ width: "1em" }} icon={faTimes} />
+                    <FontAwesomeIcon
+                      style={{ color: "var(--primary)" }}
+                      icon={faTimes}
+                    />
                   ) : (
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className={clsx(styles.faCheckIcon, "opacity-0")}
+                      className={clsx(
+                        styles.faCheckIcon,
+                        "opacity-0 fnd-primary"
+                      )}
                     />
                   )}
                 </span>
