@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { getLocalizationProps } from '../../Context/LangContext';
-import FinderExpo from '../../components/FinderComponents/FinderExpoSections/FinderExpo';
-import FinderLayout from '../../components/Layouts/FinderLayout';
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import React, { useEffect } from "react";
+import { getLocalizationProps } from "../../Context/LangContext";
 /*
 import useTranslation from '../../hooks/useTranslation';
 import MainSection from "./../../components/HomeSections/MainSection";
@@ -15,16 +13,16 @@ import MainExpoSection from "../../components/ExpoSections/MainExpoSection";
 */
 
 const IndexPage: NextPage = () => {
-	// const { t } = useTranslation();
+  // const { t } = useTranslation();
 
-	// just refresh the heroku api
-	useEffect(() => {
-		fetch('https://hubgraph.herokuapp.com/').then(() => {
-			console.log('hubgraph fetched');
-		});
-	}, []);
-	return (
-		/* top section 
+  // just refresh the heroku api
+  useEffect(() => {
+    fetch("https://hubgraph.herokuapp.com/").then(() => {
+      console.log("hubgraph fetched");
+    });
+  }, []);
+  return (
+    /* top section 
     <Layout title="Realestate Brand">
       
       <MainSection />
@@ -37,26 +35,30 @@ const IndexPage: NextPage = () => {
       <HowWorksSection />
       
       </Layout>
-      */
+      
 		<FinderLayout>
 			<FinderExpo />
 		</FinderLayout>
-	);
+    */
+    <>
+      <span> </span>
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-	const localization = getLocalizationProps(ctx, 'common');
-	return {
-		props: {
-			localization,
-		},
-	};
+  const localization = getLocalizationProps(ctx, "common");
+  return {
+    props: {
+      localization,
+    },
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return {
-		paths: ['en', 'ar'].map((lang) => ({ params: { lang } })),
-		fallback: false,
-	};
+  return {
+    paths: ["en", "ar"].map((lang) => ({ params: { lang } })),
+    fallback: false,
+  };
 };
 export default IndexPage;
