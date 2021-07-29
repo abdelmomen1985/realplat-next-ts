@@ -1,7 +1,7 @@
-import { useMemo } from "react";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { concatPagination } from "@apollo/client/utilities";
 import merge from "deepmerge";
+import { useMemo } from "react";
 
 let apolloClient: any;
 
@@ -9,7 +9,7 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: "https://realestatep.hasura.app/v1/graphql", // Server URL (must be absolute)
+      uri: "https://mellw.hasura.app/v1/graphql", // Server URL (must be absolute)
       headers: {
         "x-hasura-admin-secret": "rKpA@W3S2PlZsK",
       }, // Additional fetch() options like `credentials` or `headers`
