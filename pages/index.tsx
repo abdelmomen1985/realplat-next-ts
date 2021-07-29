@@ -1,10 +1,10 @@
-import React from "react";
 import Head from "next/head";
-import { getInitialLocale } from "../i18n/getInitialLocale";
+import React from "react";
 
 const Index: React.FC = () => {
   React.useEffect(() => {
-    window.location.replace(`/${getInitialLocale()}`);
+    //window.location.replace(`/${getInitialLocale()}`);
+    window.location.replace(`/english`);
   });
 
   return (
