@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React, { useEffect } from "react";
+import FinderExpo from "../../components/FinderComponents/FinderExpoSections/FinderExpo";
+import FinderLayout from "../../components/Layouts/FinderLayout";
 import { getLocalizationProps } from "../../Context/LangContext";
 /*
 import useTranslation from '../../hooks/useTranslation';
@@ -36,13 +38,10 @@ const IndexPage: NextPage = () => {
       
       </Layout>
       
-		<FinderLayout>
-			<FinderExpo />
-		</FinderLayout>
-    */
-    <>
-      <span> </span>
-    </>
+      */
+    <FinderLayout>
+      <FinderExpo />
+    </FinderLayout>
   );
 };
 
