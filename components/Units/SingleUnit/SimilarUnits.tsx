@@ -61,7 +61,7 @@ const SimilarUnits = ({ units }: { units: Unit[] }) => {
 		setInnerUnits(dummyUnits);
 	};
 
-	const wishlist_ids = data?.user_wishlist_aggregate.nodes.map(
+	const wishlist_ids = data?.core_user_wishlist_aggregate.nodes.map(
 		(node: any) => node.unit.id
 	);
 	return (

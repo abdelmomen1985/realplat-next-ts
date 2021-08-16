@@ -155,8 +155,8 @@ export default function PricesModal(props: any) {
 									}
 									title={item.title}
 									unit={item.unit}
-									min={item.value[0]}
-									max={item.value[1]}
+									min={+item.value[0]?.toLocaleString()}
+									max={+item.value[1]?.toLocaleString()}
 									step={item.step}
 									filterListState={props.filterListState}
 									filtered={(value) => {

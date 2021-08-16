@@ -44,7 +44,7 @@ const ComparingMobile = ({
 						</Th>
 						<Td>{unit.property_type.name[locale]}</Td>
 						<Td>
-							{unit.fin_total} {t('egp')}
+							{unit.fin_total?.toLocaleString()} {t('egp')}
 						</Td>
 						<Td>
 							{(unit.fin_total / unit.land).toFixed()}{' '}
@@ -61,10 +61,10 @@ const ComparingMobile = ({
 						</Td>
 						<Td>{unit.delivery_year}</Td>
 						<Td>
-							{unit.fin_down_payment} {t('egp')}
+							{unit.fin_down_payment?.toLocaleString()} {t('egp')}
 						</Td>
 						<Td>
-							{unit.fin_monthly_payment} {t('egp')}
+							{unit.fin_monthly_payment?.toLocaleString()} {t('egp')}
 						</Td>
 						<Td>
 							{unit.fin_years} {t('years')}

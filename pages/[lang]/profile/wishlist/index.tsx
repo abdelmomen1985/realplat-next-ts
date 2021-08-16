@@ -36,9 +36,9 @@ export default function WhishList() {
 	}, [user]);
 
 	useEffect(() => {
-		if (data?.user_wishlist_aggregate) {
+		if (data?.core_user_wishlist_aggregate) {
 			console.log(data);
-			const serverWishListUnits: any = data?.user_wishlist_aggregate.nodes;
+			const serverWishListUnits: any = data?.core_user_wishlist_aggregate.nodes;
 			let resolvedUnits = [];
 			for (let node in serverWishListUnits) {
 				resolvedUnits.push({

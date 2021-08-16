@@ -43,7 +43,7 @@ const ComparingDesktop = ({
 					</h3>
 					<h3>{unit.property_type.name[locale]}</h3>
 					<h3>
-						{unit.fin_total} {t('egp')}
+						{unit.fin_total?.toLocaleString()} {t('egp')}
 					</h3>
 					<h3>
 						{(unit.fin_total / unit.land).toFixed()}{' '}
@@ -60,10 +60,10 @@ const ComparingDesktop = ({
 					</h3>
 					<h3>{unit.delivery_year}</h3>
 					<h3>
-						{unit.fin_down_payment} {t('egp')}
+						{unit.fin_down_payment?.toLocaleString()} {t('egp')}
 					</h3>
 					<h3>
-						{unit.fin_monthly_payment} {t('egp')}
+						{unit.fin_monthly_payment?.toLocaleString()} {t('egp')}
 					</h3>
 					<h3>
 						{unit.fin_years} {t('years')}

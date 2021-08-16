@@ -1,17 +1,18 @@
 import { useQuery } from '@apollo/client';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { GET_LOCATIONS } from '../../../../query/locations';
+import useTranslation from '../../../../hooks/useTranslation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faAngleDown,
 	faAngleUp,
 	faCheck,
+	faMapMarkerAlt,
 	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AppContext } from '../../../../Context/AppContextProvider';
 import clsx from 'clsx';
-import React, { useEffect, useRef, useState } from 'react';
-import useTranslation from '../../../../hooks/useTranslation';
-import { GET_LOCATIONS } from '../../../../query/locations';
-import styles from './filtersStyles.module.scss';
-
+import styles from './filters.module.scss';
 interface Ddprops {
 	title: string;
 	list: any;
@@ -27,7 +28,7 @@ export default function FinderDropDown(props: Ddprops) {
 	const [isOpenState, setIsOpenState] = useState(false);
 	const [listTitle, setListTitle] = useState(props.title);
 	const [locationsInnerState, setLocationsInnerState] = useState(data?.units);
-
+	const { isMobile } = useContext(AppContext);
 	// const list = props.list;
 	const { t, locale } = useTranslation();
 	const node = useRef<HTMLDivElement>(null);
@@ -66,7 +67,6 @@ export default function FinderDropDown(props: Ddprops) {
 				});
 			}
 		}
-		console.log(falseChecked);
 		setLocationsInnerState(falseChecked);
 	}, [props.filterListState]);
 	useEffect(() => {
@@ -128,38 +128,79 @@ export default function FinderDropDown(props: Ddprops) {
 
 	return (
 		<>
-			<div
-				className="dd-wrapper font-noto-sans w-11/12 mx-auto relative"
-				ref={node}
-			>
+			<style jsx>
+				{`
+					.filter-button {
+						color: #9691a4;
+						border: none;
+						border-radius: 5px;
+						font-weight: 500;
+						outline: none;
+						position: relative;
+					}
+					.filter-button::after {
+						content: ' ';
+						position: absolute;
+						left: 100%;
+						top: 18%;
+						bottom: auto;
+						width: 1px;
+						height: 70%;
+						background: #efecf3;
+						z-index: 9999;
+						margin-top: auto;
+					}
+					.circularIcon {
+						width: 10px;
+						height: 10px;
+						margin-right: 5px;
+						background-color: #edae49;
+						border-radius: 50%;
+						border: transparent;
+						display: block;
+					}
+				`}
+			</style>
+			<div className="dd-wrapper relative" ref={node}>
 				<button
 					type="button"
-					className={clsx(styles.filterButton)}
+					className=" dd-header text-lg md:text-base border py-3 px-3 border-gray-400 bg-white rounded-md font-medium filter-button"
 					onClick={toggleList}
 				>
-					<div className="flex justify-between items-center">
-						<div className="flex">
-							{listTitle !== 'location' && (
-								<span className={clsx(styles.circularIcon)}></span>
-							)}{' '}
-							{t(`${listTitle}`)}{' '}
-						</div>
-						<div>
-							{isOpenState ? (
-								<span>
-									{' '}
-									<FontAwesomeIcon className="ml-1" icon={faAngleUp} />
-								</span>
-							) : (
-								<span>
-									<FontAwesomeIcon className="ml-1" icon={faAngleDown} />
-								</span>
-							)}
-						</div>
+					<div className="dd-header-title flex justify-center lg:justify-between items-center">
+						<span>
+							<FontAwesomeIcon icon={faMapMarkerAlt} className="mx-1" />
+						</span>
+						{listTitle !== 'location' && <span className="circularIcon"></span>}{' '}
+						{t(`${listTitle.toLowerCase()}`)}{' '}
+						{isOpenState ? (
+							<span>
+								{' '}
+								<FontAwesomeIcon className="mx-1" icon={faAngleUp} />
+							</span>
+						) : (
+							<span>
+								<FontAwesomeIcon className="mx-1" icon={faAngleDown} />
+							</span>
+						)}
 					</div>
 				</button>
 				{isOpenState && (
-					<div role="list" className={clsx(styles.ddList, 'absolute')}>
+					<div
+						role="list"
+						className={clsx(styles.ddList, 'absolute')}
+						style={{
+							top: '50px',
+							background: '#fff',
+							borderRadius: '5px',
+							boxShadow: '0 2px 2px #eee',
+							zIndex: 999,
+							width: isMobile ? '90%' : '250px',
+							left: isMobile ? '0' : 'auto',
+							right: isMobile ? '0' : 'auto',
+							margin: isMobile ? '0 auto' : '',
+						}}
+					>
 						{locationsInnerState.map((item: any) => (
 							<button
 								type="button"

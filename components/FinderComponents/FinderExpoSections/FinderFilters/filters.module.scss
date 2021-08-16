@@ -1,0 +1,42 @@
+.filtersContainer {
+  @apply text-center justify-center items-center flex-wrap rounded-md shadow-md;
+  width: max-content;
+  padding-inline-end: 30px;
+}
+
+.rangeContainer {
+  @apply flex justify-center items-center;
+  width: 200px;
+
+}
+
+.searchBtn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-left: 1rem;
+  margin-right: 5px;
+}
+
+.ddList {
+  top: 50px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px #eee;
+  z-index: 999;
+  width: 200px;
+  left: auto;
+  right: auto;
+  font-size: 16px;
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+  }
+
+  button {
+    &:hover {
+      .faCheckIcon {
+        opacity: 100%;
+      }
+    }
+  }
+}

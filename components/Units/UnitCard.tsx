@@ -166,10 +166,12 @@ export const UnitCard = ({
 										{locale === 'en' ? unit.sk_city.name : unit.sk_city.name_ar}
 									</h3>
 									<p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary">
-										{t('totalPrice')}: {unit.fin_total} {t('egp')}
+										{t('totalPrice')}: {unit?.fin_total?.toLocaleString()}{' '}
+										{t('egp')}
 									</p>
 									<p className="mt-5 mb-2 text-lg font-medium font-roboto text-text-secondary">
-										{t('downPay')}: {unit.fin_down_payment} {t('egp')}
+										{t('downPay')}: {unit?.fin_down_payment?.toLocaleString()}{' '}
+										{t('egp')}
 									</p>
 								</div>
 							</div>

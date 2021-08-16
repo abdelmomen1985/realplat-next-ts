@@ -102,7 +102,7 @@ const common = {
 	FF: 'Fully Finished',
 	SF: 'Semi Finished',
 	Ready_To_Move: 'Ready To Move',
-	prop_type: 'Type',
+	prop_type: 'Property Type',
 	priceRange: 'Payments',
 	egp: 'Egp',
 	paymentYears: 'Payment Years',

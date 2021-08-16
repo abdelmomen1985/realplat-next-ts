@@ -21,7 +21,8 @@ export default function FinancialAnalysis({ unit }: { unit: Unit }) {
 					{t('pricePerM')}: {(unit.fin_total / unit.land).toFixed()} {t('egp')}
 				</li>
 				<li className="my-2 text-text-secondary text-lg font-medium">
-					{t('totalPrice')}: {unit.fin_total.toFixed()} {t('egp')}
+					{t('totalPrice')}: {unit.fin_total.toFixed()?.toLocaleString()}{' '}
+					{t('egp')}
 				</li>
 				<li className="my-2 text-text-secondary text-lg font-medium">
 					{t('NPV')}: {unit.npv.toFixed()} {t('egp')}

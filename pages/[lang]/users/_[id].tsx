@@ -1,35 +1,35 @@
-import { GetServerSideProps } from "next";
-import Layout from "../../../components/Layouts/Layout";
-import ListDetail from "../../../components/ListDetail";
-import { getLocalizationProps } from "../../../Context/LangContext";
-import { User } from "../../../interfaces";
-import { sampleUserData } from "../../../utils/sample-data";
+import { GetServerSideProps } from 'next';
+import Layout from '../../../components/Layouts/Layout';
+import ListDetail from '../../../components/ListDetail';
+import { getLocalizationProps } from '../../../Context/LangContext';
+import { User } from '../../../interfaces';
+import { sampleUserData } from '../../../utils/sample-data';
 
 type Props = {
-  item?: User;
-  errors?: string;
+	item?: User;
+	errors?: string;
 };
 
 const UserDetail = ({ item, errors }: Props) => {
-  if (errors) {
-    return (
-      <Layout title="Error | Next.js + TypeScript Example">
-        <p>
-          <span style={{ color: "red" }}>Error:</span> {errors}
-        </p>
-      </Layout>
-    );
-  }
+	if (errors) {
+		return (
+			<Layout title="Error | Next.js + TypeScript Example">
+				<p>
+					<span style={{ color: 'red' }}>Error:</span> {errors}
+				</p>
+			</Layout>
+		);
+	}
 
-  return (
-    <Layout
-      title={`${
-        item ? item.name : "User Detail"
-      } | Next.js + TypeScript Example`}
-    >
-      {item && <ListDetail item={item} />}
-    </Layout>
-  );
+	return (
+		<Layout
+			title={`${
+				item ? item.name : 'User Detail'
+			} | Next.js + TypeScript Example`}
+		>
+			{item && <ListDetail item={item} />}
+		</Layout>
+	);
 };
 
 /*
@@ -70,20 +70,20 @@ export const getStaticProps: GetStaticProps = async ({
 };
 */
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const id = context.params?.id;
-    const item = sampleUserData.find((data) => data.id === Number(id));
-    // By returning { props: item }, the StaticPropsDetail component
-    // will receive `item` as a prop at build time
-    const localization = getLocalizationProps(context, "common");
-    return {
-      props: {
-        localization,
-        item,
-      },
-    };
-  } catch (err) {
-    return { props: { errors: err.message } };
-  }
+	try {
+		const id = context.params?.id;
+		const item = sampleUserData.find((data) => data.id === String(id));
+		// By returning { props: item }, the StaticPropsDetail component
+		// will receive `item` as a prop at build time
+		const localization = getLocalizationProps(context, 'common');
+		return {
+			props: {
+				localization,
+				item,
+			},
+		};
+	} catch (err) {
+		return { props: { errors: err.message } };
+	}
 };
 export default UserDetail;
