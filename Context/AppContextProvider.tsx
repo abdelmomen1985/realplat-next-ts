@@ -96,6 +96,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 		});
 	};
 	const [loginModal, setLoginModal] = useState(false);
+	const [finderLoginModal, setFinderLoginModal] = useState(false);
 
 	// const checkTablet = (windowWidth: number) => {
 	//     if(   ){
@@ -112,6 +113,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 		clearComparing,
 		loginModal,
 		setLoginModal,
+		finderLoginModal,
+		setFinderLoginModal,
 		filterUnitsGlobal,
 	};
 	return (

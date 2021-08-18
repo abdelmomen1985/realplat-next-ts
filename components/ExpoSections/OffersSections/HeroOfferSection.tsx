@@ -21,21 +21,26 @@ const HeroOfferSection = ({ unit }: { unit: Unit }) => {
 		setLoading(true);
 		createMeeting()
 			.then((res) => {
+				console.log('sth is going on');
 				insertMeeting({
 					variables: {
 						user_id: user?.id,
 						zoom_data: { ...res?.data?.create_meeting },
 					},
-				}).then((res) => {
-					window.open(
-						res?.data?.insert_meetings_one?.zoom_data?.join_url,
-						'_blank'
-					);
-					setLoading(false);
-				});
+				})
+					.then((res) => {
+						window.open(
+							res?.data?.insert_meetings_one?.zoom_data?.join_url,
+							'_blank'
+						);
+						setLoading(false);
+					})
+					.catch((err) => {
+						console.log(err.message);
+					});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.message);
 			});
 	};
 	return (

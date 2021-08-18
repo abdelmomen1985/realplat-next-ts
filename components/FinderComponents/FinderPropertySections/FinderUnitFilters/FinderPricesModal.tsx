@@ -121,8 +121,8 @@ export default function FinderPricesModal(props: any) {
 									}
 									title={item.title}
 									unit={item.unit}
-									min={+item.value[0]?.toLocaleString()}
-									max={+item.value[1]?.toLocaleString()}
+									min={item.value[0]}
+									max={item.value[1]}
 									step={item.step}
 									filterListState={props.filterListState}
 									filtered={(value) => {

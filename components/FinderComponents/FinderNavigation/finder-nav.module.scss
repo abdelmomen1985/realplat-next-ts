@@ -27,17 +27,21 @@
   align-items: center;
   min-width: 66px;
   margin-left: 60px;
+
   @media screen and (max-width: 768px) {
     margin: 0 auto;
   }
 }
+
 .right {
   display: flex;
   min-width: 259px;
+
   @media screen and (max-width: 768px) {
     display: none;
   }
 }
+
 .navLink {
   text-decoration: none;
   @apply p-2;
@@ -93,5 +97,19 @@
     position: relative;
     height: auto;
     bottom: auto;
+  }
+}
+
+.dropDownMenu {
+  z-index: 999;
+  width: 250px;
+  top: 30px;
+  left: 0;
+  right: 0;
+  position: absolute;
+
+  @media screen and (max-width: 760px) {
+    top: 0;
+    position: relative;
   }
 }

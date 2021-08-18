@@ -6,6 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { AppContext } from './../../../Context/AppContextProvider';
 import { Unit } from '../../../interfaces';
+import { useMutation } from '@apollo/client';
+import {
+	CREATE_ZOOM_MEETING,
+	INSERT_MEETING,
+} from '../../../query/zoom-meetings';
+import LoadingCircle from './../../common/LoadingCircle';
 
 const TabbedInfo = ({ unit }: { unit: Unit }) => {
 	const { t, locale } = useTranslation();
@@ -146,8 +152,40 @@ const TabbedInfo = ({ unit }: { unit: Unit }) => {
 export default function UnitInformation({ unit }: { unit: Unit }) {
 	const { t, locale } = useTranslation();
 
-	const { isMobile } = useContext(AppContext);
+	const { isMobile, user } = useContext(AppContext);
+	const [loading, setLoading] = useState<boolean>(false);
 
+	const [createMeeting] = useMutation(CREATE_ZOOM_MEETING);
+
+	const [insertMeeting] = useMutation(INSERT_MEETING);
+
+	const createZoomMeeting = () => {
+		setLoading(true);
+		console.log('user', user?.id);
+		createMeeting()
+			.then((res) => {
+				console.log('sth is going on');
+				insertMeeting({
+					variables: {
+						user_id: user?.id,
+						zoom_data: { ...res?.data?.create_meeting },
+					},
+				})
+					.then((res) => {
+						window.open(
+							res?.data?.insert_meetings_one?.zoom_data?.join_url,
+							'_blank'
+						);
+						setLoading(false);
+					})
+					.catch((err) => {
+						console.log(err.message);
+					});
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 	return (
 		<div className="px-5 py-3 grid grid-cols-1 md:grid-cols-2 items-start">
 			<div>
@@ -173,12 +211,17 @@ export default function UnitInformation({ unit }: { unit: Unit }) {
 						/>{' '}
 						{isMobile ? '' : t('whatsapp')}
 					</button>
-					<button className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary">
+					<button
+						disabled={loading}
+						onClick={createZoomMeeting}
+						className="flex justify-between items-center py-2 my-2  px-3 mx-2 text-lg font-medium bg-outline-primary rounded-md text-primary"
+					>
 						<img
 							className={clsx('mr-0', locale === 'en' ? 'md:mr-1' : 'md:ml-1')}
 							src="/images/call-to-action/zoom.png"
 						/>{' '}
 						{isMobile ? '' : t('zoom')}
+						{loading && <LoadingCircle width={'25px'} margin={'0 5px'} />}
 					</button>
 				</div>
 				{unit.description && (

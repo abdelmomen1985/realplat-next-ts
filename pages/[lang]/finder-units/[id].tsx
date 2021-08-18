@@ -1,8 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { getLocalizationProps } from '../../../Context/LangContext';
-
-import Link from 'next/link';
 import { Unit } from '../../../interfaces';
 import useTranslation from '../../../hooks/useTranslation';
 import { UNITS_BY_PK } from '../../../query/unitsQuery';
@@ -18,6 +15,7 @@ import FinderPropLocation from '../../../components/FinderComponents/FinderPrope
 import FinderSimilarUnits from './../../../components/FinderComponents/FinderPropertySections/FinderSimilarUnits';
 import clsx from 'clsx';
 import styles from '../../../components/FinderComponents/FinderPropertySections/finder-prop.module.scss';
+
 const SingleExpoPage = ({ unit }: { unit: Unit }) => {
 	const { t } = useTranslation();
 

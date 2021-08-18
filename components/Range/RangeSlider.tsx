@@ -27,6 +27,7 @@ export default function RangeSlider({
 	step,
 	filterListState,
 }: RangeProps) {
+	console.log(min, max, value, step, 'min-max');
 	const [payState, setPaymentState] = useState(value !== undefined);
 	const { t } = useTranslation();
 	//const [valuesState, setValuesState] = useState(value);
@@ -75,10 +76,9 @@ export default function RangeSlider({
 				{t(`${title}`)}
 			</label>
 			<Range
-				min={+min?.toLocaleString()}
-				max={+max}
-				step={step?.toLocaleString()}
-				// tabIndex={[0, 0]}
+				min={min}
+				max={max}
+				step={step}
 				onChange={(value) => priceChangeHandler(value)}
 				defaultValue={value ? value : [min, max]}
 				disabled={!payState}
@@ -86,9 +86,10 @@ export default function RangeSlider({
 			<h3>
 				{value ? (
 					<div className="flex flex-wrap justify-between">
-						<div>{value?.[0]}</div> -{' '}
+						<div>{value?.[0].toLocaleString()}</div> -{' '}
 						<div>
-							{value?.[1]} <span>{t(`${unit.toLowerCase()}`)}</span>
+							{value?.[1].toLocaleString()}{' '}
+							<span>{t(`${unit.toLowerCase()}`)}</span>
 						</div>{' '}
 					</div>
 				) : (

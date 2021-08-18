@@ -12,10 +12,23 @@
     @apply rounded-lg;
   }
 
+  &.hoverRed {
+    &:hover {
+      background-color: var(--primary);
+    }
+  }
+
+  &.hoverPrimary {
+    &:hover {
+      background-color: var(--main-color);
+    }
+  }
+
   @media screen and (max-width: 760px) {
     margin: auto;
   }
 }
+
 .verticalLine {
   width: 80%;
   margin: auto;
