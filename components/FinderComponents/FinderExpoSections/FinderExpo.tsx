@@ -8,6 +8,7 @@ import FinderHomeCatIcons from './FinderHomeCatIcons';
 import SearchByCity from './SearchByCity';
 import SectionTitle from './SectionTitle';
 import FinderExpoFilters from './FinderFilters/FinderExpoFilters';
+import useTranslation from './../../../hooks/useTranslation';
 
 const dummyUnit: Unit = {
 	media: [
@@ -35,34 +36,35 @@ const dummyUnit: Unit = {
 	bathrooms: 1,
 } as Unit;
 
-const ExpoCardUnit = () => {
+const ExpoCardUnit = ({ expo }: { expo: any }) => {
+	const { locale } = useTranslation();
 	return (
 		<div
 			className={clsx(
-				'flex-1',
-				'flex',
-				'justify-items-end',
-				'mr-2',
-				'relative',
-				styles.expoHalf,
-				styles.halfTop,
-				'm-1'
+				'flex-1	flex justify-items-end	mr-2 relative m-1',
+				styles.expoHalf
+				// styles.halfTop
 			)}
+			style={{ backgroundImage: expo.images[0].url }}
 		>
 			<div className={clsx('absolute', 'top-4', 'left-4')}>
-				<div className={clsx(styles.gradientBadge)}>Mellw Expo</div>
-				<div className={clsx(styles.gradientBadge, styles.blueBadge)}>New</div>
+				<div className={clsx(styles.gradientBadge)}>{expo?.type}</div>
+				<div className={clsx(styles.gradientBadge, styles.blueBadge)}>
+					{expo[`status_${locale}`]}
+				</div>
 			</div>
 			<div className={clsx('self-end', 'm-4')}>
-				<div className={clsx(styles.notosansNormalWhite_14px)}>COMMERCIAL</div>
+				<div className={clsx(styles.notosansNormalWhite_14px)}>
+					{expo[`expo_type_${locale}`]}
+				</div>
 				<div className={clsx(styles.notosansBoldWhite_20px)}>
-					Luxury Office Space
+					{expo[`name_${locale}`]}
 				</div>
 
 				<div className={clsx('mt-1', 'flex')}>
 					<img src="/images/finder/pin.svg" alt="" />
 					<div className={clsx(styles.notosansNormalWhite_14px, 'mx-2')}>
-						Down Town, New Capital Cairo, Cairo
+						{expo[`location_${locale}`]}
 					</div>
 				</div>
 			</div>
@@ -70,8 +72,18 @@ const ExpoCardUnit = () => {
 	);
 };
 
-export default function FinderExpo({ units }: { units: Unit[] }) {
+export default function FinderExpo({
+	units,
+	homePageSections,
+}: {
+	units: Unit[];
+	homePageSections: any;
+}) {
 	const { filterUnitsGlobal, filterState } = useContext(AppContext);
+	const { t, locale } = useTranslation();
+	const { homepageCategories, homepageCities, homepageCards, homepageExpos } =
+		homePageSections;
+	console.log;
 	return (
 		<>
 			<div className={styles.expo2}>
@@ -108,82 +120,37 @@ export default function FinderExpo({ units }: { units: Unit[] }) {
 					setFilterListState={filterUnitsGlobal}
 				/>
 				{/* categories icons */}
-				<FinderHomeCatIcons />
+				<FinderHomeCatIcons homepageCategories={homepageCategories} />
 				{/* home cards */}
-				<div className={clsx(styles.homeCards)}>
-					<div className={styles.homeCardsCard}>
-						<img
-							className="mt-2"
-							src="/images/finder/illustration1.png"
-							alt=""
-						/>
-						<div className={clsx(styles.notosansBoldMirage_24px, 'my-4')}>
-							Mellw Expo
-						</div>
-						<div
-							className={clsx(
-								'mx-4',
-								'text-center',
-								'flex-grow',
-								styles.notosansNormalDolphin_14px
-							)}
-						>
-							Mellw your home search journey From your comfort couch join Mellw
-							Expo online
-						</div>
-						<button className={clsx('my-4 btn btn-fnd-primary')}>
-							Join Mellw Expo
-						</button>
-					</div>
-					<div className={styles.homeCardsCard}>
-						<img
-							className="mt-2"
-							src="/images/finder/illustration2.png"
-							alt=""
-						/>
-						<div className={clsx(styles.notosansBoldMirage_24px, 'my-4')}>
-							Mellw Offers
-						</div>
-						<div
-							className={clsx(
-								'mx-4',
-								'text-center',
-								'flex-grow',
-								styles.notosansNormalDolphin_14px
-							)}
-						>
-							Save your time searching the perfect property offer match your
-							down payment & monthly installments
-						</div>
-						<button className={clsx('my-4 btn btn-fnd-primary')}>
-							Search Mellw Offers
-						</button>
-					</div>
-					<div className={styles.homeCardsCard}>
-						<img
-							className="mt-2"
-							src="/images/finder/illustration3.png"
-							alt=""
-						/>
-						<div className={clsx(styles.notosansBoldMirage_24px, 'my-4')}>
-							Payment Reminders
-						</div>
-						<div
-							className={clsx(
-								'mx-4',
-								'text-center',
-								'flex-grow',
-								styles.notosansNormalDolphin_14px
-							)}
-						>
-							Add your property details & payment plan, to get notifications
-							before installments due date Enjoy frequently property evaluation
-						</div>
-						<button className={clsx('my-4 btn btn-fnd-primary')}>
-							Add Property
-						</button>
-					</div>
+				<div className={styles.homeCards}>
+					{homepageCards.length > 0 &&
+						homepageCards.map((card: any) => (
+							<div key={card?.id} className={styles.homeCardsCard}>
+								<img
+									className="mt-2"
+									src={card?.images[0].preview_url}
+									alt={card[`title_${locale}`]}
+								/>
+								<div className={clsx(styles.notosansBoldMirage_24px, 'my-4')}>
+									{card[`title_${locale}`]}
+								</div>
+								<div
+									className={clsx(
+										'mx-4',
+										'text-center',
+										'flex-grow',
+										styles.notosansNormalDolphin_14px
+									)}
+								>
+									{card[`description_${locale}`]}
+								</div>
+								<button className={clsx('my-4 btn btn-fnd-primary')}>
+									{card[`link_${locale}`]}
+								</button>
+							</div>
+						))}
 				</div>
+
 				{/* Recommended Properties */}
 				<div className="mt-16">
 					<SectionTitle title="Recommended Properties" />
@@ -232,29 +199,13 @@ export default function FinderExpo({ units }: { units: Unit[] }) {
 								'md:flex-grow md:ml-16 flex overflow-x-scroll md:overflow-x-auto'
 							)}
 						>
-							<div className={clsx(styles.expoBadge)}>
-								<span className={clsx(styles.notosansNormalGunPowder_14px)}>
-									Apartments
-								</span>
-							</div>
-
-							<div className={clsx(styles.expoBadge)}>
-								<span className={clsx(styles.notosansNormalGunPowder_14px)}>
-									Villas
-								</span>
-							</div>
-
-							<div className={clsx(styles.expoBadge)}>
-								<span className={clsx(styles.notosansNormalGunPowder_14px)}>
-									Townhouses
-								</span>
-							</div>
-
-							<div className={clsx(styles.expoBadge)}>
-								<span className={clsx(styles.notosansNormalGunPowder_14px)}>
-									Commercial property
-								</span>
-							</div>
+							{homepageCategories?.map((cat: any) => (
+								<div key={cat?.id} className={clsx(styles.expoBadge)}>
+									<span className={clsx(styles.notosansNormalGunPowder_14px)}>
+										{cat[`name_${locale}`]}
+									</span>
+								</div>
+							))}
 						</div>
 						<div
 							className={clsx(
@@ -270,7 +221,7 @@ export default function FinderExpo({ units }: { units: Unit[] }) {
 				</div>
 				{/* Expo Promo Units */}
 				<div className="mt-8 flex">
-					<div
+					{/* <div
 						className={clsx(
 							'flex-1',
 							'flex',
@@ -303,10 +254,12 @@ export default function FinderExpo({ units }: { units: Unit[] }) {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> */}
+					<ExpoCardUnit expo={homepageExpos[0]} />
+
 					<div className="flex-1 flex flex-col">
-						<ExpoCardUnit />
-						<ExpoCardUnit />
+						<ExpoCardUnit expo={homepageExpos[1]} />
+						<ExpoCardUnit expo={homepageExpos[2]} />
 						{/* <div
               className={clsx(
                 "flex-1",
