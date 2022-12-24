@@ -1,3 +1,4 @@
-GET https://api.zoom.us/v2/users/8xjBJw3HS16MWlPuE9MhuQ/meetings
+DELETE https://api.zoom.us/v2/meetings/96431146321
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InYwdHNGNHFWUmtPbk01TGp1TEhHTVEiLCJleHAiOjE4NjE5NDg4MDAsImlhdCI6MTY0Mjk0ODY2Nn0.O-WiHvD1mGnS_J961DLjEzEbD0J4flokzUAUzrF5jFA
 Content-type: application/json
+
